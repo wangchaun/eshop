@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SerialNumber">
+	<resultMap class="com.sinokj.app.component.serialNumber.model.SerialNumber" id="SerialNumberResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="app_type" property="appType" jdbcType="varchar"/>
+		<result column="serial_date" property="serialDate" jdbcType="datetime"/>
+		<result column="number" property="number" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<select id="SerialNumber_select" resultMap="SerialNumberResult">
+		select * from serial_number
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="appType">
+				app_type = #appType#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<insert id="SerialNumber_insert">
+		insert into serial_number 
+			(id,app_type,serial_date,number)
+		values
+			(#id#,#appType#,#serialDate#,#number#)
+	</insert>
+	
+	<update id="SerialNumber_update">
+		update serial_number
+	    <dynamic prepend="set" >
+	      <isNotNull prepend="," property="serialDate" >
+	        serial_date = #serialDate#
+	      </isNotNull>    
+	      <isNotNull prepend="," property="number" >
+	        number = #number#
+	      </isNotNull>
+	    </dynamic>
+	    where id = #id#
+	</update>
+	
+	<delete id="SerialNumber_delete">
+		delete from serial_number where id = #id#
+	</delete>
+</sqlMap>

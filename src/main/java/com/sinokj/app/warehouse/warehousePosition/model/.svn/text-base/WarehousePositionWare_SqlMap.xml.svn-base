@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehousePositionWare">
+	<resultMap class="com.sinokj.app.warehouse.warehousePosition.model.WarehousePositionWare" id="WarehousePositionWareResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- WarehousePositionWare -->
+		<result column="warehouse_position_id" property="warehousePositionId" jdbcType="varchar"/>
+		<result column="warehouse_position_name" property="warehousePositionName" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+		<result column="ware_count" property="wareCount" jdbcType="int"/>
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+	</resultMap>
+	<resultMap class="com.sinokj.app.warehouse.warehousePosition.model.WarehousePositionWare" id="WarehousePositionWareExtendsResult" extends="WarehousePositionWareResult">
+		<result column="ware_code" property="wareCode" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="WarehousePositionWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehousePositionWare.WarehousePositionWare_insert"/>
+		<flushOnExecute statement="WarehousePositionWare.WarehousePositionWare_update"/>
+		<flushOnExecute statement="WarehousePositionWare.WarehousePositionWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<sql id="WarehousePositionWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				a.id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehousePositionId">
+				a.warehouse_position_id = #warehousePositionId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseName">
+				a.warehouse_name like '%$warehouseName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="wareName">
+				a.ware_name like '%$wareName$%'
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	
+	<select id="WarehousePositionWare_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehousePositionWare_cache">
+		select count(*) from warehouse_positon_ware a inner join warehouse_position b on a.warehouse_position_id = b.id
+		<include refid="WarehousePositionWare_query_select_where_clause"/>
+	</select>	
+	<select id="WarehousePositionWare_query_select" resultMap="WarehousePositionWareExtendsResult" cacheModel="WarehousePositionWare_cache">
+		select a.*,b.code as ware_code from warehouse_positon_ware as a inner join ware as b on a.ware_id = b.id
+			<include refid="WarehousePositionWare_query_select_where_clause"/>
+		order by a.warehouse_name, a.sort asc
+	</select>
+	 
+	<select id="WarehousePositionWare_select" resultMap="WarehousePositionWareResult" cacheModel="WarehousePositionWare_cache">
+		select * from warehouse_positon_ware 
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="id">
+					id = #id#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="warehouseId">
+					warehouse_id = #warehouseId#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="wareId">
+					ware_id = #wareId#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="warehousePositionId">
+					warehouse_position_id = #warehousePositionId#
+				</isNotEmpty>
+			</dynamic>
+		order by sort asc
+	</select>
+	
+	<insert id="WarehousePositionWare_insert">
+		insert into warehouse_positon_ware 
+			(id,warehouse_position_id,warehouse_position_name,ware_id,ware_name,ware_count,sort,warehouse_id,warehouse_name)
+		values
+			(#id#,#warehousePositionId#,#warehousePositionName#,#wareId#,#wareName#,#wareCount#,#sort#,#warehouseId#,#warehouseName#)
+	</insert>
+	
+	<update id="WarehousePositionWare_update">
+		update warehouse_positon_ware set
+			warehouse_id = #warehouseId#,
+			ware_id = #wareId#,
+			ware_count = #wareCount#
+		where id = #id#
+	</update>
+	
+  <delete id="WarehousePositionWare_delete">
+    delete from warehouse_positon_ware
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

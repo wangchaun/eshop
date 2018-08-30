@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Magazine">
+	<resultMap class="com.sinokj.app.store.magazine.model.Magazine" id="MagazineResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- Magazine -->
+		<result column="instruction" property="instruction" jdbcType="text"/>
+		<result column="title" property="title" jdbcType="varchar"/>
+		<result column="document_id" property="documentId" jdbcType="varchar"/>
+		<result column="document_name" property="documentName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Magazine_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Magazine.Magazine_insert"/>
+		<flushOnExecute statement="Magazine.Magazine_update"/>
+		<flushOnExecute statement="Magazine.Magazine_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="Magazine_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id like '%$id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="title">
+				title like '%$title$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_Name like '%$creatorName$%'
+			</isNotEmpty>
+					
+		</dynamic>		
+	</sql>
+	<select id="Magazine_count_query_select" resultClass="java.lang.Integer" cacheModel="Magazine_cache">
+		select count(*) from magazine
+		<include refid="Magazine_query_select_where_clause"/>
+	</select>	
+	<select id="Magazine_query_select" resultMap="MagazineResult" cacheModel="Magazine_cache">
+		select * from magazine
+		<include refid="Magazine_query_select_where_clause"/>
+		order by create_time,code desc
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="Magazine_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id  = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code  = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="title">
+				title  = #title#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_name = #creatorName#
+			</isNotEmpty>
+					
+		</dynamic>		
+	</sql>	
+	<select id="Magazine_select" resultMap="MagazineResult" cacheModel="Magazine_cache">
+		select * from magazine
+		<include refid="Magazine_select_where_clause"/>
+		order by create_time,code desc
+	</select>
+
+	<insert id="Magazine_insert">
+		insert into magazine 
+			(id,code,title,instruction,document_id,document_name,creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#title#,#instruction#,#documentId#,#documentName#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	<update id="Magazine_update">
+		update magazine set
+			title = #title#,
+			instruction = #instruction#,
+			document_id = #documentId#,
+			document_name = #documentName#,
+			creator_name = #creatorName#,
+			create_time = #createTime#,
+			state = #state#
+		where id = #id#
+	</update>
+	
+  <delete id="Magazine_delete">
+    delete from magazine
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

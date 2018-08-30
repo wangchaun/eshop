@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehouseInto">
+	<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseInto" id="WarehouseIntoResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<!-- WarehouseInto -->
+		<result column="type" property="type" jdbcType="char"/>
+		<result column="order_id" property="orderId" jdbcType="varchar"/>
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="handler_id" property="handlerId" jdbcType="varchar"/>
+		<result column="handler_name" property="handlerName" jdbcType="varchar"/>
+		<result column="dept_id" property="deptId" jdbcType="varchar"/>
+		<result column="dept_name" property="deptName" jdbcType="varchar"/>
+	</resultMap>
+	
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="WarehouseInto_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehouseInto.WarehouseInto_insert"/>
+		<flushOnExecute statement="WarehouseInto.WarehouseInto_update"/>
+		<flushOnExecute statement="WarehouseInto.WarehouseInto_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="WarehouseInto_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseName">
+			  warehouse_name like '%$warehouseName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+			  type = #type#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="WarehouseInto_query_select" resultMap="WarehouseIntoResult" cacheModel="WarehouseInto_cache">
+		select * from warehouse_into 
+		<include refid="WarehouseInto_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="WarehouseInto_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehouseInto_cache">
+		select count(*) from warehouse_into
+		<include refid="WarehouseInto_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="WarehouseInto_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="orderId">
+			  order_id = #orderId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+			  type = #type#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="WarehouseInto_select" resultMap="WarehouseIntoResult" cacheModel="WarehouseInto_cache">
+		select * from warehouse_into 
+		<include refid="WarehouseInto_select_where_clause"/>
+		order by create_time desc
+	</select>	
+
+	<insert id="WarehouseInto_insert">
+		insert into warehouse_into 
+			(id,code,type,order_id,warehouse_id,warehouse_name,
+			remark,handler_id,handler_name,dept_id,dept_name,
+			creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#type#,#orderId#,#warehouseId#,#warehouseName#,
+			#remark#,#handlerId#,#handlerName#,#deptId#,#deptName#,
+			#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	
+	<update id="WarehouseInto_update">
+		update warehouse_into set
+			order_id = #orderId#,
+			warehouse_id = #warehouseId#,
+			warehouse_name = #warehouseName#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			remark = #remark#,
+			handler_id = #handlerId#,
+			handler_name = #handlerName#,
+			dept_id = #deptId#,
+			dept_name = #deptName#
+		where id = #id#
+	</update>
+	
+	<delete id="WarehouseInto_delete">
+		delete from warehouse_into where id = #id#
+	</delete>
+</sqlMap>

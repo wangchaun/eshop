@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml;http://open.weibo.com/wb">
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/commons/taglibs.jsp" %>
+<%@ include file="/commons/meta.jsp" %>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>云岗网上商城</title>
+    <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/styles/front/style/login_page.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2.css"/>
+    <script src="${ctx}/scripts/front/js/stuHover.js" type="text/javascript"></script>
+    <script language="javascript" src="${ctx}/scripts/front/js/jquery.js"></script>
+    <script language="javascript" src="${ctx}/scripts/front/js/index20110925_mini.js"></script>
+    <script language="javascript" src="${ctx}/scripts/front/js/jquery2.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/front/js/jquery1.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/front/common/common.js?version=${version}"></script>
+    <script type="text/javascript" src="${ctx }/scripts/front/customer/login.js?version=${version}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("body").keydown(function (e) {
+                var curKey = e.which;
+                if (curKey == 13) {
+                    $(".login0202_text1btn").click();
+                }
+            });
+        });
+
+        function changeDiv(tag, method) {
+            document.getElementById(tag).style.display = method;
+        }
+
+    </script>
+</head>
+<body>
+<div class="box">
+    <%@ include file="/WEB-INF/page/front/guanwang/header.jsp" %>
+    <!--[if !IE]>中间<![endif]-->
+    <div class="content">
+        <div class="login">
+            <!--[if !IE]>左侧<![endif]-->
+            <div class="login01">
+                <div class="login01_text">
+                    <div class="login01_text01">
+                        <span>行货正品</span>
+                        全部商品保证行货正品，您可放心购物
+                    </div>
+                    <div class="login01_text01">
+                        <span>商品自提</span>
+                        可到营业厅自提商品，质量有保障
+                    </div>
+                    <div class="login01_text01">
+                        <span>购物积分</span>
+                        网上消费赠积分，积分可抵现
+                    </div>
+                    <div class="login01_text01">
+                        <span>七天包退</span>
+                        购买七天之内没有开封可无理由退货
+                    </div>
+                </div>
+            </div>
+            <!--[if !IE]>右侧<![endif]-->
+            <div class="login02">
+                <div class="login0201"><img src="${ctx}/Images/images/y4.jpg"/></div>
+                <div class="login0202">
+                    <form action="" id="loginForm" name="loginForm" method="post">
+                        <div class="login0202_text">商城会员登录</div>
+                        <div class="login0202_text1" style="padding-top: 15px; height: 50px;">
+                            <h1>账号：</h1>
+                            <h2><input style="color:#CCC" name="customer.code" id="codesY" type="text"
+                                       class="login0202_text1input" onfocus="dlbh()" onblur="sqbh()"/></h2>
+                            <h3 id="loginMessage" style="display: none;"></h3>
+                        </div>
+                        <div class="login0202_text1">
+                            <h1>密码：</h1>
+                            <h2><input name="customer.pwd" id="pwdsY" type="password" class="login0202_text1input"
+                                       onclick="dlbh1()" onfocus="this.style.border='1px solid #FEA710'"
+                                       onblur="this.style.border='1px solid #dadada';"/></h2>
+
+                        </div>
+                        <div class="login0202_text2">
+                            <h1><input name="" type="button" class="login0202_text1btn" value="登录"
+                                       onclick="submitForm()"/></h1>
+                            <h2 style="display:none;"><a href="forgetPassword.do">忘记密码</a></h2>
+                            <!-- forgotPassword.html -->
+                        </div>
+                    </form>
+                    <div class="login0202_text3">
+                        <div class="login0202_text301">
+                            <samp>还不是商城用户？</samp></div>
+                        <div class="login0202_text302">
+                            现在免费注册商城会员，便能立即享<br/>受便宜又放心的购物乐趣!
+                             <span><a href="${ctx}/zhuce.do">会员注册</a></span>
+                        </div>
+                    </div>
+                    <div class="login0202_text4">
+
+                    </div>
+                </div>
+                <div class="login0201"><img src="${ctx}/Images/images/y7.jpg"/></div>
+            </div>
+            <!--[if !IE]>右侧结束<![endif]-->
+        </div>
+    </div>
+    <!--[if !IE]>中间登录结束<![endif]-->
+    <%@ include file="/WEB-INF/page/front/guanwang/bottom.jsp" %>
+</div>
+
+
+</body>
+</html>

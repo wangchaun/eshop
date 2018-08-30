@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+
+
+
+/*============================待评价商品===================================*/
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ idth:1200px; float:left; padding-top:15px;}
+
+/*******************商品评价******************************/
+
+.orderDetails{ width:1200px; float:left;  color:#0a7cd4; font-size:18px;   font-family:"微软雅黑"; height:32px; line-height:28px; border-bottom:#2a8fdf solid 2px;}
+.orderDetails span{  color:#606060; font-size:18px;  font-family:"微软雅黑"; padding-left:10px; padding-right:10px;}
+.orderDetails samp{  color:#606060; font-size:18px;  font-family:"微软雅黑";}
+.orderDetails samp a{ color:#0a7cd4; font-size:18px;  font-family:"微软雅黑"; text-decoration:none;}
+.orderDetails samp a:hover{ color:#0a7cd4; font-size:18px;  font-family:"微软雅黑"; text-decoration:underline;}
+.ordys{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑";}
+.ordys a{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑"; text-decoration:none;}
+.ordys a:hover{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑"; text-decoration:underline;}
+.photocomment{ width:1200px; margin-top:15px; float:left; background:#f6f6f6;}
+.photocomment h1{ padding-left:23px; padding-top:6px; float:left; line-height:24px; width:1100px;}
+.photocomment h2{ padding-left:23px;  float:left; line-height:24px; color:#de6900; padding-bottom:6px;width:1100px;}
+.photocomment1{ width:1200px; margin-top:20px; float:left; color:#373737; font-size:15px; font-family:"微软雅黑";}
+.photocomment1 h1{ padding-top:3px; padding-right:8px; float:left; color:#e41215; font-size:12px; font-family:"宋体";}
+.photocomment2{ width:1000px; margin-top:25px;*margin-top:20px;_margin-top:20px;  float:left; padding-left:28px; padding-bottom:10px;}
+.photocomment2 h1{ float:left; padding-right:7px; padding-top:0px;padding-top:0px;_padding-top:0px;}
+.photocomment2 h2{ float:left; padding-right:7px; padding-top:0px;padding-top:5px;_padding-top:5px; }
+.photocomment2 h3{ float:left; padding-right:40px;  padding-top:0px;*padding-top:5px;_padding-top:5px;}
+.photocomment3{ width:1176px; margin-top:12px; float:left; padding-left:24px;}
+.photocomment3 h1{ float:left; padding-right:5px; width:630px;}
+.photocomment3textare{ width:620px; height:150px; border:#dadada solid 1px; line-height:22px; overflow:hidden;}
+.photocomment3 h2{ float:left; width:500px; color:#a9a9a9;}
+.photocomment3 h2 span{ float:left; width:500px; line-height:22px; padding-bottom:20px;}
+.photocomment3 h2 samp{ float:left; width:330px; line-height:22px;}
+
+.photocomment4{ width:1176px; margin-top:20px; float:left; padding-left:24px;}
+.photocommentbtn{ width:74px; height:29px; background:url(../../../Images/images/pu15.jpg) no-repeat left top; cursor:pointer; border:none;}

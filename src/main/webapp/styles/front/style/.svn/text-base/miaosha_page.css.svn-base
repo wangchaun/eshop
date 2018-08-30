@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+body{behavior:url("js/csshover.htc");}
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================商品分类===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.limitbuy{ width:1200px; float:left;}
+.limitbuy01{ width:1200px; height:32px; padding-top:20px; float:left; border-bottom:#2791e3 solid 2px;}
+.limitbuy01 span{ float:left; padding-top:0px; height:32px;  background:url(../../../Images/images/a14.jpg) no-repeat center bottom; color:#0a7cd4; font-size:18px; font-family:"微软雅黑"; }
+.limitbuy01 samp{ float:left; padding-top:0px; height:30px;  color:#828282; font-size:16px; font-family:"微软雅黑"; padding-left:22px; padding-top:2px;}
+.miaosha{ width:1198px; float:left; border:#f39d4b solid 1px; margin-top:30px; background:#fbfbfb; overflow:hidden; margin-bottom:10px;}
+.miaosha01{ width:1114px; float:left; margin-left:42px; display:inline; background:url(../../../Images/images/miaosha.jpg) repeat-x left bottom; padding-bottom:35px;}
+.miao_text{width:1114px; float:left; padding-top:25px;}
+.miao_text span{ color:#666; font-family:"微软雅黑"; font-size:20px; text-decoration:none; width:845px; height:27px; overflow:hidden; float:left;}
+.miao_text samp{ color:#ff9600; font-family:"微软雅黑"; font-size:16px; text-decoration:none; width:845px; height:27px; overflow:hidden;  float:left;}
+.miao_text span a{color:#666; font-family:"微软雅黑"; font-size:20px; text-decoration:none;}
+.miao_text span a:hover{color:#0a7cd4; font-family:"微软雅黑"; font-size:20px; text-decoration:underline;}
+.miao_text1{width:1110px; float:left; padding-top:14px; padding-left:5px;}
+.miao_text101{ width:747px; float:left;}
+.miao_text102{ width:353px; float:left; margin-top:60px; height:278px; background:url(../../../Images/images/miao2.jpg) no-repeat left top;}
+.miao_text10201{ width:300px; float:left; padding-top:16px; height:48px; padding-left:40px;}
+.miao_text10201 span{ float:left; color:#666; font-size:20px; font-family:"微软雅黑"; line-height:34px;}
+.miao_text10201 samp{ width:35px; height:34px; float:left; color:#fff; font-size:20px; font-family:Arial, Helvetica, sans-serif; line-height:34px; text-align:center; background:#fe9f43;}
+.miao_text10202 { width:289px; float:left; padding-top:28px; height:69px; padding-left:64px;}
+.miao_text10202 h1{ float:left; padding-top:23px; padding-right:0px; color:#fff; font-size:12px; font-family:Arial, Helvetica, sans-serif;}
+.miao_text10202 h2{ float:left; padding-top:3px;  color:#fff; font-size:36px; font-family:Arial, Helvetica, sans-serif; padding-right:28px;}
+.miao_text10202 h3{ float:left;}
+.miao_text10203{ width:345px; float:left; padding-left:40px; line-height:59px;}
+.miao_text10203 h1{ color:#666666; font-size:18px; font-family:"微软雅黑"; float:left;}
+.miao_text10203 h1 span{ text-decoration:line-through; font-weight:normal;}
+.miao_text10203 h2{ color:#c5c3c1; font-size:14px; font-family:"微软雅黑"; padding-left:12px; padding-right:12px; float:left;}
+.miao_text10204{ width:299px; float:left; padding-left:40px; line-height:58px;}
+.miao_text10204 h1{ float:left; font-size:12px; color:#666; }
+.miao_text10204 h1 samp{ float:left; font-size:12px; color:#666; float:left;}
+.miao_text10204 h1 span{ font-size:24px; font-family:Arial, Helvetica, sans-serif; color:#e41215; float:left; padding-right:2px;}
+.miao_text10204 h2{ float:left; font-size:12px; color:#666; padding-left:49px;}
+.hotmoneybtn{ width:113px; height:41px; background:url(../../../Images/images/miao4.jpg) no-repeat left top; border:none; cursor:pointer;}
+.startButton{ width:113px; height:41px; background:url(../../../Images/images/miao10.JPG) no-repeat left top; border:none; cursor:pointer;}
+.miao3{ width:1198px; float:left; padding-bottom:50px;}
+.miao5{ width:1198px; float:left; margin-bottom:10px;}
+.box-163css{ width:1168px; margin-left:44px; display:inline; padding-top:35px;  position:relative; float:left;}
+.ashow2{ width:1110px;  float:left; display:inline; overflow:hidden;}
+.ashow2 LI { FLOAT: left; OVERFLOW: hidden; WIDTH: 222px; text-align:center;}
+.ashow2 LI img{ width:185px; padding:3px; border:#d3d3d3 solid 1px; height:119px;}
+.al {BACKGROUND: url(../../../Images/images/left.jpg) no-repeat 0px 0; left:-25px; top:82px; position:absolute; OVERFLOW: hidden; WIDTH: 19px; CURSOR: pointer; LINE-HEIGHT: 200px; HEIGHT: 50px}
+.ar {BACKGROUND: url(../../../Images/images/right.jpg) no-repeat 0px 0; right:33px; top:82px; position:absolute; OVERFLOW: hidden; WIDTH: 19px; CURSOR: pointer; LINE-HEIGHT: 200px; HEIGHT: 50px}
+.miao4{ width:1200px; float:left; padding-top:12px; line-height:22px; color:#666;}
+
+
+
+

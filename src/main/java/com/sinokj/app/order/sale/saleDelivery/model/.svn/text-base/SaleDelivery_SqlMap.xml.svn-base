@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SaleDelivery">
+	<resultMap class="com.sinokj.app.order.sale.saleDelivery.model.SaleDelivery" id="SaleDeliveryResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<!-- SaleDelivery -->
+		<result column="order_id" property="orderId" jdbcType="varchar"/>
+		<result column="bank_account_id" property="bankAccountId" jdbcType="varchar"/>
+		<result column="bank_account_name" property="bankAccountName" jdbcType="varchar"/>
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="customer_name" property="customerName" jdbcType="varchar"/>
+		<result column="delivery_cost" property="deliveryCost" jdbcType="decimal"/>
+		<result column="money_account" property="moneyAccount" jdbcType="decimal"/>
+		<result column="money_received" property="moneyReceived" jdbcType="decimal"/>
+		<result column="linkman" property="linkman" jdbcType="varchar"/>
+		<result column="mobile" property="mobile" jdbcType="varchar"/>
+		<result column="delivery_id" property="deliveryId" jdbcType="varchar"/>
+		<result column="delivery_code" property="deliveryCode" jdbcType="varchar"/>
+		<result column="delivery_name" property="deliveryName" jdbcType="varchar"/>
+		<result column="payment_state" property="paymentState" jdbcType="varchar"/>
+		<result column="delivery_state" property="deliveryState" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="handler_id" property="handlerId" jdbcType="varchar"/>
+		<result column="handler_name" property="handlerName" jdbcType="varchar"/>
+		<result column="dept_id" property="deptId" jdbcType="varchar"/>
+		<result column="dept_name" property="deptName" jdbcType="varchar"/>
+	</resultMap>
+	<!-- 客户往来账查询字段 -->
+		<resultMap class="com.sinokj.app.order.sale.saleDelivery.model.SaleDelivery" id="CustomerLwz">
+			<result column="create_time" property="createTime"/>
+			<result column="customer_name" property="customerName"/>
+			<result column="code" property="code"/>
+			<result column="remark" property="remark"/>
+			<result column="order_money" property="oderMoney"/>
+			<result column="pay_money" property="payMoney"/>
+			<result column="fee" property="fee"/>
+		</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="SaleDelivery_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="SaleDelivery.SaleDelivery_insert"/>
+		<flushOnExecute statement="SaleDelivery.SaleDelivery_update"/>
+		<flushOnExecute statement="SaleDelivery.SaleDelivery_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="SaleDelivery_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name like '%$customerName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="paymentState">
+			  payment_state = #paymentState#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="mobile">
+			  mobile =#mobile#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseId">
+			  warehouse_id = #warehouseId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="deliveryState">
+			delivery_state=#deliveryState#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="paymentState">
+			payment_state=#paymentState#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<!-- 客户往来帐条件查询 -->
+	<sql id="SaleDelivery_CustomerLwz_select_where_clause">
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="begin">
+				<![CDATA[a.create_time >= #begin#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="end">
+				<![CDATA[a.create_time <= #end#]]>
+			</isNotEmpty>
+				<isNotEmpty prepend="and" property="customerName">
+			  		a.customer_name like '%$customerName$%'
+				</isNotEmpty>
+			</dynamic>
+	</sql>
+	
+	<select id="SaleDelivery_query_select" resultMap="SaleDeliveryResult" cacheModel="SaleDelivery_cache">
+		select * from sale_delivery 
+		<include refid="SaleDelivery_query_select_where_clause"/>
+		order by code desc
+	</select>
+	<select id="SaleDelivery_count_query_select" resultClass="java.lang.Integer" cacheModel="SaleDelivery_cache">
+		select count(*) from sale_delivery
+		<include refid="SaleDelivery_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="SaleDelivery_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="orderId">
+			  order_id = #orderId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name like '%$customerName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="mobile">
+			  mobile =#mobile#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseId">
+			  warehouse_id = #warehouseId#
+			</isNotEmpty>
+			
+			<isNotNull prepend="," property="paymentState" >
+			payment_state = #paymentState#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryState" >
+			delivery_state = #deliveryState#
+			</isNotNull>
+		</dynamic>	
+	</sql>
+	<select id="SaleDelivery_select" resultMap="SaleDeliveryResult" cacheModel="SaleDelivery_cache">
+		select * from sale_delivery 
+		<include refid="SaleDelivery_select_where_clause"/>
+		order by code desc
+	</select>	
+		<!-- 客户往来帐查询 -->
+	<select id="SaleDelivery_CustomerLwz_select" resultMap="CustomerLwz" >
+		select * from (
+		select a.create_time,a.customer_name,a.code,a.remark,a.money_account as order_money,null as pay_money,(a.money_account-a.money_received) as fee from sale_delivery a
+		UNION 
+		select b.create_time,b.customer_name,b.code,b.remark,null,b.money_account,null  from sale_collection b
+		UNION 
+		select c.create_time,c.customer_name,c.code,c.remark,null,(0-c.money_account),null from sale_return c
+		GROUP BY order_id ORDER BY create_time desc
+		) a 
+		<include refid="SaleDelivery_CustomerLwz_select_where_clause"/>
+	</select>
+	
+	<insert id="SaleDelivery_insert">
+		insert into sale_delivery 
+			(id,code,order_id,bank_account_id,bank_account_name,warehouse_id,warehouse_name,customer_id,customer_name,
+			money_account,money_received,delivery_cost,linkman,mobile,
+			delivery_id,delivery_code,delivery_name,payment_state,delivery_state,remark,handler_id,handler_name,dept_id,
+			dept_name,creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#orderId#,#bankAccountId#,#bankAccountName#,#warehouseId#,#warehouseName#,#customerId#,#customerName#,
+			#moneyAccount#,#moneyReceived#,#deliveryCost#,#linkman#,#mobile#,
+			#deliveryId#,#deliveryCode#,#deliveryName#,#paymentState#,#deliveryState#,#remark#,
+			#handlerId#,#handlerName#,#deptId#,#deptName#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	
+	<update id="SaleDelivery_update">
+		update sale_delivery 
+		<dynamic prepend="set" >
+			<isNotNull prepend="," property="bankAccountId" >
+			bank_account_id = #bankAccountId#
+			</isNotNull>
+			<isNotNull prepend="," property="bankAccountName" >
+			bank_account_name = #bankAccountName#
+			</isNotNull>
+			<isNotNull prepend="," property="warehouseId" >
+			warehouse_id = #warehouseId#
+			</isNotNull>
+			<isNotNull prepend="," property="warehouseName" >
+			warehouse_name = #warehouseName#
+			</isNotNull>
+			<isNotNull prepend="," property="moneyAccount" >
+			money_account = #moneyAccount#
+			</isNotNull>
+			<isNotNull prepend="," property="moneyReceived" >
+			money_received = #moneyReceived#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryCost" >
+			delivery_cost = #deliveryCost#
+			</isNotNull>
+			<isNotNull prepend="," property="linkman" >
+			linkman = #linkman#
+			</isNotNull>
+			<isNotNull prepend="," property="mobile" >
+			mobile = #mobile#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryId" >
+			delivery_id = #deliveryId#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryCode" >
+			delivery_code = #deliveryCode#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryName" >
+			delivery_name = #deliveryName#
+			</isNotNull>
+			<isNotNull prepend="," property="modifierId" >
+			modifier_id = #modifierId#
+			</isNotNull>
+			<isNotNull prepend="," property="modifierName" >
+			modifier_name = #modifierName#
+			</isNotNull>
+			<isNotNull prepend="," property="modifyTime" >
+			modify_time = #modifyTime#
+			</isNotNull>
+			<isNotNull prepend="," property="state" >
+			state = #state#
+			</isNotNull>
+			<isNotNull prepend="," property="paymentState" >
+			payment_state = #paymentState#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryState" >
+			delivery_state = #deliveryState#
+			</isNotNull>
+			<isNotNull prepend="," property="remark" >
+			remark = #remark#
+			</isNotNull>
+		</dynamic>
+		where id = #id#
+	</update>
+	
+	<update id="SaleDelivery_payState_update">
+		update sale_delivery 
+		<dynamic prepend="set" >
+			<isNotEmpty prepend="," property="moneyReceived" >
+				money_received = #moneyReceived#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="paymentState" >
+				payment_state = #paymentState#
+			</isNotEmpty>
+		</dynamic>
+		where id = #id#
+	</update>
+	<delete id="SaleDelivery_delete">
+		delete from sale_delivery where id = #id#
+	</delete>
+</sqlMap>

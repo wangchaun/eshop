@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WareSpecificationVal">
+	<resultMap class="com.sinokj.app.good.ware.model.WareSpecificationVal" id="WareSpecificationValResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- WareSpecificationVal -->
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="good_specification_val_id" property="goodSpecificationValId" jdbcType="varchar"/>
+	</resultMap>
+	<resultMap class="com.sinokj.app.good.ware.model.WareSpecificationVal" id="WareSpecificationValExtendsResult" extends="WareSpecificationValResult">
+		<!-- 虚拟列 -->
+		<result column="specification_val_name" property="specificationValName" jdbcType="varchar"/>
+	</resultMap>
+	
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="WareSpecificationVal_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WareSpecificationVal.WareSpecificationVal_insert"/>
+		<flushOnExecute statement="WareSpecificationVal.WareSpecificationVal_update"/>
+		<flushOnExecute statement="WareSpecificationVal.WareSpecificationVal_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 
+
+	<select id="WareSpecificationVal_select" resultMap="WareSpecificationValExtendsResult" cacheModel="WareSpecificationVal_cache">
+		select a.*,b.value as specification_val_name from ware_specification_val a inner join good_specification_val b
+				on a.good_specification_val_id = b.id
+			where ware_id = #wareId# order by sort asc
+ 	</select>
+ 	<select id="WareSpecificationVal_ware_select" resultMap="WareSpecificationValResult" cacheModel="WareSpecificationVal_cache">
+ 		select * from ware_specification_val where ware_id = #wareId# and good_specification_val_id = #goodSpecificationValId#
+ 	</select>
+	
+	<insert id="WareSpecificationVal_insert">
+		insert into ware_specification_val 
+			(id,sort,ware_id,good_specification_val_id)
+		values
+			(#id#,#sort#,#wareId#,#goodSpecificationValId#)
+	</insert>
+	
+	<update id="WareSpecificationVal_update">
+		update ware_specification_val set
+			sort = #sort#,
+			ware_id = #wareId#,
+			good_specification_val_id = #goodSpecificationValId#
+		where id = #id#
+	</update>
+    <delete id="WareSpecificationVal_delete">
+	    delete from ware_specification_val
+	    where ware_id = #wareId#
+    </delete>	
+	
+</sqlMap>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="ApplyToCash">
+	<resultMap class="com.sinokj.app.vip.applyCash.model.ApplyToCash" id="ApplyToCashResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- Fee  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="to_Cash_Amount" property="toCashAmount" jdbcType="decimal"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="handler_Id" property="handlerId" jdbcType="varchar"/>
+		<result column="handler_Name" property="handlerName" jdbcType="varchar"/>
+		<result column="dept_Id" property="deptId" jdbcType="varchar"/>
+		<result column="dept_Name" property="deptName" jdbcType="varchar"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="customer_name" property="customerName" jdbcType="varchar"/>
+		<result column="bank_Name" property="bankName" jdbcType="varchar"/>
+		<result column="account_Holder" property="accountHolder" jdbcType="varchar"/>
+		<result column="bank_account" property="bankAccount" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="ApplyToCash_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="ApplyToCash.ApplyToCash_insert"/>
+		<flushOnExecute statement="ApplyToCash.ApplyToCash_update"/>
+		<flushOnExecute statement="ApplyToCash.ApplyToCash_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="ApplyToCash_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name like '%$customerName$%'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="ApplyToCash_query_select" resultMap="ApplyToCashResult" cacheModel="ApplyToCash_cache">
+		select * from apply_to_cash 
+		<include refid="ApplyToCash_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="ApplyToCash_count_query_select" resultClass="java.lang.Integer" cacheModel="ApplyToCash_cache">
+		select count(*) from apply_to_cash
+		<include refid="ApplyToCash_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="ApplyToCash_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name = '#customerName#'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="ApplyToCash_select" resultMap="ApplyToCashResult" cacheModel="ApplyToCash_cache">
+		select * from apply_to_cash 
+		<include refid="ApplyToCash_select_where_clause"/>
+		order by create_time desc
+	</select>	
+
+	<!--  增加提现申请  -->
+	<insert id="ApplyToCash_insert">
+		insert into apply_to_cash 
+			(id,remark,handler_id,handler_name,dept_id,dept_name,creator_id,
+			creator_name,create_time,state,customer_id,customer_name,to_Cash_Amount,
+			bank_Name,account_Holder,bank_account)
+		values
+			(#id#,#remark#,#handlerId#,#handlerName#,#deptId#,#deptName#,#creatorId#,
+			#creatorName#,#createTime#,#state#,#customerId#,#customerName#,#toCashAmount#,
+			#bankName#,#accountHolder#,#bankAccount#)
+	</insert>
+	
+	<!--  修改提现申请 根据id -->
+	<update id="ApplyToCash_update">
+		update apply_to_cash set
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			remark = #remark#,
+			handler_id = #handlerId#,
+			handler_name = #handlerName#,
+			dept_id = #deptId#,
+			dept_name = #deptName#,
+			customer_id = #customerId#,
+			customer_name = #customerName#,
+			bank_Name = #bankName#,
+			account_Holder = #accountHolder#,
+			bank_account = #bankAccount#,
+			to_Cash_Amount=#toCashAmount#
+		where id = #id#
+	</update>
+	
+	<!-- 删除提现申请 根据id-->
+	<delete id="ApplyToCash_delete">
+		delete from apply_to_cash where id = #id#
+	</delete>
+</sqlMap>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="Gift">
+	<resultMap class="com.sinokj.app.store.gift.model.Gift" id="GiftResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- PromotionActivity  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="intro" property="intro" jdbcType="varchar"/>
+		<result column="pic_id" property="picId" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+		<result column="start_time" property="startTime" jdbcType="datetime"/>
+		<result column="end_time" property="endTime" jdbcType="datetime"/>	
+		<result column="vip_level_id" property="vipLevelId" jdbcType="VARCHAR" />
+	    <result column="vip_level_name" property="vipLevelName" jdbcType="VARCHAR" />
+		<result column="gift_id" property="giftId" jdbcType="varchar"/>
+		<result column="gift_name" property="giftName" jdbcType="varchar"/>
+		<result column="gift_price" property="giftPrice" jdbcType="varchar"/>
+		<result column="credits" property="credits" jdbcType="int"/>
+		<result column="amount" property="amount" jdbcType="int"/>
+		<result column="order_money" property="orderMoney" jdbcType="int"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Gift_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Gift.Gift_insert"/>
+		<flushOnExecute statement="Gift.Gift_update"/>
+		<flushOnExecute statement="Gift.Gift_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据主题和编号 -->
+	<sql id="Gift_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id like '%$id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="giftName">
+			  gift_name like '%$giftName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Gift_query_select" resultMap="GiftResult" cacheModel="Gift_cache">
+		select * from gift
+		<include refid="Gift_query_select_where_clause"/>
+		order by create_time,code desc
+	</select>
+	<select id="Gift_count_query_select" resultClass="java.lang.Integer" cacheModel="Gift_cache">
+		select count(*) from gift
+		<include refid="Gift_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="Gift_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="giftName">
+			  gift_name = #giftName#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Gift_select" resultMap="GiftResult" cacheModel="Gift_cache">
+		select * from gift 
+		<include refid="Gift_select_where_clause"/>
+		order by create_time,code desc
+	</select>	
+
+	<!--  增加  -->
+	<insert id="Gift_insert">
+		insert into gift
+			(id,code,intro,order_money,gift_id,gift_name,gift_price,credits,pic_id,pic,amount,start_time,end_time,vip_level_id,vip_level_name,modifier_id,modifier_name,modify_time,creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#intro#,#orderMoney#,#giftId#,#giftName#,#giftPrice#,#credits#,#picId#,#pic#,#amount#,#startTime#,#endTime#,#vipLevelId#,#vipLevelName#,#modifierId#,#modifierName#,#modifyTime#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	
+	<!--  修改 根据id -->
+	<update id="Gift_update">
+		update gift set
+			code = #code#,
+			gift_id = #giftId#,
+			gift_name = #giftName#,
+			gift_price = #giftPrice#,
+			credits = #credits#,
+			intro = #intro#,
+			order_money = #orderMoney#,
+			pic_id = #picId#,
+			pic = #pic#,
+			amount = #amount#,
+			start_time = #startTime#,
+			end_time = #endTime#,
+			vip_level_id = #vipLevelId#,
+			vip_level_name = #vipLevelName#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			creator_id = #creatorId#,
+			creator_name = #creatorName#,
+			create_time = #createTime#
+		where id = #id#
+	</update>
+	
+	<!-- 删除 根据id-->
+	<delete id="Gift_delete">
+		delete from gift where id = #id#
+	</delete>
+</sqlMap>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SaleReturn">
+	<resultMap class="com.sinokj.app.order.sale.saleReturn.model.SaleReturn" id="SaleReturnResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<!-- SaleReturn -->
+		<result column="order_id" property="orderId" jdbcType="varchar"/>
+		<result column="bank_account_id" property="bankAccountId" jdbcType="varchar"/>
+		<result column="bank_account_name" property="bankAccountName" jdbcType="varchar"/>
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="customer_name" property="customerName" jdbcType="varchar"/>
+		<result column="delivery_cost" property="deliveryCost" jdbcType="decimal"/>
+		<result column="money_account" property="moneyAccount" jdbcType="decimal"/>
+		<result column="delivery_cost" property="deliveryCost" jdbcType="decimal"/>
+		<result column="linkman" property="linkman" jdbcType="varchar"/>
+		<result column="mobile" property="mobile" jdbcType="varchar"/>
+		<result column="delivery_id" property="deliveryId" jdbcType="varchar"/>
+		<result column="delivery_code" property="deliveryCode" jdbcType="varchar"/>
+		<result column="delivery_name" property="deliveryName" jdbcType="varchar"/>
+		<result column="return_state" property="returnState" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="handler_id" property="handlerId" jdbcType="varchar"/>
+		<result column="handler_name" property="handlerName" jdbcType="varchar"/>
+		<result column="dept_id" property="deptId" jdbcType="varchar"/>
+		<result column="dept_name" property="deptName" jdbcType="varchar"/>
+		<result column="returntype" property="returntype" jdbcType="varchar"/>
+		
+		
+		<result column="returnContent" property="returnContent" jdbcType="varchar"/>
+		<result column="isinvoice" property="isinvoice" jdbcType="varchar"/>
+		<result column="returngoodtype" property="returngoodtype" jdbcType="varchar"/>
+		<result column="deliveryAddress" property="deliveryAddress" jdbcType="varchar"/>
+		<result column="street" property="street" jdbcType="varchar"/>
+		<result column="intro_delivery" property="introDelivery" jdbcType="varchar"/>
+		
+		<result column="orderstate_time" property="orderstateTime" jdbcType="datetime"/>
+		<result column="return_time" property="returnTime" jdbcType="datetime"/>
+		<result column="receive_time" property="receiveTime" jdbcType="datetime"/>
+		
+	</resultMap> 
+	
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="SaleReturn_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="SaleReturn.SaleReturn_insert"/>
+		<flushOnExecute statement="SaleReturn.SaleReturn_update"/>
+		<flushOnExecute statement="SaleReturn.SaleReturn_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="SaleReturn_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name like '%$customerName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="remark">
+			  remark = #remark#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="SaleReturn_query_select" resultMap="SaleReturnResult" cacheModel="SaleReturn_cache">
+		select * from sale_return 
+		<include refid="SaleReturn_query_select_where_clause"/>
+		order by code desc
+	</select>
+	<select id="SaleReturn_count_query_select" resultClass="java.lang.Integer" cacheModel="SaleReturn_cache">
+		select count(*) from sale_return
+		<include refid="SaleReturn_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="SaleReturn_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name like '%$customerName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="remark">
+			  remark = #remark#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="data">
+			  <![CDATA[create_time >= #data#]]>
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="SaleReturn_select" resultMap="SaleReturnResult" cacheModel="SaleReturn_cache">
+		select * from sale_return 
+		<include refid="SaleReturn_select_where_clause"/>
+		order by code desc
+	</select>	
+
+	<insert id="SaleReturn_insert">
+		insert into sale_return 
+			(id,code,order_id,bank_account_id,bank_account_name,warehouse_id,warehouse_name,customer_id,customer_name,
+			money_account,delivery_cost,linkman,mobile,
+			delivery_id,delivery_code,delivery_name,return_state,remark,handler_id,handler_name,dept_id,
+			dept_name,creator_id,creator_name,create_time,state,returntype,returnContent,isinvoice,returngoodtype,deliveryAddress,
+			street,intro_delivery,orderstate_time,return_time,receive_time)
+		values
+			(#id#,#code#,#orderId#,#bankAccountId#,#bankAccountName#,#warehouseId#,#warehouseName#,#customerId#,#customerName#,
+			#moneyAccount#,#deliveryCost#,#linkman#,#mobile#,
+			#deliveryId#,#deliveryCode#,#deliveryName#,#returnState#,#remark#,
+			#handlerId#,#handlerName#,#deptId#,#deptName#,#creatorId#,#creatorName#,#createTime#,#state#,#returntype#,#returnContent#,
+			#isinvoice#,#returngoodtype#,#deliveryAddress#,#street#,#introDelivery#,#orderstateTime#,#returnTime#,#receiveTime#)
+	</insert>
+	
+	<update id="SaleReturn_update">
+		update sale_return set
+			order_id = #orderId#,
+			bank_account_id = #bankAccountId#,
+			bank_account_name = #bankAccountName#,
+			warehouse_id = #warehouseId#,
+			warehouse_name = #warehouseName#,
+			customer_id = #customerId#,
+			customer_name = #customerName#,
+			money_account = #moneyAccount#,
+			delivery_cost = #deliveryCost#,
+			linkman = #linkman#,
+			mobile = #mobile#,
+			delivery_id = #deliveryId#,
+			delivery_code = #deliveryCode#,
+			delivery_name = #deliveryName#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			return_state = #returnState#,
+			remark = #remark#,
+			handler_id = #handlerId#,
+			handler_name = #handlerName#,
+			dept_id = #deptId#,
+			dept_name = #deptName#,
+			returntype=#returntype#,
+			returnContent=#returnContent#,
+			isinvoice=#isinvoice#,
+			returngoodtype=#returngoodtype#,
+			deliveryAddress=#deliveryAddress#,
+			street=#street#,
+			intro_delivery=#introDelivery#,
+			orderstate_time=#orderstateTime#,
+			return_time=#returnTime#,
+			receive_time=#receiveTime#
+		where id = #id#
+	</update>
+	
+	<delete id="SaleReturn_delete">
+		delete from sale_return where id = #id#
+	</delete>
+</sqlMap>

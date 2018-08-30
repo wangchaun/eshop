@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- 前台配置 -->
+<struts>
+	<!-- *!*.do结尾的action -->
+	<package name="front" extends="struts-default">
+	 
+	    <!-- 一卡通支付功能 跳转到一卡通支付页面 -->
+	    <action name="paycard" class="com.sinokj.app.order.paycard.CardAction" method="payCard">
+	        <result name="paycard">/WEB-INF/page/front/guanwang/paycard.jsp</result>
+	    </action>
+	    <action name="confirmation" class="com.sinokj.app.order.paycard.CardAction"  method="confirmation"></action>
+	    <action name="searchCreadit" class="com.sinokj.app.front.action.FrontGoodAction"  method="searchCreadit"></action>
+	    <action name="userBean" class="com.sinokj.app.front.action.FrontGoodAction"  method="userBean"></action>
+	    <action name="CancelBean" class="com.sinokj.app.front.action.FrontGoodAction"  method="CancelBean"></action>
+	    <action name="CancelBean2" class="com.sinokj.app.front.action.FrontGoodAction"  method="CancelBean2"></action>
+	    <action name="userBeanTwo" class="com.sinokj.app.front.action.FrontGoodAction"  method="userBeanTwo"></action>
+	    <action name="useMaterialGiftCard" class="com.sinokj.app.front.action.FrontGoodAction"  method="useMaterialGiftCard"></action>
+		<action name="cancelMaterialGiftCard" class="com.sinokj.app.front.action.FrontGoodAction"  method="cancelMaterialGiftCard"></action>
+		<action name="useMaterialGiftCard2" class="com.sinokj.app.front.action.FrontGoodAction"  method="useMaterialGiftCard2"></action>
+		<action name="cancelMaterialGiftCard2" class="com.sinokj.app.front.action.FrontGoodAction"  method="cancelMaterialGiftCard2"></action>
+		<!-- 跳转到秒杀界面 -->
+		<action name="miaosha" class="com.sinokj.app.front.action.FrontGoodAction" method="miaosha">
+			<result name="miaosha">/WEB-INF/page/front/guanwang/miaosha.jsp</result>
+		</action>
+		<!-- 跳转到抢购界面 -->
+		<action name="qianggou" class="com.sinokj.app.front.action.FrontGoodAction" method="qianggou">
+			<result name="qianggou">/WEB-INF/page/front/guanwang/qianggou.jsp</result>
+		</action>
+		<!-- 跳转到团购界面 -->
+		<action name="tuangou" class="com.sinokj.app.front.action.FrontGoodAction" method="tuangou">
+			<result name="tuangou">/WEB-INF/page/front/guanwang/tuangou.jsp</result>
+		</action>
+		<!-- 跳转到品牌馆界面 -->
+		<action name="brand" class="com.sinokj.app.front.action.FrontGoodAction" method="brand">
+			<result name="brand">/WEB-INF/page/front/guanwang/brand_Detail.jsp</result>
+		</action>
+		<!-- 跳转到品牌馆详情界面 -->
+		<action name="brandDetail" class="com.sinokj.app.front.action.FrontGoodAction" method="brandDetail">
+			<result name="brandDetail">/WEB-INF/page/front/guanwang/brand_Detail.jsp</result>
+		</action>
+		
+		<!-- 首页 -->
+		<action name="index" class="com.sinokj.app.front.action.CusLoginAction" method="index">
+			<result name="index">/WEB-INF/page/front/guanwang/index.jsp</result>
+		</action>
+		
+		<!--用户登陆 -->
+		<action name="loginV" class="com.sinokj.app.front.action.CusLoginAction" method="loginV"></action>	
+		
+		<!-- 用户忘记密码 -->
+		<action name="forgetPassword" class="com.sinokj.app.front.action.CusLoginAction" method="forgetPassword">
+		  <result name="forget">/WEB-INF/page/front/guanwang/forgotPassword.jsp</result>
+		</action>	
+		<!-- 查询库存 -->	
+		<action name="selectGoodStock" class="com.sinokj.app.front.action.FrontGoodAction" method="selectGoodStock"></action>
+
+		<!-- 跳转到注册页面 -->
+		<action name="zhuce" class="com.sinokj.app.front.action.CusLoginAction" method="zhuce">
+			<result name="zhuce">/WEB-INF/page/front/guanwang/register.jsp</result>
+		</action>
+		<!-- 会员注册 -->
+		<action name="registers" class="com.sinokj.app.front.action.CusLoginAction" method="registerUser"></action>
+		<!-- 验证码图片 -->
+		<action name="changeImage" class="com.sinokj.app.front.action.CusLoginAction" method="changeImage"></action>
+		<action name="verifyCode" class="com.sinokj.app.front.action.CusLoginAction" method="verifyCode"></action>
+		<!-- 验证用户名 -->
+		<action name="checkUser" class="com.sinokj.app.front.action.CusLoginAction" method="checkUser"></action>	
+		<action name="checkEmai" class="com.sinokj.app.front.action.CusLoginAction" method="checkEmai"></action>	
+								
+		<!-- 验证帐号唯一 -->
+		<action name="checkCodes" class="com.sinokj.app.front.action.CusLoginAction" method="checkCodes"></action>
+		<action name="checkEmail" class="com.sinokj.app.front.action.CusLoginAction" method="checkEmail"></action>
+		<!-- 会员登录 -->
+		<action name="login" class="com.sinokj.app.front.action.CusLoginAction" method="login"></action>
+		<!-- 会员退出 -->
+		<action name="loginOut" class="com.sinokj.app.front.action.CusLoginAction" method="loginOut">
+			<result name="loginOut"  type="redirect">index.do</result>
+		</action>
+		<!-- 跳转到会员登录页面 -->
+		<action name="frontLogin" class="com.sinokj.app.front.action.CusLoginAction" method="frontLogin">
+			<result name="frontLogin">/WEB-INF/page/front/guanwang/login.jsp</result>
+		</action>
+		<!-- 搜索功能 -->		
+		<action name="shoptype" class="com.sinokj.app.front.action.HeaderShopTypeAcction" method="shoptype">
+			<result name="GoodSearchSelect">/WEB-INF/page/front/guanwang/search.jsp</result>
+		</action>
+		<action name="getSecondGoods" class="com.sinokj.app.front.action.HeaderShopTypeAcction" method="getSecondGoods">
+			<result name="second">/WEB-INF/page/front/guanwang/photoList.jsp</result>
+		</action>
+		<!-- 添加收藏 -->
+		<action name="addGoodToFavorite" class="com.sinokj.app.front.action.FrontGoodAction" method="addGoodToFavorite"></action>
+		
+		<!-- 跳转到商品父类频道【一级】页面 -->
+		<action name="getFirstLevelPage" class="com.sinokj.app.front.action.FrontFirstGoodAction" method="getFirstLevel">
+			<result name="first">/WEB-INF/page/front/guanwang/classifiedGoods.jsp</result>
+		</action>
+		<!--商品详细信息 
+		<action name="cpxq" class="com.sinokj.app.front.action.FrontGoodAction" method="getGoodsById">
+			<result name="index">/WEB-INF/page/front/guanwang/detail.jsp</result>
+		</action>-->
+		<!-- 跳转到会员中心个人信息页面 -->
+		<action name="customersManage" class="com.sinokj.app.front.action.UserManageAction" method="customersManage">
+			<result name="customersManage">/WEB-INF/page/front/guanwang/myshop.jsp</result>
+		</action>
+			<!-- 详细信息 -->
+		<action name="cpxq" class="com.sinokj.app.front.action.FrontGoodAction" method="getGoodsById">
+			<result name="index">/WEB-INF/page/front/guanwang/detail.jsp</result>
+			<result name="group_good">/WEB-INF/page/front/guanwang/tuangou_Detail.jsp</result>
+		</action>
+		<!-- 跳转到评价页面 -->
+		<action name="pingjia" class="com.sinokj.app.front.action.FrontGoodAction" method="pingjia">
+			<result name="pingjia">/WEB-INF/page/front/guanwang/pingjia.jsp</result>
+		</action>
+		<action name="pingjia2" class="com.sinokj.app.front.action.FrontGoodAction" method="pingjia2">
+			<result name="pingjia">/WEB-INF/page/front/guanwang/pingjia.jsp</result>
+		</action>
+		<!-- 保存会员评论 -->
+		<action name="wareCommentSave" class="com.sinokj.app.front.action.FrontGoodAction" method="wareCommentSave"></action>
+		<!-- 保存会员咨询 -->	
+		<action name="messageSave" class="com.sinokj.app.front.action.FrontGoodAction" method="saveMessage"></action>
+		<!--添加普通商品到购物车 -->
+		<action name="addGoodToCart" class="com.sinokj.app.front.action.FrontGoodAction" method="addGoodToCart"></action>
+		<!--添加团购商品到购物车 -->
+		<action name="addGroupGoodToCart" class="com.sinokj.app.front.action.FrontGroupBuyAction" method="addGroupGoodToCart"></action>
+		<!--添加组合商品到购物车 -->
+		<action name="addGoodComposeToCart" class="com.sinokj.app.front.action.FrontGoodAction" method="addGoodComposeToCart"></action>
+		<!--公告详细信息页面 -->
+		<action name="oneNewsdetail" class="com.sinokj.app.front.action.InforAction" method="getNewsdetail">
+			<result name="news_detail">/WEB-INF/page/front/guanwang/newsdetail.jsp</result>
+		</action>
+		<action name="newnews" class="com.sinokj.app.front.action.InforAction" method="newnews">
+			<result name="newnews">/WEB-INF/page/front/guanwang/newnews.jsp</result>
+		</action>
+		<!-- 跳转到我的订单 -->
+		<action name="orderManage" class="com.sinokj.app.front.action.UserManageAction" method="orderManage">
+			<result name="orderManage">/WEB-INF/page/front/guanwang/myOrder.jsp</result>
+		</action>
+		<!-- 待付款订单 -->
+		<action name="paymentOrder" class="com.sinokj.app.front.action.UserManageAction" method="paymentOrder">
+			<result name="paymentOrder">/WEB-INF/page/front/guanwang/payOrder.jsp</result>
+		</action>
+		<!-- 已发货订单 -->
+		<action name="shippedGoods" class="com.sinokj.app.front.action.UserManageAction" method="shippedGoods">
+			<result name="shippedGoods">/WEB-INF/page/front/guanwang/shippedGoods.jsp</result>
+		</action>
+		<!-- 我的收藏 -->
+		<action name="myFavorite" class="com.sinokj.app.front.action.UserManageAction" method="myFavorite">
+			<result name="myFavorite">/WEB-INF/page/front/guanwang/myFavorites.jsp</result>
+		</action>
+		<!-- 我的优惠卷 -->
+		<action name="myCoupon" class="com.sinokj.app.front.action.UserManageAction" method="myCoupon">
+			<result name="myCoupon">/WEB-INF/page/front/guanwang/coupon.jsp</result>
+		</action>
+		<!-- 删除收藏 -->
+		<action name="deleteFavorites" class="com.sinokj.app.front.action.UserManageAction" method="deleteFavorites"></action>
+		<!-- 我的评价 -->
+		<action name="myComment" class="com.sinokj.app.front.action.UserManageAction" method="myComment">
+			<result name="myComment">/WEB-INF/page/front/guanwang/mycomment.jsp</result>
+		</action>
+		<!-- 我的咨询 -->
+		<action name="myMessage" class="com.sinokj.app.front.action.UserManageAction" method="myMessage">
+			<result name="myMessage">/WEB-INF/page/front/guanwang/zixun.jsp</result>
+		</action>
+		<!-- 我的地址管理 -->
+		<action name="myaddress" class="com.sinokj.app.front.action.UserManageAction" method="myaddress">
+			<result name="myaddress">/WEB-INF/page/front/guanwang/address.jsp</result>
+		</action>
+		<!-- 保存收货地址 -->
+		<action name="saveAddress" class="com.sinokj.app.front.action.UserManageAction" method="saveAddress"></action>
+		<!-- 设置默认收货地址 -->
+		<action name="updateAddress" class="com.sinokj.app.front.action.UserManageAction" method="updateAddress"></action>
+		<!-- 删除收货地址 -->
+		<action name="deleteAddress" class="com.sinokj.app.front.action.UserManageAction" method="delAddress"></action>
+		<!-- 跳转到我的信息页面 -->
+		<action name="myinfor" class="com.sinokj.app.front.action.UserManageAction" method="information">
+			<result name="information">/WEB-INF/page/front/guanwang/information.jsp</result>
+		</action>
+		<!-- 保存个人信息 -->
+		<action name="customerSave" class="com.sinokj.app.front.action.UserManageAction" method="customerSave"></action>
+		<!-- 跳转到安全设置页面 -->
+		<action name="security" class="com.sinokj.app.front.action.UserManageAction" method="security">
+			<result name="security">/WEB-INF/page/front/guanwang/security.jsp</result>
+		</action>
+		<!-- 跳转到修改密码 -->
+		<action name="password" class="com.sinokj.app.front.action.UserManageAction" method="password">
+			<result name="password">/WEB-INF/page/front/guanwang/password.jsp</result>
+		</action>
+		<!-- 跳转到修改邮箱 -->
+		<action name="mail" class="com.sinokj.app.front.action.UserManageAction" method="mail">
+			<result name="mail">/WEB-INF/page/front/guanwang/mail.jsp</result>
+		</action>
+		<!-- 跳转到修改手机 -->
+		<action name="updatePhone" class="com.sinokj.app.front.action.UserManageAction" method="phone">
+			<result name="phone">/WEB-INF/page/front/guanwang/phone.jsp</result>
+		</action>
+		<!-- 验证旧密码是否正确 -->
+		<action name="isPwdRightInput" class="com.sinokj.app.front.action.UserManageAction" method="isPwdRightInput"></action>
+		<!-- 保存密码 -->
+		<action name="saveModifierPwds" class="com.sinokj.app.front.action.UserManageAction" method="saveModifierPwd"></action>
+		<!-- 跳转到修改密码成功页面 -->
+		<action name="passwordSuccess" class="com.sinokj.app.front.action.UserManageAction" method="passwordSuccess">
+			<result name="password1">/WEB-INF/page/front/guanwang/password1.jsp</result>
+		</action>
+		<!-- 查找收货地址 -->
+		<action name="selectAdddress" class="com.sinokj.app.front.action.UserManageAction" method="selectAdddress"></action>
+		<!-- 退换货 -->
+		<action name="tuihuan" class="com.sinokj.app.front.action.UserManageAction" method="tuihuan">
+			<result name="tuihuan">/WEB-INF/page/front/guanwang/tuihuan.jsp</result>
+		</action>
+		<!-- 退换货申请页面 -->
+		<action name="application" class="com.sinokj.app.front.action.UserManageAction" method="application">
+			<result name="application">/WEB-INF/page/front/guanwang/application.jsp</result>
+		</action>
+		<!-- 查看订单信息 -->
+		<action name="showOrder" class="com.sinokj.app.front.action.UserManageAction" method="showOrder">
+			<result name="showOrder">/WEB-INF/page/front/guanwang/orderDetails.jsp</result>
+		</action>
+		<!-- 取消订单 -->
+		<action name="updateOrderState" class="com.sinokj.app.front.action.UserManageAction" method="updateOrderState"></action>
+		<!-- 跳转到待评价商品页面 -->
+		<action name="pingjiaTwo" class="com.sinokj.app.front.action.UserManageAction" method="pingjiaTwo">
+			<result name="pingjiaTwo">/WEB-INF/page/front/guanwang/pingjia2.jsp</result>
+		</action>
+		<!-- 修改退换货数量 -->
+		<action name="changeReturnNumber" class="com.sinokj.app.front.action.UserManageAction" method="changeReturnNumber"></action>
+		<!-- 保存返、修、退货信息 -->
+		<action name="saveApplication" class="com.sinokj.app.front.action.UserManageAction" method="saveApplication"></action>
+		<!-- 查看返修退换货结果页 -->
+		<action name="results" class="com.sinokj.app.front.action.UserManageAction" method="results">
+			<result name="results">/WEB-INF/page/front/guanwang/results.jsp</result>
+		</action>
+		<!-- 联盟点会员销售中心 -->
+		<action name="lianmengSales" class="com.sinokj.app.front.action.UserManageAction" method="lianmengSales">
+			<result name="lianmengSales">/WEB-INF/page/front/guanwang/sales.jsp</result>
+		</action>
+		<!-- 联盟点会员销售分析 -->
+		<action name="salesAnalysis" class="com.sinokj.app.front.action.UserManageAction" method="salesAnalysis">
+			<result name="salesAnalysis">/WEB-INF/page/front/guanwang/salesAnalysis.jsp</result>
+		</action>
+		<!-- 跳转到评价页面 -->
+		<action name="pingjiaPage" class="com.sinokj.app.front.action.UserManageAction" method="pingjiaPage">
+			<result name="pingjiaPage">/WEB-INF/page/front/guanwang/pingjiaTwo.jsp</result>
+		</action>
+		<!-- 保存评论 -->
+		<action name="wareCommentSaveTwo" class="com.sinokj.app.front.action.UserManageAction" method="wareCommentSaveTwo"></action>
+		<!-- 退换货确认收货 -->
+		<action name="updateReturnSate" class="com.sinokj.app.front.action.UserManageAction" method="updateReturnSate"></action>
+		<!-- 是否登陆 -->
+		<action name="validationLogin" class="com.sinokj.app.front.action.CusLoginAction" method="validationLogin"></action>
+		<!-- 跳转到修改邮箱 -->
+		<action name="updateEmail" class="com.sinokj.app.front.action.UserManageAction" method="updateEmail"></action>
+		<!-- 发送邮件验证邮箱 -->
+		<action name="sendEmail" class="com.sinokj.app.front.action.UserManageAction" method="sendEmail">
+			<result name="emailOne">/WEB-INF/page/front/guanwang/mail1.jsp</result>
+		</action>
+		<!-- 验证邮箱成功 -->
+		<action name="emailsucc" class="com.sinokj.app.front.action.UserManageAction" method="emailsuccess">
+			<result name="emailsucc">/WEB-INF/page/front/guanwang/mail2.jsp</result>
+		</action>
+		<!-- 跳转到上传图片页面 -->
+		<action name="frontedit" class="com.sinokj.app.component.file.action.FrontFileUploadAction" method="frontedit">
+			<result name="edit_FrontFileUpload">/WEB-INF/page/component/FileUpload/edit_FrontFileUpload.jsp</result>
+		</action>
+		<!-- 保存头像 -->
+		<action name="saveHeadImg" class="com.sinokj.app.front.action.UserManageAction" method="saveHeadImg"></action>
+		
+		
+
+		
+		<!--跳到购物车页面 -->
+		<action name="ShoppingCar" class="com.sinokj.app.front.action.FrontGoodAction" method="myShoppingCar">
+			<result name="shoppingCar">/WEB-INF/page/front/guanwang/shoppingCart.jsp</result>
+		</action>
+		<!--删除购物车中的商品 -->
+		<action name="deleteGoodFromCar" class="com.sinokj.app.front.action.FrontGoodAction" method="deleteGoodFromCar"></action>
+		<!--清空购物车中的商品 -->
+		<action name="clearShoppingCar" class="com.sinokj.app.front.action.FrontGoodAction" method="clearShoppingCar"></action>
+		<!--修改购物车中的商品 -->
+		<action name="changeNum" class="com.sinokj.app.front.action.FrontGoodAction" method="changeNum"></action>
+		<!--判断购物车是否为空 -->
+		<action name="isNotEmptyCart" class="com.sinokj.app.front.action.FrontGoodAction" method="isNotEmptyCart"></action>
+		<!--结算 -->
+		<action name="jiesuan" class="com.sinokj.app.front.action.FrontGoodAction" method="jiesuan">
+			<result name="orderinfo">/WEB-INF/page/front/guanwang/confirmOrder.jsp</result>
+			<result name="shoppingCars">/WEB-INF/page/front/guanwang/shoppingCart.jsp</result>
+		</action>
+		<action name="jiesuan2" class="com.sinokj.app.front.action.FrontGoodAction" method="jiesuan2">
+			<result name="success">/WEB-INF/page/front/guanwang/confirmOrder1.jsp</result>
+		</action>
+		<!--提交或修改表单基本信息 -->
+		<action name="setinformation" class="com.sinokj.app.front.action.FrontGoodAction" method="saveOrderAddress">
+		</action>
+		<!--底部导航详细信息 -->
+		<action name="infor" class="com.sinokj.app.store.information.action.InformationAction" method="listInfor">
+		      <result name="listInfor">/WEB-INF/page/front/guanwang/help.jsp</result>
+		</action>
+		<!--生成订单信息 -->
+		<action name="createOrder" class="com.sinokj.app.front.action.FrontGoodAction" method="createOrder">
+		</action>
+		<action name="createOrder2" class="com.sinokj.app.front.action.FrontGoodAction" method="createOrder2">
+		</action>
+		<!--跳到订单提交成功页面 -->
+		<action name="successOrder" class="com.sinokj.app.front.action.FrontGoodAction" method="successOrder">
+			<result name="successOrder">/WEB-INF/page/front/guanwang/ordersPay.jsp</result>
+		</action>
+		<action name="successOrder2" class="com.sinokj.app.front.action.FrontGoodAction" method="successOrder2">
+			<result name="successOrder">/WEB-INF/page/front/guanwang/orderpay2.jsp</result>
+		</action>
+		<!-- 跳到重新付款页面-->
+		<action name="orderpay" class="com.sinokj.app.front.action.FrontGoodAction" method="orderpay">
+			<result name="orderpay">/WEB-INF/page/front/guanwang/ordersPay1.jsp</result>
+		</action>
+		
+		<!-- 修改服务 -->
+		<action name="XGSpecification" class="com.sinokj.app.front.action.FrontGoodAction" method="XGSpecificationVal"></action>
+		<!--删除订单在中的基本信息 -->
+		<action name="delectcustomerAddress" class="com.sinokj.app.front.action.FrontGoodAction" method="delectcustomerAddress"></action>
+		<!--第二种加入购物车 -->
+		<action name="addGoodseewareToCart" class="com.sinokj.app.front.action.FrontGoodAction" method="addGoodseewareToCart"></action>
+	
+		<!-- 支付宝乾付宝处理完请求后，将处理结果返回给这个URL-->
+		<action name="alipaynotify" class="com.sinokj.app.component.alipay.action.ZfbAction" method="alipaynotify"></action>
+		<!-- 支付宝针对该交易的交易状态同步通知接收URL -->
+		<action name="alipayreturn" class="com.sinokj.app.component.alipay.action.ZfbAction" method="alipayreturn">
+			<result name="success">/returnok.jsp</result>
+			<result name="error">/returnerror.jsp</result>
+		</action>
+		<!-- 验证支付表单 -->
+		<action name="getZfbPayError" class="com.sinokj.app.component.alipay.action.ZfbAction" method="getZfbPayError"></action>
+		<action name="getZfbPayError2" class="com.sinokj.app.component.alipay.action.ZfbAction" method="getZfbPayError2"></action>
+		
+		<!-- 跳转到支付宝页面 -->
+		<action name="alipayto" class="com.sinokj.app.component.alipay.action.ZfbAction" method="alipayto">
+			<result name="alipayto">/WEB-INF/page/component/alipay/alipayto.jsp</result>
+		</action>
+		<!-- 跳转到支付宝页面 -->
+		<action name="alipayto2" class="com.sinokj.app.component.alipay.action.ZfbAction" method="alipayto2">
+			<result name="alipayto">/WEB-INF/page/component/alipay/alipayto.jsp</result>
+		</action>
+		
+		<!-- 网银在线表单验证 -->
+		<action name="getChinaBankError" class="com.sinokj.app.component.chinaBank.action.ChinaBankAction" method="getChinaBankError"></action>
+		<!-- 跳转到网银在线页面 -->
+		<action name="chinaBank" class="com.sinokj.app.component.chinaBank.action.ChinaBankAction" method="chinaBankto">
+			<result name="chinaBankto">/chinabank/Send.jsp</result>
+		</action>
+		<!-- 网银在线 -->
+		<action name="receive" class="com.sinokj.app.component.chinaBank.action.ChinaBankAction" method="receive">
+			<result name="success">/returnok.jsp</result>
+			<result name="error">/returnerror.jsp</result>
+		</action>
+		
+	</package>	
+	
+	
+	<!-- json数据传输 -->
+	<package name="front_JSON" extends="json-default">
+		<action name="getPromotionBrands" class="com.sinokj.app.front.action.CusLoginAction" method="getPromotionBrandsJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		
+		<action name="getGoodTypelist" class="com.sinokj.app.front.action.CusLoginAction" method="getTypeofGoodJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+	    <action name="getTypeofGoodJsonYingYe" class="com.sinokj.app.front.action.CusLoginAction" method="getTypeofGoodJsonYingYe">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="getWareSpecification" class="com.sinokj.app.front.action.FrontGoodAction" method="getWareOfSpecificationJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		
+		<action name="getgoodComment" class="com.sinokj.app.front.action.FrontGoodAction" method="getGoodCommentJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		
+		<action name="getGoodMessage" class="com.sinokj.app.front.action.FrontGoodAction" method="getGoodMessageJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="productPage2Json" class="com.sinokj.app.front.action.HeaderShopTypeAcction" method="productPage2Json">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="productPage3Json" class="com.sinokj.app.front.action.HeaderShopTypeAcction" method="productPage3Json">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="vipCountJson" class="com.sinokj.app.front.action.UserManageAction" method="vipCountJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 查询城市地区 -->
+		<action name="selectCityJson" class="com.sinokj.app.front.action.UserManageAction" method="selectCityJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		
+		<!--查询优惠劵  -->
+		<action name="srachCoupons" class="com.sinokj.app.front.action.FrontGoodAction" method="srachCoupons">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 查询退换货 -->
+		<action name="tuihuanJsion" class="com.sinokj.app.front.action.UserManageAction" method="tuihuanJsion">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 查询我的订单 -->
+		<action name="saleOrderJsion" class="com.sinokj.app.front.action.UserManageAction" method="saleOrderJsion">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 查询联盟点会员订单 -->
+		<action name="saleUnionOrderJson" class="com.sinokj.app.front.action.UserManageAction" method="saleUnionOrderJson">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!--查询购物车 -->
+		<action name="getshoppingcar" class="com.sinokj.app.front.action.FrontGoodAction" method="getshoppingCar">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!--查询品牌馆 -->
+		<action name="brand_json" class="com.sinokj.app.front.action.FrontGoodAction" method="brand_json">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!--查询手机号码  -->
+	    <action name="phone" class="com.sinokj.app.good.phone.PhoneAction" method="phone_json">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			<result name="success2" type="json">
+				<param name="root">reversions</param>
+				<param name="excludeNullProperties">true</param>
+			</result> 
+		</action>
+		<action name="selectPhone" class="com.sinokj.app.good.phone.PhoneAction" method="selectPhone">
+		   <result name="selectPhone">/WEB-INF/page/front/guanwang/selectPhone01.jsp</result>
+		</action>
+		<action name="getStateByPhone" class="com.sinokj.app.good.phone.PhoneAction" method="getStateByPhone">
+		</action>
+		<action name="phonepackage" class="com.sinokj.app.good.phone_package.PhonepackageAction" method="phonepackage_json">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+			
+		</action>
+		<action name="selectPhonepackage" class="com.sinokj.app.good.phone_package.PhonepackageAction" method="selectPhonepackage">
+		   <result name="selectPhonepackage">/WEB-INF/page/front/guanwang/selectPhone01.jsp</result>
+		</action>
+		
+			
+	</package>
+	
+	
+</struts>

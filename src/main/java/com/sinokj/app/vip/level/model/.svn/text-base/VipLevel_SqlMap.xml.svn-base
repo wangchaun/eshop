@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="VipLevel">
+	<resultMap class="com.sinokj.app.vip.level.model.VipLevel" id="VipLevelResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- VipLevel  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="required_consumption_amount" property="requiredConsumptionAmount" jdbcType="decimal"/>
+		<result column="vip_discount" property="vipDiscount" jdbcType="double"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="VipLevel_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="VipLevel.VipLevel_insert"/>
+		<flushOnExecute statement="VipLevel.VipLevel_update"/>
+		<flushOnExecute statement="VipLevel.VipLevel_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="VipLevel_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+			  name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="VipLevel_query_select" resultMap="VipLevelResult" cacheModel="VipLevel_cache">
+		select * from Vip_Level 
+		<include refid="VipLevel_query_select_where_clause"/>
+		order by code desc
+	</select>
+	<select id="VipLevel_count_query_select" resultClass="java.lang.Integer" cacheModel="VipLevel_cache">
+		select count(*) from Vip_Level
+		<include refid="VipLevel_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="VipLevel_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+			  name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="VipLevel_select" resultMap="VipLevelResult" cacheModel="VipLevel_cache">
+		select * from Vip_Level 
+		<include refid="VipLevel_select_where_clause"/>
+		order by code desc
+	</select>
+
+	<!--  增加会员等级  -->
+	<insert id="VipLevel_insert">
+		insert into Vip_Level 
+			(id,code,remark,name,creator_id,creator_name,
+			create_time,state,required_consumption_amount,vip_discount
+			 )
+		values
+			(#id#,#code#,#remark#,#name#,#creatorId#,#creatorName#,
+			#createTime#,#state#,#requiredConsumptionAmount#,#vipDiscount#
+			 )
+	</insert>
+	
+	<!--  修改会员等级 根据id -->
+	<update id="VipLevel_update">
+		update Vip_Level set
+			required_consumption_amount = #requiredConsumptionAmount#,
+			vip_discount = #vipDiscount#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			remark = #remark#,
+			name = #name#
+		where id = #id#
+	</update>
+	
+	<!-- 删除会员等级 根据id-->
+	<delete id="VipLevel_delete">
+		delete from Vip_Level where id = #id#
+	</delete>
+</sqlMap>

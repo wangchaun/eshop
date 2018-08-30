@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:jdbc.properties</value>
+	</list>
+		</property>
+	</bean>
+	
+	<!-- 定义DataSource -->  
+	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource" >
+	    <property name="driver" value="${jdbc.driverClassName}" />  
+        <property name="driverUrl" value="${jdbc.url}" />  
+        <property name="user" value="${jdbc.username}" />  
+        <property name="password" value="${jdbc.password}" />  
+         <!--配置proxool参数-->
+        <property name="alias" value="${jdbc.alias}"/>
+        <property name="simultaneousBuildThrottle" value="${jdbc.simultaneousBuildThrottle}"/>
+        <property name="maximumActiveTime" value="${jdbc.maximumActiveTime}"/>
+        <property name="houseKeepingTestSql" value="${jdbc.houseKeepingTestSql}"/>
+        <property name="maximumConnectionCount" value="${jdbc.maximumConnectionCount}"/>
+        <property name="minimumConnectionCount" value="${jdbc.minimumConnectionCount}"/>
+        <property name="delegateProperties" value="characterEncoding=${jdbc.characterEncoding}"/>
+	</bean>
+	
+	
+	<!-- 事物配置 开始 -->
+	<!-- 事务管理 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 定义事务拦截属性 -->
+	<!-- 
+		transactionAttributes属性可以设置事务处理的方式，事务隔离级别，是否只读三个属性，用逗号隔开
+		事务隔离级别各数据库系统不完全支持，一般不设置，用默认的即可
+		事务处理选项有如下几个：（前面2个常用）
+		PROPAGATION_REQUIRED － 需要事务处理。如果当前不存在事务环境，则创建一个
+		PROPAGATION_SUPPORTS － 如果当前存在事务环境，则作为其中的一部分。如果不存在，则按非事务方式执行
+		PROPAGATION_REQUIRES_NEW － 需要事务处理。并总是开启一个新事务。如果已经存在事务环境，则挂起之
+		PROPAGATION_MANDATORY － 执行到指定方法时，必须已经存在事务环境，否则出错
+		PROPAGATION_NEVER － 不支持事务操作，如果存在事务环境会出错
+		PROPAGATION_NOT_SUPPORTED － 不支持事务操作。如果存在事务，则挂起
+	-->
+	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="createSaleOrder">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="select*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="query*">PROPAGATION_SUPPORTS,readOnly</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 定义bean别名自动代理创建器 -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="*Service" />
+		<property name="proxyTargetClass" value="true"></property>
+		<property name="interceptorNames">
+		<list>
+			<value>transactionInterceptor</value>
+		</list>
+		</property>
+	</bean>
+	
+	<!-- 定义事务拦截器 -->
+	<bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+		<property name="transactionInterceptor" ref="transactionInterceptor" />
+	</bean>
+	<!-- 
+ 	<import resource="applicationContext-transaction.xml" />
+ 	-->
+ 	<!-- 事物配置 结束 -->
+ 
+ 	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+ 	
+ 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:conf/ibatis/sql-map-config.xml"/>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="lobHandler">
+			<ref local="lobHandler" />
+		</property>
+	</bean>
+	
+	<bean id="sqlExecutor" class="com.sinokj.code.ibatis.LimitSqlExecutor" />
+	<bean id="baseDao" class="com.sinokj.code.ibatis.BaseSqlMapDaoSupport" init-method="initialize">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="sqlExecutor" ref="sqlExecutor" />
+	</bean>
+	<bean id="publicDAO" class="com.sinokj.code.ibatis.impl.PublicDAO" parent="baseDao" />
+</beans>
+

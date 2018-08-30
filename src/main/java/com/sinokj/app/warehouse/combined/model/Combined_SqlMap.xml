@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Combined">
+	<resultMap class="com.sinokj.app.warehouse.combined.model.Combined" id="CombinedResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<!-- Combined -->
+		<result column="type" property="type" jdbcType="varchar"/>
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+		<result column="ware_count" property="wareCount" jdbcType="int"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	<!-- 缓存模型 -->
+	<cacheModel id="Combined_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Combined.Combined_insert"/>
+		<flushOnExecute statement="Combined.Combined_update"/>
+		<flushOnExecute statement="Combined.Combined_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<sql id="Combined_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+				type = #type#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	
+	 <select id="Combined_count_query_select" resultClass="java.lang.Integer" cacheModel="Combined_cache">
+		select count(*) from combined
+			<include refid="Combined_query_select_where_clause"/>
+	</select>	
+	<select id="Combined_query_select" resultMap="CombinedResult" cacheModel="Combined_cache">
+		select * from combined
+			<include refid="Combined_query_select_where_clause"/>
+		order by code desc
+	</select>
+	 
+	<select id="Combined_select" resultMap="CombinedResult" cacheModel="Combined_cache">
+		select * from combined 
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="id">
+					id = #id#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="warehouseId">
+					warehouse_id = #warehouseId#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="wareId">
+					ware_id = #wareId#
+				</isNotEmpty>
+			</dynamic>
+		order by code desc
+	</select>
+	
+	<insert id="Combined_insert">
+		insert into combined 
+			(id,code,type,warehouse_id,warehouse_name,ware_id,ware_name,ware_count,
+			creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#type#,#warehouseId#,#warehouseName#,#wareId#,#wareName#,#wareCount#,
+			#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	
+	<update id="Combined_update">
+		update combined set
+			warehouse_id = #warehouseId#,
+			warehouse_name = #warehouseName#,
+			ware_id = #wareId#,
+			ware_name = #wareName#,
+			ware_count = #wareCount#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#
+		where id = #id#
+	</update>
+	
+  <delete id="Combined_delete">
+    delete from combined
+    	where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+/*============================尾部===================================*/
+
+.foot{ width:100%; margin:0 auto; background:url(../../../Images/images/a38.jpg) repeat-x left top; height:330px; clear:both; overflow:hidden;}
+.foot01{ width:1200px; margin:0 auto;}
+.foot_text{ width:1200px; float:left; padding-top:46px;}
+.foot_text01{ width:1152px; float:left; padding-left:48px; padding-top:8px;}
+.foot_text01 li{ width:230px; float:left; text-align:left;}
+.foot_text02{ width:1200px; float:left; padding-top:25px;}
+.foot_text0201{ width:262px; margin-left:33px; display:inline; float:left; height:197px; background:url(../../../Images/images/oneshop14.jpg) repeat-x left top; margin-right:70px;}
+.foot_text0201_text{ width:213px; margin-left:14px; display:inline; float:left; margin-top:14px; height:36px; background:url(../../../Images/images/oneshop15.jpg) no-repeat left top;}
+.foot_text0201_text span{ color:#333333; font-size:14px; font-weight:bold; float:left; padding-left:36px;}
+.foot_text0201_text1{ width:220px; margin-left:24px; display:inline; float:left; margin-top:17px; height:15px;}
+.foot_text0201_text1 h1{ float:left; width:26px;}
+.foot_text0201_text1 h2{ float:left; width:194px; color:#333333; font-size:12px; }
+.foot_text0201_text1 h2 a{ color:#333333; font-size:12px; text-decoration:none;}
+.foot_text0201_text1 h2 a:hover{ color:#0a7cd4; font-size:12px; text-decoration:underline;}
+.foot_text0201_text1 h3{ float:left; width:194px; color:#333333; font-size:12px; line-height:16px;}
+.foot_text0202{ width:165px;float:left; height:175px; padding-top:10px;}
+.foot_text0202 li{ width:165px; text-align:left; line-height:22px; color:#333333; font-size:12px; font-family:"宋体";}
+.foot_text0202 li a{ color:#333333; font-size:12px; font-family:"宋体"; text-decoration:none;}
+.foot_text0202 li a:hover{ color:#2791e3; font-size:12px; font-family:"宋体"; text-decoration:underline;}
+.foot_text0203{ width:120px;float:left; height:175px; padding-top:10px;}
+.foot_text0203 li{ width:120px; text-align:left; line-height:22px; color:#333333; font-size:12px; font-family:"宋体";}
+.foot_text0203 li a{ color:#333333; font-size:12px; font-family:"宋体"; text-decoration:none;}
+.foot_text0203 li a:hover{ color:#2791e3; font-size:12px; font-family:"宋体"; text-decoration:underline;}
+#ftpy{ color:#333333; font-size:14px; font-weight:bold; font-family:"宋体";}
+.foot1{ width:100%; margin:0 auto; background:url(../../../Images/images/a46.jpg) repeat-x left top; height:100px; clear:both;}
+.foot1_bottom{ width:1200px; margin:0 auto;}
+.foot1_bottext{ width:1200px; padding-top:32px; float:left; line-height:22px; text-align:center; color:#333333; font-size:12px; font-family:"宋体";}
+.foot1_bottext span{ color:#2791e3; font-size:12px; font-family:"宋体";}
+.foot1_bottext1{ width:1200px; padding-top:10px; float:left; text-align:center;}
+.foot1_bottext1 img{ border:#d2d2d2 solid 1px;}
+.foot1_bottext2{ width:1200px; padding-top:13px; float:left; text-align:center;}
+
+
+
+
+

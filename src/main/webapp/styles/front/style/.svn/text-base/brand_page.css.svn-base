@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================商品分类===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.brand{ width:1200px; height:32px; padding-top:15px; float:left; background:url(../../../Images/images/brand3.jpg) no-repeat left bottom; display:block;}
+.brand1{ width:1200px; float:left;}
+.brand1 h1{ float:left; padding-right:25px;}
+.brand1 h2{ float:left; padding-right:30px; padding-top:7px;}
+.brandbtn{ color:#0a7cd4; font-size:18px; font-family:"微软雅黑"; border:none; background:none; cursor:pointer; width:73px; height:25px;}
+.brandbtn1{ color:#666666; font-size:12px;  border:none; background:none; cursor:pointer;}
+.brand2{ width:1195px; padding-left:5px; padding-top:9px; float:left; height:36px;}
+.brand2 h1{ width:65px; font-size:14px; font-weight:bold; float:left;}
+.brand2 h1 a{ font-size:14px; font-weight:bold; text-decoration:none;}
+.brand2 h1 a:hover{ font-size:14px; font-weight:bold; text-decoration:underline; color:#0a7cd4;}
+.brand2 ul{ float:left;}
+.brand2 ul li{ float:left; width:26px;}
+.brand2 ul li a{ color:#666; font-size:14px; font-weight:bold; text-align:left; text-decoration:none; font-family:Arial, Helvetica, sans-serif;}
+.brand2 ul li a:hover{ color:#0a7cd4; font-size:14px; font-weight:bold; text-align:left; text-decoration:none; font-family:Arial, Helvetica, sans-serif;}
+.brand3{ width:1200px; padding-top:15px; float:left;}
+.brand301{ width:83px;  float:left;}
+.brand301 span{ width:56px; height:56px; margin-top:1px; background:#2791e3; font-size:48px; color:#fff; line-height:56px; text-align:center; font-family:Arial, Helvetica, sans-serif; display:block;}
+.brand302{ width:1117px;  float:left;}
+.brand302 li{ width:157px;  float:left; margin-bottom:15px;}
+.brand302 li img{ width:132px; height:56px; border:#ebeaea solid 1px;}

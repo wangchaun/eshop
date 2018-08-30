@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="FeeItem">
+	<resultMap class="com.sinokj.app.order.cashBasis.fee.model.FeeItem" id="FeeItemResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		
+		<!-- FeeItem  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="money" property="money" jdbcType="decimal"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="order_Id" property="orderId" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!--费用支出汇总-->
+	<resultMap class="com.sinokj.app.order.cashBasis.fee.model.FeeItem" id="FeeItemResult1">
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="money" property="money" jdbcType="decimal"/>
+		<result column="order_Id" property="orderId" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="FeeItem_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="FeeItem.FeeItem_insert"/>
+		<flushOnExecute statement="FeeItem.FeeItem_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<sql id="FeeItem_Withuncosc_select_where_clause">	
+			<isNotEmpty prepend="and" property="beginTime">
+			  a.create_time>=#beginTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+			  a.create_time&lt;=#endTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  a.customer_name like '%$customerName$%'
+			</isNotEmpty>
+	</sql>
+	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="FeeItem_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  a.id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="orderId">
+			  a.order_Id = #orderId#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="FeeItem_query_select" resultMap="FeeItemResult" cacheModel="FeeItem_cache">
+		select a.*,b.code as feecode from fee_Item a inner join fee b on a.order_Id=b.id
+		<include refid="FeeItem_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="FeeItem_count_query_select" resultClass="java.lang.Integer" cacheModel="FeeItem_cache">
+		select count(*) from fee_Item a inner join fee b on a.order_Id=b.id
+		<include refid="FeeItem_query_select_where_clause"/>
+	</select>
+	
+	<select id="FeeItem_Withuncosc_select" resultMap="FeeItemResult1" >
+		select a.create_time,a.customer_name,b.order_id,b.`code`,b.`name`,sum(b.money) as money from fee a,fee_item b
+		where a.id=b.order_id 
+		<include refid="FeeItem_Withuncosc_select_where_clause"/>
+		group by b.`code`
+	</select>
+	<!--  增加  -->
+	<insert id="FeeItem_insert">
+		insert into fee_Item 
+			(id,name,money,order_id,sort,remark,code)
+		values
+			(#id#,#name#,#money#,#orderId#,#sort#,#remark#,#code#)
+	</insert>
+	
+	<!-- 删除费用单 根据id-->
+	<delete id="FeeItem_delete">
+		delete from fee_Item where order_Id = #orderId#
+	</delete>
+</sqlMap>

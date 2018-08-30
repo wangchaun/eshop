@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================商品分类===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.limitbuy{ width:1200px; float:left; overflow:hidden;}
+.limitbuy01{ width:1200px; height:32px; padding-top:20px; float:left; border-bottom:#2791e3 solid 2px;}
+.limitbuy01 span{ float:left; padding-top:0px; height:32px;  background:url(../../../Images/images/a14.jpg) no-repeat center bottom; color:#0a7cd4; font-size:18px; font-family:"微软雅黑"; }
+.limitbuy01 h1{ float:left; padding-left:33px; color:#666; font-size:16px; font-family:"微软雅黑"; line-height:25px;}
+.limitbuy01 h2{ float:left;  display:inline; background:#ff9600; width:25px; height:25px; display:block; line-height:25px; text-align:center; font-family:"Arial"; font-size:18px; color:#fff; }
+.limitbuy01 h3{ float:left;  color:#666; font-size:16px; font-family:"微软雅黑"; padding-top:0px; padding-left:2px; padding-right:2px; line-height:25px;}
+.limitbuy02{ width:1200px; float:left; }
+.limitbuy02 li{ width:254px; float:left; padding-left:23px; padding-right:23px; padding-top:30px;  overflow:hidden;
+display: inline; vertical-align:bottom;}
+.limitbuy02 li img{ width:246px; height:246px;}
+.limitbuy02 li h1{ width:254px; padding-left:0px; float:left; line-height:24px; padding-top:7px; text-align:left; height:48px; overflow:hidden;}
+.limitbuy02 li h1 span{color:#ff9600; font-size:14px; font-family:"微软雅黑"; font-weight:normal;}
+.limitbuy02 li h1 a{ color:#666; font-size:14px; font-family:"微软雅黑"; text-decoration:none;}
+.limitbuy02 li h1 a:hover{ color:#666; font-size:14px; font-family:"微软雅黑"; text-decoration:underline;}
+.limitbuy02 li h2{ width:254px; float:left; line-height:30px;  color:#e83234; font-size:18px; font-family:"微软雅黑"; text-align:left;}
+.limitbuy02 li h2 samp{color:#666; font-size:12px; font-family:"宋体"; float:left; padding-top:2px;}
+.limitbuy02 li h2 span{  color:#e83234; font-size:18px;  font-family:"微软雅黑"; text-align:left; padding-top:2px; float:left;}
+.limitbuy02 li h3{ width:254px;  float:left; line-height:22px;  color:#999999; font-size:12px; text-align:left;}
+.limitbuy02 li h3 span{ text-decoration:line-through; }
+.limitbuy02 li h4{ width:254px;  float:left; line-height:22px;  text-align:left;}
+.limitbuy02 li h4 span{ color:#e41215; font-size:12px;}
+.limitbuy02 li h4 samp{ padding-left:20px;}
+.limitbuy02 li h5{width:254px;  float:left; padding-top:6px; text-align:left;}
+.limitbuy02btn{ width:103px; height:31px; background:url(../../../Images/images/img25.jpg) no-repeat left top; border:none; cursor:pointer; }

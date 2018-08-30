@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GiftGood">
+	<resultMap class="com.sinokj.app.store.gift.model.GiftGood" id="GiftGoodResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- SaleOrder -->
+		<result column="promote_id" property="promoteId" jdbcType="varchar"/>
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="price_market" property="priceMarket" jdbcType="decimal"/>
+		<result column="price_promote" property="pricePromote" jdbcType="decimal"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GiftGood_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GiftGood.GiftGood_insert"/>
+		<flushOnExecute statement="GiftGood.GiftGood_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="GiftGood_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="promoteId">
+				a.promote_id = #promoteId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="GiftGood_count_query_select" resultClass="java.lang.Integer" cacheModel="GiftGood_cache">
+		select count(*) from gift_good a inner join gift b on a.promote_id=b.id
+		<include refid="GiftGood_query_select_where_clause"/>
+	</select>	
+	<select id="GiftGood_query_select" resultMap="GiftGoodResult" cacheModel="GiftGood_cache">
+		select a.*,b.code as promotecode from gift_good a inner join gift b on a.promote_id=b.id
+		<include refid="GiftGood_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	
+	<insert id="GiftGood_insert">
+		insert into gift_good
+			(id,sort,promote_id,good_id,good_name,price_market,price_promote)
+		values
+			(#id#,#sort#,#promoteId#,#goodId#,#goodName#,#priceMarket#,#pricePromote#)
+	</insert>
+	
+	<delete id="GiftGood_delete">
+		delete from gift_good where promote_id = #promoteId#
+	</delete>
+</sqlMap>

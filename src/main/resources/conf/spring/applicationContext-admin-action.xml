@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+				http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- 后台action -->
+
+	<!-- 系统管理 开始 -->
+	<bean name="SysLoginAction"
+		class="com.sinokj.app.system.login.action.SysLoginAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	<bean name="SysUserAction"
+		class="com.sinokj.app.system.user.action.SysUserAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	<bean name="SysRoleAction"
+		class="com.sinokj.app.system.role.action.SysRoleAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	<bean name="SysPowerAction"
+		class="com.sinokj.app.system.power.action.SysPowerAction"
+		autowire="byName">
+	</bean>
+	<bean name="SysRolePowerAction"
+		class="com.sinokj.app.system.rolePower.action.SysRolePowerAction"
+		autowire="byName">
+	</bean>
+	<!-- 高级权限 -->
+	<bean name="SysAdvPowerAction"
+		class="com.sinokj.app.system.advPower.action.SysAdvPowerAction"
+		autowire="byName">
+	</bean>
+	<!-- 部门 -->
+	<bean name="SysDeptAction"
+		class="com.sinokj.app.system.dept.action.SysDeptAction"
+		autowire="byName">
+	</bean>
+
+	<bean name="DatabaseBackupAction"
+		class="com.sinokj.app.system.dbBackup.action.DatabaseBackupAction"
+		autowire="byName">
+	</bean>
+	<!-- 系统管理 结束 -->
+
+	<!-- 公共组件 -->
+	<bean id="FileUploadAction"
+		class="com.sinokj.app.component.file.action.FileUploadAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 基本信息 -->
+	<bean id="DictionaryAction"
+		class="com.sinokj.app.baseInfo.dictionary.action.DictionaryAction"
+		autowire="byName">
+	</bean>
+	<bean id="DictionaryItemAction"
+		class="com.sinokj.app.baseInfo.dictionary.action.DictionaryItemAction"
+		autowire="byName">
+	</bean>
+	<bean id="AreaAction"
+		class="com.sinokj.app.baseInfo.area.action.AreaAction"
+		autowire="byName">
+	</bean>
+	<bean id="PaymentAction"
+		class="com.sinokj.app.baseInfo.payment.action.PaymentAction"
+		autowire="byName">
+	</bean>
+	<bean id="DeliveryAction"
+		class="com.sinokj.app.baseInfo.delivery.action.DeliveryAction"
+		autowire="byName">
+	</bean>
+	<bean id="BankAccountAction"
+		class="com.sinokj.app.baseInfo.bankAccount.action.BankAccountAction"
+		autowire="byName">
+	</bean>
+	<bean id="SupplierAction"
+		class="com.sinokj.app.baseInfo.supplier.action.SupplierAction"
+		autowire="byName">
+	</bean>
+	<bean id="CreditAction"
+		class="com.sinokj.app.baseInfo.credit.action.CreditAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 客户信息 -->
+	<bean id="CustomerAction"
+		class="com.sinokj.app.customer.action.CustomerAction"
+		autowire="byName">
+	</bean>
+	<!-- 商品类别 -->
+	<bean id="GoodTypeAction"
+		class="com.sinokj.app.good.goodType.action.GoodTypeAction"
+		autowire="byName">
+	</bean>
+	<!-- 商品信息 -->
+	<bean id="GoodAction"
+		class="com.sinokj.app.good.good.action.GoodAction" autowire="byName">
+	</bean>
+	<!-- 商品信息 -->
+	<bean id="GroupgoodAction"
+		class="com.sinokj.app.good.groupgood.action.GroupgoodAction" autowire="byName">
+	</bean>
+	<!-- 货品 -->
+	<bean id="WareAction"
+		class="com.sinokj.app.good.ware.action.WareAction" autowire="byName">
+	</bean>
+	<!-- 商品种类 -->
+	<bean id="GoodKindAction"
+		class="com.sinokj.app.good.goodKind.action.GoodKindAction"
+		autowire="byName">
+	</bean>	
+	<!-- 商品种类属性值 -->
+	<bean id="GoodKindValAction"
+		class="com.sinokj.app.good.goodKind.action.GoodKingValAction"
+		autowire="byName">	
+	</bean>
+	<!-- 商品属性 -->
+	<bean id="GoodAttrAction"
+		class="com.sinokj.app.good.goodAttr.action.GoodAttrAction"
+		autowire="byName">
+	</bean>
+	<!-- 商品收藏 -->
+	<bean id="FavoriteAction"
+		class="com.sinokj.app.good.favorite.action.FavoriteAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 销售订单-->
+	<bean id="SaleOrderAction"
+		class="com.sinokj.app.order.sale.saleOrder.action.SaleOrderAction"
+		autowire="byName">
+	</bean>
+	<!-- 销售收款单 -->
+	<bean id="SaleCollectionAction"
+		class="com.sinokj.app.order.sale.saleCollection.action.SaleCollectionAction"
+		autowire="byName">
+	</bean>
+	<!-- 销售收款单子项 -->
+	<bean id="SaleCollectionItemAction"
+		class="com.sinokj.app.order.sale.saleCollection.action.SaleCollectionItemAction"
+		autowire="byName">
+	</bean>
+	<!-- 销售出货单 -->
+	<bean id="SaleDeliveryAction"
+		class="com.sinokj.app.order.sale.saleDelivery.action.SaleDeliveryAction"
+		autowire="byName">
+	</bean>
+	<!-- 销售退货单 -->
+	<bean id="SaleReturnAction"
+		class="com.sinokj.app.order.sale.saleReturn.action.SaleReturnAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 仓库 -->
+	<bean id="WarehouseAction"
+		class="com.sinokj.app.warehouse.warehouse.action.WarehouseAction"
+		autowire="byName">
+	</bean>
+	<!-- 仓库货品 -->
+	<bean id="WarehouseWareAction"
+		class="com.sinokj.app.warehouse.warehouse.action.WarehouseWareAction"
+		autowire="byName">
+	</bean>
+	<!-- 组合拆分单 -->
+	<bean id="CombinedAction"
+		class="com.sinokj.app.warehouse.combined.action.CombinedAction"
+		autowire="byName">
+	</bean>
+	<!-- 组合拆分货品 -->
+	<bean id="CombinedWareAction"
+		class="com.sinokj.app.warehouse.combined.action.CombinedWareAction"
+		autowire="byName">
+	</bean>
+	<!-- 智能补货 -->
+	<bean id="SmartReplenishAction"
+		class="com.sinokj.app.warehouse.warehouse.action.SmartReplenishAction"
+		autowire="byName">
+	</bean>
+	<!-- 仓位 -->
+	<bean id="WarehousePositionAction"
+		class="com.sinokj.app.warehouse.warehousePosition.action.WarehousePositionAction"
+		autowire="byName">
+	</bean>
+	<!-- 仓位货品 -->
+	<bean id="WarehousePositionWareAction"
+		class="com.sinokj.app.warehouse.warehousePosition.action.WarehousePositionWareAction"
+		autowire="byName">
+	</bean>
+	<!-- 入库单 -->
+	<bean id="WarehouseIntoAction"
+		class="com.sinokj.app.warehouse.warehouseInto.action.WarehouseIntoAction"
+		autowire="byName">
+	</bean>
+	<!-- 入库货品 -->
+	<bean id="WarehouseIntoWareAction"
+		class="com.sinokj.app.warehouse.warehouseInto.action.WarehouseIntoWareAction"
+		autowire="byName">
+	</bean>
+	<!-- 调库单 -->
+	<bean id="WarehouseMoveAction"
+		class="com.sinokj.app.warehouse.warehouseMove.action.WarehouseMoveAction"
+		autowire="byName">
+	</bean>
+	<bean id="WarehouseMoveWareAction"
+		class="com.sinokj.app.warehouse.warehouseMove.action.WarehouseMoveWareAction"
+		autowire="byName">
+	</bean>
+	<!-- 成本调整单 -->
+	<bean id="CostAdjustAction"
+		class="com.sinokj.app.warehouse.costAdjust.action.CostAdjustAction"
+		autowire="byName">
+	</bean>
+	<!-- 成本调整单货物 -->
+	<bean id="CostAdjustWareAction"
+		class="com.sinokj.app.warehouse.costAdjust.action.CostAdjustWareAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 收付管理 start -->
+	<!--  费用单   -->
+	<bean id="FeeAction"
+		class="com.sinokj.app.order.cashBasis.fee.action.FeeAction"
+		autowire="byName">
+	</bean>
+
+	<bean id="FeeItemAction"
+		class="com.sinokj.app.order.cashBasis.fee.action.FeeItemAction"
+		autowire="byName">
+	</bean>
+	<bean id="PayAction"
+		class="com.sinokj.app.order.cashBasis.pay.action.PayAction"
+		autowire="byName">
+	</bean>
+	<bean id="CashItemAction"
+		class="com.sinokj.app.order.cashBasis.pay.action.CashItemAction"
+		autowire="byName">
+	</bean>
+	<bean id="CollectionAction"
+		class="com.sinokj.app.order.cashBasis.collection.action.CollectionAction"
+		autowire="byName">
+	</bean>
+	<!-- 收付管理 end -->
+
+	<!-- 广告管理 -->
+	<bean id="AdvertiseAction"
+		class="com.sinokj.app.store.advertise.action.AdvertiseAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 杂志管理 -->
+	<bean id="MagazineAction"
+		class="com.sinokj.app.store.magazine.action.MagazineAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 返利管理-->
+	<bean id="RebateAction"
+		class="com.sinokj.app.order.buy.rebate.action.RebateAction"
+		autowire="byName">
+	</bean>
+	<bean id="RebateItemAction"
+		class="com.sinokj.app.order.buy.rebate.action.RebateItemAction"
+		autowire="byName">
+	</bean>
+
+	<!--  会员管理 -->
+	<bean id="PrepaidAction"
+		class="com.sinokj.app.vip.prepaid.action.PrepaidAction"
+		autowire="byName" />
+	<bean id="VipCouponAction"
+		class="com.sinokj.app.vip.coupon.action.VipCouponAction"
+		autowire="byName" />
+	<bean id="VipCouponWareAction"
+		class="com.sinokj.app.vip.coupon.action.VipCouponWareAction"
+		autowire="byName" />
+	<bean id="MessageAction"
+		class="com.sinokj.app.vip.message.action.MessageAction"
+		autowire="byName" />
+	<bean id="VipLevelAction"
+		class="com.sinokj.app.vip.level.action.VipLevelAction"
+		autowire="byName" />
+	<bean id="ApplyToCashAction"
+		class="com.sinokj.app.vip.applyCash.action.ApplyToCashAction"
+		autowire="byName" />
+	<!-- 新闻公告管理 -->
+	<bean id="InformationAction"
+		class="com.sinokj.app.store.information.action.InformationAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 商品包装 -->
+	<bean id="PackagingAction"
+		class="com.sinokj.app.store.packaging.action.PackagingAction"
+		autowire="byName">
+	</bean>
+	<!-- 祝福贺卡 -->
+	<bean id="GreetingCardAction"
+		class="com.sinokj.app.store.greetingCard.action.GreetingCardAction"
+		autowire="byName">
+	</bean>
+
+	<!-- 促销专题 -->
+	<bean id="PromoteAction"
+		class="com.sinokj.app.store.promote.action.PromoteAction"
+		autowire="byName">
+	</bean>
+	<bean id="PromotecolumnAction"
+		class="com.sinokj.app.store.promotecolumn.action.PromotecolumnAction"
+		autowire="byName">
+	</bean>
+	<bean id="PromoteGoodAction"
+		class="com.sinokj.app.store.promote.action.PromoteGoodAction"
+		autowire="byName">
+	</bean>
+	<!-- 优惠活动 -->
+	<bean id="PromotionActivityAction"
+		class="com.sinokj.app.store.promotionActivity.action.PromotionActivityAction"
+		autowire="byName">
+	</bean>
+	<bean id="PromotionActivityGoodAction"
+		class="com.sinokj.app.store.promotionActivity.action.PromotionActivityGoodAction"
+		autowire="byName">
+	</bean>
+	<!-- 商城设置 -->
+	<bean id="StoreSetAction"
+		class="com.sinokj.app.store.storeSet.action.StoreSetAction"
+		autowire="byName">
+	</bean>
+	<!--礼品包赠送 -->
+	<bean id="GiftAction"
+		class="com.sinokj.app.store.gift.action.GiftAction"
+		autowire="byName">
+	</bean>
+	<bean id="GiftGoodAction"
+		class="com.sinokj.app.store.gift.action.GiftGoodAction"
+		autowire="byName">
+	</bean>
+	<!--会员评论 -->
+	<bean id="WareCommentAction"
+		class="com.sinokj.app.vip.wareComment.action.WareCommentAction"
+		autowire="byName">
+	</bean>
+</beans>

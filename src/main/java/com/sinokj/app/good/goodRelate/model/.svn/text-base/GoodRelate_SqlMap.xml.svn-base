@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodRelate">
+	<resultMap class="com.sinokj.app.good.goodRelate.model.GoodRelate" id="GoodRelateResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="varchar"/>
+		<!-- GoodRelate -->
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="relate_good_id" property="relateGoodId" jdbcType="varchar"/>
+	</resultMap>
+	<!-- 扩展列 -->
+	<resultMap class="com.sinokj.app.good.goodRelate.model.GoodRelate" id="GoodRelateExtendResult" extends="GoodRelateResult">
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+		<result column="brand_name" property="brandName" jdbcType="varchar"/>
+		<result column="price" property="price" jdbcType="decimal"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+	</resultMap>
+	<select id="GoodRelate_select" resultMap="GoodRelateExtendResult">
+		select a.*,b.code as code,b.name as name,b.good_type_name as good_type_name,b.brand_name as brand_name,b.price as price,b.pic as pic 
+			from good_relate a left join good  b on a.relate_good_id = b.id
+		where a.good_id = #goodId# order by sort asc
+	</select>
+	
+	<insert id="GoodRelate_insert">
+		insert into good_relate 
+			(id,sort,good_id,relate_good_id)
+		values
+			(#id#,#sort#,#goodId#,#relateGoodId#)
+	</insert>
+	<update id="GoodRelate_update">
+		update good_relate set
+			good_id = #goodId#,
+			relate_good_id = #relateGoodId#,
+			sort = #sort#
+		where id = #id#
+	</update>
+	
+  	<delete id="GoodRelate_delete">
+	    delete from good_relate
+	    where good_id = #goodId#
+  	</delete>	
+	
+</sqlMap>

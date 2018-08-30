@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehousePosition">
+	<resultMap class="com.sinokj.app.warehouse.warehousePosition.model.WarehousePosition" id="WarehousePositionResult">
+	  	<result column="id" property="id" jdbcType="VARCHAR" />
+	 	<result column="code" property="code" jdbcType="VARCHAR" />
+	 	<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="warehouse_id" property="warehouseId" jdbcType="VARCHAR" />
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>	
+	    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	    <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	    <result column="state" property="state" jdbcType="VARCHAR" />
+	    <result column="sort" property="sort" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="WarehousePosition_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehousePosition.WarehousePosition_insert"/>
+		<flushOnExecute statement="WarehousePosition.WarehousePosition_update"/>
+		<flushOnExecute statement="WarehousePosition.WarehousePosition_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="WarehousePosition_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseId">
+				warehouse_id = #warehouseId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="WarehousePosition_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehousePosition_cache">
+		select count(*) from warehouse_position
+		<include refid="WarehousePosition_query_select_where_clause"/>
+	</select>	
+	<select id="WarehousePosition_query_select" resultMap="WarehousePositionResult" cacheModel="WarehousePosition_cache">
+		select * from warehouse_position
+		<include refid="WarehousePosition_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="WarehousePosition_select" resultMap="WarehousePositionResult" cacheModel="WarehousePosition_cache">
+		select * from warehouse_position
+		<include refid="WarehousePosition_query_select_where_clause"/>
+		order by sort asc
+	</select>	
+	<!-- 获取有货品的仓位(wareId) -->
+	<select id="WarehousePosition_wareId_select" resultMap="WarehousePositionResult" cacheModel="WarehousePosition_cache">
+		select * from warehouse_position where id in(
+				select distinct warehouse_position_id from warehouse_positon_ware 
+				where ware_id= #wareId#
+				 and  warehouse_id = #warehouseId#) 
+		order by sort asc
+	</select>
+	
+	<insert id="WarehousePosition_insert">
+		 insert into warehouse_position 
+		 (id,code,name,warehouse_id,warehouse_name,creator_id,creator_name,create_time,state,sort)
+	  	 values
+	  	 (#id#,#code#,#name#,#warehouseId#,#warehouseName#,#creatorId#,#creatorName#,#createTime#,#state#,#sort#)
+	</insert>
+	
+	<update id="WarehousePosition_update">
+		update warehouse_position set
+	        code = #code#,
+	        name = #name#,
+	        warehouse_id = #warehouseId#,
+	        warehouse_name = #warehouseName#,
+	        sort = #sort:INTEGER#,
+	        modifier_id = #modifierId#,
+	        modifier_name = #modifierName#,
+	        modify_time = #modifyTime#,
+	        state = #state:VARCHAR#
+	    where id = #id#
+	</update>
+	
+  <delete id="WarehousePosition_delete">
+    delete from warehouse_position
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

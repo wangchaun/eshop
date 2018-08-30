@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Information">
+	<resultMap class="com.sinokj.app.store.information.model.Information" id="InformationResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="area_id" property="areaId" jdbcType="varchar"/>
+		<result column="area_name" property="areaName" jdbcType="varchar"/>
+		
+		<!-- Information -->
+		<result column="type" property="type" jdbcType="char"/>
+		<result column="content" property="content" jdbcType="text"/>
+		<result column="title" property="title" jdbcType="varchar"/>
+		<result column="regulation_type" property="regulationType" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Information_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Information.Information_insert"/>
+		<flushOnExecute statement="Information.Information_update"/>
+		<flushOnExecute statement="Information.Information_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="Information_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id like '%$id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="title">
+				title like '%$title$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+			  type = #type#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_Name like '%$creatorName$%'
+			</isNotEmpty>
+			<isNotNull prepend="and" property="ecommunity">
+				<![CDATA[ type in ('0','1','2') ]]>
+			</isNotNull>
+			<isNotEmpty prepend="and" property="areaId">
+				area_id = #areaId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaName">
+				area_name like '%$areaName$%'
+			</isNotEmpty>	
+		</dynamic>		
+	</sql>
+	<select id="Information_count_query_select" resultClass="java.lang.Integer" cacheModel="Information_cache">
+		select count(*) from information
+		<include refid="Information_query_select_where_clause"/>
+	</select>	
+	<select id="Information_query_select" resultMap="InformationResult" cacheModel="Information_cache">
+		select * from information
+		<include refid="Information_query_select_where_clause"/>
+		order by create_time desc
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="Information_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id  = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code  = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="title">
+				title like '%$title$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+			  type = #type#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_name = #creatorName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaId">
+				area_id = #areaId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaName">
+				area_name = #areaName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="regulationType">
+				regulation_type = #regulationType#
+			</isNotEmpty>			
+		</dynamic>		
+	</sql>	
+	<select id="Information_select" resultMap="InformationResult" cacheModel="Information_cache">
+		select * from information
+		<include refid="Information_select_where_clause"/>
+		order by create_time desc
+	</select>
+	
+	<insert id="Information_insert">
+		insert into information 
+			(id,code,type,title,content,creator_id,creator_name,create_time,state,area_id,area_name,regulation_type)
+		values
+			(#id#,#code#,#type#,#title#,#content#,#creatorId#,#creatorName#,#createTime#,#state#,#areaId#,#areaName#,#regulationType#)
+	</insert>
+	<update id="Information_update">
+		update information set
+			title = #title#,
+			content = #content#,
+			creator_name = #creatorName#,
+			create_time = #createTime#,
+			state = #state#,
+			area_id = #areaId#,
+			area_name = #areaName#,
+			regulation_type=#regulationType#
+		where id = #id#
+	</update>
+	
+  <delete id="Information_delete">
+    delete from information
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehouseIntoWare">
+	<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseIntoWare" id="WarehouseIntoWareResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- WarehouseIntoWare -->
+		<result column="warehouse_into_id" property="warehouseIntoId" jdbcType="varchar"/>
+		<result column="warehouse_position_id" property="warehousePositionId" jdbcType="varchar"/>
+		<result column="warehouse_position_name" property="warehousePositionName" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+		<result column="into_num" property="intoNum" jdbcType="int"/>
+	    <result column="price_in" property="priceIn" jdbcType="decimal"/>
+	    <result column="money_in" property="moneyIn" jdbcType="decimal"/>
+	</resultMap>
+<!-- 库存出入汇总返回类型 -->	
+	<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseIntoWare" id="PageListDailyResult">
+	   <result column="code" property="code" jdbcType="varchar"/>
+	   <result column="name" property="wareName" jdbcType="varchar"/>
+	   <result column="unit" property="unit" jdbcType="varchar"/>
+	   <result column="buyNumber" property="buyNumber" jdbcType="decimal"/>
+	   <result column="buyMoney" property="buyMoney" jdbcType="decimal"/>
+	   <result column="saleNumber" property="saleNumber" jdbcType="decimal"/>
+	   <result column="saleMoney" property="saleMoney" jdbcType="decimal"/>
+	   <result column="warecount" property="warecount" jdbcType="decimal"/>
+	   <result column="total" property="total" jdbcType="decimal"/>
+	</resultMap>
+	
+<!-- 库存出入明细返回类型 -->
+		<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseIntoWare" id="PageListDailyResult2">
+	   <result column="aid" property="aid" jdbcType="varchar"/>
+	   <result column="delivery_time" property="deliveryTime" jdbcType="datetime"/>
+	    <result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="goodcode" property="gcode" jdbcType="varchar"/>	
+	   <result column="code" property="code" jdbcType="varchar"/>
+	   <result column="name" property="wareName" jdbcType="varchar"/>
+	   <result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+	   <result column="brand_name" property="brandName" jdbcType="varchar"/>
+	   <result column="unit" property="unit" jdbcType="varchar"/>
+	   <result column="buyNumber" property="buyNumber" jdbcType="decimal"/>
+	   <result column="buyMoney" property="buyMoney" jdbcType="decimal"/>
+	   <result column="saleNumber" property="saleNumber" jdbcType="decimal"/>
+	   <result column="saleMoney" property="saleMoney" jdbcType="decimal"/>
+	</resultMap>
+	
+<!--进销存汇总返回类型 -->	
+	<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseIntoWare" id="PageListDailyResult3">	
+	   <result column="code" property="code" jdbcType="varchar"/>
+	   <result column="name" property="name" jdbcType="varchar"/>
+	   <result column="unit" property="unit" jdbcType="varchar"/>
+	   <result column="initialNum" property="initialNum" jdbcType="decimal"/>
+	   <result column="price" property="price" jdbcType="numeric"/>
+	   <result column="buyNumber" property="buyNumber" jdbcType="decimal"/>
+	   <result column="buyMoney" property="buyMoney" jdbcType="decimal"/>
+	   <result column="saleNumber" property="saleNumber" jdbcType="decimal"/>
+	   <result column="saleMoney" property="saleMoney" jdbcType="decimal"/>
+	</resultMap>
+
+<!--进销存明细返回类型 -->		
+	<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseIntoWare" id="PageListDailyResult4">	
+	   <result column="delivery_time" property="deliveryTime" jdbcType="datetime"/>
+	   <result column="code" property="code" jdbcType="varchar"/>
+	   <result column="goodcode" property="gcode" jdbcType="varchar"/>	
+	   <result column="name" property="wareName" jdbcType="varchar"/>
+	   <result column="unit" property="unit" jdbcType="varchar"/>
+	   <result column="buyNumber" property="buyNumber" jdbcType="decimal"/>
+	   <result column="buyMoney" property="buyMoney" jdbcType="decimal"/>
+	   <result column="saleNumber" property="saleNumber" jdbcType="decimal"/>
+	   <result column="saleMoney" property="saleMoney" jdbcType="decimal"/>  
+	</resultMap>
+	
+	<resultMap class="com.sinokj.app.warehouse.warehouseInto.model.WarehouseIntoWare" id="PageListDailyResult5">	
+		 <result column="ware_count" property="warecounts" jdbcType="int"/>
+	   <result column="total_cost_inventory" property="total" jdbcType="decimal"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="WarehouseIntoWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehouseIntoWare.WarehouseIntoWare_insert"/>
+		<flushOnExecute statement="WarehouseIntoWare.WarehouseIntoWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="WarehouseIntoWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  a.id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseIntoId">
+			  a.warehouse_into_id = #warehouseIntoId#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	
+	<!-- 出入库明细模糊搜索 -->
+	<sql id="WarehouseIntoWare_coldstorage">
+		<dynamic prepend="where">		
+			<isNotEmpty prepend="and" property="goodName">
+                 a.delivery_time>=#goodName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodCode">
+			   <![CDATA[ 
+                 a.delivery_time<=#goodCode#
+                ]]>
+			</isNotEmpty>		
+			<isNotEmpty prepend="and" property="wareName">
+			  	a.name like '%$wareName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseName">
+			  	a.warehouse_name like '%$warehouseName$%'
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<select id="WarehouseIntoWare_query_select" resultMap="WarehouseIntoWareResult" cacheModel="WarehouseIntoWare_cache">
+		select a.*,b.code as code from warehouse_into_ware a inner join ware b on a.ware_id = b.id 
+		<include refid="WarehouseIntoWare_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="WarehouseIntoWare_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehouseIntoWare_cache">
+		select count(*) from warehouse_into_ware a inner join ware b on a.ware_id = b.id 
+		<include refid="WarehouseIntoWare_query_select_where_clause"/>
+	</select>
+	
+	
+	<!--库存出入汇总搜索条件 -->
+	<sql id="WarehouseIntoWareList_daily_select_where_clause1">
+				<dynamic prepend="where">
+					<isNotEmpty prepend="and" property="goodName">
+                	 abc.delivery_time>=#goodName#
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="goodCode">			   
+               		  abc.delivery_time &lt;= #goodCode#             
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="wareName">
+                	 abc.name like '%$wareName$%'
+					</isNotEmpty>
+				</dynamic> 	
+	</sql>
+	<sql id="WarehouseIntoWareList_daily_select_where_clause2">
+				<dynamic prepend="where">
+					<isNotEmpty prepend="and" property="goodName">
+               		  cde.create_time>=#goodName#
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="goodCode">			   
+               		  cde.create_time &lt;=#goodCode#             
+					</isNotEmpty>
+					<isNotEmpty prepend="and" property="wareName">
+                	  cde.name like '%$wareName$%'
+					</isNotEmpty>
+				</dynamic> 		
+	</sql>
+<!-- 库存出入汇总模糊搜索 -->
+	<select id="WarehouseIntoWareList_daily_select" resultMap="PageListDailyResult" >
+		select `code`,`name`,`unit`,delivery_time,create_time,IFNULL(sum(order_number),0) buyNumber,IFNULL(sum(money),0) buyMoney,IFNULL(sum(salenumber),0) saleNumber,IFNULL(sum(salemoney),0) saleMoney,
+		(IFNULL(sum(order_number),0)-IFNULL(sum(salenumber),0)) warecount,(IFNULL(sum(money),0)-IFNULL(sum(salemoney),0)) total
+		from (
+		select `code`,`name`,`unit`,abc.ware_id,delivery_time,create_time,order_number,money,salenumber,salemoney from 
+		(select c.id,a.`code`,a.`name`,a.unit,b.ware_id,b.order_number,b.money,c.delivery_time
+		from good a,buy_ware b,buy_into c,ware
+		where c.order_id=b.buy_id and b.ware_id=ware.id and ware.good_id=a.id
+		) abc 
+		left join
+		(select d.create_time,e.ware_id,e.order_number salenumber,e.money salemoney from sale_delivery d,sale_ware e 
+		where d.order_id=e.sale_id) de
+		on abc.ware_id=de.ware_id
+		<include refid="WarehouseIntoWareList_daily_select_where_clause1"/>
+		group by abc.id
+		UNION 
+		select code,name,unit,cde.ware_id,delivery_time,create_time,order_number,money,salenumber,salemoney from 
+		(select a.delivery_time,b.ware_id ,b.order_number,b.money from buy_into a,buy_ware b
+		where a.order_id=b.buy_id) ab
+		right join
+		(select e.id,c.`code`,c.`name`,c.unit,d.ware_id,d.order_number salenumber ,d.money salemoney,e.create_time
+		from good c,sale_ware d,sale_delivery e,ware 
+		where e.order_id=d.sale_id and d.ware_id=ware.id and ware.good_id=c.id) cde
+		on ab.ware_id=cde.ware_id
+		<include refid="WarehouseIntoWareList_daily_select_where_clause2"/>
+		group by cde.id
+		) a 
+		group by `code`
+	</select>
+	
+<!--库存出入明细查询 -->
+	<select id="WarehouseIntoWareList_coldstorage_select" resultMap="PageListDailyResult2" >
+		select * from(		
+			select a.id as aid,a.delivery_time,a.warehouse_name,a.code as goodcode,c.code ,c.name,c.good_type_name,c.brand_name,c.unit,b.order_number as buyNumber,b.money as buyMoney,null as saleNumber,null as saleMoney
+				from buy_into as a,buy_ware as b,good as c,ware
+				where a.order_id=b.buy_id AND b.ware_id=ware.id AND ware.good_id=c.id
+			UNION ALL
+			select a.id ,a.create_time,a.warehouse_name,a.code as goodcode,c.code,c.name,c.good_type_name,c.brand_name,c.unit,null,null,b.order_number,b.money 
+				from sale_delivery as a,sale_ware as b,good as c,ware
+				where  a.order_id=b.sale_id AND b.ware_id=ware.id AND ware.good_id=c.id
+		) a
+			<include refid="WarehouseIntoWare_coldstorage"/>
+		ORDER BY delivery_time desc 	
+	</select>
+
+	<!--进销存汇总模糊搜索 1-->
+	<sql id="WarehouseIntoWare_discrepancy1">
+		<dynamic prepend="where">		
+			<isNotEmpty prepend="and" property="goodName">
+                 abc.create_time>=#goodName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodCode">
+			   <![CDATA[ 
+                 abc.create_time<=#goodCode#
+                ]]>
+			</isNotEmpty>		
+			<isNotEmpty prepend="and" property="name">
+			  	abc.name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseName">
+			  	abc.warehouse_name like '%$warehouseName$%'
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<!--进销存汇总模糊搜索 2-->
+	<sql id="WarehouseIntoWare_discrepancy2">
+		<dynamic prepend="where">		
+			<isNotEmpty prepend="and" property="goodName">
+                def.delivery_time>=#goodName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodCode">
+			   <![CDATA[ 
+                 def.delivery_time<=#goodCode#
+                ]]>
+			</isNotEmpty>		
+			<isNotEmpty prepend="and" property="name">
+			  	def.name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseName">
+			  	def.warehouse_name like '%$warehouseName$%'
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<!-- 查询库存总数 -->
+	<select id="WarehouseIntoWareList_kucuncount_select" resultMap="PageListDailyResult5">
+		select sum(a.ware_count) as ware_count,sum(a.total_cost_inventory) as total_cost_inventory from warehouse_ware a where a.ware_name=#wareName# 
+	</select>
+	
+<!--进销存汇总查询 -->	
+	<select id="WarehouseIntoWareList_discrepancy_select" resultMap="PageListDailyResult3" >
+	select warehouse_name,`code`,`name`,unit,initialNum,price,create_time,delivery_time,IFNULL(sum(salenumber),0) as saleNumber,IFNULL(sum(salemoney),0) as saleMoney,IFNULL(sum(buynumber),0) as buyNumber,IFNULL(sum(buymoney),0) as buyMoney 
+	from(
+	select abc.warehouse_name,abc.`code`,abc.`name`,abc.unit,abc.initialNum,abc.price,create_time,delivery_time,abc.order_number salenumber,abc.money salemoney,def.order_number buynumber,def.money buymoney
+	from
+		(select a.id,a.create_time,a.warehouse_name,good.`code`,good.`name`,good.unit,good.initialNum,good.price,b.order_number,b.money
+		from 	sale_delivery a,sale_ware b,ware,good where a.order_id=b.sale_id and b.ware_id=ware.id and ware.good_id=good.id
+		group by a.id) abc 
+			left join 	
+		(select a.delivery_time,a.warehouse_name,good.`code`,b.order_number,b.money
+		from  buy_into a,buy_ware b,ware,good  where a.order_id=b.buy_id and b.ware_id=ware.id and ware.good_id=good.id
+		group by a.id) def 
+		on abc.`code`=def.`code`
+		<include refid="WarehouseIntoWare_discrepancy1"/>
+		group by abc.id
+		UNION 
+	select def.warehouse_name,def.`code`,def.`name`,def.unit,def.initialNum,def.price,create_time,delivery_time,abc.order_number salenumber,abc.money salemoney,def.order_number buynumber,def.money buymoney		
+	from
+		(select a.create_time,a.warehouse_name,good.`code`,b.order_number,b.money
+		from 	sale_delivery a,sale_ware b,ware,good where a.order_id=b.sale_id and b.ware_id=ware.id and ware.good_id=good.id
+		group by a.id) abc 
+		right join 	
+		(select a.id,a.delivery_time,a.warehouse_name,good.`code`,good.`name`,good.unit,good.initialNum,good.price,b.order_number,b.money
+		from  buy_into a,buy_ware b,ware,good  where a.order_id=b.buy_id and b.ware_id=ware.id and ware.good_id=good.id
+		group by a.id) def 
+		on abc.`code`=def.`code`
+		<include refid="WarehouseIntoWare_discrepancy2"/>
+		group by def.id 
+	) a 
+	group by a.`code`
+	
+	</select>
+	
+<!--进销存汇总明细 -->	
+	<select id="WarehouseIntoWareList_inventory_select" resultMap="PageListDailyResult4" >
+		select * from 
+			(select a.warehouse_name,a.delivery_time,c.`code`,good.`code` as goodcode,good.`name`,good.unit,b.order_number as buyNumber,b.money as buyMoney,null  as saleNumber,null as saleMoney
+			from buy_into a,buy_ware b,buy_order c,ware,good
+			where a.order_id=b.buy_id and b.ware_id=ware.id and ware.good_id=good.id 
+			group by a.id
+			UNION
+			select a.warehouse_name,a.create_time,c.`code`,good.`code` as goodcode,good.`name`,good.unit,null,null,b.order_number,b.money 
+			from sale_delivery a,sale_ware b,sale_order c,ware,good
+			where a.order_id=b.sale_id and b.ware_id=ware.id and ware.good_id=good.id 
+			group by a.id
+		) a 
+			<include refid="WarehouseIntoWare_coldstorage"/>
+		order by a.delivery_time desc;
+	</select>
+
+
+	<insert id="WarehouseIntoWare_insert">
+		insert into warehouse_into_ware 
+			(id,warehouse_into_id,warehouse_position_id,warehouse_position_name,
+			ware_id,ware_name,into_num,price_in,money_in,sort)
+		values
+			(#id#,#warehouseIntoId#,#warehousePositionId#,#warehousePositionName#,
+			#wareId#,#wareName#,#intoNum#,#priceIn#,#moneyIn#,#sort#)
+	</insert>
+	
+	<delete id="WarehouseIntoWare_delete">
+		delete from warehouse_into_ware where warehouse_into_id = #warehouseIntoId#
+	</delete>
+</sqlMap>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehouseMove">
+	<resultMap id="WarehouseMoveResult" class="com.sinokj.app.warehouse.warehouseMove.model.WarehouseMove" >
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="f_warehouse_id" property="fwarehouseId" jdbcType="VARCHAR" />
+	  <result column="f_warehouse_name" property="fwarehouseName" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_id" property="swarehouseId" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_name" property="swarehouseName" jdbcType="VARCHAR" />
+	  <result column="remark" property="remark" jdbcType="VARCHAR" />
+	  <result column="handler_id" property="handlerId" jdbcType="VARCHAR" />
+	  <result column="handler_name" property="handlerName" jdbcType="VARCHAR" />
+	  <result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+	  <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+	  <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	  <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	  <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	  <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	  <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	  <result column="state" property="state" jdbcType="VARCHAR" />
+	</resultMap>
+	
+ 	 <!-- 缓存模型 -->
+	<cacheModel id="WarehouseMove_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehouseMove.WarehouseMove_insert"/>
+		<flushOnExecute statement="WarehouseMove.WarehouseMove_update"/>
+		<flushOnExecute statement="WarehouseMove.WarehouseMove_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+  	<!-- 模糊查询条件 -->
+	<sql id="WarehouseMove_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="fwarehouseName">
+				f_warehouse_name like '%$fwarehouseName$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="swarehouseName">
+				s_warehouse_name like '%$swarehouseName$%'	
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	
+	<select id="WarehouseMove_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehouseMove_cache">
+		select count(*) from warehouse_move	
+		<include refid="WarehouseMove_query_select_where_clause"/>
+	</select>
+	
+	<!-- 模糊查询 -->
+	<select id="WarehouseMove_query_select" resultMap="WarehouseMoveResult" cacheModel="WarehouseMove_cache">
+		select * from warehouse_move 
+		<include refid="WarehouseMove_query_select_where_clause"/>
+		order by create_time asc
+	</select>
+	
+	<!-- 精确查询 -->
+	<select id="WarehouseMove_select" resultMap="WarehouseMoveResult" cacheModel="WarehouseMove_cache">
+		select * from warehouse_move where id = #id# order by create_time asc
+	</select>	
+
+ 	<!-- 根据id删除调度单 -->
+    <delete id="WarehouseMove_delete">
+        delete from warehouse_move where id = #id#
+    </delete>
+    
+    <!-- 添加调度单 -->
+	<insert id="WarehouseMove_insert">
+	  insert into warehouse_move (id,code,f_warehouse_id,f_warehouse_name,s_warehouse_id,s_warehouse_name,remark,handler_id,handler_name,dept_id,dept_name,creator_id,creator_name,create_time,modifier_id,modifier_name,modify_time,state)
+	  values
+	  (#id#,#code#,#fwarehouseId#,#fwarehouseName#,#swarehouseId#,#swarehouseName#,#remark#,#handlerId#,#handlerName#,#deptId#,#deptName#,#creatorId#,#creatorName#,#createTime#,#modifierId#,#modifierName#,#modifyTime#,#state#)
+	</insert>
+  
+  	<!-- 更新调度单 -->
+	<update id="WarehouseMove_update">
+	    update warehouse_move set
+	        code = #code#,
+	        f_warehouse_id = #fwarehouseId#,
+	        f_warehouse_name = #fwarehouseName#,
+	        s_warehouse_id = #swarehouseId#,
+	        s_warehouse_name = #swarehouseName#,
+	        remark = #remark:VARCHAR#,
+	        handler_id = #handlerId#,
+	        handler_name = #handlerName#,
+	        dept_id = #deptId#,
+	        dept_name = #deptName#,
+	        creator_id = #creatorId#,
+	        creator_name = #creatorName#,
+	        create_time = #createTime#,
+	        modifier_id = #modifierId#,
+	        modifier_name = #modifierName#,
+	        modify_time = #modifyTime#,
+	        state = #state:VARCHAR#
+	    where id = #id#
+	</update>
+	
+</sqlMap>

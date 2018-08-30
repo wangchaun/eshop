@@ -1,0 +1,438 @@
+.w {
+	width:990px;
+	margin:0 auto;
+}
+.cc0000 {
+	color:#cc0000;
+}
+.333 {
+	color:#333;
+}
+.color-999 {
+	color:#999;
+}
+.color-666 {
+	color:#666;
+	text-align:right;
+}
+.ff6600 {
+	color:#ff6600;
+}
+.bor_bot {
+	border-bottom:1px solid #ffe6bc;
+	line-height:30px;
+	font-size:14px;
+}
+.mon {
+	text-align:right;
+	line-height:30px;
+	font-size:14px;
+}
+.mon strong {
+	color:#cc0000;
+	font-family:\5FAE\8F6F\96C5\9ED1;
+	font-size:24px;
+}
+/*logo*/
+#wmt {
+	overflow:hidden;
+	margin-bottom:5px
+}
+#wmt #logo {
+	float:left
+}
+#wmt .step {
+	float:right;
+	margin-top:16px
+}
+/*tuan*/
+#tuan {
+	margin-bottom:10px;
+}
+#tuan .mt {
+	height:33px;
+	background:url(../images/team_buy_tit_regist.jpg) #D1D1D1 repeat-x 0 -34px;
+}
+#tuan .mt h2 {
+	float:left;
+	height:33px;
+	padding-left:15px;
+	background:url(../images/team_buy_tit_regist.jpg) no-repeat 0 0;
+	line-height:33px;
+}
+#tuan .mt b {
+	float:right;
+	width:10px;
+	height:33px;
+	background:url(../images/team_buy_tit_regist.jpg) no-repeat 0 -68px;
+}
+#tuan .mc {
+	padding:20px 40px;
+	border:solid #D1D1D1;
+	border-width:0 1px 1px;
+}
+/*step*/
+.step {
+	overflow:hidden;
+	;
+	background:#ededed;
+	color:#999999;
+	font-weight:bold;
+	line-height:25px;
+	margin:0 auto;
+	text-align:center
+}
+.step li {
+	float:left;
+	position:relative;
+	padding-left:22px;
+	padding-right:35px
+}
+.step li b {
+	position:absolute;
+	width:22px;
+	height:25px;
+	background:url(../images/team_buy_flow.gif) no-repeat;
+	top:0;
+	right:-1px
+}
+#step2 .fore2 {
+	background:#ffe6bc;
+	color:#ff6600
+}
+#step2 .fore1 {
+	background:#bbbbbb;
+	color:#ffffff;
+	width:120px
+}
+#step1 .fore1 b {
+	background-position:0 -26px
+}
+#step2 .fore1 b {
+	background-position:0 -78px
+}
+/*table*/
+.tb-void {
+	overflow:hidden;
+	margin-bottom:10px;
+}
+.tb-line {
+	border-top:1px solid #E6E6E6
+}
+.tb-void table {
+	border-collapse:collapse;
+	border:solid #E6E6E6;
+	border-width:0 1px 1px 1px;
+}
+.tb-void th {
+	background:#f7f7f7 url(../images/team_buy_th_bg.jpg) repeat-x;
+	height:26px;
+	line-height:26px;
+	color:#666666;
+	font-weight:normal;
+}
+.tb-void td {
+	border:solid #E6E6E6;
+	border-width:1px 0 0 1px;
+	padding:5px 4px;
+}
+.tb-void td a {
+	color:#005ea7;
+	text-align:left
+}
+.tb-void td a:link, .tb-void td a:visited {
+	color:#005ea7;
+}
+.tb-void s, .tb-void b {
+	display:inline-block;
+	width:15px;
+	height:11px;
+	cursor:pointer;
+}
+.tb-void s {
+	background:url(../images/team_buy_icon1.jpg) no-repeat;
+	_margin-right:5px;
+}
+.tb-void b {
+	background:url(../images/team_buy_icon2.jpg) no-repeat;
+}
+.tb-void input {
+	width:28px;
+	text-align:center;
+}
+/*information*/
+#tuan h3 {
+	font-size:12px;
+	padding-bottom:5px;
+}
+#tuan h3 a {
+	font-size:12px;
+	font-weight:normal;
+	color:#005ea7
+}
+#tuan a:link, #tuan a:visited {
+	color:#005ea7;
+}
+#tuan .item {
+	line-height:25px;
+	overflow:hidden;
+	zoom:1;
+	margin-bottom:10px;
+}
+#tuan .item1 {
+	line-height:25px;
+	overflow:hidden;
+	zoom:1;
+	border:1px solid #ffccaa;
+	padding:20px 20px 20px 35px;
+	margin-bottom:10px;
+	color:#ff6500;
+	background:url(../images/item1-bg.gif) no-repeat 15px center #fffcf1;
+}
+#tuan .label {
+	font-size:12px;
+	color:#000;
+	float:left
+}
+#tuan .label_1 {
+	font-size:12px;
+	color:#000;
+	line-height:25px;
+}
+#tuan .item .fl {
+	overflow:hidden;
+}
+.item .radio {
+	margin-top:6px;
+}
+#tuan .sele {
+	margin-right:10px;
+}
+.m1 {
+	border:1px solid #ffccaa;
+	background-color:#fffcf1;
+	padding:20px
+}
+.m2 {
+	border:1px solid #ffccaa;
+	background:#fffcf1;
+	padding:10px;
+	margin-bottom:10px;
+}
+#tuan .text {
+	border-color:#aaa #ddd #ddd #aaa;
+	border-style:solid;
+	border-width:1px;
+	color: #000;
+	font-family: verdana, arial;
+	font-size: 12px;
+	height: 16px;
+	line-height: 16px;
+	padding: 3px 20px 3px 3px;
+}
+/*Order message*/
+#tuan .bor .area {
+	float: none;
+	height: 81px;
+	width: 449px;
+	border-color:#aaa #ddd #ddd #aaa;
+	border-style:solid;
+	border-width:1px;
+	font-size:12px;
+	padding:10px
+}
+/*submit_btn*/
+#submit_btn {
+	text-align:right;
+}
+#submit_btn .tijiao {
+	background:url(../images/team_buy_tijiao.jpg) no-repeat;
+	width:138px;
+	height:38px;
+	border:none;
+	cursor:pointer;
+}
+#tuan .bor {
+	line-height:25px;
+	overflow:hidden;
+	zoom:1;
+	margin-bottom:10px;
+}
+#tuan .bor strong {
+	color:#ff6600;
+}
+#tuan .middle {
+	color:#333;
+	line-height:20px;
+	padding-left:17px;
+}
+#tuan td {
+	padding:2px;
+	line-height:20px;
+}
+/*consignee_addr*/
+#consignee_addr {
+	border:1px solid #ffe6bc;
+	background:#fff;
+	padding:10px;
+	margin-bottom:10px;
+}
+#addressListPanel {
+	margin-bottom:10px;
+}
+#tuan .footer .btn {
+	background:url(../images/team_buy_tijiao.jpg) no-repeat 0 -40px;
+	width:120px;
+	height:24px;
+	text-align:center;
+	line-height:24px;
+	display:block;
+	color:#000;
+	font-weight:bold;
+}
+#tuan .footer .btn a:link, #tuan .footer .btn a:visited {
+	color:#000;
+}
+/*validator*/
+span.errorTip {
+	margin-left:4px;
+	font-size:12px;
+	color:#C00;
+}
+div.errorTip {
+	font-size:12px;
+	color:#C00;
+}
+div.validTip, span.validTip {
+	font-size:12px;
+	display:none;
+}
+span.require {
+	color:#C00;
+	font-weight:bold;
+}
+.noerror .errorTip, .noerror .validTip {
+	display: none;
+}
+.errorInput {
+	background-color:#FFCC33;
+}
+/** order_pay_success **/
+/*logo*/
+#wmt {
+	overflow:hidden;
+	margin-bottom:25px
+}
+#wmt #logo {
+	float:left
+}
+#wmt .step {
+	float:right;
+	margin-top:8px
+}
+/*tuangou_pay_success*/
+#tuangou_pay_success {
+	margin-bottom:10px;
+}
+#tuangou_pay_success .mt {
+	height:33px;
+	background:url(../images/tit_regist.jpg) #D1D1D1 repeat-x 0 -34px;
+}
+#tuangou_pay_success .mt h2 {
+	float:left;
+	height:33px;
+	padding-left:15px;
+	background:url(../images/tit_regist.jpg) no-repeat 0 0;
+	line-height:33px;
+}
+#tuangou_pay_success .mt span {
+	float:right;
+	height:33px;
+	line-height:33px;
+	text-align:right;
+}
+#tuangou_pay_success .mt b {
+	float:right;
+	width:10px;
+	height:33px;
+	background:url(../images/tit_regist.jpg) no-repeat 0 -68px;
+}
+#tuangou_pay_success .mc {
+	border:solid #D1D1D1;
+	border-width:0 1px 1px;
+}
+.order_pay_m1 {
+	margin:10px 0 0;
+	padding:10px 0 0
+}
+/*success*/
+.success {
+	overflow:hidden;
+	zoom:1;
+	padding:0 0 18px 40px
+}
+.success s {
+	float:left;
+	background:url(../images/bg_regist.jpg) -42px -210px;
+	width:48px;
+	height:40px;
+	margin-right:14px;
+	margin-top:8px;
+}
+.success h4 {
+	color:#009900;
+	line-height:39px;
+	font-size:16px;
+}
+.success ul {
+	overflow:hidden;
+	margin-top:8px
+}
+.success ul li {
+	color:#666666;
+	font-weight:bold;
+	float:left;
+	margin-right:30px;
+	font-size:14px
+}
+/*table*/
+.tb-x1 {
+	margin-bottom:10px;
+	color:#666;
+	width:800px;
+	margin-left:60px;
+}
+.tb-x2 {
+	margin-bottom:10px;
+	color:#666;
+	margin-left:60px;
+}
+.tb-x1 table {
+	border-collapse:collapse;
+}
+.tb-x1 th {
+	background:url(../images/team_buy_th_bg.jpg) repeat-x 0 bottom #fff;
+	border:1px solid #ccc;
+	padding:5px;
+	font-weight:normal;
+}
+.tb-x1 td {
+	background:#fff;
+	border:1px solid #ccc;
+	padding:5px;
+	text-align:center;
+}
+.tb-x1 td a {
+	color:#005ea7;
+}
+.bar {
+	background:#f7f7f7;
+	height:35px;
+	line-height:35px;
+	padding:0 20px;
+	font-size:14px;
+}
+.bar a {
+	margin-right:15px;
+	color:#005a9d;
+}

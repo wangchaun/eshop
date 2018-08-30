@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- 后台配置 -->
+<struts>
+	
+	<!-- json处理 -->
+	<package name="json" extends="json-default">
+		<!-- 系统用户 -->
+		<action name="SysUser_json" class="com.sinokj.app.system.user.action.SysUserAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 系统角色 -->
+		<action name="SysRole_json" class="com.sinokj.app.system.role.action.SysRoleAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 系统部门 -->
+		<action name="SysDept_json" class="com.sinokj.app.system.dept.action.SysDeptAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 系统权限 -->
+		<action name="SysPower_json" class="com.sinokj.app.system.power.action.SysPowerAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 高级权限 -->
+		<action name="SysAdvPower_json" class="com.sinokj.app.system.advPower.action.SysAdvPowerAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 地区信息 -->
+		<action name="Area_json" class="com.sinokj.app.baseInfo.area.action.AreaAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 支付方式 -->
+		<action name="Payment_json" class="com.sinokj.app.baseInfo.payment.action.PaymentAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 配送方式 -->
+		<action name="Delivery_json" class="com.sinokj.app.baseInfo.delivery.action.DeliveryAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 银行账号信息 -->
+		<action name="BankAccount_json" class="com.sinokj.app.baseInfo.bankAccount.action.BankAccountAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 供应商 -->
+		<action name="Supplier_json" class="com.sinokj.app.baseInfo.supplier.action.SupplierAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 积分配置 -->
+		<action name="Credit_json" class="com.sinokj.app.baseInfo.credit.action.CreditAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 客户信息 -->
+		<action name="Customer_json" class="com.sinokj.app.customer.model.action.CustomerAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="CustomerJson" class="com.sinokj.app.good.phone.PhoneAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品类别 -->
+		<action name="GoodType_json" class="com.sinokj.app.good.goodType.action.GoodTypeAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品品牌 -->
+		<action name="GoodBrand_json" class="com.sinokj.app.good.goodBrand.action.GoodBrandAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="GroupGoodBrand_json" class="com.sinokj.app.good.goodBrand.action.GroupGoodBrandAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品信息-->
+		<action name="Good_json" class="com.sinokj.app.good.good.action.GoodAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 货品信息  -->
+		<action name="Ware_json" class="com.sinokj.app.good.ware.action.WareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品种类 -->
+		<action name="GoodKind_json" class="com.sinokj.app.good.goodKind.action.GoodKindAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品种类属性值 -->
+		<action name="GoodKingVal_json" class="com.sinokj.app.good.goodKind.action.GoodKingValAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品规格 -->
+		<action name="GoodSpecification_json" class="com.sinokj.app.good.goodSpecification.action.GoodSpecificationAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品规格值 -->
+		<action name="GoodSpecificationVal_json" class="com.sinokj.app.good.goodSpecification.action.GoodSpecificationValAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 商品属性 -->
+		<action name="GoodAttr_json" class="com.sinokj.app.good.goodAttr.action.GoodAttrAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 仓库 -->
+		<action name="Warehouse_json" class="com.sinokj.app.warehouse.warehouse.action.WarehouseAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 仓库货物 -->
+		<action name="WarehouseWare_json" class="com.sinokj.app.warehouse.warehouse.action.WarehouseWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 组合拆分单-->
+		<action name="Combined_json" class="com.sinokj.app.warehouse.combined.action.CombinedAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 组合拆分的货物 -->
+		<action name="CombinedWare_json" class="com.sinokj.app.warehouse.combined.action.CombinedWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 调度单 -->
+		<action name="WarehouseMove_json" class="com.sinokj.app.warehouse.warehouseMove.action.WarehouseMoveAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 调度货物 -->
+		<action name="WarehouseMoveWare_json" class="com.sinokj.app.warehouse.warehouseMove.action.WarehouseMoveWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 仓位 -->
+		<action name="WarehousePosition_json" class="com.sinokj.app.warehouse.warehousePosition.action.WarehousePositionAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 仓位货物-->
+		<action name="WarehousePositionWare_json" class="com.sinokj.app.warehouse.warehousePosition.action.WarehousePositionWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 成本调整单-->
+		<action name="CostAdjust_json" class="com.sinokj.app.warehouse.costAdjust.action.CostAdjustAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		
+		
+		<!-- 销售订单  -->
+		<action name="SaleOrder_json" class="com.sinokj.app.order.sale.saleOrder.action.SaleOrderAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售收款单  -->
+		<action name="SaleCollection_json" class="com.sinokj.app.order.sale.saleCollection.action.SaleCollectionAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售收款单子项  -->
+		<action name="SaleCollectionItem_json" class="com.sinokj.app.order.sale.saleCollection.action.SaleCollectionItemAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售出货单  -->
+		<action name="SaleDelivery_json" class="com.sinokj.app.order.sale.saleDelivery.action.SaleDeliveryAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售退货单  -->
+		<action name="SaleReturn_json" class="com.sinokj.app.order.sale.saleReturn.action.SaleReturnAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售货品  -->
+		<action name="SaleWare_json" class="com.sinokj.app.order.sale.saleWare.action.SaleWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+	
+		
+		<!-- 入库单 -->
+		<action name="WarehouseInto_json" class="com.sinokj.app.warehouse.warehouseInto.action.WarehouseIntoAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 入库货品 -->
+		<action name="WarehouseIntoWare_json" class="com.sinokj.app.warehouse.warehouseInto.action.WarehouseIntoWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 数据字典 -->		
+		<action name="Dictionary_json" class="com.sinokj.app.baseInfo.dictionary.action.DictionaryAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="DictionaryItem_json" class="com.sinokj.app.baseInfo.dictionary.action.DictionaryItemAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 费用单 -->
+		<action name="Fee_json" class="com.sinokj.app.order.cashBasis.fee.action.FeeAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="FeeItem_json" class="com.sinokj.app.order.cashBasis.fee.action.FeeItemAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="Pay_json" class="com.sinokj.app.order.cashBasis.pay.action.PayAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="CashItem_json" class="com.sinokj.app.order.cashBasis.pay.action.CashItemAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="Collection_json" class="com.sinokj.app.order.cashBasis.collection.action.CollectionAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 收费管理 end -->
+		<!-- 广告管理 -->
+		<action name="Advertise_json" class="com.sinokj.app.store.advertise.action.AdvertiseAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		
+		<!-- 杂志管理 -->
+		<action name="Magazine_json" class="com.sinokj.app.store.magazine.action.MagazineAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		
+		<!-- 会员管理 -->
+		<action name="Prepaid_json" class="com.sinokj.app.vip.prepaid.action.PrepaidAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="VipCoupon_json" class="com.sinokj.app.vip.coupon.action.VipCouponAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="VipCouponWare_json" class="com.sinokj.app.vip.coupon.action.VipCouponWareAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="Message_json" class="com.sinokj.app.vip.message.action.MessageAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>	  
+		<action name="VipLevel_json" class="com.sinokj.app.vip.level.action.VipLevelAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<action name="ApplyToCash_json" class="com.sinokj.app.vip.applyCash.action.ApplyToCashAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		
+		<!-- 返利管理 -->
+		<action name="Rebate_json" class="com.sinokj.app.order.buy.rebate.action.RebateAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="RebateItem_json" class="com.sinokj.app.order.buy.rebate.action.RebateItemAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 新闻公告管理 -->
+		<action name="Information_json" class="com.sinokj.app.store.information.action.InformationAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 商品包装 -->
+		<action name="Packaging_json" class="com.sinokj.app.store.packaging.action.PackagingAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 祝福贺卡 -->
+		<action name="GreetingCard_json" class="com.sinokj.app.store.greetingCard.action.GreetingCardAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 促销专题 -->
+		<action name="Promote_json" class="com.sinokj.app.store.promote.action.PromoteAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 促销栏目修改 -->
+		<action name="Promotecolumn_json" class="com.sinokj.app.store.promotecolumn.action.PromotecolumnAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="PromoteGood_json" class="com.sinokj.app.store.promote.action.PromoteGoodAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 优惠活动 -->
+		<action name="PromotionActivity_json" class="com.sinokj.app.store.promotionActivity.action.PromotionActivityAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="PromotionActivityGood_json" class="com.sinokj.app.store.promotionActivity.action.PromotionActivityGoodAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 商城设置 -->
+		<action name="StoreSet_json" class="com.sinokj.app.store.storeSet.action.StoreSetAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 礼品包赠送 -->
+		<action name="Gift_json" class="com.sinokj.app.store.gift.action.GiftAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<action name="GiftGood_json" class="com.sinokj.app.store.gift.action.GiftGoodAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		<!-- 会员评论 -->
+		<action name="WareComment_json" class="com.sinokj.app.vip.wareComment.action.WareCommentAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>	
+		</action>
+		
+		<!-- 销售汇总 -->
+		<action name="Salesummary_json" class="com.sinokj.app.formcenter.orderform.salesummary.SalesummaryAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售排行 -->
+		<action name="Salerise_json" class="com.sinokj.app.formcenter.orderform.salerise.SaleriseAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 销售明细 -->
+		<action name="Saledetail_json" class="com.sinokj.app.formcenter.orderform.saledetail.SaledetailAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		<!-- 团购商品信息-->
+		<action name="GroupGood_json" class="com.sinokj.app.good.groupgood.action.GroupgoodAction">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+	</package>
+
+
+	<!-- *!*.do结尾的action -->
+	<package name="dynamic-do-admin" extends="struts-default">
+		<!-- 系统登录 -->
+		<action name="SysLogin" class="com.sinokj.app.system.login.action.SysLoginAction">
+			<result name="index">/WEB-INF/page/index/login.jsp</result>
+			<result name="logout" type="redirect">/SysLogin!login.do</result>
+			<result name="main">/WEB-INF/page/index/main.jsp</result>
+			<result name="mainInfo">/WEB-INF/page/index/mainInfo.jsp</result>
+			<result name="bgIndex">/WEB-INF/page/index/bgIndex.jsp</result>
+		</action>
+	
+		<!-- 系统用户 -->
+		<action name="SysUser" class="com.sinokj.app.system.user.action.SysUserAction">
+			<result name="list_SysUser">/WEB-INF/page/system/SysUser/list_SysUser.jsp</result>
+			<result name="edit_SysUser">/WEB-INF/page/system/SysUser/edit_SysUser.jsp</result>
+			<result name="edit_password">/WEB-INF/page/system/SysUser/edit_password.jsp</result>
+		</action>
+		
+		<!-- 系统角色 -->
+		<action name="SysRole" class="com.sinokj.app.system.role.action.SysRoleAction">
+			<result name="list_role_user">/WEB-INF/page/system/SysRole/list_role_user.jsp</result>
+			<result name="list_SysRole">/WEB-INF/page/system/SysRole/list_SysRole.jsp</result>
+			<result name="edit_SysRole">/WEB-INF/page/system/SysRole/edit_SysRole.jsp</result>
+		</action>
+		<!-- 系统部门 -->
+		<action name="SysDept" class="com.sinokj.app.system.dept.action.SysDeptAction">
+			<result name="list_SysDept">/WEB-INF/page/system/SysDept/list_SysDept.jsp</result>
+			<result name="edit_SysDept">/WEB-INF/page/system/SysDept/edit_SysDept.jsp</result>
+		</action>	
+		
+		<!-- 系统普通权限 -->
+		<action name="SysPower" class="com.sinokj.app.system.power.action.SysPowerAction">
+			<result name="list_SysPower">/WEB-INF/page/system/SysPower/list_SysPower.jsp</result>
+			<result name="edit_SysPower">/WEB-INF/page/system/SysPower/edit_SysPower.jsp</result>
+		</action>
+		<!-- 系统高级权限 -->
+		<action name="SysAdvPower" class="com.sinokj.app.system.advPower.action.SysAdvPowerAction">
+			<result name="list_sysAdvPower">/WEB-INF/page/system/SysAdvRolePower/list_SysAdvPower.jsp</result>
+			<result name="edit_SysAdvPower">/WEB-INF/page/system/SysAdvRolePower/edit_SysAdvPower.jsp</result>
+		</action>
+		<!-- 系统角色权限关系 -->
+		<action name="SysRolePower" class="com.sinokj.app.system.rolePower.action.SysRolePowerAction">
+			<result name="edit_SysRolePower">/WEB-INF/page/system/SysRolePower/edit_SysRolePower.jsp</result>
+		</action>
+		<!-- 数据库备份 -->
+		<action name="databaseBackup" class="com.sinokj.app.system.dbBackup.action.DatabaseBackupAction"></action>
+		<!-- 公共组件 -->
+		<action name="FileUpload" class="com.sinokj.app.component.file.action.FileUploadAction">
+			<result name="edit_FileUpload">/WEB-INF/page/component/FileUpload/edit_FileUpload.jsp</result>
+		</action>		
+		<!-- 客户信息 -->
+		<action name="customers" class="com.sinokj.app.customer.action.CustomerAction">
+			<result name="list_customer">/WEB-INF/page/customer/list_customer.jsp</result>
+			<result name="edit_customer">/WEB-INF/page/customer/edit_customer.jsp</result>
+		</action>
+		<!-- 数据字典 -->
+		<action name="Dictionary" class="com.sinokj.app.baseInfo.dictionary.action.DictionaryAction">
+			<result name="list_dictionary">/WEB-INF/page/baseInfo/dictionary/list_dictionary.jsp</result>
+			<result name="edit_dictionary">/WEB-INF/page/baseInfo/dictionary/edit_dictionary.jsp</result>
+		</action>
+		<action name="DictionaryItem" class="com.sinokj.app.baseInfo.dictionary.action.DictionaryItemAction">
+			<result name="list_dictionaryItem">/WEB-INF/page/baseInfo/dictionary/list_dictionaryItem.jsp</result>
+			<result name="edit_dictionaryItem">/WEB-INF/page/baseInfo/dictionary/edit_dictionaryItem.jsp</result>
+		</action>
+		<!-- 地区信息 -->
+		<action name="area" class="com.sinokj.app.baseInfo.area.action.AreaAction">
+			<result name="edit_area">/WEB-INF/page/baseInfo/area/edit_area.jsp</result>
+			<result name="list_area">/WEB-INF/page/baseInfo/area/list_area.jsp</result>
+		</action>
+	    <!-- 积分配置 -->
+		<action name="credit" class="com.sinokj.app.baseInfo.credit.action.CreditAction">
+			<result name="edit_credit">/WEB-INF/page/baseInfo/create/edit_credit.jsp</result>
+			<result name="list_credit">/WEB-INF/page/baseInfo/create/list_credit.jsp</result>
+		</action>
+		<!-- 支付方式 -->
+		<action name="payment" class="com.sinokj.app.baseInfo.payment.action.PaymentAction">
+			<result name="list_payment">/WEB-INF/page/baseInfo/payment/list_payment.jsp</result>
+			<result name="edit_payment">/WEB-INF/page/baseInfo/payment/edit_payment.jsp</result>
+		</action>
+		<!-- 配送方式 -->
+		<action name="delivery" class="com.sinokj.app.baseInfo.delivery.action.DeliveryAction">
+			<result name="list_delivery">/WEB-INF/page/baseInfo/delivery/list_delivery.jsp</result>
+			<result name="edit_delivery">/WEB-INF/page/baseInfo/delivery/edit_delivery.jsp</result>
+		</action>	
+		<!-- 银行账号信息 -->
+		<action name="bankAccount" class="com.sinokj.app.baseInfo.bankAccount.action.BankAccountAction">
+			<result name="list_bankAccount">/WEB-INF/page/baseInfo/bankAccount/list_bankAccount.jsp</result>
+			<result name="edit_bankAccount">/WEB-INF/page/baseInfo/bankAccount/edit_bankAccount.jsp</result>
+		</action>
+		<!--供应商-->
+		<action name="supplier" class="com.sinokj.app.baseInfo.supplier.action.SupplierAction">
+			<result name="list_supplier">/WEB-INF/page/baseInfo/supplier/list_supplier.jsp</result>
+			<result name="edit_supplier">/WEB-INF/page/baseInfo/supplier/edit_supplier.jsp</result>
+		</action>
+		<!-- 商品类别 -->
+		<action name="goodType" class="com.sinokj.app.good.goodType.action.GoodTypeAction">
+			<result name="list_goodType">/WEB-INF/page/good/goodType/list_goodType.jsp</result>
+			<result name="edit_goodType">/WEB-INF/page/good/goodType/edit_goodType.jsp</result>
+			<result name="find_goodType">/WEB-INF/page/good/goodType/find_goodType.jsp</result>
+		</action>
+			<!-- 商品类别 -->
+		<action name="groupgoodType" class="com.sinokj.app.good.groupgoodType.action.GroupGoodTypeAction">
+			<result name="list_goodType">/WEB-INF/page/good/groupgoodType/list_groupgoodType.jsp</result>
+			<result name="edit_goodType">/WEB-INF/page/good/goodType/edit_goodType.jsp</result>
+			<result name="find_goodType">/WEB-INF/page/good/goodType/find_goodType.jsp</result>
+		</action>
+		<!-- 商品品牌 -->
+		<action name="goodBrand" class="com.sinokj.app.good.goodBrand.action.GoodBrandAction">
+			<result name="list_goodBrand">/WEB-INF/page/good/goodBrand/list_goodBrand.jsp</result>
+			<result name="edit_goodBrand">/WEB-INF/page/good/goodBrand/edit_goodBrand.jsp</result>
+			<result name="find_goodBrand">/WEB-INF/page/good/goodBrand/find_goodBrand.jsp</result>
+		</action>
+		<action name="groupGoodBrand" class="com.sinokj.app.good.goodBrand.action.GroupGoodBrandAction">
+			<result name="list_groupgoodBrand">/WEB-INF/page/good/goodBrand/list_groupgoodBrand.jsp</result>
+			<result name="edit_groupgoodBrand">/WEB-INF/page/good/goodBrand/edit_groupgoodBrand.jsp</result>
+			<result name="find_goodBrand">/WEB-INF/page/good/goodBrand/find_goodBrand.jsp</result>
+		</action>
+		<!-- 商品信息-->
+		<action name="good" class="com.sinokj.app.good.good.action.GoodAction">
+			<result name="list_good">/WEB-INF/page/good/good/list_good.jsp</result>
+			<result name="edit_good">/WEB-INF/page/good/good/edit_good.jsp</result>
+			<result name="list_specification">/WEB-INF/page/good/good/list_specification.jsp</result>
+			<result name="upload_excel">/WEB-INF/page/good/good/excelFile_upload.jsp</result>
+			<result name="edit_excelDate">/WEB-INF/page/good/good/excelFile_good.jsp</result>
+			 
+		</action>
+		<!-- 手机号码上传 -->
+		<action name="telphone" class="com.sinokj.app.good.phone.PhoneAction">
+			<result name="upload_excel">/WEB-INF/page/good/telphone/excelFile_upload.jsp</result>
+			<result name="edit_excelDate">/WEB-INF/page/good/telphone/excelFile_good.jsp</result>
+		</action>
+		
+		<!-- 商品种类 -->
+		<action name="goodKind" class="com.sinokj.app.good.goodKind.action.GoodKindAction">
+			<result name="list_goodKind">/WEB-INF/page/good/goodKind/list_goodKind.jsp</result>
+			<result name="edit_goodKind">/WEB-INF/page/good/goodKind/edit_goodKind.jsp</result>
+		</action>
+		<!-- 商品种类属性值 -->
+		<action name="goodKingVal" class="com.sinokj.app.good.goodKind.action.GoodKingValAction">
+			<result name="list_goodKingVal">/WEB-INF/page/good/goodKind/list_goodKingVal.jsp</result>
+			<result name="edit_goodKingVal">/WEB-INF/page/good/goodKind/edit_goodKingVal.jsp</result>
+		</action>
+		<!-- 商品规格 -->
+		<action name="goodSpecification" class="com.sinokj.app.good.goodSpecification.action.GoodSpecificationAction">
+			<result name="list_goodSpecification">/WEB-INF/page/good/goodSpecification/list_goodSpecification.jsp</result>
+			<result name="edit_goodSpecification">/WEB-INF/page/good/goodSpecification/edit_goodSpecification.jsp</result>
+		</action>
+		<!-- 商品规格值 -->
+		<action name="goodSpecificationVal" class="com.sinokj.app.good.goodSpecification.action.GoodSpecificationValAction">
+			<result name="list_goodSpecificationVal">/WEB-INF/page/good/goodSpecification/list_goodSpecificationVal.jsp</result>
+			<result name="edit_goodSpecificationVal">/WEB-INF/page/good/goodSpecification/edit_goodSpecificationVal.jsp</result>
+		</action>
+		<!-- 商品属性 -->
+		<action name="goodAttr" class="com.sinokj.app.good.goodAttr.action.GoodAttrAction">
+			<result name="list_goodAttr">/WEB-INF/page/good/goodAttr/list_goodAttr.jsp</result>
+			<result name="edit_goodAttr">/WEB-INF/page/good/goodAttr/edit_goodAttr.jsp</result>
+		</action>
+		<!--仓库-->
+		<action name="warehouse" class="com.sinokj.app.warehouse.warehouse.action.WarehouseAction">
+			<result name="list_warehouse">/WEB-INF/page/warehouse/warehouse/list_warehouse.jsp</result>
+			<result name="edit_warehouse">/WEB-INF/page/warehouse/warehouse/edit_warehouse.jsp</result>
+		</action>
+		<!-- 仓位 -->
+		<action name="warehousePosition" class="com.sinokj.app.warehouse.warehousePosition.action.WarehousePositionAction">
+			<result name="list_warehousePosition">/WEB-INF/page/warehouse/warehousePosition/list_warehousePosition.jsp</result>
+			<result name="edit_warehousePosition">/WEB-INF/page/warehouse/warehousePosition/edit_warehousePosition.jsp</result>
+			<result name="show_warehousePosition">/WEB-INF/page/warehouse/warehousePosition/show_warehousePosition.jsp</result>
+		</action>
+		<!-- 仓位货物-->
+		<action name="warehousePositionWare" class="com.sinokj.app.warehouse.warehousePosition.action.WarehousePositionWareAction">
+			<result name="list_warehousePositionWare">/WEB-INF/page/warehouse/warehousePosition/list_warehousePositionWare.jsp</result>
+		</action>
+		<!-- 货品信息  -->
+		<action name="ware" class="com.sinokj.app.good.ware.action.WareAction">
+			<result name="list_ware">/WEB-INF/page/good/ware/list_ware.jsp</result>
+		</action>
+		<!-- 仓库货物 -->
+		<action name="warehouseWare" class="com.sinokj.app.warehouse.warehouse.action.WarehouseWareAction">
+			<result name="list_warehouseWare">/WEB-INF/page/warehouse/warehouse/list_warehouseWare.jsp</result>
+		</action>
+		<!-- 仓库货物 -->
+		<action name="combined" class="com.sinokj.app.warehouse.combined.action.CombinedAction">
+			<result name="list_combined">/WEB-INF/page/warehouse/combined/list_combined.jsp</result>
+			<result name="edit_combined">/WEB-INF/page/warehouse/combined/edit_combined.jsp</result>
+		</action>
+		<!-- 订单信息  -->
+		
+		<!-- 打印销售订单-->
+		<action name="downloadPdf" class="com.sinokj.app.order.sale.saleOrder.action.SaleOrderAction" method="downloadPdf"></action>
+		<!-- 销售订单  -->
+		<action name="saleOrder" class="com.sinokj.app.order.sale.saleOrder.action.SaleOrderAction">
+			<result name="list_saleOrder">/WEB-INF/page/order/sale/saleOrder/list_saleOrder.jsp</result>
+			<result name="edit_saleOrder">/WEB-INF/page/order/sale/saleOrder/edit_saleOrder.jsp</result>
+		</action>
+		<!-- 销售收款单  -->
+		<action name="saleCollection" class="com.sinokj.app.order.sale.saleCollection.action.SaleCollectionAction">
+			<result name="list_saleCollection">/WEB-INF/page/order/sale/saleCollection/list_saleCollection.jsp</result>
+			<result name="edit_saleCollection">/WEB-INF/page/order/sale/saleCollection/edit_saleCollection.jsp</result>
+		</action>
+		<!-- 销售出货单  -->
+		<action name="saleDelivery" class="com.sinokj.app.order.sale.saleDelivery.action.SaleDeliveryAction">
+			<result name="list_saleDelivery">/WEB-INF/page/order/sale/saleDelivery/list_saleDelivery.jsp</result>
+			<result name="edit_saleDelivery">/WEB-INF/page/order/sale/saleDelivery/edit_saleDelivery.jsp</result>
+		</action>
+		<!-- 销售退货单  -->
+		<action name="saleReturn" class="com.sinokj.app.order.sale.saleReturn.action.SaleReturnAction">
+			<result name="list_saleReturn">/WEB-INF/page/order/sale/saleReturn/list_saleReturn.jsp</result>
+			<result name="edit_saleReturn">/WEB-INF/page/order/sale/saleReturn/edit_saleReturn.jsp</result>
+		</action>
+		
+		<!-- 入库单 -->
+		<action name="warehouseInto" class="com.sinokj.app.warehouse.warehouseInto.action.WarehouseIntoAction">
+			<result name="list_warehouseInto">/WEB-INF/page/warehouse/warehouseInto/list_warehouseInto.jsp</result>
+			<result name="edit_warehouseInto">/WEB-INF/page/warehouse/warehouseInto/edit_warehouseInto.jsp</result>
+		</action>
+
+        <!--调度单-->
+		<action name="warehouseMove" class="com.sinokj.app.warehouse.warehouseMove.action.WarehouseMoveAction">
+			<result name="list_warehouseMove">/WEB-INF/page/warehouse/warehouseMove/list_warehouseMove.jsp</result>
+			<result name="edit_warehouseMove">/WEB-INF/page/warehouse/warehouseMove/edit_warehouseMove.jsp</result>
+		</action>
+		
+		
+		<!-- 收付管理 start -->
+		<!-- 费用单 -->
+		<action name="fee" class="com.sinokj.app.order.cashBasis.fee.action.FeeAction">
+			<result name="list_fee">/WEB-INF/page/order/cashBasis/fee/list_fee.jsp</result>
+			<result name="edit_fee">/WEB-INF/page/order/cashBasis/fee/edit_fee.jsp</result>
+		</action>
+		<action name="pay" class="com.sinokj.app.order.cashBasis.pay.action.PayAction">
+			<result name="list_pay">/WEB-INF/page/order/cashBasis/pay/list_pay.jsp</result>
+			<result name="edit_pay">/WEB-INF/page/order/cashBasis/pay/edit_pay.jsp</result>
+		</action>
+		<action name="collection" class="com.sinokj.app.order.cashBasis.collection.action.CollectionAction">
+			<result name="list_collection">/WEB-INF/page/order/cashBasis/collection/list_collection.jsp</result>
+			<result name="edit_collection">/WEB-INF/page/order/cashBasis/collection/edit_collection.jsp</result>
+		</action>
+		<!-- 收付管理 end -->
+		
+		<!-- 广告管理 -->					
+		<action name="advertise" class="com.sinokj.app.store.advertise.action.AdvertiseAction">
+			<result name="list_advertise">/WEB-INF/page/store/advertise/list_Advertise.jsp</result>
+			<result name="edit_advertise">/WEB-INF/page/store/advertise/edit_Advertise.jsp</result>
+		</action>
+		
+		<!-- 杂志管理 -->					
+		<action name="magazine" class="com.sinokj.app.store.magazine.action.MagazineAction">
+			<result name="list_magazine">/WEB-INF/page/store/magazine/list_Magazine.jsp</result>
+			<result name="edit_magazine">/WEB-INF/page/store/magazine/edit_Magazine.jsp</result>
+		</action>
+		
+		<!-- 会员管理  -->
+		<action name="prepaid" class="com.sinokj.app.vip.prepaid.action.PrepaidAction">
+			<result name="list_prepaid">/WEB-INF/page/vip/prepaid/list_prepaid.jsp</result>
+			<result name="edit_prepaid">/WEB-INF/page/vip/prepaid/edit_prepaid.jsp</result>
+		</action>
+		<action name="vipCoupon" class="com.sinokj.app.vip.coupon.action.VipCouponAction">
+			<result name="list_vipCoupon">/WEB-INF/page/vip/coupon/list_vipCoupon.jsp</result>
+			<result name="edit_vipCoupon">/WEB-INF/page/vip/coupon/edit_vipCoupon.jsp</result>
+		</action>
+		<action name="message" class="com.sinokj.app.vip.message.action.MessageAction">
+			<result name="list_message">/WEB-INF/page/vip/message/list_message.jsp</result>
+			<result name="edit_message">/WEB-INF/page/vip/message/edit_message.jsp</result>
+			<result name="show_message">/WEB-INF/page/vip/message/show_message.jsp</result>
+			<result name="edit_revovery">/WEB-INF/page/vip/message/edit_revovery.jsp</result>
+			<result name="list_revovery">/WEB-INF/page/vip/message/list_revovery.jsp</result>
+		</action>
+		<action name="vipLevel" class="com.sinokj.app.vip.level.action.VipLevelAction">
+			<result name="list_vipLevel">/WEB-INF/page/vip/level/list_vipLevel.jsp</result>
+			<result name="edit_vipLevel">/WEB-INF/page/vip/level/edit_vipLevel.jsp</result>
+		</action>
+		<action name="applyToCash" class="com.sinokj.app.vip.applyCash.action.ApplyToCashAction">
+			<result name="list_applyToCash">/WEB-INF/page/vip/applyCash/list_applyToCash.jsp</result>
+			<result name="edit_applyToCash">/WEB-INF/page/vip/applyCash/edit_applyToCash.jsp</result>
+		</action>
+		
+		<!-- 返利管理  -->
+		<action name="rebate" class="com.sinokj.app.order.buy.rebate.action.RebateAction">
+			<result name="list_rebate">/WEB-INF/page/order/buy/rebate/list_rebate.jsp</result>
+			<result name="edit_rebate">/WEB-INF/page/order/buy/rebate/edit_rebate.jsp</result>
+			<result name="itemEdit_rebate">/WEB-INF/page/order/buy/rebate/list_rebateItem.jsp</result>
+			<result name="show_rebate">/WEB-INF/page/order/buy/rebate/show_rebate.jsp</result>
+		</action>
+		<action name="rebateItem" class="com.sinokj.app.order.buy.rebate.action.RebateItemAction">
+			<result name="list_rebateItem">/WEB-INF/page/order/buy/rebate/list_rebateItem.jsp</result>
+			<result name="edit_rebateItem">/WEB-INF/page/order/buy/rebate/edit_rebateItem.jsp</result>
+			<result name="show_rebateItem">/WEB-INF/page/order/buy/rebate/show_rebateItem.jsp</result>
+		</action>
+		
+		<!-- 新闻公告管理  -->
+		<action name="information" class="com.sinokj.app.store.information.action.InformationAction">
+			<result name="list_information">/WEB-INF/page/store/information/list_Information.jsp</result>
+			<result name="edit_information">/WEB-INF/page/store/information/edit_Information.jsp</result>
+		</action>
+		<!-- 商品包装  -->
+		<action name="packaging" class="com.sinokj.app.store.packaging.action.PackagingAction">
+			<result name="list_packaging">/WEB-INF/page/store/packaging/list_Packaging.jsp</result>
+			<result name="edit_packaging">/WEB-INF/page/store/packaging/edit_Packaging.jsp</result>
+			<result name="list_pic">/WEB-INF/page/store/packaging/list_pic.jsp</result>
+		</action>
+		<!-- 祝福贺卡 -->					
+		<action name="greetingCard" class="com.sinokj.app.store.greetingCard.action.GreetingCardAction">
+			<result name="list_greetingCard">/WEB-INF/page/store/greetingCard/list_GreetingCard.jsp</result>
+			<result name="edit_greetingCard">/WEB-INF/page/store/greetingCard/edit_GreetingCard.jsp</result>
+		</action>
+		<!-- 促销专题 -->					
+		<action name="promote" class="com.sinokj.app.store.promote.action.PromoteAction">
+			<result name="list_promote">/WEB-INF/page/store/promote/list_Promote.jsp</result>
+			<result name="edit_promote">/WEB-INF/page/store/promote/edit_Promote.jsp</result>
+		</action>
+		<!-- 促销栏位设置 -->					
+		<action name="promotecolumn" class="com.sinokj.app.store.promotecolumn.action.PromotecolumnAction">
+			<result name="list_promotecolumn">/WEB-INF/page/store/promotecolumn/list_Promotecolumn.jsp</result>
+			<result name="edit_promotecolumn">/WEB-INF/page/store/promotecolumn/edit_Promotecolumn.jsp</result>
+		</action>
+		<!-- 优惠活动 -->					
+		<action name="promotionActivity" class="com.sinokj.app.store.promotionActivity.action.PromotionActivityAction">
+			<result name="list_promotionActivity">/WEB-INF/page/store/promotionActivity/list_PromotionActivity.jsp</result>
+			<result name="edit_promotionActivity">/WEB-INF/page/store/promotionActivity/edit_PromotionActivity.jsp</result>
+		</action>
+		<!-- 商城设置 -->					
+		<action name="storeSet" class="com.sinokj.app.store.storeSet.action.StoreSetAction">
+			<result name="list_storeSet">/WEB-INF/page/store/storeSet/list_storeSet.jsp</result>
+			<result name="edit_storeSet">/WEB-INF/page/store/storeSet/edit_storeSet.jsp</result>
+		</action>
+		<!-- 礼品包赠送 -->					
+		<action name="gift" class="com.sinokj.app.store.gift.action.GiftAction">
+			<result name="list_gift">/WEB-INF/page/store/gift/list_gift.jsp</result>
+			<result name="edit_gift">/WEB-INF/page/store/gift/edit_gift.jsp</result>
+		</action>
+		<!-- 会员评论 -->					
+		<action name="wareComment" class="com.sinokj.app.vip.wareComment.action.WareCommentAction">
+			<result name="list_wareComment">/WEB-INF/page/vip/wareComment/list_wareComment.jsp</result>
+			<result name="show_wareComment">/WEB-INF/page/vip/wareComment/show_wareComment.jsp</result>
+		</action>
+		<!-- 报表中心 -->
+		<action name="showlist" class="com.sinokj.app.showlist.action.FormcenterAction">
+			<result name="show_list">/WEB-INF/page/index/showlist.jsp</result>
+		</action>
+		<!-- 销售排行 -->
+		<action name="salerise" class="com.sinokj.app.formcenter.orderform.salerise.SaleriseAction">
+			<result name="list_salerise">/WEB-INF/page/formcenter/orderform/salelist/list_salerise.jsp</result>
+		</action>
+		<!-- 销售汇总 -->
+		<action name="salesummary" class="com.sinokj.app.formcenter.orderform.salesummary.SalesummaryAction">
+			<result name="list_salesummary">/WEB-INF/page/formcenter/orderform/salesummary/list_salesummary.jsp</result>
+		</action>
+		<!-- 销售明细 -->
+		<action name="saledetail" class="com.sinokj.app.formcenter.orderform.saledetail.SaledetailAction">
+			<result name="list_saledetail">/WEB-INF/page/formcenter/orderform/saledetail/list_saledetail.jsp</result>
+		</action>
+		<!-- 团购商品 -->
+		<action name="groupGood" class="com.sinokj.app.good.groupgood.action.GroupgoodAction">
+			<result name="list_groupGood">/WEB-INF/page/good/groupGood/list_groupGood.jsp</result>
+			<result name="edit_groupGood">/WEB-INF/page/good/groupGood/edit_groupGood.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodKingVal">
+	<resultMap class="com.sinokj.app.good.goodKind.model.GoodKingVal" id="GoodKingValResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="varchar"/>
+		<!-- GoodSpecificationVal -->
+		<result column="goodKing_id" property="goodKingId" jdbcType="varchar"/>
+		<result column="value" property="value" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="text"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodKingVal_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodKingVal.GoodKingVal_insert"/>
+		<flushOnExecute statement="GoodKingVal.GoodKingVal_update"/>
+		<flushOnExecute statement="GoodKingVal.GoodKingVal_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="GoodKingVal_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodKingId">
+				goodKing_id = #goodKingId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="GoodKingVal_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodKingVal_cache">
+		select count(*) from goodking_val
+		<include refid="GoodKingVal_query_select_where_clause"/>
+	</select>	
+	<select id="GoodKingVal_query_select" resultMap="GoodKingValResult" cacheModel="GoodKingVal_cache">
+		select * from goodking_val
+		<include refid="GoodKingVal_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="GoodKingVal_select" resultMap="GoodKingValResult" cacheModel="GoodKingVal_cache">
+		select * from goodking_val
+		<include refid="GoodKingVal_query_select_where_clause"/>
+		order by sort asc
+	</select>	
+	<select id="GoodKingVal_idArr_select" resultMap="GoodKingValResult" cacheModel="GoodKingVal_cache">
+		select * from goodking_val
+			where id in 
+			<iterate open="(" close=")" conjunction="," property="KingValIdArr">
+				#KingValIdArr[]#
+			</iterate>
+		order by goodKing_id,sort asc
+	</select>
+	<!-- 根据商品类别来查询商品的一级种类属性下的属性值 -->
+	<select id="GoodKingVal_goodtype_select" resultMap="GoodKingValResult" cacheModel="GoodKingVal_cache">
+		select * from goodking_val where goodKing_id in (select id from good_attr where good_kind_id in 
+			(select id from good_kind where good_type_id=#goodtypeId#)) ORDER BY sort asc
+	</select>
+	
+	<insert id="GoodKingVal_insert">
+		insert into goodking_val 
+			(id,sort,goodKing_id,value,remark)
+		values
+			(#id#,#sort#,#goodKingId#,#value#,#remark#)
+	</insert>
+	<update id="GoodKingVal_update">
+		update goodking_val set
+			sort = #sort#,
+			goodKing_id = #goodKingId#,
+			value = #value#,
+			remark = #remark#
+		where id = #id#
+	</update>
+  <delete id="GoodKingVal_delete">
+    delete from goodking_val
+    	<dynamic prepend="where">
+    		<isNotEmpty prepend="and" property="id">
+    			id = #id:VARCHAR#
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="goodKingId">
+    			goodKing_id = #goodKingId#
+    		</isNotEmpty>
+    	</dynamic>
+  </delete>	
+	
+</sqlMap>

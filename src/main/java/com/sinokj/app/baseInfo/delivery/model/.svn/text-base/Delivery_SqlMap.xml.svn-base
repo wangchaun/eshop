@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Delivery" >
+	<resultMap id="DeliveryResult" class="com.sinokj.app.baseInfo.delivery.model.Delivery" >
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="name" property="name" jdbcType="VARCHAR" />
+	  <result column="delivery_fee" property="deliveryFee" jdbcType="decimal" />
+	  <result column="remark" property="remark" jdbcType="VARCHAR" />
+	  <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	  <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	  <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	  <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	  <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	  <result column="state" property="state" jdbcType="VARCHAR" />
+	</resultMap>
+  	 <!-- 缓存模型 -->
+	<cacheModel id="Delivery_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Delivery.Delivery_insert"/>
+		<flushOnExecute statement="Delivery.Delivery_update"/>
+		<flushOnExecute statement="Delivery.Delivery_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+  	<!-- 模糊查询条件 -->
+	<sql id="Delivery_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+				state = #state# 
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	
+  	<!-- 精确查询条件 -->
+	<sql id="Delivery_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+				state = #state# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="idArr">
+				id in 
+				<iterate open="(" close=")" conjunction="," property="idArr">
+					#idArr[]#
+				</iterate>
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>	
+  	
+  	<!-- 模糊查询 -->
+	<select id="Delivery_query_select" resultMap="DeliveryResult" cacheModel="Delivery_cache">
+		select * from delivery
+		<include refid="Delivery_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="Delivery_count_query_select" resultClass="java.lang.Integer" cacheModel="Delivery_cache">
+		select count(*) from delivery
+		<include refid="Delivery_query_select_where_clause"/>
+	</select>
+  	<!-- 精确查询 -->
+	<select id="Delivery_select" resultMap="DeliveryResult" cacheModel="Delivery_cache">
+		select * from delivery
+		<include refid="Delivery_select_where_clause"/>
+		order by create_time desc
+	</select>
+
+ 	<!-- 根据id删除配送方式 -->
+    <delete id="Delivery_delete">
+        delete from delivery where id = #id#
+    </delete>
+    
+    <!-- 添加配送方式 -->
+	<insert id="Delivery_insert"  >
+	  insert into delivery (id, code, name,delivery_fee,remark,creator_id,
+	    creator_name, create_time, modifier_id, modifier_name, modify_time, state)
+	  values (#id:VARCHAR#, #code:VARCHAR#, #name:VARCHAR#,#deliveryFee:decimal#,#remark:VARCHAR#, #creatorId:VARCHAR#, #creatorName:VARCHAR#,
+	    #createTime:TIMESTAMP#, #modifierId:VARCHAR#, #modifierName:VARCHAR#, #modifyTime:TIMESTAMP#,
+	    #state:VARCHAR#)
+	</insert>
+  
+  	<!-- 更新配送方式 -->
+	<update id="Delivery_update" >
+	    update delivery
+	    <dynamic prepend="set" >
+	      <isNotNull prepend="," property="code" >
+	        code = #code:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="name" >
+	        name = #name:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="creatorId" >
+	        creator_id = #creatorId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="creatorName" >
+	        creator_name = #creatorName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="createTime" >
+	        create_time = #createTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifierId" >
+	        modifier_id = #modifierId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifierName" >
+	        modifier_name = #modifierName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifyTime" >
+	        modify_time = #modifyTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="," property="state" >
+	        state = #state:VARCHAR#
+	      </isNotNull>
+	       <isNotNull prepend="," property="deliveryFee" >
+	        delivery_fee = #deliveryFee:decimal#
+	      </isNotNull>
+	       <isNotNull prepend="," property="remark" >
+	        remark = #remark:VARCHAR#
+	      </isNotNull>
+	    </dynamic>
+	    where id = #id#
+	</update>
+</sqlMap>

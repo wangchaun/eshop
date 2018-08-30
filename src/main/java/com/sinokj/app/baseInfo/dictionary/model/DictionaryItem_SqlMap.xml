@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DictionaryItem" >
+  <resultMap id="DictionaryItemResult" class="com.sinokj.app.baseInfo.dictionary.model.DictionaryItem" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="dictionary_id" property="dictionaryId" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <!-- 缓存模型 -->
+	<cacheModel id="DictionaryItem_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="DictionaryItem.DictionaryItem_insert"/>
+		<flushOnExecute statement="DictionaryItem.DictionaryItem_update"/>
+		<flushOnExecute statement="DictionaryItem.DictionaryItem_delete"/>
+		<flushOnExecute statement="Dictionary.Dictionary_insert"/>
+		<flushOnExecute statement="Dictionary.Dictionary_update"/>
+		<flushOnExecute statement="Dictionary.Dictionary_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel>
+  
+  <!-- 精确查询条件 -->
+  <sql id="DictionaryItem_select_where_clause" >
+  	<dynamic prepend="where">
+		<isNotNull prepend="and" property="id">
+  			id = #id#
+  		</isNotNull>
+  		<isNotNull prepend="and" property="dictionaryId">
+  			dictionary_id = #dictionaryId#
+  		</isNotNull>
+  		<isNotNull prepend="and" property="code">
+  			code = #code#
+  		</isNotNull>
+  		<isNotNull prepend="and" property="name">
+  			name = #name#
+  		</isNotNull>
+  	</dynamic>
+  </sql>
+  
+  <!-- 模糊查询条件 -->
+  <sql id="DictionaryItem_query_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotNull prepend="and" property="id">
+  			id = #id#
+  		</isNotNull>
+  		<isNotNull prepend="and" property="dictionaryId">
+  			dictionary_id = #dictionaryId#
+  		</isNotNull>
+  		<isNotEmpty prepend="and" property="code">
+  			code like '%$code$%'
+  		</isNotEmpty>
+  		<isNotEmpty prepend="and" property="name">
+  			name like '%$name$%'
+  		</isNotEmpty>
+  	</dynamic>
+  </sql>
+  
+  <!-- 精确查询条件 -->
+  <select id="DictionaryItem_select" resultMap="DictionaryItemResult">
+    select * from dictionary_item
+    <include refid="DictionaryItem_select_where_clause"/>
+    order by sort asc
+  </select>
+  
+  <select id="DictionaryItem_count_query_select" resultClass="java.lang.Integer" cacheModel="DictionaryItem_cache">
+		select count(*) from dictionary_item
+		<include refid="DictionaryItem_query_select_where_clause"/>
+	</select>	
+  <!-- 模糊查询条件 -->
+  <select id="DictionaryItem_query_select" resultMap="DictionaryItemResult" cacheModel="DictionaryItem_cache">
+    select * from dictionary_item
+    <include refid="DictionaryItem_query_select_where_clause"/>
+    order by sort asc
+  </select>
+  
+  <delete id="DictionaryItem_delete">
+    delete from dictionary_item
+    where id = #id:VARCHAR#
+  </delete>
+  
+  <delete id="DictionaryItem_by_dictionaryId_delete">
+    delete from dictionary_item
+    where dictionary_id = #dictionaryId:VARCHAR#
+  </delete>
+  
+  <insert id="DictionaryItem_insert">
+    insert into dictionary_item (id, dictionary_id, code, name, sort)
+    values (#id:VARCHAR#, #dictionaryId:VARCHAR#, #code:VARCHAR#, #name:VARCHAR#, #sort:INTEGER#)
+  </insert>
+
+  <update id="DictionaryItem_update">
+    update dictionary_item
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="dictionaryId" >
+        dictionary_id = #dictionaryId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="code" >
+        code = #code:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sort" >
+        sort = #sort:INTEGER#
+      </isNotNull>
+    </dynamic>
+    where id = #id:VARCHAR#
+  </update>
+</sqlMap>

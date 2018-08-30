@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CombinedWare">
+	<resultMap class="com.sinokj.app.warehouse.combined.model.CombinedWare" id="CombinedWareResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- CombinedWare -->
+		<result column="order_id" property="orderId" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+		<result column="ware_count" property="wareCount" jdbcType="int"/>
+	</resultMap>
+	 
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="CombinedWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="CombinedWare.CombinedWare_insert"/>
+		<flushOnExecute statement="CombinedWare.CombinedWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<sql id="CombinedWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="orderId">
+				order_id = #orderId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	
+	 <select id="CombinedWare_count_query_select" resultClass="java.lang.Integer" cacheModel="CombinedWare_cache">
+		select count(*) from combined_ware
+		<include refid="CombinedWare_query_select_where_clause"/>
+	</select>	
+	<select id="CombinedWare_query_select" resultMap="CombinedWareResult" cacheModel="CombinedWare_cache">
+		select * from combined_ware
+			<include refid="CombinedWare_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	 
+	<select id="CombinedWare_select" resultMap="CombinedWareResult" cacheModel="CombinedWare_cache">
+		select * from combined_ware 
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="orderId">
+					order_id = #orderId#
+				</isNotEmpty>
+			</dynamic>
+		order by sort asc
+	</select>
+	
+	<insert id="CombinedWare_insert">
+		insert into combined_ware 
+			(id,order_id,ware_id,ware_name,ware_count,sort)
+		values
+			(#id#,#orderId#,#wareId#,#wareName#,#wareCount#,#sort#)
+	</insert>
+  <delete id="CombinedWare_delete">
+    delete from combined_ware
+    	where order_id = #orderId#
+  </delete>	
+	
+</sqlMap>

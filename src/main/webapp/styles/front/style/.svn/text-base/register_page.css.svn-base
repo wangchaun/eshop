@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================用户注册===================================*/
+
+
+
+.forgotpassword02_text03{ width:600px; float:left; margin-top:5px; margin-left:62px; display:inline; background:url(../../../Images/images/pass7.jpg) no-repeat left top; line-height:16px; color:#fff;}
+
+.forgotpassword02_text03_1{ width:600px; float:left; margin-top:5px; margin-left:70px; display:inline; background:url(../../../Images/images/pass701.jpg) no-repeat left top; line-height:16px; color:#fff;}
+.forgotpassword02_text03_2{ width:600px; float:left; margin-top:5px; margin-left:70px; display:inline; background:url(../../../Images/images/pass702.jpg) no-repeat left top; line-height:16px; color:#fff;}
+.forgotpassword02_text03_3{ width:600px; float:left; margin-top:5px; margin-left:70px; display:inline; background:url(../../../Images/images/pass703.jpg) no-repeat left top; line-height:16px; color:#fff;}
+
+
+
+
+
+
+
+
+
+
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.instructions{ width:1197px; float:left; height:35px; line-height:37px; color:#2791e3; font-family:"宋体"; font-size:12px; padding-left:3px; border-bottom:#2791e3 solid 2px;}
+.instructions a{ color:#2791e3; font-family:"宋体"; font-size:12px; text-decoration:none;}
+.instructions a:hover{ color:#2791e3; font-family:"宋体"; font-size:12px; text-decoration:underline;}
+.instructions span{ color:#333333; font-family:"宋体"; font-size:12px;}
+.register1{ width:1198px; border:#e6e6e6 solid 1px; margin-top:30px; float:left; padding-bottom:37px;}
+.register_left{ width:661px; float:left; padding-left:110px; margin-top:37px; background:url(../images/y20.jpg) repeat-y right top;  overflow:hidden;}
+.register_right{ width:336px;  padding-top:37px; padding-left:89px; float:left; margin-bottom:37px; overflow:hidden;}
+.register01{ width:600px; float:left; font-size:18px; color:#2791e3; font-family:"微软雅黑"; padding-bottom:10px;}
+.register02{ width:980px; float:left;}
+.register02_left{ width:700px; float:left;}
+.login0202_text1{ width:600px;  float:left; padding-top:15px;}
+.login0202_text1 h1{ float:left; padding-right:10px; line-height:26px;}
+.login0202_text1 h2{ float:left;}
+.login0202_text1 h3{ float:left; padding-left:10px; margin-right:5px; color:#FF0000; line-height:26px; display:inline;}
+.login0202_text1 h4{ float:left;  width:200px; height:24px; border:#d9e4fa solid 1px; line-height:24px; background:#fafcff;  padding-left:10px;}
+.login0202_text1 h5{ float:left;  width:240px; height:24px; line-height:24px; color:#FF0000; padding-left:10px;}
+.login0202_text1 h5 span{ width:20px; float:left;  padding-right:5px; padding-top: 4px;}
+.login0202_text1input{ width:230px; height:24px; border:#dadada solid 1px; line-height:24px; background:#fff;}
+.login0202_text1btn{ width:130px; height:29px; border:none; background:#2791e3; color:#fff; font-size:16px; font-family:"微软雅黑"; line-height:29px; cursor:pointer;}
+.login0202_text1input1{ width:100px; height:24px; border:#dadada solid 1px; line-height:24px; background:#fff;}
+.login0202_text2{ width:500px;  float:left; padding-left:70px;  padding-top:15px;}
+.login0202_text201{ float:left; padding-right:10px;}
+.login0202_text202{ float:left; padding-top:3px;}
+.login0202_text202 h1{ float:left; padding-right:10px;}
+.login0202_text202 h2{ float:left; color:#2791e3; font-size:12px; line-height:28px; width:200px;}
+.login0202_text202 h2 a{color:#2791e3; font-size:12px; text-decoration:none;}
+.login0202_text202 h2 a:hover{color:#2791e3; font-size:12px; text-decoration:underline;}
+.login0202_text202 h3{ float:left; padding-left:10px;}
+.login0202_text202 h3 span{ float:left; padding-top:5px; padding-right:3px;  padding-top:7px;*padding-top:3px;_padding-top:3px;}
+.login0202_text202 h3 samp{ float:left; line-height:28px;}
+.register02_right{ width:280px; float:left;}
+.register02_right01{ width:280px; float:left; padding-top:15px;}
+.register02_right02{ width:280px; float:left; padding-top:15px; padding-bottom:10px;}
+.register02_right01 a{color:#2791e3; font-size:12px; text-decoration:underline;}
+.register02_right02 a{color:#2791e3; font-size:12px; text-decoration:none;}
+.register02_right02 a:hover{color:#2791e3; font-size:12px; text-decoration:underline;}
+.login0202_text2{ width:500px;  float:left; padding-left:70px;  padding-top:15px;}
+.Agreement{  width:500px;  float:left; margin-left:70px; display:inline;  margin-top:15px;  height:230px; overflow-Y:auto; overflow-X:hidden; border:#e0e0e0 solid 1px;}
+.Agreement01{ padding-left:10px; padding-right:10px; padding-top:10px; padding-bottom:10px; float:left;  line-height:22px;}
+.Agreement01 span{    color:#0a7cd4; font-size:16px; font-family:"微软雅黑"; text-align:center; line-height:30px; display:block;}
+
+
+.re_yzm {width: 80px; text-align: center; font-size:16px; float:left; line-height:26px; letter-spacing: 0.2em; color:#FF0000; cursor:pointer; font-weight:600; font-family: "微软雅黑"; background-image: url("../../../Images/images/bg21.jpg");}
+
+
+
+
+.forgotpassword02_text03 h1{ width:57px; text-align:center; float:left; line-height: 16px; padding: 0;}
+.forgotpassword02_text03 h2{ width:67px; text-align:center; float:left; line-height: 16px; padding: 0;}
+.forgotpassword02_text03 h3{ width:68px; text-align:center; float:left; line-height: 16px; padding: 0; color: #FFF;}
+.forgotpasswordinput{ width:186px; height:24px; border:#b7b7b7 solid 1px; line-height:24px; padding-left:5px; color:#bdbdbd;}
+.forgotpassword02_text04{ width:600px; float:left; margin-top:23px; margin-left:62px; display:inline;}
+.forgotpasswordbutton{  width:70px; height:29px; cursor:pointer; border:none; background:url(../../../Images/images/pass11.jpg) no-repeat left top;}
+.forgotpassword02_text05{ width:800px; float:left; padding-top:10px;}
+.forgotpassword02_text05 h1{ width:62px; float:left; height:26px; line-height:26px;}
+.forgotpassword02_text05 h2{  float:left;}
+.forgotpassword02_text05 h3{  float:left; padding-left:10px; padding-top:5px;}
+.forgotpassword02_text05 h4{  float:left; padding-left:10px; color:#e70d0d; line-height:26px;}
+.forgotpassword02_text05 h5{  float:left; padding-left:10px; color:#666; line-height:26px;}
+.forgotpassword02_text05 h6{  float:left; color:#666; font-weight:bold; line-height:26px;}
+.forgotpassword02_text06{ width:600px; float:left; padding-top:20px; padding-left:62px;}

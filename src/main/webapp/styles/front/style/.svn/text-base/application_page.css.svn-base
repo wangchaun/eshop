@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+
+
+
+/*============================申请结果===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+.content{ width:1200px; margin:0 auto;}
+.applyReturn{ width:1200px; float:left; padding-top:20px;}
+.applyReturn_left{ width:196px; float:left;}
+.applyReturn_right{ width:1004px; float:left;}
+.applyright{width:964px; float:left; padding-left:40px;}
+
+/*******************申请结果******************************/
+
+.courht{width:964px; float:left; padding-left:40px;}
+/*******************申请结果******************************/
+.courht_text2{ width:964px; float:left; margin-top:25px;}
+.table{ width:962px; height:32px; background:url(../../../Images/images/pu3.jpg) repeat-x left top; border:#e4e4e4 solid 1px; float:left;}
+.table1{ width:962px; border-left:#efefef solid 1px;border-right:#efefef solid 1px; float:left;}
+.table1 table td{border-bottom:#efefef solid 1px;}
+.phlist{ padding-left:20px; float:left; padding-bottom:18px; padding-top:18px;}
+.phlist h1{ float:left; padding-right:14px;}
+.phlist h1 img{ width:57px; height:57px;border:#e0e0e0 solid 1px;}
+.phlist h2{ float:left; width:220px; padding-top:12px; line-height:18px; color:#666px;}
+.phlist h2 span{color:#666px; font-weight:bold}
+.phlist_click{ width:61px; height:25px; text-align:center; background:url(../../../Images/images/pu17.jpg) no-repeat left top; margin:0 auto;}
+.phlist_click h1{ width:16px; height:25px; float:left;}
+.phlistbtn{ width:16px; height:25px; cursor:pointer; border:none; background: none;}
+.phlistbtn1{ width:16px; height:25px; cursor:pointer; border:none; background: none;}
+.phlist_click h2{ width:29px; height:25px; line-height:25px; text-align:center;  float:left;}
+.phlistys{ color:#aaaaaa;}
+
+/*******************共用的字体样式******************************/
+
+.tableborder{ border-bottom:#dfddde solid 1px; font-size:12px; font-weight:bold; color:#727272; }
+.tablefont{  font-size:12px;  color:#606060; }
+.tablefont1{  font-size:12px; font-weight:bold; color:#727272; }
+
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px;background:url(../../../Images/images/a14.jpg) no-repeat center bottom;}
+
+.courht_title1{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px; padding-top:25px; margin-bottom:15px;}
+.courht_title1 h1{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/images/a14.jpg) no-repeat center bottom; margin-right:10px; display:inline;}
+.courht_title1 h2{ width:20px; float:left;  padding-top:10px;*padding-top:5px;_padding-top:5px;}
+.courht_title1 h3{ float:left; padding-right:17px;  padding-top:10px;*padding-top:10px;_padding-top:10px;}
+.applyReturn1{ width:964px; float:left; margin-top:13px; }
+.applyReturnf1{ width:964px; float:left; margin-top:5px; }
+
+.applyReturn1_title{ width:160px; float:left; text-align:right; line-height:22px; display:block; height:22px; padding-right:12px;}
+.applyReturn1_title span{ color:#e01226;}
+.applyReturn1_titlen1{ width:160px; float:left; text-align:right; line-height:30px; display:block; height:22px; padding-right:12px;}
+.applyReturn1_titlen1 span{ color:#e01226;}
+.applyReturn1_text{ width:700px; float:left; padding-left:6px;}
+.applyReturn1textera{ width:457px; padding-left:10px; padding-top:5px; height:107px; overflow:hidden; text-align:left; border:#d9d9d9 solid 1px; color:#9f9f9f; line-height:22px; font-size:12px;}
+.applyReturn1_text h1{ float:left; padding-right:7px;}
+.applyReturn1_text h2{ float:left; padding-right:20px; line-height:22px;}
+.applyReturn1_text h3{ float:left; color:#1f96f2;}
+.applyReturn1_text h3 a{color:#1f96f2; text-decoration:none;}
+.applyReturn1_text h3 a:hover{color:#1f96f2; text-decoration: underline;}
+.applyReturn1_text h4{ float:left; padding-right:7px; padding-top:5px;*padding-top:0px;_padding-top:0px;}
+.applyReturn2{ width:616px; float:left; margin-top:11px; padding-left:345px; }
+.applyReturn2 h1{ float:left; padding-right:14px; line-height:24px;}
+.applyReturn2 h2{ float:left;}
+.applyReturn2btn{width:72px; height:24px; cursor:pointer; border:none; background:#2891e4; line-height:24px; text-align:center; color:#fff; font-family:"宋体"; font-size:12px;}
+.applyReturn3{ width:648px; float:left; line-height:28px; text-align:right; color:#8e8e8e; }
+.applyReturn1_text1{ width:700px; float:left; padding-left:6px; }
+.applyReturn1_text1 h1{ float:left; padding-right:7px; padding-top:5px;*padding-top:0px;_padding-top:0px;}
+.applyReturn1_text1 h2{ float:left; padding-right:20px;  padding-top:5px;}
+.applyReturn1_text1 h3{ float:left; color:#1f96f2;  padding-top:5px;}
+.applyReturn1_text1 h3 a{color:#1f96f2; text-decoration:none;}
+.applyReturn1_text1 h3 a:hover{color:#1f96f2; text-decoration: underline;}
+.applyReturn1_text1 h4{ float:left; color:#999999;  padding-top:5px;}
+.applyReturn1_text2{ width:700px; float:left; padding-left:6px; }
+.applyReturn1_text2 h1{  float:left; padding-right:14px; }
+.applyReturn1_text2select{ width:109px; height:20px; border:#d9d9d9 solid 1px; background:#fff; line-height:18px; color:#666;  }
+.applyReturn1_text2input{ width:355px; height:28px; border:#d9d9d9 solid 1px; background:#fff; line-height:28px; color:#666;  }
+.applyReturn1_text2input1{ width:120px; height:28px; padding-left:5px; border:#d9d9d9 solid 1px; background:#fff; line-height:28px; color:#666;  }
+.applyReturn1_text3{ width:700px; float:left; padding-left:6px;}
+.applyReturn1_text3 h1{ float:left; padding-right:30px; }
+.applyReturn1_text3 h2{ float:left; padding-right:8px; line-height:30px;}
+.applyReturn1_text3 h2 span{ color:#e01226;}
+.applyReturn2btn1{width:90px; height:29px; cursor:pointer; border:none; background:url(../../../Images/images/pu18.jpg) no-repeat left top; }
+.applyReturn2btn2{width:90px; height:29px; cursor:pointer; border:none; background:url(../../../Images/images/pu19.jpg) no-repeat left top; }
+.applyReturn1_text4{ width:700px; float:left; padding-left:6px; padding-top:10px;}
+.applyReturn1_text4 h1{ float:left; padding-right:30px; }
+.borde{ border-right:#f2f2f2 solid 1px;}
+.bordefont{ font-family:Arial, Helvetica, sans-serif; padding-right:1px;}

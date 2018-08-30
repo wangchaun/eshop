@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+
+
+
+/*============================我的优惠券===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+/*******************优惠券******************************/
+.coupon_left{ width:196px; float:left;}
+
+.coupon_right{ width:1004px; float:left;}
+.courht{width:964px; float:left; padding-left:40px;}
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/images/a14.jpg) no-repeat center bottom;}
+.courht_text{ width:900px; float:left; padding-left:18px; font-family:"微软雅黑"; font-size:15px; color:#666; padding-top:15px;}
+.courht_text span{  font-family: "Arial"; font-size:18px; color:#ea0621;}
+.courht_text1{ width:964px; float:left; padding-top:15px;}
+.courht_text1 span{ padding-right:20px;}
+.courht_text1select{ width:152px; height:20px; border:#d6d6d6 solid 1px; line-height:20px; font-size:12px; color:#666; background:#fff;}
+.courht_text1select1{ width:112px; height:20px; border:#d6d6d6 solid 1px; line-height:20px; font-size:12px; color:#666; background:#fff;}
+.courht_text2{ width:964px; float:left; margin-top:15px;}
+.table{ width:962px; height:32px; background:url(../../../Images/images/pu3.jpg) repeat-x left top; border:#e4e4e4 solid 1px; float:left;}
+.table1{ width:962px; border-left:#efefef solid 1px;border-right:#efefef solid 1px; float:left;}
+.table1 table td{border-bottom:#efefef solid 1px;}
+.courht_title3{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px; padding-top:10px;}
+.courht_title3 span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/images/a14.jpg) no-repeat center bottom;}
+.courht_title4{ width:962px; float:left; border:#d9d9d9 solid 1px; border-top:none;}
+.courht_title4 span{ padding-left:25px; padding-right:20px; padding-top:11px; float:left; line-height:26px; color:#666; font-size:12px; font-family:"宋体"; padding-bottom:11px;}
+.leftborder{ border-right:#efefef solid 1px;}
+.time{ font-family:Arial, Helvetica, sans-serif; font-size:12px;}

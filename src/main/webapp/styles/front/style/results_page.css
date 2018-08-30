@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+
+
+
+/*============================申请结果===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+.content{ width:1200px; margin:0 auto;}
+.applyReturn{ width:1200px; float:left; padding-top:20px;}
+.applyReturn_left{ width:196px; float:left;}
+.applyReturn_right{ width:1004px; float:left;}
+.applyright{width:964px; float:left; padding-left:40px;}
+
+/*******************申请结果******************************/
+
+.courht{width:964px; float:left; padding-left:40px;}
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/image/pu2.jpg) no-repeat left bottom;}
+
+/*******************申请结果******************************/
+
+.courht_text2{ width:964px; float:left; margin-top:20px;}
+/******************* 申请结果******************************/
+
+.apply{width:964px; float:left; padding-left:40px;}
+.apply_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.apply_title span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/image/pu2.jpg) no-repeat left bottom;}
+.apply_title2{ width:964px; float:left; background:#fff5f4; margin-top:15px;}
+.apply_title201{ width:954px; margin-left:10px; display:inline; height:43px; border-bottom:#e6dcdb solid 1px; float:left; line-height:43px;}
+.apply_title201 h1{ padding-left:10px; padding-right:45px; color:#706b68;  font-weight:bold; float: left; font-size:14px;}
+.apply_title201 h2{  padding-right:45px; color:#706b68; font-size:14px; font-weight:bold;float: left;}
+.apply_title201 h2 span{ color:#37971c; font-size:14px; font-weight:bold;}
+.apply_title201 h3{ color:#6a6665; font-size:12px;float: left;}
+.apply_title202{ width:944px; margin-left:20px; display:inline; line-height:22px; padding-top:9px; padding-bottom:9px; color:#666; font-size:12px; float:left; }
+.apply_title3{ width:899px; float:left;  margin-top:30px; padding-left:30px; height:33px;}
+.apply_title4{ width:930px; float:left; padding-left:12px; font-size:12px; font-weight:normal; padding-bottom:15px;}
+.apply_title4 h1{ width:225px; float:left;}
+.apply_title4 h2{ width:222px; float:left;}
+.apply_title4 h3{ width:226px; float:left;}
+.apply_title4 h4{ width:207px; float:left;}
+.apply_title4 h5{ float:left;}
+.apply_title5{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px; margin-top:15px;}
+.apply_title5 span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/image/pu5.jpg) no-repeat center bottom;}
+.apply_title6{ width:934px; float:left; padding-left:30px; padding-top:15px;}
+.tableborder{ border-bottom:#e3dcdc solid 1px; font-weight:bold;}
+.tablefont1{ color:#333333; font-weight:bold; }
+.orderDetails201btn2{background: none repeat scroll 0 0 #F7A655;border: medium none;color: #FFFFFF;cursor: pointer;font-family: "宋体";font-size: 12px; height: 20px;line-height: 20px;text-align: center;width: 55px;}
+
+
+
+

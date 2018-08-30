@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodType">
+	<resultMap class="com.sinokj.app.good.goodType.model.GoodType" id="GoodTypeInfoResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="parent_id" property="parentId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="level" property="level" jdbcType="int"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="pic_id" property="picId" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+		<result column="listShow" property="listShow" jdbcType="varchar"/>
+		<result column="is_inventory" property="isInventories" jdbcType="varchar"/>
+		<result column="isParent" property="isParent" jdbcType="varchar"/>
+		
+		<result column="payment_id" property="paymentId" jdbcType="varchar"/>
+		<result column="payment_name" property="paymentName" jdbcType="varchar"/>
+		<result column="delivery_id" property="deliveryId" jdbcType="varchar"/>
+		<result column="delivery_name" property="deliveryName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodType_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodType.GoodType_insert"/>
+		<flushOnExecute statement="GoodType.GoodType_update"/>
+		<flushOnExecute statement="GoodType.GoodType_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel> 	
+	
+  	<!-- 模糊查询 -->
+	<sql id="GoodType_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>				
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="level">
+				level = #level#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="listShow">
+				listShow = #listShow#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isParent">
+				isParent = #isParent#
+			</isNotEmpty>
+			
+		</dynamic>
+	</sql>
+	<select id="GoodType_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodType_cache">
+		select count(*) from good_type
+			<include refid="GoodType_query_select_where_clause"/>
+		<!-- order by level,sort -->
+	</select>
+	
+	<select id="GoodType_query_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from good_type 
+		<include refid="GoodType_query_select_where_clause"/>
+		order by level,sort
+	</select>		
+	
+	<select id="GoodType_query_select1_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from good_type where `level`=1 
+		order by modify_time desc,level,sort
+	</select>	
+	
+	<select id="GoodType_query_select2_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from (
+		select * from good_type where `level`=1 
+		UNION
+		select * from good_type
+		<include refid="GoodType_query_select_where_clause"/>
+		) a
+		order by modify_time desc,level,sort
+	</select>
+	
+	<select id="GoodType_query_select3_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from (
+		select * from good_type where `level`=1 
+		UNION
+		select * from  good_type where parent_id=(select parent_id from good_type where id in (select parent_id from good_type <include refid="GoodType_query_select_where_clause"/>))
+		UNION
+		select * from good_type
+		<include refid="GoodType_query_select_where_clause"/>
+		) a
+		order by modify_time desc,level,sort
+	</select>
+	
+	<!-- 结算取商品配送方式 -->
+	<select id="GoodType_jiesuan_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from good_type where id in(select good_type_id from good where id in( 						
+			select good_id from ware where id in 
+				<iterate open="(" close=")" conjunction="," property="wareIdArr">
+					#wareIdArr[]#
+				</iterate>
+			))
+		UNION
+		select * from good_type where id in (
+			select parent_id from good_type where id in(select good_type_id from good where id in( 						
+				select good_id from ware where id in 
+					<iterate open="(" close=")" conjunction="," property="wareIdArr">
+						#wareIdArr[]#
+					</iterate>
+				)))
+		UNION
+		select * from good_type where id in (
+			select parent_id from good_type where id in (
+				select parent_id from good_type where id in(select good_type_id from good where id in( 						
+					select good_id from ware where id in 
+						<iterate open="(" close=")" conjunction="," property="wareIdArr">
+							#wareIdArr[]#
+						</iterate>
+					))))
+	</select>
+	
+	
+  	<!-- 精确查询 -->
+	<sql id="GoodType_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#	
+			</isNotEmpty>	
+			<isNotNull prepend="and" property="level">
+			 	level = #level#
+			</isNotNull>
+			<isNotEmpty prepend="and" property="listShow">
+				listShow = #listShow#
+			</isNotEmpty>
+			<!-- 
+				<isNotEmpty prepend="and" property="wareIdArr">
+					id in(
+						select good_type_id from good where id in(
+							select good_id from ware where id in
+							<iterate open="(" close=")" conjunction="," property="wareIdArr">
+								#wareIdArr[]#
+							</iterate>
+					))
+				</isNotEmpty>
+			 -->
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>				
+		</dynamic>
+	</sql>		
+	<select id="GoodType_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from good_type 
+		<include refid="GoodType_select_where_clause"/>
+		order by modify_time desc,level,sort
+	</select>
+	
+	<!-- 精确查询 -->
+	<sql id="GoodType_level_select_where_clause">
+		<dynamic prepend="where">
+			<isEqual property="level" compareValue="2">
+				id =(select parent_id from good_type where id=#id#)
+			</isEqual>
+			<isEqual property="level" compareValue="3">
+				id =(select parent_id from good_type where id =(
+						select parent_id from good_type where id=#id#))
+			</isEqual>	
+		</dynamic>
+	</sql>	
+	
+	<!--  根据类别Id和类别等级查询其所属父类或祖父类的类别信息 -->
+	<select id="GoodType_level_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from good_type 
+		<include refid="GoodType_level_select_where_clause"/>
+		order by level,sort
+	</select>
+	
+	<!-- 查询广告页面选择广告类型 -->
+	<select id="GoodType_adver_select" resultMap="GoodTypeInfoResult" cacheModel="GoodType_cache">
+		select * from good_type where `level`=1 order by level,sort LIMIT 0,9
+	</select>
+	
+	
+	<!-- 查询商品类别数目 -->
+	<select id="GoodType_count_select" resultClass="java.lang.Integer" cacheModel="GoodType_cache">
+		select max(sort) from good_type
+	</select>
+
+	<insert id="GoodType_insert">
+		insert into good_type
+		 	(id,parent_id,code,name,level,remark,sort,creator_id,creator_name,create_time,state,pic_id,pic,listShow,
+		 	payment_id,payment_name,delivery_id,delivery_name,modify_time,is_inventory,isParent)
+		   values(#id#,#parentId#,#code#,#name#,#level#,#remark#,#sort#,#creatorId#,#creatorName#,#createTime#,#state#,#picId#,#pic#,
+		   #listShow#,#paymentId#,#paymentName#,#deliveryId#,#deliveryName#,#modifyTime#,#isInventories#,#isParent#)
+	</insert>
+	
+	<update id="GoodType_update">
+		update good_type set code=#code#,name=#name#,remark=#remark#,modifier_id=#modifierId#,
+		 modifier_name=#modifierName#,modify_time=#modifyTime#,state=#state#,pic_id = #picId#,pic = #pic#,listShow = #listShow#,
+		 payment_id=#paymentId#,payment_name=#paymentName#,delivery_id=#deliveryId#,delivery_name=#deliveryName#,is_inventory=#isInventories#,isParent=#isParent#
+		  where id = #id#
+	</update>
+	
+	<delete id="GoodType_delete">
+		delete from good_type
+		<dynamic prepend="where">
+			<isNotEmpty property="id" prepend="and">
+				id=#id#
+			</isNotEmpty>
+			<isNotEmpty property="parentId" prepend="and">
+				parent_id=#parentId#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

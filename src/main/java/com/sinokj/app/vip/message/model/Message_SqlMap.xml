@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="Message">
+	<resultMap class="com.sinokj.app.vip.message.model.Message" id="MessageResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>	
+		<result column="type" property="type" jdbcType="varchar"/>
+			
+		<!-- Message  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="message_id" property="messageId" jdbcType="varchar"/>
+		<result column="content" property="content" jdbcType="varchar"/>
+		<result column="reply_state" property="replyState" jdbcType="varchar"/>
+	</resultMap>
+		
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Message_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Message.Message_insert"/>
+		<flushOnExecute statement="Message.Message_update"/>
+		<flushOnExecute statement="Message.Message_replyState_update"/>
+		<flushOnExecute statement="Message.Message_delete"/>
+		<flushOnExecute statement="Message.Message_messageId_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="Message_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			    id = #id#
+			</isNotEmpty>
+			<isNotEmpty  prepend="and" property="state">
+  				state = #state#
+  			</isNotEmpty>
+  			<!-- 
+  			<isNull prepend="and" property="messageId">
+  				<![CDATA[ isnull(message_id,message_id) ]]>
+	  		</isNull> -->
+	  		<isNotEmpty prepend="and" property="messageId">
+			    message_id = #messageId#
+			</isNotEmpty>
+	  		<isNotNull prepend="and" property="messageId">
+	  			message_id = #messageId#
+	  		</isNotNull>
+  			<isNotEmpty  prepend="and" property="creatorId">
+  				creator_id = #creatorId#
+  			</isNotEmpty>
+  			<isNotEmpty prepend="and" property="creatorName">
+  				creator_Name like '%$creatorName$%'
+  			</isNotEmpty>
+  			<isNotEmpty  prepend="and" property="goodId">
+  				good_id = #goodId#
+  			</isNotEmpty>
+  			<isNotEmpty  prepend="and" property="replyState">
+  				reply_state = #replyState#
+  			</isNotEmpty>
+  			<isNotEmpty  prepend="and" property="type">
+  				type = #type#
+  			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Message_query_select" resultMap="MessageResult" cacheModel="Message_cache">
+		select * from Message 
+		<include refid="Message_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="Message_count_query_select" resultClass="java.lang.Integer" cacheModel="Message_cache">
+		select count(*) from Message
+		<include refid="Message_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="Message_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			    id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="messageId">
+			    message_id = #messageId#
+			</isNotEmpty>
+			<isNotEmpty property="state" prepend="and">
+  			    state = #state#
+  			</isNotEmpty>
+  			<isNotEmpty  prepend="and" property="creatorId">
+  				creator_id = #creatorId#
+  			</isNotEmpty>
+  			<isNotEmpty prepend="and" property="creatorName">
+  			    creator_Name = #creatorName#
+  			</isNotEmpty>
+  			<isNotEmpty  prepend="and" property="goodId">
+  				good_id = #goodId#
+  			</isNotEmpty>
+  			<isNotEmpty  prepend="and" property="replyState">
+  				reply_state = #replyState#
+  			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Message_select" resultMap="MessageResult" cacheModel="Message_cache">
+		select * from Message 
+		<include refid="Message_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="Message_reply_select" resultMap="MessageResult" cacheModel="Message_cache">
+		select * from message where message_id in (
+		   select id from message where creator_id=#creatorId#)
+	</select>
+
+	<!--  增加留言  -->
+	<insert id="Message_insert">
+		insert into Message 
+			(id,creator_id,creator_name,create_time,
+			content,reply_state,message_id,state,good_id,type)
+		values
+			(#id#,#creatorId#,#creatorName#,#createTime#,
+			#content#,#replyState#,#messageId#,#state#,#goodId#,#type#)
+	</insert>
+	
+	<!--  修改留言 根据id -->
+	<update id="Message_update">
+		update Message set
+			content=#content#,
+			replyState=#replyState#
+		where id = #id#
+	</update>
+	
+	<!--  修改留言状态 根据id -->
+	<update id="Message_replyState_update">
+		update Message 
+			<dynamic prepend="set">
+				<isNotEmpty prepend="," property="replyState">
+					reply_state = #replyState#
+				</isNotEmpty>
+			</dynamic>
+		where id = #id#
+	</update>
+	
+	<!-- 删除留言 根据id-->
+	<delete id="Message_delete">
+		delete from Message where id = #id#
+	</delete>
+	
+	<!-- 删除留言 根据id-->
+	<delete id="Message_messageId_delete">
+		delete from Message where message_id = #id#
+	</delete>
+</sqlMap>

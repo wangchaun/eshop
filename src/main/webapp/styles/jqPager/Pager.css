@@ -1,0 +1,18 @@
+/* jquery.page.js css  */
+#pagerBot{ width:924px; float:right; margin-top:20px; position:relative; overflow:hidden; height:35px; line-height: 26px;}
+ul.pages {position: absolute;    right: 0;    top: 0;}
+ul.pages li {float: left;}
+ul.pages li.pageNumber{ width:24px; height:23px; margin-top: 1px; line-height:24px; color:#666666; font-family:"宋体"; font-size:12px; text-align:center; cursor:pointer; background:#fff; border:#d9d9d9 solid 1px; margin-right:11px; display:inline; display:block; text-decoration:none; float:left;}
+ul.pages li.pgNext1 { width:48px; padding-right: 10px; padding-left:19px;text-align:left; height:27px; line-height:27px; color:#666666; font-family:"宋体"; font-size:12px; border:none; cursor:pointer; background:url(../../Images/images/p_btn9.jpg) no-repeat left top; display:block; text-decoration:none;}
+ul.pages li.pgNext { width:59px; padding-right: 10px; padding-left:8px; height:26px; line-height:26px; color:#666666; font-family:"宋体"; font-size:12px; border:none; display:block; cursor:pointer; background:url(../../Images/images/p_btn10.jpg) no-repeat left top; text-align:left;}
+
+ul.pages li.pgCurrent { width:24px; height:23px; line-height:24px; color:#2891e4; font-family:"宋体"; text-align:center; font-size:12px; cursor:pointer; background:#eff7ff; border:#77baef solid 1px; margin-right:11px; display:inline; display:block; text-decoration:none; float:left;}
+ul.pages li.pgCurrent:hover { width:24px; height:23px; line-height:24px; color:#2891e4; font-family:"宋体"; text-align:center; font-size:12px; cursor:pointer; background:#eff7ff; border:#77baef solid 1px; margin-right:11px; display:inline; display:block; text-decoration:none; float:left;}
+ul.pages li.thpoint {  float:left; line-height:26px; padding-right:12px;}
+#chinkNows {margin:0 10px; display:inline; width:22px; height:22px; line-height:24px; color:#666666; font-family:"宋体"; font-size:12px; background:#fff; border:#d9d9d9 solid 1px; text-align:center;}
+.paging01_btn3{ width:49px; height:26px; line-height:16px; color:#fff; font-family:"微软雅黑"; font-size:14px; cursor:pointer; background:#2791e3; text-align:center; border:none;}
+.paging01{  float:left; padding-right:10px;}
+.paging02{  float:left; padding-top:1px;}
+.paging03{  float:left; line-height:26px; padding-right:12px;}
+.paging04{  float:left; line-height:26px;}
+.paging05{  float:left;}

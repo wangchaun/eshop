@@ -1,0 +1,68 @@
+@charset "utf-8";
+table{
+border-collapse:collapse;  
+}
+table td{
+empty-cells:show;
+font-size:12px;
+color:#666;
+}
+
+.box{ width:100%; margin:0 auto;}
+/* CSS Document */
+.ctop{ width:100%;margin:0 auto; background:url(../../../Images/images/topbg.jpg) repeat-x left top; height:152px; z-index:200}
+.top_con{ width:1200px; margin:0 auto;}
+.top_ctext{ padding-left:14px; line-height:31px; float:left; color:#666666; font-size:12px; font-family:"宋体";  }
+#top_ctextys{  color:#1488e3; font-size:12px; font-family:"宋体";  }
+.top_ctext1{ width:700px; padding-left:11px;  float:left; padding-top:4px; }
+.subbmit{ width:45px; height:22px; border:none; line-height:22px; color:#fff; font-size:12px; font-family:"宋体"; background:url(../../../Images/images/btn.jpg) no-repeat left top; cursor:pointer; text-align:center;}
+.top_ctext2{ width:300px; float:right;  line-height:31px; height:31px; color:#666666; font-size:12px; font-family:"宋体";}
+.top_ctext2 .ys1{  float:left; line-height:31px; height:31px; color:#666666; font-size:12px; font-family:"宋体";}
+.top_ctext2 .ys2{  float:left; padding-top:8px; height:22px; padding-left:8px; width:24px;}
+.top_ctext2 .ys3{  float:left; line-height:31px; height:31px; color:#666666; font-size:12px; font-family:"宋体";}
+.top_logo{ width:1200px; margin:0 auto; height:121px;}
+
+
+
+/*============================logo和搜索框===================================*/
+
+.topf{ width:1200px; float:left; height:121px; z-index:200; position:relative;}
+.logo{ width:670px; float:left; padding-top:32px;  }
+.logo01{ width:220px;  float:left;  }
+.logo02{ width:150px; padding-left:14px; float:left; padding-top:3px; line-height:55px; }
+.ht{ color:#2791e3; font-size:32px;  font-family:"微软雅黑"; float:left;}
+.ht1{ padding-left:0px; padding-top:0px;}
+.htbtn{ width:70px; height:14px; text-align:left; color:#ababab; font-size:12px; border:none; background:#fff; cursor:pointer;} 
+.shopcart{ width:582px; height:42px; float:left; position:absolute; top:43px; right:0px;  background:url(../../../Images/images/hao1.jpg) no-repeat left top; line-height:42px; font-size:16px;  font-family:"微软雅黑";}
+.shopcart h1{ width:207px;  float:left; padding-left:37px; color:#fff;}
+.shopcart h2{ width:176px;  float:left;   color:#666;}
+.shopcart h3{   float:left;  color:#666666;}
+#fy{   width:492px; float:left; height:260px; overflow-y:auto; overflow-x:hidden; padding-top:1px; padding-bottom:5px;}
+#fy1{  color:#5199cd; text-decoration:none; font-size:14px; font-family:"宋体"; font-weight:normal;  width:476px; padding-top:15px; padding-left:16px; float:left; }
+#fy1 span{   width:72px; height:27px; background:url(../pro_dropdown_2/a8.jpg) no-repeat left top; line-height:27px; float:left; text-align:center;   font-size:14px; font-family:"宋体"; color:#6a6a6a; display:block; margin-right:5px; display:inline;}
+#fy1 a{ width:48px; float:left; height:27px; line-height:27px; text-align:center; display:block; color:#5199cd; text-decoration:none; font-size:14px; font-family:"宋体"; font-weight:normal;}
+#fy1 a:hover{ color:#5199cd; text-decoration:underline; font-size:14px; font-family:"宋体"; font-weight:normal;}
+#fy2{ float:left; height:10px;}
+
+/*============================选号入网===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.lookproduct{ width:1200px; height:30px; border-bottom:#2791e3 solid 2px; position:relative; margin-top:5px; float:left;}
+.lookproduct samp{ float:left; padding-top:0px; height:30px;  background:url(../../../Images/images/shopcart2.jpg) no-repeat left bottom; color:#0a7cd4; font-size:18px; font-family:"微软雅黑"; }
+.lookproduct span{ float:left; padding-top:0px; height:30px;  background:url(../../../Images/images/a14.jpg) no-repeat  center bottom; color:#0a7cd4; font-size:18px; font-family:"微软雅黑"; }
+.pick{ width:1078px; padding-top:20px; padding-left:5px; float:left;}
+.pick h1{ float:left; width:60px; padding-top:4px; line-height:20px;}
+.pick h2{ float:left; padding-top:4px; padding-right:12px;}
+.pick h3{ float:left; padding-right:12px;}
+.pickselect{ width:90px; height:20px; border:#d9d9d9 solid 1px; line-height:18px; font-size:12px; color:#666;}
+.pickselect1{ width:108px; height:20px; border:#d9d9d9 solid 1px; line-height:18px; font-size:12px; color:#666;}
+.pickinput{ width:189px; padding-left:5px; height:25px; line-height:25px; font-size:12px; color:#666; border:#dadada solid 1px;}
+.pickbtn{ width:61px; height:27px; cursor:pointer;  border:none; background:url(../../../Images/images/hao2.jpg) no-repeat left top;}
+.pickbtn1{ width:74px; height:27px; cursor:pointer;  border:none; background:url(../../../Images/images/hao3.jpg) no-repeat left top;}
+.table{ width:1198px; height:32px; background:url(../../../Images/images/pu3.jpg) repeat-x left top; border:#e4e4e4 solid 1px; float:left;  margin-top:30px;}
+.table1{ width:1198px; border-left:#efefef solid 1px;border-right:#efefef solid 1px; float:left;}
+.table1 table td{border-bottom:#efefef solid 1px;}
+.borl{border-right:#efefef solid 1px;}
+.pickys{ font-weight:bold; color:#333333; font-size:14px;}
+.pick2{ width:1200px; padding-top:20px;  float:left; text-align:center; padding-top:10px;}
+

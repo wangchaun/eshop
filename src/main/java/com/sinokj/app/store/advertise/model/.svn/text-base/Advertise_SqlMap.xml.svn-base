@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Advertise">
+	<resultMap class="com.sinokj.app.store.advertise.model.Advertise" id="AdvertiseResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- Advertise -->
+		<result column="content" property="content" jdbcType="text"/>
+		<result column="subject" property="subject" jdbcType="varchar"/>
+		<result column="pic_id" property="picId" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+		<result column="type" property="type" jdbcType="varchar"/>
+		<result column="place_id" property="placeId" jdbcType="varchar"/>
+		<result column="place" property="place" jdbcType="varchar"/>
+		<result column="level" property="level" jdbcType="varchar"/>
+		<result column="url" property="url" jdbcType="varchar"/>
+		<result column="is_good_type_id" property="isGoodTypeId" jdbcType="varchar"/>
+		<result column="area_id" property="areaId" jdbcType="varchar"/>
+		<result column="area_name" property="areaName" jdbcType="varchar"/>
+		
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Advertise_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Advertise.Advertise_insert"/>
+		<flushOnExecute statement="Advertise.Advertise_update"/>
+		<flushOnExecute statement="Advertise.Advertise_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="Advertise_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="subject">
+				subject like '%$subject$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_name like '%$creatorName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_name like '%$creatorName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaId">
+				area_id like '%$areaId$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaName">
+				area_name like '%$areaName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="place">
+				place = #place#
+			</isNotEmpty>	
+			<isNotEmpty prepend="and" property="placeId">
+				place_id = #placeId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="Advertise_count_query_select" resultClass="java.lang.Integer" cacheModel="Advertise_cache">
+		select count(*) from advertise
+		<include refid="Advertise_query_select_where_clause"/>
+	</select>	
+	<select id="Advertise_query_select" resultMap="AdvertiseResult" cacheModel="Advertise_cache">
+		select * from advertise
+		<include refid="Advertise_query_select_where_clause"/>
+		order by modify_time desc
+	</select>
+	<select id="Advertise_AdvertiseById_select" resultMap="AdvertiseResult" cacheModel="Advertise_cache">
+		select * from advertise where place_id = #id#
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="Advertise_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="subject">
+				subject = #subject#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="place">
+				place = #place#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="placeId">
+				place_id = #placeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isGoodTypeId">
+				is_good_type_id = #isGoodTypeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaId">
+				area_id = #areaId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaName">
+				area_name = #areaName#
+			</isNotEmpty>
+			
+		</dynamic>		
+	</sql>	
+	<select id="Advertise_select" resultMap="AdvertiseResult" cacheModel="Advertise_cache">
+		select * from advertise
+		<include refid="Advertise_select_where_clause"/>
+		order by modify_time,code asc
+	</select>
+
+	<!-- 根据广告Id数组进行in查询 -->
+	<insert id="Advertise_insert">
+		insert into advertise 
+			(id,code,subject,content,pic,pic_id,type,place_id,place,level,creator_id,creator_name,create_time,modify_time,state,url,is_good_type_id,area_id,area_name)
+		values
+			(#id#,#code#,#subject#,#content#,#pic#,#picId#,#type#,#placeId#,#place#,#level#,#creatorId#,#creatorName#,#createTime#,#modifyTime#,#state#,#url#,#isGoodTypeId#,#areaId#,#areaName#
+			)
+	</insert>
+	<update id="Advertise_update">
+		update advertise set
+			subject = #subject#,
+			content = #content#,
+			pic = #pic#,
+			pic_id = #picId#,
+			type = #type#,
+			place_id = #placeId#,
+			place = #place#,
+			level = #level#,
+			creator_name = #creatorName#,
+			modify_time = #modifyTime#,
+			create_time = #createTime#,
+			state = #state#,
+			url = #url#,
+			is_good_type_id = #isGoodTypeId#,
+			area_id = #areaId#,
+			area_name = #areaName#
+		where id = #id#
+	</update>
+	
+	
+	
+  <delete id="Advertise_delete">
+    delete from advertise
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

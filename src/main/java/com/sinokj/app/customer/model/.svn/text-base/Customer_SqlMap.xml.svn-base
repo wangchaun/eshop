@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Customer" >
+  <resultMap id="Customer_result" class="com.sinokj.app.customer.model.Customer" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+    <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    
+    <!-- customer -->
+    <result column="type" property="type" jdbcType="varchar"/>
+    <result column="sex" property="sex" jdbcType="varchar"/>
+    <result column="card_number" property="cardNumber" jdbcType="varchar"/>
+    <result column="account" property="account" jdbcType="varchar"/>
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="payables" property="payables" jdbcType="decimal"/>
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_address" property="companyAddress" jdbcType="VARCHAR" />
+    <result column="linkman" property="linkman" jdbcType="varchar"/>
+	<result column="mobile" property="mobile" jdbcType="varchar"/>
+	<result column="telephone" property="telephone" jdbcType="varchar"/>
+	<result column="email" property="email" jdbcType="varchar"/>
+	<result column="area_ids" property="areaIds" jdbcType="varchar"/>
+	<result column="area_names" property="areaNames" jdbcType="varchar"/>
+	<result column="street" property="street" jdbcType="varchar"/>
+	<result column="zip_code" property="zipCode" jdbcType="varchar"/>
+	<result column="remark" property="remark" jdbcType="varchar"/>
+	<result column="vip_level_id" property="vipLevelId" jdbcType="varchar" />
+	<result column="vip_level_name" property="vipLevelName" jdbcType="varchar" />
+	<result column="credits" property="credits" jdbcType="decimal" />
+	
+	<result column="warehouse_Id" property="warehouseId" jdbcType="VARCHAR"/>
+	<result column="warehouse_Name" property="warehouseName" jdbcType="VARCHAR"/>  
+	<result column="salary" property="salary" jdbcType="VARCHAR"/>  
+	<result column="schooling" property="schooling" jdbcType="VARCHAR"/>  
+	<result column="maritalstatus" property="maritalstatus" jdbcType="VARCHAR"/>
+	<result column="is_pinlessmobile" property="isPinlessmobile" jdbcType="VARCHAR"/>  
+	<result column="is_pinlessemail" property="isPinlessemail" jdbcType="VARCHAR"/>  
+	<result column="pic" property="pic" jdbcType="VARCHAR"/>  
+	<result column="pic_id" property="picId" jdbcType="VARCHAR"/> 
+	<result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+	<result column="card_endtime" property="cardEndTime" jdbcType="datetime"/>
+	<result column="card_address" property="cardAddress" jdbcType="VARCHAR"/>
+	<result column="credit" property="credit" jdbcType="int"/>
+		<result column="agree" property="agree" jdbcType="VARCHAR"/>  
+	<result column="clintIp" property="clintIp" jdbcType="VARCHAR"/>    
+  </resultMap>
+  
+  <!-- 缓存模型 -->
+	<cacheModel id="Customer_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Customer.Customer_insert"/>
+		<flushOnExecute statement="Customer.Customer_update"/>
+		<flushOnExecute statement="Customer.Customer_state_update"/>
+		<flushOnExecute statement="Customer.Customer_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 
+  
+  <!-- 模糊查询 -->
+  <sql id="Customer_query_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotEmpty property="code" prepend="and">
+  			code like '%$code$%'
+  		</isNotEmpty>
+  		<isNotEmpty property="companyName" prepend="and">
+  			company_name like '%$companyName$%'
+  		</isNotEmpty>
+  		<isNotEmpty property="state" prepend="and">
+  			state = #state#
+  		</isNotEmpty>
+  		<isNotEmpty property="type" prepend="and">
+  			type = #type#
+  		</isNotEmpty>
+  		<isNotEmpty property="vipLevelId" prepend="and">
+  			vip_level_id = #vipLevelId#
+  		</isNotEmpty>
+  		<isNotEmpty property="linkman" prepend="and">
+  			linkman = #linkman#
+  		</isNotEmpty>
+  		<isNotEmpty property="telephone" prepend="and">
+  			telephone = #telephone#
+  		</isNotEmpty>
+  		<isNotEmpty property="mobile" prepend="and">
+  			mobile = #mobile#
+  		</isNotEmpty>
+  		<isNotEmpty property="name" prepend="and">
+  			name = #name#
+  		</isNotEmpty>
+  	</dynamic>
+  </sql>  
+  <select id="Customer_query_select" resultMap="Customer_result" cacheModel="Customer_cache">
+    select * from customer
+     <include refid="Customer_query_select_where_clause"/>
+    order by create_time desc
+  </select>  
+  <select id="Customer_count_query_select" resultClass="java.lang.Integer" cacheModel="Customer_cache">
+		select count(*) from customer
+		<include refid="Customer_query_select_where_clause"/>
+	</select>
+   
+  <!-- 精确查询 -->
+  <sql id="Customer_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotNull property="id" prepend="and">
+  			id = #id#
+  		</isNotNull>
+  		<isNotNull property="code" prepend="and">
+  			code = #code#
+  		</isNotNull>
+  		<isNotNull property="cardNumber" prepend="and">
+  			card_number = #cardNumber#
+  		</isNotNull>
+  		<isNotNull property="pwd" prepend="and">
+  			pwd = #pwd#
+  		</isNotNull>
+  		<isNotNull property="state" prepend="and">
+  			state = #state#
+  		</isNotNull>
+  		<isNotEmpty property="vipLevelId" prepend="and">
+  			vip_level_id = #vipLevelId#
+  		</isNotEmpty>
+  		<isNotEmpty property="linkman" prepend="and">
+  			linkman = #linkman#
+  		</isNotEmpty>
+  		<isNotEmpty property="telephone" prepend="and">
+  			telephone = #telephone#
+  		</isNotEmpty>
+  		<isNotEmpty property="mobile" prepend="and">
+  			mobile = #mobile#
+  		</isNotEmpty>
+  		<isNotEmpty property="name" prepend="and">
+  			name = #name#
+  		</isNotEmpty>
+  		<isNotEmpty property="email" prepend="and">
+  			email = #email#
+  		</isNotEmpty>
+  	</dynamic>
+  </sql>
+  <select id="Customer_select" resultMap="Customer_result" cacheModel="Customer_cache">
+    select * from customer
+  <include refid="Customer_select_where_clause"/>  
+   order by create_time desc
+  </select>
+  
+  <delete id="Customer_delete">
+    delete from customer
+    where id = #id:VARCHAR#
+  </delete>
+
+  <insert id="Customer_insert">
+    insert into customer 
+    (id, code,card_number, name, creator_id,creator_name, create_time, modifier_id, modifier_name, modify_time, state,
+     type,sex,account,pwd,payables,credits,company_name,company_address,linkman,telephone, mobile,email,
+     area_ids,area_names,street,zip_code,remark,vip_level_id,vip_level_name,warehouse_Id,warehouse_Name,maritalstatus,
+     schooling,salary,is_pinlessmobile,is_pinlessemail,pic,pic_id,id_card,card_endtime,card_address,clintIp,agree)
+    values 
+    (#id#,#code#,#cardNumber#,#name#,#creatorId#,#creatorName#,#createTime#,#modifierId#,#modifierName#,#modifyTime#,#state#,
+     #type#,#sex#,#account#,#pwd#,#payables#,#credits#,#companyName#,#companyAddress#,#linkman#,#telephone#,#mobile#,#email#,
+     #areaIds#,#areaNames#,#street#,#zipCode#,#remark#,#vipLevelId#,#vipLevelName#,#warehouseId#,#warehouseName#,#maritalstatus#,
+     #schooling#,#salary#,#isPinlessmobile#,#isPinlessemail#,#pic#,#picId#,#idCard#,#cardEndTime#,#cardAddress#,#clintIp#,#agree#)
+  </insert>
+  <update id="Customer_update">
+    update customer
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="credit" >
+        credit = #credit:int#
+      </isNotNull>
+      <isNotNull prepend="," property="cardNumber" >
+        card_number = #cardNumber:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="code" >
+        code = #code:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creatorId" >
+        creator_id = #creatorId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creatorName" >
+        creator_name = #creatorName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time = #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="modifierId" >
+        modifier_id = #modifierId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="modifierName" >
+        modifier_name = #modifierName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="modifyTime" >
+        modify_time = #modifyTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="state" >
+        state = #state:VARCHAR#
+      </isNotNull>
+       <isNotNull prepend="," property="type" >
+        type = #type:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sex" >
+        sex = #sex#
+      </isNotNull>
+      <isNotNull prepend="," property="account" >
+        account = #account#
+      </isNotNull>
+      <isNotNull prepend="," property="pwd" >
+        pwd = #pwd:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="payables" >
+        payables = #payables#
+      </isNotNull>
+      <isNotNull prepend="," property="credits" >
+        credits = #credits#
+      </isNotNull>
+      <isNotNull prepend="," property="companyName" >
+        company_name = #companyName#
+      </isNotNull>
+      <isNotNull prepend="," property="companyAddress" >
+        company_address = #companyAddress#
+      </isNotNull>
+      <isNotNull prepend="," property="linkman" >
+        linkman = #linkman#
+      </isNotNull>
+      <isNotNull prepend="," property="telephone" >
+        telephone = #telephone:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="mobile" >
+        mobile = #mobile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="email" >
+        email = #email:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="areaIds" >
+        area_ids = #areaIds#
+      </isNotNull>
+      <isNotNull prepend="," property="areaNames" >
+        area_names = #areaNames#
+      </isNotNull>
+      <isNotNull prepend="," property="street" >
+        street = #street#
+      </isNotNull>
+      <isNotNull prepend="," property="zipCode" >
+        zip_code = #zipCode#
+      </isNotNull>
+      <isNotNull prepend="," property="remark" >
+        remark = #remark#
+      </isNotNull>
+      <isNotNull prepend="," property="vipLevelId" >
+        vip_level_id = #vipLevelId#
+      </isNotNull>
+      <isNotNull prepend="," property="vipLevelName" >
+        vip_level_name = #vipLevelName#
+      </isNotNull>
+      <isNotNull prepend="," property="warehouseId" >
+        warehouse_id = #warehouseId#
+      </isNotNull>
+      <isNotNull prepend="," property="warehouseName" >
+        warehouse_Name = #warehouseName#
+      </isNotNull>
+      <isNotNull prepend="," property="maritalstatus" >
+      	maritalstatus = #maritalstatus#
+      </isNotNull>
+      <isNotNull prepend="," property="schooling" >
+      	schooling = #schooling#
+      </isNotNull>
+      <isNotNull prepend="," property="salary" >
+      	salary = #salary#
+      </isNotNull>
+      <isNotNull prepend="," property="isPinlessmobile" >
+      	is_pinlessmobile=#isPinlessmobile#
+       </isNotNull>
+      <isNotNull prepend="," property="isPinlessemail" >
+      	is_pinlessemail=#isPinlessemail#
+       </isNotNull>
+       <isNotNull prepend="," property="pic" >
+      	pic=#pic#
+       </isNotNull>
+        <isNotNull prepend="," property="picId" >
+      	pic_id=#picId#
+       </isNotNull>
+       <!-- 修改了。。。。。 -->
+       <isNotNull prepend="," property="cardEndTime" >
+      	card_endtime=#cardEndTime#
+       </isNotNull>
+       <isNotNull prepend="," property="cardAddress" >
+      	card_address=#cardAddress#
+       </isNotNull>
+    </dynamic>
+    where id = #id:VARCHAR#
+  </update>
+  <!-- 前台客户更改账号信息 -->
+  <update id="Customer_account_update">
+   	update customer
+  	 <dynamic prepend="set">
+	  	 <isNotEmpty prepend="," property="pwd" >
+	        pwd = #pwd:VARCHAR#
+	     </isNotEmpty>
+	     <isNotEmpty prepend="," property="email" >
+	        email = #email:VARCHAR#
+	     </isNotEmpty>
+  	 </dynamic>
+  	  where id = #id:VARCHAR#
+  </update>
+  <!-- 更改客户状态 -->
+  <update id="Customer_state_update">
+   	update customer
+  	 <dynamic prepend="set">
+	  	 <isNotEmpty prepend="," property="state" >
+	        state = #state:VARCHAR#
+	     </isNotEmpty>
+  	 </dynamic>
+  	  where id = #id:VARCHAR#
+  </update>
+</sqlMap>

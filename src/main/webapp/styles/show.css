@@ -1,0 +1,10 @@
+img{
+	border: 0px;
+}
+a{
+	text-decoration:none;
+}
+a:hover{
+	color:#CC3300;
+	text-decoration:underline;
+}

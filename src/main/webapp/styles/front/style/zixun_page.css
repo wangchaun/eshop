@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+
+
+
+/*============================我的评价===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+.content{ width:1200px; margin:0 auto;}
+.applyReturn{ width:1200px; float:left; padding-top:20px;}
+.applyReturn_left{ width:196px; float:left;}
+.applyReturn_right{ width:1004px; float:left;}
+.applyright{width:964px; float:left; padding-left:40px;}
+
+/*******************我的评价******************************/
+
+.courht{width:964px; float:left; padding-left:40px;}
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../../../Images/images/pu2.jpg) no-repeat left bottom;}
+
+/*******************我的评价******************************/
+
+.courht_text2{ width:964px; float:left; margin-top:15px;}
+.table{ width:962px; height:32px; background:url(../../../Images/images/pu3.jpg) repeat-x left top; border:#e4e4e4 solid 1px; float:left;}
+.table1{ width:962px; border-left:#efefef solid 1px;border-right:#efefef solid 1px; float:left;}
+.table1 table td{border-bottom:#efefef solid 1px;}
+.phlist{ float:left; padding-bottom:18px; padding-top:18px; width:280px;}
+.phlist h2{ float:left; padding-right:14px;}
+.phlist h2 img{ width:57px; height:57px;border:#e0e0e0 solid 1px;}
+.phlist h3{ float:left; width:200px; padding-top:12px; line-height:18px; color:#666px;}
+.phlist h3 span{color:#666px; font-weight:bold}
+.phlist h1{ float:left; padding-right:10px; padding-top:20px; width:13px;}
+.myconsulting{ line-height:22px; width:185px; padding-left:25px;}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodCompose">
+	<resultMap class="com.sinokj.app.good.goodCompose.model.GoodCompose" id="GoodComposeResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- GoodCompose -->
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="compose_good_id" property="composeGoodId" jdbcType="varchar"/>
+		<result column="price_discount" property="priceDiscount" jdbcType="decimal"/>
+	</resultMap>
+	<!-- 扩展列 -->
+	<resultMap class="com.sinokj.app.good.goodCompose.model.GoodCompose" id="GoodComposeExtendResult" extends="GoodComposeResult">
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+		<result column="brand_name" property="brandName" jdbcType="varchar"/>
+		<result column="price" property="price" jdbcType="decimal"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!--ly 开始 -->
+	<!--根据商品id获取组合商品 -->
+		<select id="GoodCompose_goodId_select" resultMap="GoodComposeExtendResult">
+			select a.*,b.code as code,b.name as name,b.good_type_name as good_type_name,b.brand_name as brand_name,b.price as price,b.pic as pic 
+				from good_compose a left join good  b on a.compose_good_id = b.id
+			where a.compose_good_id = #goodId# order by sort asc
+		</select>
+	
+	<!--ly 结束 -->
+	
+	<select id="GoodCompose_select" resultMap="GoodComposeExtendResult">
+		select a.*,b.code as code,b.name as name,b.good_type_name as good_type_name,b.brand_name as brand_name,b.price as price,b.pic as pic 
+			from good_compose a left join good  b on a.compose_good_id = b.id
+		where a.good_id = #goodId# order by sort asc
+	</select>
+	
+	<insert id="GoodCompose_insert">
+		insert into good_compose 
+			(id,sort,good_id,compose_good_id,price_discount)
+		values
+			(#id#,#sort#,#goodId#,#composeGoodId#,#priceDiscount#)
+	</insert>
+	<update id="GoodCompose_update">
+		update good_compose set
+			price_discount = #priceDiscount#,
+			sort = #sort#,
+			good_id = #goodId#,
+			compose_good_id = #composeGoodId#
+		where id = #id#
+	</update>
+	<delete id="GoodCompose_delete">
+	    delete from good_compose
+	    where good_id = #goodId#
+    </delete>	
+</sqlMap>

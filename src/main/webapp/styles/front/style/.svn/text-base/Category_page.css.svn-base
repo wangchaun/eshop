@@ -1,0 +1,20 @@
+@charset "utf-8";
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================分类导航===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.category{ width:1167px; padding-left:33px; float:left; padding-top:27px; border-bottom:#2791e3 solid 2px; height:32px;}
+.category h1{ width:20px; float:left; padding-top:8px;}
+.category h2{ float:left;color:#0a7cd4; font-size:18px;  font-family:"微软雅黑"; }
+.category1{ width:1167px; padding-left:33px; float:left; padding-top:30px; height:24px;}
+.category1 h1{ width:20px; float:left; padding-top:8px;}
+.category1 h2{ float:left;color:#0a7cd4; font-size:16px;  font-family:"微软雅黑"; }
+.category2{ width:1170px; margin-left:30px; display:inline; float:left;  background:url(../images/core3.jpg) repeat-x left bottom; padding-top:15px; padding-bottom:15px; line-height:30px;}
+.category201{ float:left; width:101px; padding-left:2px; line-height:30px;}
+.category201 h1{ float:left; padding-left:22px; background:url(../images/core4.jpg) no-repeat left center; font-size:14px; font-weight:bold; }
+.category202{float:left; width:1067px; overflow:hidden;}
+.category202 li{ float:left; padding-right:30px; line-height:30px; color:#333333; font-size:12px;}
+.category202 li a{  color:#333333; font-size:12px; text-decoration:none;}
+.category202 li a:hover{  color:#0a7cd4; font-size:12px; text-decoration:underline;}

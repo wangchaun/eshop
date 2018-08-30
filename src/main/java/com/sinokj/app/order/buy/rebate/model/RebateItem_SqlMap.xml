@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="RebateItem">
+	<resultMap class="com.sinokj.app.order.buy.rebate.model.RebateItem" id="RebateItemResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="Integer"/>
+		
+		<!-- rebateItem  column为数据库中的字段 property为实体类中的属性 -->
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="supplier_id" property="supplierId" jdbcType="varchar"/>
+		<result column="supplier_name" property="supplierName" jdbcType="varchar"/>
+		<result column="rebate_amount" property="rebateAmount" jdbcType="Double"/>
+		<result column="sale_money" property="saleMoney" jdbcType="Double"/>
+		<result column="rebate_rate" property="rebateRate" jdbcType="Float"/>
+		<result column="actual_rebate" property="actualRebate" jdbcType="Double"/>
+		<result column="rebate_id" property="rebateId" jdbcType="varchar"/>
+	</resultMap>
+	<!-- 缓冲模型 -->
+	<cacheModel type="LRU" id="RebateItem_cache" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="RebateItem.RebateItem_insert"/>
+		<flushOnExecute statement="RebateItem.RebateItem_update"/>
+		<flushOnExecute statement="RebateItem.RebateItem_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel>
+	<!-- 模糊查询 -->
+	<sql id="RebateItem_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="supplierId">
+				supplier_id = #supplierId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="supplierName">
+				supplier_name like '%$supplierName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="rebateId">
+				rebate_id like '%$rebateId$%'
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="RebateItem_query_select" resultMap="RebateItemResult" cacheModel="RebateItem_cache">
+		select * from rebate_item
+		<include refid="RebateItem_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="RebateItem_count_query_select" resultClass="java.lang.Integer" cacheModel="RebateItem_cache">
+		select count(*) from rebate_item
+		<include refid="RebateItem_query_select_where_clause"/>	
+	</select>
+	<select id="RebateItem_sum_query_select" resultClass="java.lang.Double" cacheModel="RebateItem_cache">
+		select SUM(money) from sale_ware where ware_id in(select id from ware where good_id in 
+		(select id from good 
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="supplierId">
+					supplier_id = #supplierId#
+				</isNotEmpty>
+			</dynamic>
+		))and sale_id in (
+			select id from sale_order s where s.create_time between #startTime# and #endTime# 
+		)and type = '1'
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="RebateItem_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="supplierId">
+				supplier_id = #supplierId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="supplierName">
+				supplier_name = #supplierName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="rebateId">
+				rebate_id = #rebateId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<select id="RebateItem_select" resultMap="RebateItemResult" cacheModel="RebateItem_cache">
+		select * from rebate_item
+		<include refid="RebateItem_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="RebateItem_rebateItem_select" resultMap="RebateItemResult" cacheModel="RebateItem_cache">
+		select * from rebate_item
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="rebateId">
+					rebate_Id = #rebateId#
+				</isNotEmpty>
+			</dynamic>
+		order by create_time desc
+	</select>
+	<select id="RebateItem_state_select" resultMap="RebateItemResult" cacheModel="RebateItem_cache">
+		select * from rebate_item
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="rebateId">
+					rebate_Id = #rebateId#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="state">
+					state = #state#
+				</isNotEmpty>
+			</dynamic>
+		order by create_time desc
+	</select>
+	
+	<!-- 增加 -->
+	<insert id="RebateItem_insert">
+		insert into rebate_item
+			(id,rebate_id,supplier_id,supplier_name,rebate_amount,remark,sale_money,
+			rebate_rate,creator_id,creator_name,create_time,state,actual_rebate)
+		values
+			(#id#,#rebateId#,#supplierId#,#supplierName#,#rebateAmount#,#remark#,#saleMoney#,
+			#rebateRate#,#creatorId#,#creatorName#,#createTime#,#state#,#actualRebate#)
+	</insert>
+	
+	<!-- 根据id修改 -->
+	<update id="RebateItem_update">
+		update rebate_item set
+			rebate_amount = #rebateAmount#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			remark = #remark#,
+			rebate_amount = #rebateAmount#,
+			sale_money = #saleMoney#,
+			rebate_rate = #rebateRate#,
+			actual_rebate = #actualRebate#,
+			supplier_id = #supplierId#,
+			supplier_name = #supplierName#
+		where id = #id#	
+	</update>	
+	
+	<!-- 删除 根据id-->
+	<delete id="RebateItem_delete">
+		delete from rebate_item where id = #id#
+	</delete>
+	
+	<!-- 删除 根据返利Id-->
+	<delete id="RebateItem_rebateId_delete">
+		delete from rebate_item where rebate_id = #rebateId#
+	</delete>
+</sqlMap>

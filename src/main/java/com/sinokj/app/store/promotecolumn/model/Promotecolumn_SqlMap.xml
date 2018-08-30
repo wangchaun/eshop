@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Promotecolumn">
+	<resultMap class="com.sinokj.app.store.promotecolumn.model.Promotecolumn" id="PromotecolumnResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="column_No" property="columnNo" jdbcType="varchar"/>
+		<result column="describes" property="describes" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Promotecolumn_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Promotecolumn.Promotecolumn_insert"/>
+		<flushOnExecute statement="Promotecolumn.Promotecolumn_update"/>
+		<flushOnExecute statement="Promotecolumn.Promotecolumn_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel>
+	 
+	 <!-- 模糊搜索-->
+	 <sql id="Promotecolumn_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+			  name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnNo">
+			  column_No = #columnNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="describes">
+			  describes = #describes#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	
+	<select id="Promotecolumn_query_select" resultMap="PromotecolumnResult" cacheModel="Promotecolumn_cache">
+		select * from promotecolumn 
+		<include refid="Promotecolumn_query_select_where_clause"/>
+		order by id
+	</select>
+	<select id="Promotecolumn_count_query_select" resultClass="java.lang.Integer" cacheModel="Promotecolumn_cache">
+		select count(*) from promotecolumn
+		<include refid="Promotecolumn_query_select_where_clause"/>
+		order by id
+	</select>
+	
+	 <sql id="Promotecolumn_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+			  name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnNo">
+			  column_No = #columnNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="describes">
+			  describes = #describes#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	
+	<select id="Promotecolumn_select" resultMap="PromotecolumnResult" cacheModel="Promotecolumn_cache">
+		select * from promotecolumn 
+		<include refid="Promotecolumn_select_where_clause"/>
+		order by id
+	</select>
+	
+	<!-- 根据id -->
+	<insert id="Promotecolumn_insert">
+		insert into promotecolumn 
+			(id,code,name,column_No,describes,remark)
+		values 
+			(#id#,#code#,#name#,#columnNo#,#describes#,#remark#)
+	</insert>
+	
+	<update id="Promotecolumn_update">
+		update promotecolumn set
+			code = #code#,
+			name = #name#,
+			column_No = #columnNo#,
+			describes = #describes#,
+			remark = #remark#
+		where id = #id#
+	</update>
+	
+	<delete id="Promotecolumn_delete">
+    	delete from promotecolumn
+    	where id = #id#
+  	</delete>
+</sqlMap>	

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BrowseBuy">
+	<resultMap class="com.sinokj.app.front.browse.model.BrowseBuy" id="BrowseBuyResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="good_type_id" property="goodTypeId" jdbcType="varchar"/>
+		<result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="good_pic" property="goodPic" jdbcType="varchar"/>
+		<result column="good_price" property="goodPrice" jdbcType="decimal"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="buy_number" property="buyNumber" jdbcType="decimal"/>
+	</resultMap>
+	
+	
+  	<!-- 模糊查询 -->
+	<sql id="BrowseBuy_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeId">
+				good_type_id = #goodTypeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerIdStr">
+				customer_id in (select customer_id from browse_buy where good_id=#goodId#) 
+					and good_id!=#goodId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	
+	<select id="BrowseBuy_select" resultMap="BrowseBuyResult">
+		select * from browse_buy
+		<include refid="BrowseBuy_select_where_clause"/>
+	</select>
+
+	<select id="BrowseBuy_goodId_select" resultMap="BrowseBuyResult">
+		select * from browse_buy where good_id = #goodId# GROUP BY customer_id 
+	</select>
+	
+	
+   <!-- 查询本类以及子类所有购买数 -->
+	<select id="BrowseBuy_allbuy_select" resultMap="BrowseBuyResult">
+		<!-- select * from browse_buy where good_type_id=#goodTypeId# 
+			or good_type_id in (select id from good_type where parent_id=#parentId#) -->
+			
+			select * from browse_buy where good_type_id in(select id from good_type where id=#goodTypeId# 
+			UNION
+			select id from good_type where parent_id=#goodTypeId# 
+			UNION
+			select id from good_type where parent_id in (select id from good_type where parent_id=#goodTypeId# )
+			)
+			
+			
+	</select>
+	
+	<insert id="BrowseBuy_insert">
+		insert into browse_buy
+		 (id,click_number,good_type_id,good_type_name,good_id,good_name,good_pic,good_price,customer_id)
+		   values(#id#,#clickNumber#,#goodTypeId#,#goodTypeName#,#goodId#,#goodName#,#goodPic#,#goodPrice#,#customerId#)
+	</insert>
+
+
+</sqlMap>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SysRolePower" >
+
+  <!-- 结果集 -->
+  <resultMap id="SysRolePowerResult" class="com.sinokj.app.system.rolePower.model.SysRolePower" >
+  	<result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+	<result column="power_id" property="powerId" jdbcType="VARCHAR" />
+	<result column="power_insert" property="inserts" jdbcType="VARCHAR" />
+	<result column="power_delete" property="deletes" jdbcType="VARCHAR" />
+	<result column="power_select" property="selects" jdbcType="VARCHAR" />
+	<result column="power_update" property="updates" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 结果集，显示用户名称 -->
+  <resultMap id="SysRolePowerFullResult" class="com.sinokj.app.system.rolePower.model.SysRolePower" >
+  	<result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+	<result column="power_id" property="powerId" jdbcType="VARCHAR" /> 
+	<result column="power_name" property="powerName" jdbcType="VARCHAR" />
+	<result column="power_insert" property="inserts" jdbcType="VARCHAR" />
+	<result column="power_delete" property="deletes" jdbcType="VARCHAR" />
+	<result column="power_select" property="selects" jdbcType="VARCHAR" />
+	<result column="power_update" property="updates" jdbcType="VARCHAR" /> 
+	<result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>  
+  
+  <!-- 角色用户关系查询条件 -->
+  <sql id="SysRolePower_select_where_clause">
+    <dynamic prepend="where"> 
+	    <isNotEmpty prepend="and" property="id"> 
+	            id = #id# 
+	    </isNotEmpty>
+	    <isNotEmpty prepend="and" property="roleId"> 
+	            role_id = #roleId# 
+	    </isNotEmpty>
+	    <isNotEmpty prepend="and" property="powerId"> 
+	            power_id = #powerId# 
+	    </isNotEmpty>	    
+    </dynamic>   	
+  </sql>
+ 
+  <!-- 获取角色用户关系 -->
+  <select id="SysRolePower_select" resultMap="SysRolePowerResult"  >
+    select * from sys_role_power  
+    <include refid="SysRolePower_select_where_clause"/>
+    order by sort
+  </select>
+  
+  <!-- 获取角色用户关系 -->
+  <select id="SysRolePower_full_select" resultMap="SysRolePowerFullResult"  >
+	select 
+		a.*,b.name as power_name
+	from 
+		sys_role_power a left join sys_power b on a.power_id=b.id
+	where a.role_id = #roleId#
+	order by sort
+  </select>  
+  
+  <!-- 根据角色id，删除角色权限 -->
+  <delete id="SysRolePower_byRoleId_delete" >
+    delete from sys_role_power where role_id = #roleId#
+  </delete>
+  
+  <!-- 根据权限id，删除角色权限 -->
+  <delete id="SysRolePower_byPowerId_delete" >
+    delete from sys_role_power where power_id = #powerId#
+  </delete>  
+  
+  <!-- 添加角色 -->
+  <insert id="SysRolePower_insert" >   
+    insert into sys_role_power (id , role_id, power_id,power_insert,power_delete,power_select,power_update, sort)
+    values (#id:VARCHAR#, #roleId:VARCHAR#,#powerId:VARCHAR#,#inserts#,#deletes#,#selects#,#updates#,#sort:INTEGER#)
+  </insert>
+ 
+</sqlMap>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodSpecification">
+	<resultMap class="com.sinokj.app.good.goodSpecification.model.GoodSpecification" id="GoodSpecificationResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="varchar"/>
+		<!-- GoodSpecification -->
+		<result column="show_type" property="showType" jdbcType="varchar"/>
+		<result column="show_way" property="showWay" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodSpecification_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodSpecification.GoodSpecification_insert"/>
+		<flushOnExecute statement="GoodSpecification.GoodSpecification_update"/>
+		<flushOnExecute statement="GoodSpecification.GoodSpecification_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- ly 开始 -->
+	<!--根据规格Id数组获取规格 -->
+	<select id="GoodSpecification_specificationVal_query_select" resultMap="GoodSpecificationResult" cacheModel="GoodSpecification_cache">
+		select * from good_specification 
+		<dynamic prepend="where">
+				<isNotNull prepend="and" property="idArr">
+					id in 
+					<iterate open="(" close=")" conjunction="," property="idArr">
+						#idArr[]#
+					</iterate>
+				</isNotNull>
+			</dynamic>
+	</select>
+	<!-- ly 结束-->
+	<!-- 模糊查询 -->
+	<sql id="GoodSpecification_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="GoodSpecification_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodSpecification_cache">
+		select count(*) from good_specification
+		<include refid="GoodSpecification_query_select_where_clause"/>
+	</select>	
+	<select id="GoodSpecification_query_select" resultMap="GoodSpecificationResult" cacheModel="GoodSpecification_cache">
+		select * from good_specification
+		<include refid="GoodSpecification_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="GoodSpecification_select" resultMap="GoodSpecificationResult">
+		select * from good_specification where id = #id# order by sort asc
+	</select>	
+	<!-- 货品包含的规格 -->
+	<select id="GoodSpecification_ware_select" resultMap="GoodSpecificationResult">
+		select distinct * from 
+			(select distinct a.* ,b.id as good_specification_val_id 
+				from good_specification a inner join good_specification_val b 
+									on a.id = b.good_specification_id) as c 
+			inner join ware_specification_val d on c.good_specification_val_id = d.good_specification_val_id
+			where d.ware_id = #wareId# order by d.sort asc
+	</select>
+	
+	<insert id="GoodSpecification_insert">
+		insert into good_specification 
+			(id,code,name,creator_id,creator_name,create_time,state,sort,remark,show_type,show_way)
+		values
+			(#id#,#code#,#name#,#creatorId#,#creatorName#,#createTime#,#state#,#sort#,#remark#,#showType#,#showWay#)
+	</insert>
+	<update id="GoodSpecification_update">
+		update good_specification set
+			code = #code#,
+			name = #name#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			sort = #sort#,
+			remark = #remark#,
+			show_type = #showType#
+		where id = #id#
+	</update>
+  <delete id="GoodSpecification_delete">
+    delete from good_specification
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodAttr">
+	<resultMap class="com.sinokj.app.good.goodAttr.model.GoodAttr" id="GoodAttrResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- GoodAttr -->
+		<result column="good_kind_id" property="goodKindId" jdbcType="varchar"/>
+		<result column="input_type" property="inputType" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="value" property="value" jdbcType="varchar"/>
+	</resultMap>
+	<resultMap class="com.sinokj.app.good.goodAttr.model.GoodAttr" id="GoodAttrFullResult" extends="GoodAttrResult">
+		<!-- 联表查询字段 -->
+		<result column="attr_value_id" property="attrValueId" jdbcType="varchar"/>
+		<result column="attr_value" property="attrValue" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodAttr_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodAttr.GoodAttr_insert"/>
+		<flushOnExecute statement="GoodAttr.GoodAttr_update"/>
+		<flushOnExecute statement="GoodAttr.GoodAttr_delete"/>
+		<flushOnExecute statement="GoodAttr.GoodAttr_goodKindId_delete"/>	
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="GoodAttr_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodKindId">
+				good_kind_id = #goodKindId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="GoodAttr_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodAttr_cache">
+		select count(*) from good_attr
+		<include refid="GoodAttr_query_select_where_clause"/>
+	</select>	
+	<select id="GoodAttr_query_select" resultMap="GoodAttrResult" cacheModel="GoodAttr_cache">
+		select * from good_attr
+		<include refid="GoodAttr_query_select_where_clause"/>
+		order by sort asc
+	</select>	
+	<select id="GoodAttr_select" resultMap="GoodAttrResult" cacheModel="GoodAttr_cache">
+		select * from good_attr 
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodKindId">
+				good_kind_id = #goodKindId#
+			</isNotEmpty>
+		</dynamic>
+		order by sort asc
+	</select>
+	
+	<select id="GoodAttr_GoodAttrValue_select" resultMap="GoodAttrFullResult" cacheModel="GoodAttr_cache">
+		select a.id as attr_value_id,a.attr_value,b.* from good_attr_value a inner join good_attr b on a.good_attr_id = b.id 
+		where a.good_id = #goodId# order by sort asc
+	</select>
+	<!-- 根据商品类别来查询商品的一级种类属性 -->
+	<select id="GoodAttr_goodtype_select" resultMap="GoodAttrResult" cacheModel="GoodAttr_cache">
+		select * from good_attr where good_kind_id in (select id from good_kind where good_type_id=#goodtypeId#)
+	</select>
+	
+	
+	<insert id="GoodAttr_insert">
+		insert into good_attr 
+			(id,code,name,good_kind_id,input_type,remark,state,sort,value)
+		values
+			(#id#,#code#,#name#,#goodKindId#,#inputType#,#remark#,#state#,#sort#,#value#)
+	</insert>
+	<update id="GoodAttr_update">
+		update good_attr set
+			code = #code#,
+			name = #name#,
+			good_kind_id = #goodKindId#,
+			input_type = #inputType#,
+			remark = #remark#,
+			state = #state#,
+			sort = #sort#,
+			value = #value#
+		where id = #id#
+	</update>
+	
+  <delete id="GoodAttr_delete">
+    delete from good_attr
+    where id = #id:VARCHAR#
+  </delete>	
+   <delete id="GoodAttr_goodKindId_delete">
+    delete from good_attr
+    where good_kind_id = #goodKindId#
+  </delete>	
+	
+</sqlMap>

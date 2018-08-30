@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+.brand3{ width:1200px; padding-top:15px; float:left;}
+.brand301{ width:83px;  float:left;}
+.brand301 span{ width:56px; height:56px; margin-top:1px; background:#2791e3; font-size:48px; color:#fff; line-height:56px; text-align:center; font-family:Arial, Helvetica, sans-serif; display:block;}
+.brand302{ width:1117px;  float:left;}
+.brand302 li{ width:157px;  float:left; margin-bottom:15px;}
+.brand302 li img{ width:132px; height:56px; border:#ebeaea solid 1px;}
+
+
+/*============================商品分类===================================*/
+
+.content{ width:1200px; margin:0 auto; }
+.limitbuy{ width:1200px; float:left; overflow:hidden;}
+.brand{ width:1200px;  padding-top:15px; float:left;}
+#Tab2{
+width:946px;
+float:left;
+}
+/*菜单class*/
+.Menubox {
+width:1200px;
+background:url(../../../Images/images/brand1.jpg) repeat-x left top;
+height:29px;
+float:left;
+}
+.Menubox ul{
+margin:0px;
+padding:0px;
+}
+.Menubox li{
+float:left;
+display:block;
+cursor:pointer;
+text-align:center;
+color:#666666;
+margin-right:31px;
+display:inline;
+font-family:"宋体";
+font-size:12px;
+line-height:24px;
+}
+.Menubox li.hover{
+padding:0px;
+background:#fff;
+border-bottom:#2791e3 solid 2px;
+background:url(../../../Images/images/brand2.jpg) no-repeat center bottom;
+color:#0a7cd4;
+font-family:"微软雅黑";
+font-size:18px;
+height:27px;
+line-height:20px;
+margin-right:31px;
+display:inline;
+}
+.Contentbox{
+clear:both;
+padding-top:8px;
+width:946px;
+}
+
+
+.Menubox2 {
+width:254px;
+background:url(../../../Images/images/brand5.jpg) no-repeat left top;
+height:264px;
+margin-top:13px;
+float:left;
+display:block;
+}
+.Menubox2 span{ padding-left:19px; padding-top:12px; float:left;}
+.Menubox2 span img{ width:201px; height:240px; border:#dedede solid 1px;}
+
+.brand2{ width:940px; padding-left:5px; padding-top:9px; float:left; height:36px;}
+.brand2 h1{cursor:hand; width:65px; font-size:14px; font-weight:bold; float:left;}
+.brand2 h1 a{ font-size:14px; font-weight:bold; text-decoration:none;}
+.brand2 h1 a:hover{ font-size:14px; font-weight:bold; text-decoration:underline; color:#0a7cd4;}
+.brand2 ul{ float:left;}
+.brand2 ul li{cursor:hand; float:left; width:26px;color:#666; font-size:14px; font-weight:bold; text-align:left; text-decoration:none; font-family:Arial, Helvetica, sans-serif;}
+.brand2 ul li a{ color:#666; font-size:14px; font-weight:bold; text-align:left; text-decoration:none; font-family:Arial, Helvetica, sans-serif;}
+.brand2 ul li a:hover{ color:#0a7cd4; font-size:14px; font-weight:bold; text-align:left; text-decoration:none; font-family:Arial, Helvetica, sans-serif;}

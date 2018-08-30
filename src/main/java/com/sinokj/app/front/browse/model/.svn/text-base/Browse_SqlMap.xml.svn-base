@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Browse">
+	<resultMap class="com.sinokj.app.front.browse.model.Browse" id="BrowseResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="good_pic" property="goodPic" jdbcType="varchar"/>
+		<result column="good_price" property="goodPrice" jdbcType="decimal"/>
+	</resultMap>
+	
+	<resultMap class="com.sinokj.app.good.goodExtend.model.GoodExtend" id="BrowsetoResult" extends="BrowseResult">
+		<result column="intro_brief" property="introBrief" jdbcType="varchar"/>
+	</resultMap>
+
+  	<!-- 模糊查询 -->
+	<sql id="Browse_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+				customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodId">
+				good_id = #goodId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	<select id="Browse_select" resultMap="BrowseResult">
+		select * from browse_sale
+		<include refid="Browse_select_where_clause"/>
+	</select>
+	
+	<select id="Browse_reply_select" resultMap="BrowseResult">
+		select * from (select a.*,b.intro_brief from browse_sale a  LEFT JOIN good_extend b on a.good_id =b.good_id )a where customer_id=#customerId# 
+	</select>
+	
+	
+	<insert id="Browse_insert">
+		insert into browse_sale
+		 (id,customer_id,good_id,create_time,state,good_name,good_pic,good_price)
+		   values(#id#,#customerId#,#goodId#,#createTime#,#state#,#goodName#,#goodPic#,#goodPrice#)
+	</insert>
+
+
+</sqlMap>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SysUserPower" >
+
+  <!-- 结果集 -->
+  <resultMap id="SysUserPowerResult" class="com.sinokj.app.system.user.entity.SysUserPower" >
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleCode" jdbcType="VARCHAR" />
+    <result column="power_id" property="powerId" jdbcType="VARCHAR" />
+    <result column="power_name" property="powerName" jdbcType="VARCHAR" />
+    <result column="power_code" property="powerCode" jdbcType="VARCHAR" />
+    <result column="power_insert" property="inserts" jdbcType="VARCHAR" />
+    <result column="power_delete" property="deletes" jdbcType="VARCHAR" />
+    <result column="power_select" property="selects" jdbcType="VARCHAR" />
+     <result column="power_update" property="updates" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 角色查询条件 -->
+  <sql id="SysUserPower_where_clause">
+    <dynamic prepend="where"> 
+	    <isNotEmpty prepend="and" property="userId"> 
+	            u.id = #userId# 
+	    </isNotEmpty>
+	    <isNotEmpty prepend="and" property="userCode"> 
+	            u.code = #userCode# 
+	    </isNotEmpty>	    
+    </dynamic>   	
+  </sql>
+ 
+  <!-- 获取角色 -->
+  <select id="SysUserPower_select" resultMap="SysUserPowerResult">
+	select 
+		u.id user_id,
+	    u.name user_name,
+	    u.code user_code,
+	    r.id role_id,
+	    r.name role_name,
+	    r.code role_code,
+	    p.id power_id,
+	    p.name power_name,
+	    p.code power_code,
+	    rp.power_insert power_insert,
+	    rp.power_delete power_delete,
+	    rp.power_select power_select,
+	    rp.power_update power_update
+	    
+	from sys_user u inner join sys_role r on u.role_id=r.id
+	     inner join sys_role_power rp on r.id=rp.role_id
+	     inner join sys_power p on rp.power_id=p.id
+    <include refid="SysUserPower_where_clause"/>
+  </select> 
+   
+</sqlMap>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BankAccount" >
+	<resultMap id="BankAccountResult" class="com.sinokj.app.baseInfo.bankAccount.model.BankAccount" >
+	  <!-- base -->
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="name" property="name" jdbcType="VARCHAR" />
+	  <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	  <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	  <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	  <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	  <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	  <result column="state" property="state" jdbcType="VARCHAR" />
+	  <!-- BankAccount -->
+	  <result column="account" property="account" jdbcType="varchar" />
+	  <result column="money" property="money" jdbcType="decimal" />
+	  <result column="account_holder" property="accountHolder" jdbcType="varchar" />
+	  <result column="bank" property="bank" jdbcType="varchar" />
+	  <result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+  	 <!-- 缓存模型 -->
+	<cacheModel id="BankAccount_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="BankAccount.BankAccount_insert"/>
+		<flushOnExecute statement="BankAccount.BankAccount_update"/>
+		<flushOnExecute statement="BankAccount.BankAccount_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+  	<!-- 模糊查询条件 -->
+	<sql id="BankAccount_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+				state = #state# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="account">
+				account = #account# 
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	
+  	<!-- 精确查询条件 -->
+	<sql id="BankAccount_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+				state = #state# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="account">
+				account = #account# 
+			</isNotEmpty>		
+		</dynamic> 	
+	</sql>	
+  	
+  	<!-- 模糊查询 -->
+	<select id="BankAccount_query_select" resultMap="BankAccountResult" cacheModel="BankAccount_cache">
+		select * from bank_account
+		<include refid="BankAccount_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="BankAccount_count_query_select" resultClass="java.lang.Integer" cacheModel="BankAccount_cache">
+		select count(*) from bank_account
+		<include refid="BankAccount_query_select_where_clause"/>
+	</select>
+  	<!-- 精确查询 -->
+	<select id="BankAccount_select" resultMap="BankAccountResult" cacheModel="BankAccount_cache">
+		select * from bank_account
+		<include refid="BankAccount_select_where_clause"/>
+		order by create_time desc
+	</select>	
+	
+	
+    <delete id="BankAccount_delete">
+        delete from bank_account where id = #id#
+    </delete>
+    
+	<insert id="BankAccount_insert"  >
+	  insert into bank_account (id, code, name,creator_id,creator_name, create_time, modifier_id, modifier_name, modify_time, state,
+	  account,money,account_holder,bank,remark)
+	  values (#id:VARCHAR#, #code:VARCHAR#, #name:VARCHAR#, #creatorId:VARCHAR#, #creatorName:VARCHAR#,#createTime:TIMESTAMP#, #modifierId:VARCHAR#,
+	   #modifierName:VARCHAR#, #modifyTime:TIMESTAMP#,#state:VARCHAR#,#account#,#money#,#accountHolder#,#bank#,#remark#)
+	</insert>
+  
+	<update id="BankAccount_update" >
+	    update bank_account
+	    <dynamic prepend="set" >
+	      <isNotNull prepend="," property="code" >
+	        code = #code:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="name" >
+	        name = #name:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="creatorId" >
+	        creator_id = #creatorId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="creatorName" >
+	        creator_name = #creatorName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="createTime" >
+	        create_time = #createTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifierId" >
+	        modifier_id = #modifierId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifierName" >
+	        modifier_name = #modifierName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifyTime" >
+	        modify_time = #modifyTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="," property="state" >
+	        state = #state:VARCHAR#
+	      </isNotNull>
+	       <isNotNull prepend="," property="account" >
+	        account = #account#
+	      </isNotNull>
+	       <isNotNull prepend="," property="money" >
+	        money = #money#
+	      </isNotNull>
+	      <isNotNull prepend="," property="accountHolder" >
+	        account_holder = #accountHolder#
+	      </isNotNull>
+	      <isNotNull prepend="," property="bank" >
+	        bank = #bank#
+	      </isNotNull>
+	      <isNotNull prepend="," property="remark" >
+	        remark = #remark:VARCHAR#
+	      </isNotNull>
+	    </dynamic>
+	    where id = #id#
+	</update>
+</sqlMap>

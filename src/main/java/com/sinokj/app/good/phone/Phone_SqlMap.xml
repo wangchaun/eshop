@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Phone">
+	<resultMap class="com.sinokj.app.good.phone.Phone" id="PhoneResult">
+	    
+		<result column="id" property="id" jdbcType="varchar" />
+		<result column="phone" property="telphone" jdbcType="varchar" />
+		<result column="isBuy" property="isBuy" jdbcType="varchar" />
+		<result column="phoneFee" property="phoneFee" jdbcType="varchar" />
+		<result column="wareId" property="wareId" jdbcType="varchar" />
+		<result column="price" property="price" jdbcType="decimal" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!-- 缓存模型 -->
+	<cacheModel id="Phone_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="Phone.Phone_insert" />
+		<flushOnExecute statement="Phone.Phone_update" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<!-- 模糊查询 -->
+	<sql id="Phone_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="wareId">
+				wareId= #wareId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="telphone">
+				phone like '%$telphone$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isBuy">
+				isbuy= #isBuy#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="Phone_select" resultMap="PhoneResult">
+		select top 20 * from phone 
+		<include refid="Phone_query_select_where_clause" />
+		order by NEWID()
+	</select>
+
+	<select id="Phone_query_select" resultMap="PhoneResult">
+		select top 20 * from phone 
+		<include refid="Phone_query_select_where_clause" />
+		order by NEWID()
+	</select>
+	<insert id="Phone_insert">
+		insert into phone(id,phone,price,isBuy,wareId,phoneFee)
+		   values(#id#,#telphone#,#price#,#isBuy#,#wareId#,#phoneFee#)
+	</insert>
+	<select id="Phone_count_query_select" resultClass="java.lang.Integer" cacheModel="Phone_cache">
+		select count(*) from phone
+			<include refid="Phone_query_select_where_clause"/>
+	</select>
+	<update id="Phone_update">
+     update phone
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="isBuy" >
+        isBuy= #isBuy:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="modifyTime" >
+        modify_time = #modifyTime:TIMESTAMP#
+      </isNotNull>
+    </dynamic>
+    where phone = #telphone:VARCHAR#
+  </update>
+</sqlMap>

@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================企业用户===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.user{ width:1190px; float:left; padding-top:30px;  padding-left:10px;}
+.user span{ color:#0a7cd4; font-size:32px; font-family:"微软雅黑"; float:left; width:979px;}
+.user samp{ float:left; }
+.user1{ width:1190px; float:left; padding-top:10px; padding-left:10px;}
+.user2{ width:1200px; float:left; margin-top:30px; background:#f9f9f9; overflow:hidden;}
+.user2_left{ width:506px; float:left; margin-top:10px; background:url(../images/y1.jpg) no-repeat right top; overflow:hidden;}
+.user2_left01{ width:191px; float:left; padding-left:32px;}
+.user2_left02{ width:283px; float:left;  color:#666666; font-size:17px; font-family:"微软雅黑"; line-height:36px;}
+.user2_left02 span{ width:283px; float:left; padding-top:35px; padding-bottom:20px; display:block; font-size:24px; color:#0a7cd4; font-family:"微软雅黑"; }
+.user2_right{ width:600px; float:left; margin-top:10px; padding-left:94px; overflow:hidden;}
+.user2_right01{ width:600px;  float:left; color:#0a7cd4; font-size:20px;  font-family:"微软雅黑"; height:35px; padding-top:10px;}
+.user2_right02{ width:600px; float:left; height:25px; font-size:12px; color:#666;}
+.user2_right03{ width:600px; float:left; padding-top:10px;}
+.user2_right03 h1{ float:left; padding-right:3px; line-height:30px; width:75px; text-align:left;}
+.user2_right03 h2{ float:left;}
+.user2_right03 h3{ float:left; width:12px; text-align:center; line-height:30px; color:#c2c2c2;}
+.user2_right03input{ width:262px; height:28px; border:#d9d9d9 solid 1px; background:#fff; line-height:28px; padding-left:5px;}
+.user2_right03input1{ width:51px; padding-left:5px; height:28px; border:#d9d9d9 solid 1px; background:#fff; line-height:28px;}
+.user2_right03input2{ width:122px; padding-left:5px; height:28px; border:#d9d9d9 solid 1px; background:#fff; line-height:28px;}
+.user2_right03input3{ width:452px; padding-left:5px; height:138px; border:#d9d9d9 solid 1px; background:#fff; line-height:22px; overflow:hidden;}
+.user2_right04{ width:300px; float:left; padding-top:15px; padding-left:83px; padding-bottom:20px;}
+.user2_right03btn{ width:90px; height:29px; border:none; cursor:pointer; background:url(../images/y3.jpg) no-repeat left top;}

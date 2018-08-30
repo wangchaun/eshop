@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SysDept" >
+
+  <!-- 结果集 -->
+  <resultMap id="SysDeptResult" class="com.sinokj.app.system.dept.model.SysDept" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	<result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	<result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	<result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	<result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  
+	<!-- 缓存模型 -->
+	<cacheModel id="SysDept_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="SysDept.SysDept_insert"/>
+		<flushOnExecute statement="SysDept.SysDept_update"/>
+		<flushOnExecute statement="SysDept.SysDept_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel>   
+  
+  <!-- 模糊查询 -->
+  <sql id="SysDept_query_select_where_clause">
+    <dynamic prepend="where">
+	    <isNotEmpty prepend="and" property="id"> 
+	            id = #id# 
+	    </isNotEmpty>
+	    <isNotEmpty prepend="and" property="code"> 
+	            code like '%$code$%' 
+	    </isNotEmpty>	    
+	    <isNotEmpty prepend="and" property="name"> 
+	            name like '%$name$%' 
+	    </isNotEmpty>
+	  	<isNotEmpty prepend="and" property="state"> 
+	            state = #state#
+	    </isNotEmpty>
+    </dynamic>   	
+  </sql>
+	<select id="SysDept_count_query_select" resultClass="java.lang.Integer" cacheModel="SysDept_cache">
+		select count(*) from department
+		<include refid="SysDept_query_select_where_clause"/>
+	</select>	  
+  <select id="SysDept_query_select" resultMap="SysDeptResult" cacheModel="SysDept_cache">
+    select * from department  
+    <include refid="SysDept_query_select_where_clause"/>
+    order by  create_time desc
+  </select>  
+  
+  <!-- 精确查询 -->
+  <sql id="SysDept_select_where_clause">
+    <dynamic prepend="where">
+	    <isNotEmpty prepend="and" property="id"> 
+	            id = #id# 
+	    </isNotEmpty>
+	    <isNotEmpty prepend="and" property="code"> 
+	            code = #code#
+	    </isNotEmpty>	    
+	    <isNotEmpty prepend="and" property="name"> 
+	            name = #name#
+	    </isNotEmpty>
+	  	<isNotEmpty prepend="and" property="state">
+	            state = #state#
+	    </isNotEmpty>
+    </dynamic>   	
+  </sql>  
+  <select id="SysDept_select" resultMap="SysDeptResult" cacheModel="SysDept_cache">
+    select * from department  
+    <include refid="SysDept_select_where_clause"/>
+    order by  create_time desc
+  </select>   
+    
+  <!-- 删除角色 -->
+  <delete id="SysDept_delete">
+    delete from department where id = #id#
+  </delete>
+  
+  <!-- 添加角色 -->
+  <insert id="SysDept_insert" >   
+	  insert into department (id, code, name, 
+	  	creator_id, creator_name, create_time, modifier_id, modifier_name, modify_time, state)
+	  values (#id:VARCHAR#, #code:VARCHAR#, #name:VARCHAR#, 
+	  	#creatorId:VARCHAR#, #creatorName:VARCHAR#, #createTime:TIMESTAMP#, #modifierId:VARCHAR#, #modifierName:VARCHAR#, #modifyTime:TIMESTAMP#,#state:VARCHAR#)
+  </insert>
+  
+  <!-- 更新角色 -->
+  <update id="SysDept_update"  >  
+    update department
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="code" >
+        code = #code:VARCHAR#
+      </isNotNull>    
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creatorId" >
+        creator_id = #creatorId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="creatorName" >
+        creator_name = #creatorName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time = #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="modifierId" >
+        modifier_id = #modifierId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="modifierName" >
+        modifier_name = #modifierName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="modifyTime" >
+        modify_time = #modifyTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="state" >
+        state = #state:VARCHAR#
+      </isNotNull>    	
+    </dynamic>
+    where id = #id#
+  </update>
+ 
+</sqlMap>

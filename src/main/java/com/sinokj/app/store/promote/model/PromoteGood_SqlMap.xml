@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PromoteGood">
+	<resultMap class="com.sinokj.app.store.promote.model.PromoteGood" id="PromoteGoodResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- SaleOrder -->
+		<result column="promote_id" property="promoteId" jdbcType="varchar"/>
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="price_market" property="priceMarket" jdbcType="decimal"/>
+		<result column="price_promote" property="pricePromote" jdbcType="decimal"/>
+
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="PromoteGood_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="PromoteGood.PromoteGood_insert"/>
+		<flushOnExecute statement="PromoteGood.PromoteGood_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="PromoteGood_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="promoteId">
+				a.promote_id = #promoteId#
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="minprice">
+				<![CDATA[a.price_promote >= #minprice#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="maxprice">
+				<![CDATA[a.price_promote <= #maxprice#]]>
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	
+	<select id="PromoteGood_count_query_select" resultClass="java.lang.Integer" cacheModel="PromoteGood_cache">
+		select count(*) from promote_good a inner join promote_topic b on a.promote_id=b.id
+		<include refid="PromoteGood_query_select_where_clause"/>
+	</select>	
+	<select id="PromoteGood_query_select" resultMap="PromoteGoodResult" cacheModel="PromoteGood_cache">
+		select a.*,b.code as promotecode from promote_good a inner join promote_topic b on a.promote_id=b.id
+		<include refid="PromoteGood_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="PromoteGood_promoteId_select" resultMap="PromoteGoodResult" cacheModel="PromoteGood_cache">
+		select * from promote_good a
+		<include refid="PromoteGood_query_select_where_clause"/>
+	</select>
+	
+	<insert id="PromoteGood_insert">
+		insert into promote_good
+			(id,sort,promote_id,good_id,good_name,price_market,price_promote)
+		values
+			(#id#,#sort#,#promoteId#,#goodId#,#goodName#,#priceMarket#,#pricePromote#)
+	</insert>
+	
+	<delete id="PromoteGood_delete">
+		delete from promote_good where promote_id = #promoteId#
+	</delete>
+</sqlMap>

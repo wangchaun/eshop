@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Phonepackage">
+	<resultMap class="com.sinokj.app.good.phone_package.Phonepackage" id="PhonepackageResult">
+		<result column="packagephone" property="packagephone" jdbcType="varchar" />
+		<result column="packagetypephone" property="packagetypephone" jdbcType="varchar" />
+		<result column="countryflow" property="countryflow" jdbcType="varchar" />
+		<result column="calltime" property="calltime" jdbcType="varchar" />
+		<result column="pmessage" property="pmessage" jdbcType="varchar" />
+		<result column="prepaid" property="prepaid" jdbcType="varchar" />
+		<result column="networkphone" property="networkphone" jdbcType="varchar" />
+		<result column="freearea" property="freearea" jdbcType="varchar" />
+		<result column="overpackagefree" property="overpackagefree" jdbcType="varchar" />
+		<result column="prepaidforphone" property="prepaidforphone" jdbcType="varchar" />
+		<result column="wareId" property="wareId" jdbcType="varchar" />
+	</resultMap>
+	<!-- 缓存模型 -->
+	<cacheModel id="Phonepackage_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="Phonepackage.Phonepackage_insert" />
+		<flushOnExecute statement="Phonepackage.Phonepackage_update" />
+		<property name="size" value="1000" />
+	</cacheModel> 
+	<!-- 模糊查询 -->
+	<sql id="Phonepackage_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="wareId">
+				wareId= #wareId#
+			</isNotEmpty>
+	
+		</dynamic>
+	</sql>
+	<select id="Phonepackage_select" resultMap="PhonepackageResult">
+		select * from phonepackage
+		<include refid="Phonepackage_query_select_where_clause" />
+		
+	</select>
+	<select id="Phonepackage_query_select" resultMap="PhonepackageResult">
+		select  * from phonepackage 
+		<include refid="Phonepackage_query_select_where_clause" />
+		order by NEWID()
+	</select>
+	<insert id="Phonepackage_insert">
+		insert into phonepackage(packagephone,countryflow,calltime,pmessage,prepaid,networkphone,freearea,overpackagefree,,prepaidforphone,wareId,packagetypephone)
+		   values(#packagephone#,#countryflow#,#calltime#,#pmessage#,#prepaid#,#networkphone#,#freearea#,#overpackagefree#,#prepaidforphone#,#wareId#,#packagetypephone#)
+	</insert>
+	<select id="Phonepackage_count_query_select" resultClass="java.lang.Integer" cacheModel="Phonepackage_cache">
+		select count(*) from phonepackage
+			<include refid="Phonepackage_query_select_where_clause"/>
+	</select>
+	<update id="Phonepackage_update">
+		update phonepackage set prepaid=#prepaid#
+		   <!-- where wareId = #wareId# or package=#package# -->
+		    where wareId = #wareId# and packagephone=#packagephone#
+	</update>
+</sqlMap>
+

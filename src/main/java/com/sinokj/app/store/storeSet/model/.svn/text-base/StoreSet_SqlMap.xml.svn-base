@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="StoreSet">
+	<resultMap class="com.sinokj.app.store.storeSet.model.StoreSet" id="StoreSetResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- StoreSet -->
+		<result column="content" property="content" jdbcType="text"/>
+		<result column="subject" property="subject" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="StoreSet_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="StoreSet.StoreSet_insert"/>
+		<flushOnExecute statement="StoreSet.StoreSet_update"/>
+		<flushOnExecute statement="StoreSet.StoreSet_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="StoreSet_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="subject">
+				subject like '%$subject$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_Name like '%$creatorName$%'
+			</isNotEmpty>
+					
+		</dynamic>		
+	</sql>
+	<select id="StoreSet_count_query_select" resultClass="java.lang.Integer" cacheModel="StoreSet_cache">
+		select count(*) from store_set
+		<include refid="StoreSet_query_select_where_clause"/>
+	</select>	
+	<select id="StoreSet_query_select" resultMap="StoreSetResult" cacheModel="StoreSet_cache">
+		select * from store_set
+		<include refid="StoreSet_query_select_where_clause"/>
+		order by code desc
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="StoreSet_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="subject">
+				subject = #subject#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_name = #creatorName#
+			</isNotEmpty>
+					
+		</dynamic>		
+	</sql>	
+	<select id="StoreSet_select" resultMap="StoreSetResult" cacheModel="StoreSet_cache">
+		select * from store_set
+		<include refid="StoreSet_select_where_clause"/>
+		order by create_time,code desc
+	</select>
+
+	<!-- 根据Id数组进行in查询 -->
+	<insert id="StoreSet_insert">
+		insert into store_set 
+			(id,code,subject,content,creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#subject#,#content#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	<update id="StoreSet_update">
+		update store_set set
+			subject = #subject#,
+			content = #content#,
+			creator_name = #creatorName#,
+			create_time = #createTime#,
+			state = #state#
+		where id = #id#
+	</update>
+	
+	
+	
+  <delete id="StoreSet_delete">
+    delete from store_set
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

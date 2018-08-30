@@ -1,0 +1,46 @@
+10
+
+dir
+576
+svn://192.168.1.170/trunk/%E7%BD%91%E4%B8%8A%E5%95%86%E5%9F%8E/SinoEShop/src/com/sinokj/app/warehouse
+svn://192.168.1.170
+
+
+
+2014-11-11T08:25:46.625000Z
+469
+yb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4aa2bac3-24f6-fb48-8943-87f5c724e77e
+
+combined
+dir
+
+warehouse
+dir
+
+costAdjust
+dir
+
+warehousePosition
+dir
+
+warehouseMove
+dir
+
+warehouseInto
+dir
+

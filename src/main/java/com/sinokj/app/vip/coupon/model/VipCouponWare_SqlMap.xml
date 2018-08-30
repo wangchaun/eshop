@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="VipCouponWare">
+	<resultMap class="com.sinokj.app.vip.coupon.model.VipCouponWare" id="VipCouponWareResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		
+		<!-- VipCouponWare  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="vip_coupon_id" property="vipCouponId" jdbcType="varchar"/>
+		<result column="vip_coupon_name" property="vipCouponName" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="VipCouponWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="VipCouponWare.VipCouponWare_insert"/>
+		<flushOnExecute statement="VipCouponWare.VipCouponWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="VipCouponWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="vipCouponId">
+			  vip_coupon_id = #vipCouponId#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="VipCouponWare_query_select" resultMap="VipCouponWareResult" cacheModel="VipCouponWare_cache">
+		select * from Vip_Coupon_Ware 
+		<include refid="VipCouponWare_query_select_where_clause"/>
+		order by sort desc
+	</select>
+	<select id="VipCouponWare_count_query_select" resultClass="java.lang.Integer" cacheModel="VipCouponWare_cache">
+		select count(*) from Vip_Coupon_Ware 
+		<include refid="VipCouponWare_query_select_where_clause"/>
+	</select>
+	
+	
+	<sql id="VipCouponWare_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="vipCouponId">
+			  vip_coupon_id = #vipCouponId#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="VipCouponWare_select" resultMap="VipCouponWareResult" cacheModel="VipCouponWare_cache">
+		select * from Vip_Coupon_Ware 
+		<include refid="VipCouponWare_select_where_clause"/>
+		order by sort desc
+	</select>
+
+	<!--  增加员购物卷货物  -->
+	<insert id="VipCouponWare_insert">
+		insert into Vip_Coupon_Ware 
+			(id,sort,vip_coupon_id,vip_coupon_name,ware_id,ware_name)
+		values
+			(#id#,#sort#,#vipCouponId#,#vipCouponName#,#wareId#,#wareName#)
+	</insert>
+	
+	<!-- 删除会员购物卷货物 根据id-->
+	<delete id="VipCouponWare_delete">
+		delete from Vip_Coupon_Ware where vip_coupon_id = #vipCouponId#
+	</delete>
+</sqlMap>

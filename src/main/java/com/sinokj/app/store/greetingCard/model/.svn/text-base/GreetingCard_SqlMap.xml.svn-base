@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GreetingCard">
+	<resultMap class="com.sinokj.app.store.greetingCard.model.GreetingCard" id="GreetingCardResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- GreetingCard -->
+		<result column="content" property="content" jdbcType="text"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="customer_name" property="customerName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GreetingCard_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GreetingCard.GreetingCard_insert"/>
+		<flushOnExecute statement="GreetingCard.GreetingCard_update"/>
+		<flushOnExecute statement="GreetingCard.GreetingCard_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="GreetingCard_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_Name like '%$creatorName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+				customer_id like #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="or" property="customerId">
+				customer_id = ''
+			</isNotEmpty>	
+		</dynamic>		
+	</sql>
+	<select id="GreetingCard_count_query_select" resultClass="java.lang.Integer" cacheModel="GreetingCard_cache">
+		select count(*) from greeting_card
+		<include refid="GreetingCard_query_select_where_clause"/>
+	</select>	
+	<select id="GreetingCard_query_select" resultMap="GreetingCardResult" cacheModel="GreetingCard_cache">
+		select * from greeting_card
+		<include refid="GreetingCard_query_select_where_clause"/>
+		order by code desc
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="GreetingCard_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorName">
+				creator_name = #creatorName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+				customer_id like #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="or" property="customerId">
+				customer_id = ''
+			</isNotEmpty>	
+		</dynamic>		
+	</sql>	
+	<select id="GreetingCard_select" resultMap="GreetingCardResult" cacheModel="GreetingCard_cache">
+		select * from greeting_card
+		<include refid="GreetingCard_select_where_clause"/>
+		order by create_time,code desc
+	</select>
+	
+	<insert id="GreetingCard_insert">
+		insert into greeting_card 
+			(id,code,name,content,creator_id,creator_name,create_time,state,customer_id,customer_name)
+		values
+			(#id#,#code#,#name#,#content#,#creatorId#,#creatorName#,#createTime#,#state#,#customerId#,#customerName#)
+	</insert>
+	<update id="GreetingCard_update">
+		update greeting_card set
+			name = #name#,
+			content = #content#,
+			creator_name = #creatorName#,
+			create_time = #createTime#,
+			state = #state#,
+			customer_id = #customerId#,
+			customer_name = #customerName#
+		where id = #id#
+	</update>
+	
+	
+  <delete id="GreetingCard_delete">
+    delete from greeting_card
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodAttrValue">
+	<resultMap class="com.sinokj.app.good.goodAttr.model.GoodAttrValue" id="GoodAttrValueResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- GoodAttrValue -->
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="good_attr_id" property="goodAttrId" jdbcType="varchar"/>
+		<result column="attr_value" property="attrValue" jdbcType="varchar"/>
+	</resultMap>
+	
+	<insert id="GoodAttrValue_insert">
+		insert into good_attr_value 
+			(id,good_id,good_attr_id,attr_value,sort)
+		values
+			(#id#,#goodId#,#goodAttrId#,#attrValue#,#sort#)
+	</insert>
+	<update id="GoodAttrValue_update">
+		update good_attr_value set
+			good_id = #goodId#,
+			good_attr_id = #goodAttrId#,
+			attr_value = #attrValue#,
+			sort = #sort#
+		where id = #id#
+	</update>
+	
+  <delete id="GoodAttrValue_delete">
+    delete from good_attr_value
+    where id = #id:VARCHAR#
+  </delete>	
+  
+  <delete id="GoodAttrValue_goodId_delete">
+    delete from good_attr_value
+    where good_id = #goodId#
+  </delete>	
+  
+</sqlMap>

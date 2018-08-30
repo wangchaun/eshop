@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="CashItem">
+	<resultMap class="com.sinokj.app.order.cashBasis.pay.model.CashItem" id="CashItemResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		
+		<!-- CashItem  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="money" property="money" jdbcType="decimal"/>
+		<result column="order_Id" property="orderId" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="bank_account_code" property="bankAccountCode" jdbcType="varchar"/>
+		<result column="bank_account_id" property="bankAccountId" jdbcType="varchar"/>
+		<result column="account" property="account" jdbcType="varchar"/>
+		<result column="bank_account_name" property="bankAccountName" jdbcType="varchar"/>
+		<result column="account_holder" property="accountHolder" jdbcType="varchar"/>
+		<result column="bank" property="bank" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="CashItem_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="CashItem.CashItem_insert"/>
+		<flushOnExecute statement="CashItem.CashItem_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="CashItem_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="orderId">
+			  order_Id = #orderId#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="CashItem_query_select" resultMap="CashItemResult" cacheModel="CashItem_cache">
+		select * from Cash_Item 
+		<include refid="CashItem_query_select_where_clause"/>
+		order by sort desc
+	</select>
+	<select id="CashItem_count_query_select" resultClass="java.lang.Integer" cacheModel="CashItem_cache">
+		select count(*) from Cash_Item 
+		<include refid="CashItem_query_select_where_clause"/>
+	</select>
+
+	<!--  增加  -->
+	<insert id="CashItem_insert">
+		insert into Cash_Item 
+			(id,bank_account_code,money,bank_account_id,order_id,
+			sort,remark,account,bank_account_name,account_holder,bank)
+		values
+			(#id#,#bankAccountCode#,#money#,#bankAccountId#,#orderId#,
+			#sort#,#remark#,#account#,#bankAccountName#,#accountHolder#,#bank#)
+	</insert>
+	
+	<!-- 删除费用单 根据id-->
+	<delete id="CashItem_delete">
+		delete from Cash_Item where order_Id = #orderId#
+	</delete>
+</sqlMap>

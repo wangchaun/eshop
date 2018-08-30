@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodExtend">
+	<resultMap class="com.sinokj.app.good.goodExtend.model.GoodExtend" id="GoodExtendResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<!-- GoodExtend -->
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="intro_brief" property="introBrief" jdbcType="varchar"/>
+		<result column="intro" property="intro" jdbcType="text"/>
+		<result column="intro_wholesale" property="introWholesale" jdbcType="text"/>
+		<result column="intro_delivery" property="introDelivery" jdbcType="text"/>
+		<result column="afterSale" property="afterSale" jdbcType="text"/>
+		<result column="practiceGuidelinesFAQS" property="practiceGuidelinesFAQS" jdbcType="text"/>
+		
+		<result column="seo_title" property="seoTitle" jdbcType="varchar"/>
+		<result column="seo_keywords" property="seoKeywords" jdbcType="varchar"/>
+		<result column="seo_description" property="seoDescription" jdbcType="varchar"/>
+		<result column="groupgood_id" property="groupgoodId" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodExtend_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodExtend.GoodExtend_insert"/>
+		<flushOnExecute statement="GoodExtend.GoodExtend_update"/>
+		<flushOnExecute statement="GoodExtend.GoodExtend_delete"/>		
+		<property name="size" value="2000"/>
+	</cacheModel> 
+	<select id="GoodExtend_select" resultMap="GoodExtendResult">
+		select * from good_extend where good_id = #goodId#
+	</select>
+	
+	<select id="GoodExtend_groupgood_select" resultMap="GoodExtendResult">
+		select * from good_extend where groupgood_id = #groupgoodId#
+	</select>	
+	
+	<insert id="GoodExtend_insert">
+		insert into good_extend 
+			(id,good_id,intro_brief,intro,intro_wholesale,intro_delivery,seo_title,seo_keywords,seo_description,afterSale,practiceGuidelinesFAQS,groupgood_id)
+		values
+			(#id#,#goodId#,#introBrief#,#intro#,#introWholesale#,#introDelivery#,#seoTitle#,#seoKeywords#,#seoDescription#,#afterSale#,#practiceGuidelinesFAQS#,#groupgoodId#)
+	</insert>
+	<update id="GoodExtend_update">
+		update good_extend set
+			intro_brief = #introBrief#,
+			intro = #intro#,
+			intro_wholesale = #introWholesale#,
+			intro_delivery = #introDelivery#,
+			seo_title = #seoTitle#,
+			seo_keywords = #seoKeywords#,
+			seo_description = #seoDescription#,
+			afterSale = #afterSale#,
+			practiceGuidelinesFAQS = #practiceGuidelinesFAQS#
+		where good_id = #goodId#
+	</update>
+	
+		<update id="GoodExtend_groupgood_update">
+			update good_extend set
+				intro_brief = #introBrief#,
+				intro = #intro#,
+				intro_wholesale = #introWholesale#,
+				intro_delivery = #introDelivery#,
+				seo_title = #seoTitle#,
+				seo_keywords = #seoKeywords#,
+				seo_description = #seoDescription#,
+				afterSale = #afterSale#,
+				practiceGuidelinesFAQS = #practiceGuidelinesFAQS#
+			where groupgood_id = #groupgoodId#
+		</update>
+	
+  <delete id="GoodExtend_delete">
+    delete from good_extend
+    where good_id = #goodId#
+  </delete>	
+  <delete id="GoodExtend_groupgood_delete">
+    delete from good_extend
+    where groupgood_id = #groupgoodId#
+  </delete>	
+	
+</sqlMap>

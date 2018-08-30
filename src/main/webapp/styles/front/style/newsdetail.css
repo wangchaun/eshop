@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.instructions{ width:1197px; float:left; height:30px; line-height:30px; color:#2791e3; font-family:"宋体"; font-size:12px; padding-left:3px; }
+.instructions a{ color:#2791e3; font-family:"宋体"; font-size:12px; text-decoration:none;}
+.instructions a:hover{ color:#2791e3; font-family:"宋体"; font-size:12px; text-decoration:underline;}
+.instructions span{ color:#333333; font-family:"宋体"; font-size:12px;}
+.newsshow{ width:1200px; float:left;}
+.newsshow_left{ width:853px; float:left; border:#c5d8e9 solid 1px;}
+.newsleft_text{ padding-left:25px; padding-top:15px; width:800px; float:left; font-family:"微软雅黑"; font-size:18px; color:#0a7cd4; height:25px;}
+.newsleft_text1{ padding-left:25px; padding-top:10px; width:803px; float:left;}
+.newsleft_text1 li{ padding-left:15px;  width:788px;  background:url(../../../Images/images/new4.jpg) no-repeat left center; line-height:30px; height:30px; overflow:hidden; position:relative;}
+.newsleft_text1 li span{ position:absolute; top:0px; right:0px;}
+.newsleft_text2{ padding-left:25px; padding-top:10px; width:803px; position:relative; height:25px; float:left; margin-top:25px; margin-bottom:25px;}
+.newsleft_text3{ margin-left:25px;  width:803px; float:left;  display:inline; padding-bottom:15px;}
+.newsleft_text3 h1{ font-weight:bold; font-size:14px; width:798px; padding-left:5px; display:block; height:30px; line-height:30px; margin-top:15px; background:#f6f6f6; margin-bottom:10px;}
+.newsleft_text3 li{ padding-left:15px;  width:788px;  background:url(../../../Images/images/new4.jpg) no-repeat left center; line-height:30px; height:30px; overflow:hidden; position:relative;}
+.newsleft_text3 li span{ position:absolute; top:0px; right:0px;}
+.newsshow_right{ width:335px; padding-left:10px; float:left;}
+.newsright_text{ width:335px;  float:left;}
+.newsright_text1{ width:320px;  float:left; height:28px; background:url(../../../Images/images/lay12.jpg) no-repeat left top; padding-left:15px; line-height:28px; font-weight:bold; margin-top:0px; position:relative;}
+.newsright_text1 span{ position:absolute; top:0px; right:15px;  font-weight:normal;}
+.newsright_text2{ width:333px;  float:left; border:#dadada solid 1px;}
+.news2_text203{ width:303px; float:left;  margin-left:15px; display:inline; border-bottom:#CCCCCC dashed 1px; padding-top:15px; padding-bottom:15px;}
+.news2_text203_img{ width:120px; float:left; }
+.news2_text203_img img{ width:100px; height:100px; padding:5px; border:#dedede solid 1px;}
+.news2_text203_text{ width:183px; float:left;}
+.news2_text203_text h1{ width:183px; float:left; line-height:30px; font-size:12px; font-weight:bold; color:#0a7cd4;}
+.news2_text203_text h1 a{  font-size:12px; font-weight:bold; color:#0a7cd4; text-decoration:none;}
+.news2_text203_text h1 a:hover{  font-size:12px; font-weight:bold; color:#0a7cd4; text-decoration:underline;}
+.news2_text203_text h2{ width:183px; float:left; line-height:24px; height:72px; overflow:hidden;}
+.news2_text202{ width:303px; float:left;  padding-left:15px; padding-top:10px; padding-bottom:10px;}
+.news2_text202 li{ width:288px; float:left;  padding-left:15px; line-height:30px; text-align:left; background:url(../../../Images/images/new4.jpg) no-repeat left center; overflow:hidden; height:30px;}
+.newsright_text201{ width:303px;  float:left; padding-left:15px; padding-top:15px;}
+.newsright_text201 li{ width:130px;  float:left; text-align:center; padding-left:10px; padding-right:10px;}
+.newsright_text201 li img{ width:130px; height:110px;}
+.newsright_text201 li span{ width:130px; text-align:center; line-height:35px; display:block;}
+#tp{ margin-bottom:30px;}
+
+
+
+
+
+
+
+/******************************单页*****************************/
+.article{ padding-left:25px; padding-top:15px; width:803px; float:left; line-height:30px; font-family:"微软雅黑"; font-size:18px; color:#0a7cd4; height:30px; overflow:hidden; text-align:center;}
+.article2{ margin-left:25px; padding-top:10px; display:inline; width:803px; float:left; line-height:24px;  border-bottom:#CCCCCC solid 1px; text-align:center;}
+.article2 span{ padding-left:25px;}
+.article2 a{ color:#0a7cd4; font-size:12px; text-decoration:none;}
+.article2 a:hover{ color:#0a7cd4; font-size:12px; text-decoration:underline;}
+.article3{ margin-left:25px; padding-top:10px; display:inline; width:803px; float:left; line-height:24px;}
+
+
+
+
+
+
+
+
+

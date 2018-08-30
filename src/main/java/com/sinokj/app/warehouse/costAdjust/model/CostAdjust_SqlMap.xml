@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CostAdjust">
+	<resultMap class="com.sinokj.app.warehouse.costAdjust.model.CostAdjust" id="CostAdjustResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<!-- CostAdjust -->
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="CostAdjust_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="CostAdjust.CostAdjust_insert"/>
+		<flushOnExecute statement="CostAdjust.CostAdjust_update"/>
+		<flushOnExecute statement="CostAdjust.CostAdjust_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="CostAdjust_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="CostAdjust_query_select" resultMap="CostAdjustResult" cacheModel="CostAdjust_cache">
+		select * from cost_adjust 
+		<include refid="CostAdjust_query_select_where_clause"/>
+		order by code desc
+	</select>
+	<select id="CostAdjust_count_query_select" resultClass="java.lang.Integer" cacheModel="CostAdjust_cache">
+		select count(*) from cost_adjust
+		<include refid="CostAdjust_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="CostAdjust_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="CostAdjust_select" resultMap="CostAdjustResult" cacheModel="CostAdjust_cache">
+		select * from cost_adjust 
+		<include refid="CostAdjust_select_where_clause"/>
+		order by code desc
+	</select>	
+
+	<insert id="CostAdjust_insert">
+		insert into cost_adjust 
+			(id,code,warehouse_id,warehouse_name,
+			remark,creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#warehouseId#,#warehouseName#,
+			#remark#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	
+	<update id="CostAdjust_update">
+		update cost_adjust set
+			warehouse_id = #warehouseId#,
+			warehouse_name = #warehouseName#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			remark = #remark#,
+			state = #state#
+		where id = #id#
+	</update>
+	
+	<delete id="CostAdjust_delete">
+		delete from cost_adjust where id = #id#
+	</delete>
+</sqlMap>

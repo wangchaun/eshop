@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BrowseOthers">
+	<resultMap class="com.sinokj.app.front.browse.model.BrowseOthers" id="BrowseOthersResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="good_type_id" property="goodTypeId" jdbcType="varchar"/>
+		<result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="good_pic" property="goodPic" jdbcType="varchar"/>
+		<result column="good_price" property="goodPrice" jdbcType="decimal"/>
+		<result column="click_number" property="clickNumber" jdbcType="decimal"/>
+		
+	</resultMap>
+	
+	
+  	<!-- 模糊查询 -->
+	<sql id="BrowseOthers_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeId">
+				good_type_id = #goodTypeId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
+	
+	<select id="BrowseOthers_select" resultMap="BrowseOthersResult">
+		select * from browse_others
+		<include refid="BrowseOthers_select_where_clause"/>
+		order by click_number desc
+	</select>
+	
+	<!-- 获得本类，以及子类的所有点击数总数 -->
+	<select id="BrowseOthers_click_number_select" resultClass="java.lang.Double">
+   	    select sum(click_number) from (
+			(select * from browse_others where good_type_id =#goodTypeId#)
+		union
+			(select * from browse_others where good_type_id in(select id from good_type where parent_id=#goodTypeId#))	
+		)a ORDER BY click_number desc
+    </select>
+    
+    <!-- 获得本类以及子类的浏览历史 -->
+    <select id="BrowseOthers_lookup_select" resultMap="BrowseOthersResult">
+    	select * from (
+			(select * from browse_others where good_type_id =#goodTypeId#)
+		union
+			(select * from browse_others where good_type_id in(select id from good_type where parent_id=#goodTypeId#))	
+		)a ORDER BY click_number desc
+    </select>
+    
+   
+	<select id="BrowseOthers_click_numberTwo_select" resultClass="java.lang.Double">
+   	    select sum(click_number) from (
+			(select * from browse_others where good_type_id !=#goodTypeId#)
+		union
+			(select * from browse_others where good_type_id in(select id from good_type where parent_id!=#goodTypeId#))	
+		)a ORDER BY click_number desc
+    </select>
+    
+    
+    <select id="BrowseOthers_lookupTwo_select" resultMap="BrowseOthersResult">
+    	select * from (
+			(select * from browse_others where good_type_id !=#goodTypeId#)
+		union
+			(select * from browse_others where good_type_id in(select id from good_type where parent_id!=#goodTypeId#))	
+		)a ORDER BY click_number desc
+    </select>
+	
+	
+	<insert id="BrowseOthers_insert">
+		insert into browse_others
+		 (id,click_number,good_type_id,good_type_name,good_id,good_name,good_pic,good_price)
+		   values(#id#,#clickNumber#,#goodTypeId#,#goodTypeName#,#goodId#,#goodName#,#goodPic#,#goodPrice#)
+	</insert>
+
+
+</sqlMap>

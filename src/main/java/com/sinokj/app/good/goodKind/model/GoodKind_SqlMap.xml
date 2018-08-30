@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodKind">
+	<resultMap class="com.sinokj.app.good.goodKind.model.GoodKind" id="GoodKindResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- GoodKind -->
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="good_type_id" property="goodtypeId" jdbcType="varchar"/>
+		<result column="good_type_name" property="goodtypeName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodKind_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodKind.GoodKind_insert"/>
+		<flushOnExecute statement="GoodKind.GoodKind_update"/>
+		<flushOnExecute statement="GoodKind.GoodKind_delete"/>		
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="GoodKind_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="GoodKind_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodKind_cache">
+		select count(*) from good_kind
+		<include refid="GoodKind_query_select_where_clause"/>
+	</select>	
+	<select id="GoodKind_query_select" resultMap="GoodKindResult" cacheModel="GoodKind_cache">
+		select * from good_kind
+		<include refid="GoodKind_query_select_where_clause"/>
+		order by sort asc
+	</select>	
+	
+	<select id="GoodKind_select" resultMap="GoodKindResult" cacheModel="GoodKind_cache">
+		select * from good_kind
+		<include refid="GoodKind_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	
+	<insert id="GoodKind_insert">
+		insert into good_kind 
+			(id,code,name,creator_id,creator_name,create_time,state,sort,remark,good_type_id,good_type_name)
+		values
+			(#id#,#code#,#name#,#creatorId#,#creatorName#,#createTime#,#state#,#sort#,#remark#,#goodtypeId#,#goodtypeName#)
+	</insert>
+	<update id="GoodKind_update">
+		update good_kind set
+			code = #code#,
+			name = #name#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			sort = #sort#,
+			remark = #remark#,
+			good_type_id=#goodtypeId#,
+			good_type_name=#goodtypeName#
+		where id = #id#
+	</update>
+	
+  <delete id="GoodKind_delete">
+    delete from good_kind
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

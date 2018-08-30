@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Good">
+	<resultMap class="com.sinokj.app.good.good.model.Good" id="GoodResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<!-- Good -->
+		<result column="good_type_id" property="goodTypeId" jdbcType="varchar"/>
+		<result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+		<result column="good_kind_id" property="goodKindId" jdbcType="varchar"/>
+		<result column="good_kind_name" property="goodKindName" jdbcType="varchar"/>
+		<result column="brand_id" property="brandId" jdbcType="varchar"/>
+		<result column="brand_name" property="brandName" jdbcType="varchar"/>
+	 	<result column="supplier_id" property="supplierId" jdbcType="varchar"/>
+		<result column="supplier_name" property="supplierName" jdbcType="varchar"/>
+		<result column="unit" property="unit" jdbcType="varchar"/>
+		<result column="purchase_price" property="purchasePrice" jdbcType="decimal"/>
+		<result column="price" property="price" jdbcType="decimal"/>
+		<result column="price_market" property="priceMarket" jdbcType="decimal"/>
+		<result column="price_group_buy" property="priceGroupBuy" jdbcType="decimal"/>
+		<result column="credits" property="credits" jdbcType="int"/>
+		<result column="pic_id" property="picId" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+		<result column="tag" property="tag" jdbcType="varchar"/>
+		<result column="begin_sale_time" property="beginSaleTime" jdbcType="datetime"/>
+		<result column="end_sale_time" property="endSaleTime" jdbcType="datetime"/>
+		<result column="barcode" property="barcode" jdbcType="varchar"/>
+		<result column="index_show" property="indexShow" jdbcType="varchar"/>
+		<result column="order_multiple" property="orderMultiple" jdbcType="int"/>
+		<result column="total_sales" property="totalSales" jdbcType="int"/>
+		<result column="daily_net_sales" property="dailyNetSales" jdbcType="int"/>
+		<result column="purchase_num" property="purchaseNum" jdbcType="int"/>
+		<result column="total_cost_inventory" property="totalCostInventory" jdbcType="decimal"/>
+		<result column="average_cost_inventory" property="averageCostInventory" jdbcType="decimal"/>
+		<result column="inventory_min" property="inventoryMin" jdbcType="int"/>
+		<result column="inventory_max" property="inventoryMax" jdbcType="int"/>
+		<result column="is_inventory" property="isInventory" jdbcType="varchar"/>
+		<result column="initialNum" property="initialNum" jdbcType="decimal"/>
+		<result column="tax_rate" property="taxRate" jdbcType="decimal"/>
+		<result column="tax_price" property="taxPrice" jdbcType="decimal"/>
+		<result column="property" property="property" jdbcType="varchar"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<result column="comment_count" property="commentCount" jdbcType="int"/>
+		<result column="group_number" property="groupNumber" jdbcType="int"/>
+		<result column="begin_time" property="beginTime" jdbcType="datetime"/>
+		<result column="end_time" property="endTime" jdbcType="datetime"/>
+		<result column="is_next" property="isNext" jdbcType="varchar"/>
+		<result column="return_rate" property="returnRate" jdbcType="varchar"/>
+		<result column="return_price" property="returnPrice" jdbcType="varchar"/>
+		<result column="activit_number" property="activitNumber" jdbcType="varchar"/>
+		<result column="total_num" property="totalNum" jdbcType="varchar"/>
+		<result column="is_view" property="isView" jdbcType="varchar"/>
+		
+	</resultMap>
+	<resultMap class="com.sinokj.app.good.good.model.Good" id="GoodtooResult" extends="GoodResult">
+		<result column="intro_brief" property="introBrief" jdbcType="varchar"/>
+		<result column="areas_id" property="areasId" jdbcType="varchar"/>
+		<result column="money" property="money" jdbcType="decimal"/> 
+		<result column="p_property" property="fzproperty" jdbcType="varchar"/>
+		<result column="p_tag" property="fztag" jdbcType="varchar"/>
+	</resultMap>
+	<resultMap class="com.sinokj.app.good.good.model.Good" id="GoodMiaoShaResult" extends="GoodResult">
+		<result column="intro_brief" property="introBrief" jdbcType="varchar"/>		
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Good_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Good.Good_insert"/>
+		<flushOnExecute statement="Good.Good_update"/>
+		<flushOnExecute statement="Good.Good_info_update"/>
+		<flushOnExecute statement="Good.Good_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	
+
+	<!-- ly 开始-->
+		<!--首页显示商品-->
+		<sql id="Good_SY_select_where_clause">
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="id">
+					abc.id = #id#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="name">
+					abc.name like '%$name$%'
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="isInventory">
+					abc.is_inventory = #isInventory#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="indexShow">
+					abc.index_show = #indexShow#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="fzproperty">
+					abc.property = #fzproperty#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="areasId">
+					abc.areas_id = #areasId#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="state">
+				    abc.state=#state#
+				</isNotEmpty>
+				<!-- 按团购开始时间 
+				<isNotEmpty prepend="and" property="beginTime">
+					<![CDATA[abc.begin_time >= #beginTime#]]>
+				</isNotEmpty>-->
+				<!-- 团购未结束的商品 -->
+				<isNotEmpty prepend="and" property="endhdTime">
+					<![CDATA[abc.end_time >= #endhdTime#]]>
+				</isNotEmpty>
+				<isEqual prepend="and" property="level" compareValue="1">
+					abc.good_type_id in(
+						select id from good_type where parent_id in (select id from good_type where parent_id=#goodTypeId#)
+						UNION
+						select id from good_type where parent_id=#goodTypeId#
+						UNION
+						select id from good_type where id=#goodTypeId#	
+					)
+				</isEqual>
+			
+				<isEqual prepend="and" property="level" compareValue="2">
+					abc.good_type_id in(
+						select id from good_type where parent_id=#goodTypeId#
+						UNION
+						select id from good_type where id=#goodTypeId#	
+					)
+				</isEqual>
+				
+				<isEqual prepend="and" property="level" compareValue="3">
+					abc.good_type_id in(
+						select id from good_type where id=#goodTypeId#	
+					)
+				</isEqual>
+			</dynamic>
+		</sql>		
+		<!--首页显示商品-->
+		<select id="Good_SY_select" resultMap="GoodtooResult" cacheModel="Good_cache">
+			select * from (
+				select ab.*,c.price money,c.area_id areas_id,c.property p_property,c.tag p_tag from (
+					select a.*,b.intro_brief from good a  LEFT JOIN good_extend b on a.id =b.good_id )ab 
+				LEFT JOIN good_price c on c.good_id=ab.id
+			)abc 
+			<include refid="Good_SY_select_where_clause"/>
+			<!--  group by abc.id--> 
+			<dynamic prepend="order by">
+				<!-- 创建时间 -->
+				<isEqual prepend="," property="sortVal" compareValue="createTime">
+					<![CDATA[  create_time desc ]]>
+				</isEqual>
+				<!-- 评论数 -->
+				<isEqual prepend="," property="sortVal" compareValue="sort">
+					<![CDATA[  sort desc ]]>
+				</isEqual>
+			</dynamic>
+		</select>
+		
+		<!-- 首页你感兴趣商品展示【查询用户行为】 -->
+		<select id="Good_SY2_select" resultMap="GoodtooResult" cacheModel="Good_cache">
+			select * from (select ab.*,c.price money,c.area_id areas_id,c.property p_property,c.tag p_tag from ( 					
+			select a.*,b.intro_brief from (
+				select * from good where id in (
+			select good_id from browse_sale where customer_id =#customerId#)
+			) a  LEFT JOIN good_extend b on a.id =b.good_id )ab  				
+			LEFT JOIN good_price c on c.good_id=ab.id) abc  			 			
+			<include refid="Good_SY_select_where_clause"/> <!--  group by abc.id --> 		
+		</select>
+		<!-- 商品父类频道商品查询 -->
+		<select id="Good_SYfuleipindao_select" resultMap="GoodtooResult" cacheModel="Good_cache">
+			select * from (
+				select ab.*,c.price money,c.area_id areas_id,c.property p_property,c.tag p_tag from (
+					select a.*,b.intro_brief from 
+			(select * from good where good_type_id in (
+			select id from good_type where id=#parentId# or parent_id in (#parentId#)
+		UNION
+			select id from good_type where parent_id in(select id from good_type where parent_id in (#parentId#))
+			))a  LEFT JOIN good_extend b on a.id =b.good_id )ab LEFT JOIN good_price c on c.good_id=ab.id)abc
+			<include refid="Good_SY_select_where_clause"/>
+			
+			<dynamic prepend="order by">
+				<!-- 创建时间 -->
+				<isEqual prepend="," property="sortVal" compareValue="createTime">
+					<![CDATA[  create_time desc ]]>
+				</isEqual>
+				<!-- 评论数 -->
+				<isEqual prepend="," property="sortVal" compareValue="sort">
+					<![CDATA[  sort desc ]]>
+				</isEqual>
+			</dynamic>
+		</select>
+		
+		<!-- 首页根据类别查询商品并按条件查询 -->
+		<sql id="Good_SYgoodType_select_where_clause">
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="isInventory">
+					abc.is_inventory = #isInventory#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="and" property="areasId">
+					abc.areas_id = #areasId#
+				</isNotEmpty>
+				
+				<isEqual prepend="and" property="level" compareValue="1">
+					abc.good_type_id in(
+						select id from good_type where parent_id in (select id from good_type where parent_id=#goodTypeId#)
+						UNION
+						select id from good_type where parent_id=#goodTypeId#
+						UNION
+						select id from good_type where id=#goodTypeId#	
+					)
+				</isEqual>
+			
+				<isEqual prepend="and" property="level" compareValue="2">
+					abc.good_type_id in(
+						select id from good_type where parent_id=#goodTypeId#
+						UNION
+						select id from good_type where id=#goodTypeId#	
+					)
+				</isEqual>
+				
+				<isEqual prepend="and" property="level" compareValue="3">
+					abc.good_type_id in(
+						select id from good_type where id=#goodTypeId#	
+					)
+				</isEqual>
+			</dynamic>		
+		</sql>
+		<!-- 首页根据类别查询商品并按条件查询 -->
+		<select id="Good_SYgoodType_select" resultMap="GoodtooResult" cacheModel="Good_cache">
+			select * from (
+				select ab.*,c.price money,c.area_id areas_id,c.property p_property,c.tag p_tag from (
+					select a.*,b.intro_brief from good a  LEFT JOIN good_extend b on a.id =b.good_id )ab 
+				LEFT JOIN good_price c on c.good_id=ab.id
+			)abc 
+			<include refid="Good_SYgoodType_select_where_clause"/>
+			<!-- GROUP BY id -->
+			<dynamic prepend="order by">
+				<!-- 总销量 -->
+				<isNotNull prepend="," property="salesVolume">
+					<![CDATA[  total_sales desc ]]>
+				</isNotNull>
+				<!-- 评论数 -->
+				<isNotNull prepend="," property="commentValue">
+					<![CDATA[  comment_count desc ]]>
+				</isNotNull>
+				<!-- 推荐顺序排序 -->
+				<isEqual prepend="," property="sortVal" compareValue="sort">
+					<![CDATA[  sort desc ]]>
+				</isEqual>
+			</dynamic>
+		</select>
+		
+		
+		
+		<!-- 首页根据goodId查询商品的库存总量 -->
+		<select id="Good_warehousecount_query_ToT" resultClass="java.lang.Integer" cacheModel="Good_cache">
+			select sum(ware_count) from warehouse_ware where ware_id in (
+				select id from ware where good_id=#id#
+			)
+		</select>
+		
+		<!-- 某一级分类所有商品 -->
+		<select id="Good_count_goodTypeOne_query_ToT" resultClass="java.lang.Integer" cacheModel="Good_cache">
+			select COUNT(*) from good where id in (
+				select id from good where good_type_id =#goodTypeId# 
+				UNION  
+				select id from good where good_type_id in (select id from good_type where parent_id =#goodTypeId#)
+				UNION
+				select id from good where good_type_id in (select id from good_type where parent_id in (select id from good_type where parent_id =#goodTypeId#))
+			) <!--  order by create_time desc-->
+		</select>
+		
+		<!-- 某二级分类所有商品 -->
+		<select id="Good_count_goodTypeTwo_query_ToT" resultClass="java.lang.Integer" cacheModel="Good_cache">
+			select COUNT(*) from good where id in (
+				select id from good where good_type_id =#goodTypeId#
+				UNION  
+				select id from good where good_type_id in (select id from good_type where parent_id =#goodTypeId#)
+			)  and state = 's' <!--  order by create_time desc-->
+		</select>
+		
+		<!-- 根据wareId查询goodId -->
+		<select id="Good_wareId_select" resultMap="GoodResult" cacheModel="Good_cache">
+			select * from good where id=(
+				select good_id from ware where id= #wareId#
+			)
+		</select>
+	    <!-- 根据商品类别查询销售榜 -->
+        <select id="Good_rankingList_select" resultMap="GoodResult" cacheModel="Good_cache">
+			select * from (select *,row_number() over(order by price asc) as RowID 
+			from good where good_type_id=#goodTypeId#) as T 
+			where RowID between 0 and 5 
+		</select>
+	<!-- ly 结束 -->
+	<!-- 二级页面传入数组查询 -->
+	<sql id="Good_brand_select_where_clause">
+		<dynamic>
+			<isNotNull property="searbrand">
+					select id from good where good_type_id  in (select id from good_type where parent_id=#typesId# or good_type_id=#typesId#) and brand_name in
+				<iterate open="(" close=")" conjunction="," property="searbrand">
+					#searbrand[]#
+				</iterate>
+				)
+			</isNotNull>
+		</dynamic>
+	</sql>
+	<sql id="Good_brand2_select_where_clause">
+		<dynamic>
+			<isNotNull property="searbrand">
+					select id from good where good_type_id  in (select id from good_type where parent_id=#typesId# or good_type_id=#typesId#) and brand_name in
+				<iterate open="(" close=")" conjunction="," property="searbrand">
+					#searbrand[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+	</sql>
+	<sql id="Good_par_select_where_clause">
+		<dynamic>
+			<isNotNull prepend="and" open="(" close=")" property="searpropt">
+					attr_value in 
+				<iterate open="(" close=")" conjunction="," property="searpropt">
+					#searpropt[]#
+				</iterate>
+				and good_type_id  in (select id from good_type where parent_id=#typesId# or good_type_id=#typesId#)
+			</isNotNull>
+		</dynamic>
+	</sql>
+	<!-- 三级页面传入数组查询 -->
+	<sql id="Good_brandPage3_select_where_clause">
+		<dynamic>
+			<isNotNull property="searbrandPage3">
+				<iterate open="(" close=")" conjunction="," property="searbrandPage3">
+					#searbrandPage3[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+	</sql>
+	<sql id="Good_proptbrandPage3_select_where_clause">
+		<dynamic>
+			<isNotNull property="searproptPage3">
+				<iterate open="(" close=")" conjunction="," property="searproptPage3">
+					#searproptPage3[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+	</sql>
+	<!-- 三级页面判断商品类型id是否为空的条件查询 -->
+	<sql id="Good_proptbrandPage3_goodType_select_where_clause">
+		<isNotEmpty prepend="and" property="typeidPage">
+			good_type_id in (select id from good_type where parent_id=#typeidPage# or id=#typeidPage#)
+		</isNotEmpty>
+	</sql>
+	
+	<!-- 模糊查询 -->
+	<sql id="Good_query_select_where_clause">
+		<dynamic prepend="where">
+		    <isNotEmpty prepend="and" property="state">
+		        state = #state#
+		    </isNotEmpty>
+			<!-- 二级页面条件组合查询  单品牌-->
+			<isNotEmpty prepend="and" property="brandsea">
+			 	is_inventory='0' and id in(  
+			 	 <include refid="Good_brand_select_where_clause"/>
+			</isNotEmpty>
+			<!-- 二级页面条件组合查询  单属性-->
+			<isNotEmpty prepend="and" property="files">
+			 	is_inventory='0' and id in(  
+			 select id from good where id in(
+			  select good_id from good_attr_value where  good_id in(select id from good where good_type_id  in 
+			   (select id from good_type where parent_id=#typesId# or good_type_id=#typesId#)) 
+			     <include refid="Good_par_select_where_clause"/>
+			    ))    
+			</isNotEmpty>
+			<!-- 二级页面条件组合查询  组合-->
+			<isNotEmpty prepend="and" property="searproptbrand">
+			 	is_inventory='0' and id in(  <include refid="Good_brand2_select_where_clause"/> union
+			 select id from good where id in(
+			  select good_id from good_attr_value where  good_id in(select id from good where good_type_id  in 
+			   (select id from good_type where parent_id=#typesId# or good_type_id=#typesId#)) 
+			     <include refid="Good_par_select_where_clause"/>
+			    ))    
+			</isNotEmpty>
+			<!-- 三级页面条件组合查询  单品牌-->
+			<isNotEmpty prepend="and" property="brandseaPage3">
+				is_inventory='0' and brand_name in 
+				<include refid="Good_brandPage3_select_where_clause"/>  
+				<include refid="Good_proptbrandPage3_goodType_select_where_clause"/>
+			</isNotEmpty>
+			<!-- 三级页面条件组合查询  单属性-->
+			<isNotEmpty prepend="and" property="filesPage3">
+				 id in(
+				  	select good_id from good_attr_value where good_id in (
+				  		select id from good where good_type_id in 
+				  			(select id from good_type where id=#typeidPage# or parent_id =#typeidPage#)
+				  	) and attr_value in <include refid="Good_proptbrandPage3_select_where_clause"/>
+				  )
+			</isNotEmpty>
+			<!-- 三级页面条件组合查询  组合 -->
+			<isNotEmpty prepend="and" property="searproptbrandPage3">
+			  is_inventory='0'and id in(
+			  	  select id from good where is_inventory='0' 
+				  	and brand_name in <include refid="Good_brandPage3_select_where_clause"/>
+				  		and good_type_id in (select id from good_type where parent_id=#typeidPage# or id=#typeidPage#)
+				  UNION 
+				  select id from good where id in(
+				  	select good_id from good_attr_value where good_id in (
+				  		select id from good where good_type_id in 
+				  			(select id from good_type where id=#typeidPage# or parent_id =#typeidPage#)
+				  	) and attr_value in <include refid="Good_proptbrandPage3_select_where_clause"/>
+				  )
+			  )
+			</isNotEmpty>
+
+			<isNotEmpty prepend="and" property="goodTypeId">
+				good_type_id = #goodTypeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeName">
+				good_type_name like '%$goodTypeName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="brandId">
+				brand_id = #brandId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="minprice">
+				<![CDATA[price >= #minprice#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="maxprice">
+				<![CDATA[price <= #maxprice#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="begin">
+				<![CDATA[create_time >= #begin#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="end">
+				<![CDATA[create_time <= #end#]]>
+			</isNotEmpty>
+			<!-- 
+			<isNotEmpty prepend="and" property="indexs">
+				<![CDATA[ good_type_id in (select id from good_type where parent_id in (select id from good_type where parent_id=#typeId#)) ]]>
+			</isNotEmpty>
+			-->
+			<isNotEmpty prepend="and" property="unit">
+				<![CDATA[ good_type_id in (select id from good_type where parent_id=#unit#) or good_type_id in (#unit#)  ]]>
+			</isNotEmpty>
+			 
+			<isNotEmpty prepend="and" property="beginSaleTime">
+				<![CDATA[begin_sale_time <=#beginSaleTime#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="tag">
+				tag = #tag#
+			</isNotEmpty>		
+			<isNotEmpty prepend="and" property="property">
+				property = #property#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseId">
+				id in (select good_id from ware where id in (select ware_id from warehouse_ware where warehouse_id=#warehouseId#))
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isInventory">
+				is_inventory = #isInventory#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="shoptypeName">
+				(`name`like '%$shoptypeName$%'
+				OR good_type_name like '%$shoptypeName$%'
+				OR good_type_id in (select id from good_type where parent_id in (select id from good_type where `name` like '%$shoptypeName$%'))
+				OR brand_name like '%$shoptypeName$%')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="commentCount">
+				comment_count = #commentCount#
+			</isNotEmpty>
+			<!-- 查询二级分类以下的商品 
+			<isNotEmpty prepend="and" property="propt">
+				good_type_id  in (select id from good_type where parent_id=#parentId#)
+			</isNotEmpty>  -->
+			<!-- 查询二级页面商品 -->
+			<isNotEmpty prepend="and" property="typeId">
+				good_type_id =#typeId#
+					or (good_type_id in  (select id from good_type where parent_id=#typeId#) and is_inventory='0' and state='s')
+			</isNotEmpty>
+			<!-- 查询三级页面商品 -->
+			<isNotEmpty prepend="and" property="typeidPage3">
+				is_inventory ='0' and good_type_id in( 
+	   				select id from good_type where id =#typeidPage3# or parent_id =#typeidPage3#
+				)
+			</isNotEmpty>
+			
+		</dynamic>		
+	</sql>
+	<select id="Good_count_query_select" resultClass="java.lang.Integer" cacheModel="Good_cache">
+		select count(*) from good
+		<include refid="Good_query_select_where_clause"/>
+	</select>	
+	<select id="Good_query_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good
+		<include refid="Good_query_select_where_clause"/>
+		<dynamic prepend="order by">
+		    <!-- 传入的map或者类的属性sortval等于id吗，是就附加,和id desc -->
+		    <!-- 创建id -->
+		    <isEqual prepend="," property="sortVal" compareValue="createTime">
+				<![CDATA[  id desc ]]>
+			</isEqual>
+			<!-- 创建时间 -->
+			<isEqual prepend="," property="sortVal" compareValue="createTime">
+				<![CDATA[  create_time desc ]]>
+			</isEqual>
+			<!-- 评论数 -->
+			<isEqual prepend="," property="sortVal" compareValue="sort">
+				<![CDATA[  comment_count desc ]]>
+			</isEqual>
+			 <!-- 销量 -->
+			<isEqual prepend="," property="sortVal" compareValue="salesVolume">
+				<![CDATA[  total_sales desc ]]>
+			</isEqual>
+			<!-- 价格升序 -->
+			<isEqual prepend="," property="sortVal" compareValue="recommend">
+				<![CDATA[  price asc ]]>
+			</isEqual>
+			<!-- 价格降序 -->
+			<isEqual prepend="," property="sortVal" compareValue="ascPrice">
+				<![CDATA[  price desc ]]>
+			</isEqual>
+		</dynamic>
+	</select>
+	<select id="Good_sales_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good
+		<include refid="Good_query_select_where_clause"/>
+		order by  total_sales desc
+	</select>
+	<select id="Good_goodTypeId_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id in (select id from good_type where parent_id=#parentId#)
+	</select>
+	<select id="Good_goodsTypeId_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id = #id#
+	</select>
+	<select id="Good_goodTypeId_dailyNetSales_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id in (select id from good_type where parent_id=#parentId#)
+		order by daily_net_sales desc
+	</select>
+	<!-- 二级页面 销量 -->
+	<select id="Good_dailyNetSales_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id in (select id from good_type where parent_id=#id#)
+		order by daily_net_sales desc
+	</select>
+	<!-- 二级页面 上架时间 -->
+	<select id="Good_SaleTime_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id in (select id from good_type where parent_id=#id#)
+		order by begin_sale_time desc
+	</select>
+	<select id="Good_goodType_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id in (select id from good_type where parent_id=#id#) or good_type_id in (#id#)
+		order by good_type_name desc
+	</select>
+	<!-- 二级页面 精品推荐 -->
+	<select id="Good_goodTag_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where tag='精品推荐' and good_type_id in (select id from good_type where parent_id=#id#)
+	</select>
+	
+	<select id="Good_goodByType_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where good_type_id in (select id from good_type where parent_id in (select id from good_type where parent_id=#id#))
+	</select>
+	
+	<select id="Good_totalsales_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good  order by total_sales desc
+	
+	</select>
+	
+		<select id="Good_Property_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where property=#property# order by create_time desc limit 0,10
+	
+	</select>
+	
+	<!-- 前面太乱，没有注释，我写的查询从这里开始（ly）-->
+	<!--查询一级type包涵下所有的商品-->
+	<sql id="Good_sel_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="property">
+				property = #property#
+			</isNotEmpty>
+			<isEqual prepend="and" property="level" compareValue="1">
+				good_type_id in(
+					select id from good_type where parent_id in (select id from good_type where parent_id=#goodTypeId#)
+					UNION
+					select id from good_type where parent_id=#goodTypeId#
+					UNION
+					select id from good_type where id=#goodTypeId#	
+				)
+			</isEqual>
+			
+			<isEqual prepend="and" property="level" compareValue="2">
+				good_type_id in(
+					select id from good_type where parent_id=#goodTypeId#
+					UNION
+					select id from good_type where id=#goodTypeId#	
+				)
+			</isEqual>
+			
+			<isEqual prepend="and" property="level" compareValue="3">
+				good_type_id in(
+					select id from good_type where id=#goodTypeId#	
+				)
+			</isEqual>
+		</dynamic>		
+	</sql>		
+	<!--  -->
+	<select id="Good_sel_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good
+		<include refid="Good_sel_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<!-- 查询客户是否买过这个商品 -->
+	<select id="Good_select_buy_select" resultMap="GoodResult" cacheModel="Good_cache">
+	select * from good where id in (
+	 select good_id from ware where id in (
+	  select ware_id from sale_ware where sale_id in (
+	   select id from sale_order where customer_id=#customerId#)
+	    )) and id=#id#
+	</select>
+	
+	<!-- 精确查询 -->
+	<sql id="Good_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				good.id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+			    state=#state#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeId">
+				good_type_id = #goodTypeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeName">
+				good_type_name like '%$goodTypeName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="property">
+				property = #property#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="indexShow">
+			 index_show=#indexShow#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isInventory">
+				is_inventory = #isInventory#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isNext">
+				is_next = #isNext#
+			</isNotEmpty>
+			<!-- 查询一级页面的商品 -->
+			<isNotEmpty prepend="and" property="searchType">
+				good_type_id in (
+    			   select id from good_type where parent_id in (
+			           select id from good_type where parent_id=#parentId#)) or good_type_id=#parentId#
+			            or good_type_id in(select id from good_type where parent_id=#parentId#)
+			</isNotEmpty>
+		</dynamic>		
+	</sql>	
+	<select id="Good_select" resultMap="GoodMiaoShaResult" cacheModel="Good_cache">
+		select good.*,good_extend.intro_brief from good LEFT JOIN good_extend on good.id =good_extend.good_id
+		<include refid="Good_select_where_clause"/>
+		order by code desc
+	</select>
+	
+	<!--根据三级商品类别Id查询订单商品-->
+	<select id="selectWhereType_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where id in (select good_id from ware)
+			and good_type_id=#goodTypeId#		 
+		order by code desc
+	</select>
+	
+	<!-- 查询特殊商品 -->
+	<select id="Good_isInventory_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good where is_inventory = #isInventory# order by sort desc
+	</select>
+	
+	
+	<select id="Good_by_code_select" resultMap="GoodResult" cacheModel="Good_cache">
+		select * from good  
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="code">
+					code = #code#
+				</isNotEmpty>
+			</dynamic>
+		order by code desc
+	</select>
+	<!-- 根据商品Id数组进行in查询 -->
+	<select id="Good_by_ids_select" resultMap="GoodResult">
+		select * from good  
+			<dynamic prepend="where">
+				<isNotNull prepend="and" property="idArr">
+					id in 
+					<iterate open="(" close=")" conjunction="," property="idArr">
+						#idArr[]#
+					</iterate>
+				</isNotNull>
+			</dynamic>
+		order by code desc
+	</select>
+	
+	<!-- 根据订单id获取订单商品 -->
+	<select id="Good_by_orderid_select" resultMap="GoodResult">
+		select * from good where id in (
+			select good_id from ware where id in (
+				select ware_id from sale_ware where sale_id=#saleId# ) GROUP BY good_id)
+	</select>
+	
+	
+	
+	<insert id="Good_insert">
+		insert into good 
+			(id,code,name,good_type_id,good_type_name,good_kind_id,good_kind_name,brand_id,brand_name,
+			supplier_id,supplier_name,unit,purchase_price,price,price_market,price_group_buy,credits,barcode,index_show,
+			pic_id,pic,tag,begin_sale_time,end_sale_time,order_multiple,total_sales,daily_net_sales,average_cost_inventory,
+			inventory_min,inventory_max,creator_id,creator_name,create_time,state,is_inventory,initialNum,tax_rate,tax_price,
+			property,remark,comment_count,group_number,begin_time,is_next,return_price,return_rate,end_time,total_num,sort,activit_number,is_view)
+		values
+			(#id#,#code#,#name#,#goodTypeId#,#goodTypeName#,#goodKindId#,#goodKindName#,#brandId#,#brandName#,
+			#supplierId#,#supplierName#,#unit#,#purchasePrice#,#price#,#priceMarket#,#priceGroupBuy#,#credits#,#barcode#,#indexShow#,
+			#picId#,#pic#,#tag#,#beginSaleTime#,#endSaleTime#,#orderMultiple#,#totalSales#,#dailyNetSales#,#averageCostInventory#,
+			#inventoryMin#,#inventoryMax#,#creatorId#,#creatorName#,#createTime#,#state#,#isInventory#,#initialNum#,#taxRate#,#taxPrice#,
+			#property#,#remark#,#commentCount#,#groupNumber#,#beginTime#,#isNext#,#returnPrice#,#returnRate#,#endTime#,#totalNum#,#sort#,#activitNumber#,#isView#)
+	</insert>
+	<update id="Good_update">
+		update good set
+			code = #code#,
+			name = #name#,
+			good_type_id = #goodTypeId#,
+			good_type_name = #goodTypeName#,
+			good_kind_id = #goodKindId#,
+			good_kind_name = #goodKindName#,
+			brand_id = #brandId#,
+			brand_name = #brandName#,
+			supplier_id = #supplierId#,
+			supplier_name = #supplierName#,
+			unit = #unit#,
+			purchase_price = #purchasePrice#,
+			price = #price#,
+			price_market = #priceMarket#,
+			price_group_buy = #priceGroupBuy#,
+			credits = #credits#,
+			barcode = #barcode#,
+			index_show = #indexShow#,
+			pic_id = #picId#,
+			pic = #pic#,
+			tag = #tag#,
+			begin_sale_time = #beginSaleTime#,
+			end_sale_time = #endSaleTime#,
+			order_multiple = #orderMultiple#,
+			inventory_min = #inventoryMin#,
+			inventory_max = #inventoryMax#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			is_inventory = #isInventory#,
+			tax_rate = #taxRate#,
+			tax_price = #taxPrice#,
+			property = #property#,
+			remark = #remark#,
+			comment_count = #commentCount#,
+			group_number = #groupNumber#,
+			begin_time = #beginTime#,
+			is_next = #isNext#,
+			return_price=#returnPrice#,
+			return_rate=#returnRate#,
+			create_time = #createTime#,
+			end_time=#endTime#,
+			total_num=#totalNum#,
+			sort=#sort#,
+			initialNum=#initialNum#,
+			activit_number=#activitNumber#,
+			is_view=#isView#
+		where id = #id#
+	</update>
+	
+	<update id="Good_info_update">
+		update good
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="price">
+				price = #price#,
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="totalSales">
+				total_sales = #totalSales#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="dailyNetSales">
+				daily_net_sales = #dailyNetSales#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="purchaseNum">
+				purchase_num = #purchaseNum#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="purchasePrice">
+				purchase_price = #purchasePrice#,
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="totalCostInventory">
+				total_cost_inventory = #totalCostInventory#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="averageCostInventory">
+				average_cost_inventory = #averageCostInventory#
+			</isNotEmpty>
+				<isNotEmpty prepend="," property="taxRate">
+				tax_rate = #taxRate#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="taxPrice">
+				tax_price = #taxPrice#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="property">
+				property = #property#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="remark">
+				remark = #remark#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="remark">
+				total_num = #totalNum#
+			</isNotEmpty>
+		</dynamic>
+		where id = #id#
+	</update>
+	
+  <delete id="Good_delete">
+    delete from good
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

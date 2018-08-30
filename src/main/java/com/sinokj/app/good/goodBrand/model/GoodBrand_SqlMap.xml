@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodBrand">
+	<resultMap class="com.sinokj.app.good.goodBrand.model.GoodBrand" id="GoodBrandInfoResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="parent_id" property="parentId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="level" property="level" jdbcType="int"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+		<result column="is_selected" property="isSele" jdbcType="varchar"/>
+		<result column="brand" property="brand" jdbcType="varchar"/>
+		
+		
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodBrand_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodBrand.GoodBrand_insert"/>
+		<flushOnExecute statement="GoodBrand.GoodBrand_update"/>
+		<flushOnExecute statement="GoodBrand.GoodBrand_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel> 	
+	
+  	<!-- 模糊查询 -->
+	<sql id="GoodBrand_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>				
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="GoodBrand_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodBrand_cache">
+		select count(*) from good_brand
+		<include refid="GoodBrand_query_select_where_clause"/>
+	</select>		
+	<select id="GoodBrand_query_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+		select * from good_brand 
+		<include refid="GoodBrand_query_select_where_clause"/>
+		order by level,sort
+	</select>	
+	
+  	<!-- 精确查询 -->
+	<sql id="GoodBrand_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#	
+			</isNotEmpty>	
+			<isNotNull prepend="and" property="level">
+			 	level = #level#
+			</isNotNull>
+			<isNotEmpty prepend="and" property="isSele">
+				is_selected = #isSele#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="brand">
+				brand = #brand#
+			</isNotEmpty>
+			
+		</dynamic>
+	</sql>		
+	<select id="GoodBrand_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+		select * from good_brand 
+		<include refid="GoodBrand_select_where_clause"/>
+		order by create_time desc, level,sort
+	</select>
+	
+	<sql id="GoodBrand_sel_select_where_clause">
+		<dynamic prepend="where">
+			<isEqual property="level" compareValue="1">
+				good_type_id in(
+					select id from good_type where parent_id in (select id from good_type where parent_id=#goodTypeId#)
+					UNION
+					select id from good_type where parent_id=#goodTypeId#
+					UNION
+					select id from good_type where id=#goodTypeId#	
+				)
+			</isEqual>
+			
+			<isEqual property="level" compareValue="2">
+				good_type_id in(
+					select id from good_type where parent_id=#goodTypeId#
+					UNION
+					select id from good_type where id=#goodTypeId#	
+				)
+			</isEqual>
+			
+			<isEqual prepend="and" property="level" compareValue="3">
+				good_type_id in(
+					select id from good_type where id=#goodTypeId#	
+				)
+			</isEqual>
+			
+		</dynamic>		
+	</sql>
+	
+	<!-- 根据类别查询商品品牌 -->
+	<select id="GoodBrandByType_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+		select * from good_brand where id in(
+			select brand_id from good <include refid="GoodBrand_sel_select_where_clause"/>)
+	</select>
+	<!-- 根据类别查询商品品牌 -->
+	<select id="GoodBrandByType2_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+		select * from good_brand where brand=#brand# and parent_id in (select id from good_brand where id=#goodTypeId#)
+	</select>
+		
+	
+	<!-- 根据等级查询商品品牌 -->
+	<select id="GoodBrandBylevel_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+		select * from good_brand where level=#level# 
+		<isNotEmpty prepend="and" property="id">
+				id = #id#
+		</isNotEmpty>
+	</select>	
+	
+	<!-- 根据等级查询商品品牌 -->
+	<select id="GoodBrandByleve2_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+	select * from(
+		select * from good_brand where id=#idStr#
+		UNION
+		select * from good_brand <include refid="GoodBrand_select_where_clause"/>
+		UNION 		
+		select * from good_brand where level = '1' 
+		) a
+	</select>
+	
+	<!-- 三级页面品牌查询 -->
+	<select id="GoodBrand_page3_select" resultMap="GoodBrandInfoResult" cacheModel="GoodBrand_cache">
+		select * from good_brand where parent_id in (select id from good_brand where id in 
+			(select id from good_type where id in (select parent_id from  good_type where  id in 
+				(select parent_id from good_type where id=#goodtypeId#))))
+		UNION
+		
+ 		select * from good_brand where parent_id in (select id from good_brand where id in  	
+			(select id from  good_type where  id in  			
+				(select parent_id from good_type where id=#goodtypeId#))) 
+		UNION
+		select * from good_brand where parent_id = #goodtypeId#
+	</select>
+	
+	
+	
+	<!-- 查询商品品牌数目 -->
+	<select id="GoodBrand_count_select" resultClass="java.lang.Integer" cacheModel="GoodBrand_cache">
+		select count(id) from good_brand
+	</select>
+	
+	<insert id="GoodBrand_insert">
+		insert into good_brand
+		 (id,parent_id,code,name,level,remark,sort,creator_id,creator_name,create_time,state,pic,pic_id,is_selected,brand)
+		   values(#id#,#parentId#,#code#,#name#,#level#,#remark#,#sort#,#creatorId#,#creatorName#,#createTime#,#state#,#pic#,#picId#,#isSele#,#brand#)
+	</insert>
+	
+	<update id="GoodBrand_update">
+		update good_brand set code=#code#,name=#name#,remark=#remark#,modifier_id=#modifierId#,
+		 modifier_name=#modifierName#,modify_time=#modifyTime#,state=#state#,pic=#pic#,pic_id=#picId#,is_selected = #isSele#,brand = #brand#,create_time=#createTime#
+		  where id = #id#
+	</update>
+	
+	<delete id="GoodBrand_delete">
+		delete from good_brand
+		<dynamic prepend="where">
+			<isNotEmpty property="id" prepend="and">
+				id=#id#
+			</isNotEmpty>
+			<isNotEmpty property="parentId" prepend="and">
+				parent_id=#parentId#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

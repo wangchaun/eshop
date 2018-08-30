@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Dictionary" >
+  <resultMap id="DictionaryResult" class="com.sinokj.app.baseInfo.dictionary.model.Dictionary" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 缓存模型 -->
+	<cacheModel id="Dictionary_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Dictionary.Dictionary_insert"/>
+		<flushOnExecute statement="Dictionary.Dictionary_update"/>
+		<flushOnExecute statement="Dictionary.Dictionary_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel>
+  
+  <!-- 模糊查询 -->
+  <sql id="Dictionary_query_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotNull prepend="and" property="id">
+  			id = #id#
+  		</isNotNull>
+  		<isNotEmpty prepend="and" property="code">
+  			code like '%$code$%'
+  		</isNotEmpty>
+  		<isNotEmpty prepend="and" property="name">
+  			name like '%$name$%'
+  		</isNotEmpty>
+  	</dynamic>
+  </sql>
+	<select id="Dictionary_count_query_select" resultClass="java.lang.Integer" cacheModel="Dictionary_cache">
+		select count(*) from dictionary
+		<include refid="Dictionary_query_select_where_clause"/>
+	</select>	  
+   <select id="Dictionary_query_select" resultMap="DictionaryResult" cacheModel="Dictionary_cache">
+    select * from dictionary
+    <include refid="Dictionary_query_select_where_clause"/>
+    order by sort
+  </select>
+  
+  <!-- 精确查询 -->
+  <sql id="Dictionary_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotNull prepend="and" property="id">
+  			id = #id#
+  		</isNotNull>
+  		<isNotNull prepend="and" property="code">
+  			code = #code#
+  		</isNotNull>
+  	</dynamic>
+  </sql>
+  <select id="Dictionary_select" resultMap="DictionaryResult" cacheModel="Dictionary_cache">
+    select * from dictionary
+    <include refid="Dictionary_select_where_clause"/>
+    order by sort
+  </select>
+  
+  <select id="Dictionary_count_select" cacheModel="Dictionary_cache">
+    select count(id) from dictionary
+  </select>
+  
+  <delete id="Dictionary_delete">
+    delete from dictionary
+    where id = #id:VARCHAR#
+  </delete>
+  
+  <insert id="Dictionary_insert">
+    insert into dictionary (id, code, name, sort, state)
+    values (#id:VARCHAR#, #code:VARCHAR#, #name:VARCHAR#, #sort:INTEGER#,
+      #state:VARCHAR#)
+  </insert>
+ 
+  <update id="Dictionary_update">
+    update dictionary
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="code" >
+        code = #code:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="sort" >
+        sort = #sort:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="state" >
+        state = #state:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where id = #id:VARCHAR#
+  </update>
+</sqlMap>

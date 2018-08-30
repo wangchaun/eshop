@@ -1,0 +1,130 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================商品分类===================================*/
+
+.content{ width:100%; margin:0 auto; overflow:hidden; background:#dedede;}
+.content01{ width:100%; float:left; background:url(../../../Images/images/oneshop1.jpg) repeat-x left top;}
+.sub{ width:1200px; margin:0 auto;}
+.sub01{ width:1200px; float:left; padding-top:25px;}
+.sub02{ width:100%; margin:0 auto;}
+.sub0201{ width:100%; float:left; background:url(../../../Images/images/oneshop5.jpg) repeat-x left top #dedede; height:810px;}
+.Tab2content{ width:1200px; margin:0 auto;}
+#Tab2{
+width:1200px;
+float:left;
+padding-top:31px;
+height:62px;
+}
+/*菜单class*/
+.Menubox {
+width:1175px;
+height:62px;
+line-height:33px;
+padding-left:25px;
+position:relative;
+}
+
+.Menubox span{
+position:absolute;
+top:0px;
+right:0px;
+color:#1e8afc; 
+font-size:12px;
+}
+.Menubox span a{
+color:#1e8afc; 
+font-size:12px;
+text-decoration:none;
+}
+.Menubox span a:hover{
+color:#1e8afc; 
+font-size:12px;
+text-decoration:underline;
+}
+
+.Menubox ul{
+margin:0px;
+padding:0px;
+}
+.Menubox li{
+float:left;
+display:block;
+cursor:pointer;
+text-align:center;
+color:#ff6000;
+font-size:14px;
+margin-left:7px;
+margin-right:7px;
+display:inline;
+font-family:"微软雅黑";
+}
+.Menubox li.hover{
+padding:0px;
+background:#fff;
+width:107px;
+background:url(../../../Images/images/shop33.jpg) no-repeat left top;
+margin-left:7px;
+margin-right:7px;
+color:#666666;
+font-size:14px;
+font-family:"微软雅黑";
+height:62px;
+line-height:33px;
+display:inline;
+}
+.Contentbox{
+margin-top:0px;
+border-top:none;
+float:left;
+width:1200px;
+}
+.Unionshop{ width:1200px; float:left; margin-top:4px; background:url(../../../Images/images/shop34.jpg) repeat-y left top; height:596px;}
+.Unionshop ul li{ width:200px; height:298px; float:left;}
+.Unionshop ul li h1{ width:180px; padding-left:10px; padding-right:10px; padding-top:15px; float:left;}
+.Unionshop ul li h1 img{ width:179px; height:220px;}
+.Unionshop ul li h2{ width:180px; padding-left:10px; padding-right:10px; padding-top:7px; float:left; line-height:22px;}
+.Unionshop ul li h2 span{ float:left; color:#777777; font-size:12px; width:177px;}
+.Unionshop ul li h2 span a{ color:#777777; font-size:12px; text-decoration:none;}
+.Unionshop ul li h2 span a:hover{ color:#1e8afc; font-size:12px; text-decoration:underline;}
+.Unionshop ul li h2 samp{ float:left; color:#1e8afc; font-size:12px; width:177px; font-family:"宋体";}
+
+
+/*============================尾部===================================*/
+
+
+.oneshopfoot{ width:100%; margin:0 auto; background:url(../../../Images/images/oneshop19.jpg) repeat-x left top; height:270px; clear:both;}
+.foot01{ width:1200px; margin:0 auto;}
+.foot_text{ width:1200px; float:left; padding-top:36px;}
+.foot_text01{ width:1152px; float:left; padding-left:48px; padding-top:8px;}
+.foot_text01 li{ width:230px; float:left; text-align:left;}
+.foot_text02{ width:1200px; float:left; padding-top:25px; padding-bottom:15px;}
+.foot_text0201{ width:262px; margin-left:33px; display:inline; float:left; height:197px; background:url(../../../Images/images/oneshop14.jpg) repeat-x left top; margin-right:70px;}
+.foot_text0201_text{ width:213px; margin-left:14px; display:inline; float:left; margin-top:14px; height:36px; background:url(../../../Images/images/oneshop15.jpg) no-repeat left top;}
+.foot_text0201_text span{ color:#333333; font-size:14px; font-weight:bold; float:left; padding-left:36px;}
+.foot_text0201_text1{ width:220px; margin-left:24px; display:inline; float:left; margin-top:17px; height:15px;}
+.foot_text0201_text1 h1{ float:left; width:26px;}
+.foot_text0201_text1 h2{ float:left; width:194px; color:#333333; font-size:12px; }
+.foot_text0201_text1 h2 a{ color:#333333; font-size:12px; text-decoration:none;}
+.foot_text0201_text1 h2 a:hover{ color:#0a7cd4; font-size:12px; text-decoration:underline;}
+.foot_text0201_text1 h3{ float:left; width:194px; color:#333333; font-size:12px; line-height:16px;}
+.foot_text0202{ width:165px;float:left; height:175px; padding-top:10px;}
+.foot_text0202 li{ width:165px; text-align:left; line-height:22px; color:#333333; font-size:12px; font-family:"宋体";}
+.foot_text0202 li a{ color:#333333; font-size:12px; font-family:"宋体"; text-decoration:none;}
+.foot_text0202 li a:hover{ color:#2791e3; font-size:12px; font-family:"宋体"; text-decoration:underline;}
+.foot_text0203{ width:120px;float:left; height:175px; padding-top:10px;}
+.foot_text0203 li{ width:120px; text-align:left; line-height:22px; color:#333333; font-size:12px; font-family:"宋体";}
+.foot_text0203 li a{ color:#333333; font-size:12px; font-family:"宋体"; text-decoration:none;}
+.foot_text0203 li a:hover{ color:#2791e3; font-size:12px; font-family:"宋体"; text-decoration:underline;}
+#ftpy{ color:#333333; font-size:14px; font-weight:bold; font-family:"宋体";}
+.foot1{ width:100%; margin:0 auto; background:url(../../../Images/images/a46.jpg) repeat-x left top; height:245px; clear:both;}
+.foot1_bottom{ width:1200px; margin:0 auto;}
+.foot1_bottext{ width:1200px; padding-top:32px; float:left; line-height:22px; text-align:center; color:#333333; font-size:12px; font-family:"宋体";}
+.foot1_bottext span{ color:#2791e3; font-size:12px; font-family:"宋体";}
+.foot1_bottext1{ width:1200px; padding-top:10px; float:left; text-align:center;}
+.foot1_bottext1 img{ border:#d2d2d2 solid 1px;}
+.foot1_bottext2{ width:1200px; padding-top:13px; float:left; text-align:center;}
+

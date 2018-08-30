@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehouseWare">
+	<resultMap class="com.sinokj.app.warehouse.warehouse.model.WarehouseWare" id="WarehouseWareResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- WarehouseWare -->
+		<result column="warehouse_id" property="warehouseId" jdbcType="varchar"/>
+		<result column="warehouse_name" property="warehouseName" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+		<result column="ware_count" property="wareCount" jdbcType="int"/>
+		<result column="average_cost_inventory" property="averageCostInventory" jdbcType="decimal"/>
+		<result column="total_cost_inventory" property="totalCostInventory" jdbcType="decimal"/>
+	</resultMap>
+	<resultMap class="com.sinokj.app.warehouse.warehouse.model.WarehouseWare" id="WarehouseWareExtendsResult" extends="WarehouseWareResult">
+		<result column="ware_code" property="wareCode" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="WarehouseWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehouseWare.WarehouseWare_insert"/>
+		<flushOnExecute statement="WarehouseWare.WarehouseWare_update"/>
+		<flushOnExecute statement="WarehouseWare.WarehouseWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<sql id="WarehouseWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				a.id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="wareCode">
+				b.code like '%$wareCode$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseName">
+				a.warehouse_name like '%$warehouseName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="wareName">
+				a.ware_name like '%$wareName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseId">
+				a.warehouse_id = #warehouseId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	
+	 <select id="WarehouseWare_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehouseWare_cache">
+		select count(*) from warehouse_ware a inner join ware b on a.ware_id = b.id
+		<include refid="WarehouseWare_query_select_where_clause"/>
+	</select>	
+	<select id="WarehouseWare_query_select" resultMap="WarehouseWareExtendsResult" cacheModel="WarehouseWare_cache">
+		select a.*,b.code as ware_code from warehouse_ware a inner join ware b on a.ware_id = b.id
+			<include refid="WarehouseWare_query_select_where_clause"/>
+			 order by id desc
+		<!-- order by a.warehouse_name, a.sort asc -->
+	</select>
+	 
+	<select id="WarehouseWare_select" resultMap="WarehouseWareResult" cacheModel="WarehouseWare_cache">
+		select * from warehouse_ware 
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="id">
+					id = #id#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="warehouseId">
+					warehouse_id = #warehouseId#
+				</isNotEmpty>
+				<isNotEmpty prepend="and" property="wareId">
+					ware_id = #wareId#
+				</isNotEmpty>
+			</dynamic>
+		order by sort asc
+	</select>
+	
+	<insert id="WarehouseWare_insert">
+		insert into warehouse_ware 
+			(id,warehouse_id,warehouse_name,ware_id,ware_name,ware_count,average_cost_inventory,total_cost_inventory,sort)
+		values
+			(#id#,#warehouseId#,#warehouseName#,#wareId#,#wareName#,#wareCount#,#averageCostInventory#,#totalCostInventory#,#sort#)
+	</insert>
+	
+	<update id="WarehouseWare_update">
+		update warehouse_ware set
+			ware_count = #wareCount#,
+			average_cost_inventory = #averageCostInventory#,
+			total_cost_inventory = #totalCostInventory#
+		where id = #id#
+	</update>
+	
+  <delete id="WarehouseWare_delete">
+    delete from warehouse_ware
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="PriceAdjust">
+	<resultMap class="com.sinokj.app.order.price.priceAdjust.model.PriceAdjust" id="PriceAdjustResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<!-- PriceAdjust -->
+		<result column="type" property="type" jdbcType="varchar"/>
+		<result column="adjust_state" property="adjustState" jdbcType="varchar"/>
+		<result column="start_time" property="startTime" jdbcType="datetime"/>
+		<result column="end_time" property="endTime" jdbcType="datetime"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="handler_id" property="handlerId" jdbcType="varchar"/>
+		<result column="handler_name" property="handlerName" jdbcType="varchar"/>
+		<result column="dept_id" property="deptId" jdbcType="varchar"/>
+		<result column="dept_name" property="deptName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="PriceAdjust_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="PriceAdjust.PriceAdjust_insert"/>
+		<flushOnExecute statement="PriceAdjust.PriceAdjust_update"/>
+		<flushOnExecute statement="PriceAdjust.PriceAdjust_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="PriceAdjust_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+			  type = #type#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="PriceAdjust_query_select" resultMap="PriceAdjustResult" cacheModel="PriceAdjust_cache">
+		select * from price_adjust 
+		<include refid="PriceAdjust_query_select_where_clause"/>
+		order by code desc
+	</select>
+	<select id="PriceAdjust_count_query_select" resultClass="java.lang.Integer" cacheModel="PriceAdjust_cache">
+		select count(*) from price_adjust
+		<include refid="PriceAdjust_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="PriceAdjust_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="type">
+			  type = #type#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="PriceAdjust_select" resultMap="PriceAdjustResult" cacheModel="PriceAdjust_cache">
+		select * from price_adjust 
+		<include refid="PriceAdjust_select_where_clause"/>
+		order by code desc
+	</select>	
+
+	<insert id="PriceAdjust_insert">
+		insert into price_adjust 
+			(id,code,type,adjust_state,start_time,end_time,
+			remark,handler_id,handler_name,dept_id,dept_name,creator_id,creator_name,create_time)
+		values
+			(#id#,#code#,#type#,#adjustState#,#startTime#,#endTime#,
+			#remark#,#handlerId#,#handlerName#,#deptId#,#deptName#,#creatorId#,#creatorName#,#createTime#)
+	</insert>
+	
+	<update id="PriceAdjust_update">
+		update price_adjust set
+			adjust_state = #adjustState#,
+			start_time = #startTime#,
+			end_time = #endTime#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			remark = #remark#,
+			handler_id = #handlerId#,
+			handler_name = #handlerName#,
+			dept_id = #deptId#,
+			dept_name = #deptName#
+		where id = #id#
+	</update>
+	
+	<delete id="PriceAdjust_delete">
+		delete from price_adjust where id = #id#
+	</delete>
+</sqlMap>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SaleWare">
+	<resultMap class="com.sinokj.app.order.sale.saleWare.model.SaleWare" id="SaleWareResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- SaleOrder -->
+		<result column="sale_id" property="saleId" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="order_number" property="orderNumber" jdbcType="decimal"/>
+		<result column="good_price" property="goodPrice" jdbcType="decimal"/>
+		<result column="money" property="money" jdbcType="decimal"/>
+		<result column="price_discount" property="priceDiscount" jdbcType="decimal"/>
+		<result column="type" property="type" jdbcType="varchar"/>
+		<result column="warehouse_position_id" property="warehousePositionId" jdbcType="varchar"/>
+		<result column="warehouse_position_name" property="warehousePositionName" jdbcType="varchar"/>
+		<result column="credits" property="credits" jdbcType="decimal"/>
+		<result column="return_rate" property="returnRate" jdbcType="decimal"/> 
+		<result column="return_money" property="returnMoney" jdbcType="decimal"/>
+		<result column="ware_specification" property="wareSpecification" jdbcType="varchar"/>
+		
+	</resultMap>
+	<!-- 销售明细连接查询的新增字段  -->
+	<resultMap class="com.sinokj.app.order.sale.saleWare.model.SaleWare" extends="SaleWareResult" id="SaleWareResultMore">
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="order_code" property="orderCode" jdbcType="varchar"/>
+		<result column="good_code" property="goodCode" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="unit" property="unit" jdbcType="varchar"/>
+	</resultMap>
+	<!-- 销售汇总及毛利汇总查询字段 -->
+	 <resultMap class="com.sinokj.app.order.sale.saleWare.model.SaleWare" id="SaleWareSummaryResult" extends="SaleWareResult">
+	 	<result column="unit" property="unit" jdbcType="varchar"/>
+	 	<result column="good_type_name" property="goodTypeName" jdbcType="varchar"/>
+	 	<result column="warehouse_position_name" property="warehousePositionName" jdbcType="varchar"/>
+	 	<result column="brand_name" property="brandName" jdbcType="varchar"/>
+	 	<result column="tax_rate" property="taxRate" jdbcType="decimal"/>
+		<result column="tax_price" property="taxPrice" jdbcType="decimal"/>
+	 	<result column="good_code" property="goodCode" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+		<result column="purchase_price" property="purchasePrice" jdbcType="decimal"/>
+	 	<result column="create_time" property="createTime" jdbcType="datetime"/>
+	 	<result column="cost_money" property="costmoney" jdbcType="decimal"/>
+	 	<result column="gross_sales" property="grossSales" jdbcType="decimal"/>
+	 	<result column="sales_money" property="salesmoney" jdbcType="decimal"/>
+	 </resultMap>
+	<!-- 缓存模型 -->
+	<cacheModel id="SaleWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="SaleWare.SaleWare_insert"/>
+		<flushOnExecute statement="SaleWare.SaleWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="SaleWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="saleId">
+				sale_id = #saleId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodCode">
+				g.code = #goodCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodName">
+				g.name = #goodName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="brandName">
+				g.brand_name = #brandName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehousePositionName">
+				sw.warehouse_position_name = #warehousePositionName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeName">
+				g.good_type_name = #goodTypeName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="begin">
+				<![CDATA[sd.create_time >= #begin#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="end">
+				<![CDATA[sd.create_time <= #end#]]>
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="SaleWare_count_query_select" resultClass="java.lang.Integer" cacheModel="SaleWare_cache">
+		select count(*) from sale_ware
+		<include refid="SaleWare_query_select_where_clause"/>
+	</select>	
+	<select id="SaleWare_query_select" resultMap="SaleWareResult" cacheModel="SaleWare_cache">
+		select * from sale_ware
+		<include refid="SaleWare_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<!-- 根据订单Id查询商品 -->
+	<select id="SaleWare_select" resultMap="SaleWareResult" cacheModel="SaleWare_cache">
+		select * from sale_ware
+		<include refid="SaleWare_query_select_where_clause"/>
+	</select>
+	<select id="SaleWare_customerId_select" resultClass="java.lang.String" cacheModel="SaleWare_cache">
+   	    select distinct ware_id from sale_ware where  type = '0' and sale_ware.sale_id in (select id from sale_order where customer_id = #customerId#)
+    </select>
+    <!-- 发货与未发货状态 -->
+    <select id="SaleWare_deliveryState_select" resultMap="SaleWareResult">
+    	select * from sale_ware where sale_id in (select id from sale_order where customer_id= #customerId# and delivery_state=#deliveryState# and iscancel='0' and payment_state='1')
+    </select>
+    
+    
+	<!--销售明细查询(连接查询)  -->
+	<select id="SaleWare_saledetail_select" resultMap="SaleWareResultMore" >
+		select sw.id,sw.sort,sw.sale_id,sw.ware_id,sw.price_discount,sw.type,sw.warehouse_position_id,sw.warehouse_position_name,sw.credits,sd.create_time as create_time,sd.code as order_code,g.code as good_code,g.name as good_name,g.price as good_price,g.unit,sw.order_number,sw.money 
+from sale_ware sw join sale_delivery sd on sw.sale_id=sd.id join ware w on sw.ware_id=w.id join good  g on w.good_id=g.id
+		<include refid="SaleWare_query_select_where_clause"/>
+	</select>
+	
+	<!-- 销售汇总及毛利汇总报表
+	<select id="SaleWare_salesummary_select" resultMap="SaleWareSummaryResult" >
+		select sw.id,sw.sort,sw.sale_id,sw.ware_id,sw.price_discount,sw.type,sw.warehouse_position_id,sw.warehouse_position_name,sw.credits,sw.order_number,sw.money,sw.money as sales_money,sd.create_time as create_time,g.purchase_price*sw.order_number as cost_money,sw.money-(g.purchase_price*sw.order_number) as gross_sales,g.code as good_code,g.name as good_name,g.good_type_name as good_type_name,g.price as good_price ,g.tax_rate as tax_rate,g.tax_price as tax_price,g.purchase_price as purchase_price,g.average_cost_inventory as average_cost_inventory,g.unit as unit,g.brand_name as brand_name 
+		from sale_ware sw join sale_delivery sd on sw.sale_id=sd.id join ware w on sw.ware_id=w.id join good  g on w.good_id=g.id
+		<include refid="SaleWare_query_select_where_clause"/>
+	</select>
+	 -->
+	<!-- 汇总报表 -->
+		<select id="SaleWare_summary_select" resultMap="SaleWareSummaryResult" >
+			select sw.id,sw.sort,sw.sale_id,sw.ware_id,sw.price_discount,sw.type,sw.warehouse_position_id,sw.warehouse_position_name,sw.credits,sum(sw.order_number) as order_number,sw.money,(sum(sw.order_number)*g.price) as sales_money,sd.create_time as create_time,g.purchase_price*sum(sw.order_number) as cost_money,(sum(sw.order_number)*good_price)-(g.purchase_price*sum(sw.order_number)) as gross_sales,g.code as good_code,g.name as good_name,g.good_type_name as good_type_name,g.price as good_price ,g.tax_rate as tax_rate,g.tax_price as tax_price,g.purchase_price as purchase_price,g.average_cost_inventory as average_cost_inventory,g.unit as unit,g.brand_name as brand_name
+ 			from sale_ware sw join sale_delivery sd on sw.sale_id=sd.id join ware w on sw.ware_id=w.id join good  g on w.good_id=g.id 
+		 <include refid="SaleWare_query_select_where_clause"/>
+		GROUP BY g.id
+		</select>
+		<!-- 传入数组查询要退换货的货物 -->
+		<select id="SaleWare_saleGoods_select" resultMap="SaleWareResult">
+			select * from sale_ware where sale_id=#saleId# and id in
+			<iterate open="(" close=")" conjunction="," property="checkStrId">
+				#checkStrId[]#
+			</iterate>
+		</select>
+		
+		
+	<insert id="SaleWare_insert">
+		insert into sale_ware 
+			(id,sort,sale_id,ware_id,order_number,good_price,money,price_discount,type,warehouse_position_id,warehouse_position_name,return_rate,return_money,ware_specification)
+		values
+			(#id#,#sort#,#saleId#,#wareId#,#orderNumber#,#goodPrice#,#money#,#priceDiscount#,#type#,#warehousePositionId#,#warehousePositionName#,#returnRate#,#returnMoney#,#wareSpecification#)
+	</insert>
+	
+	<delete id="SaleWare_delete">
+		delete from sale_ware where sale_id = #saleId#
+	</delete>
+</sqlMap>

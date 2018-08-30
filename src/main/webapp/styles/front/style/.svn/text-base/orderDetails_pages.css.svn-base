@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+
+
+
+/*============================待评价商品===================================*/
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ idth:1200px; float:left; padding-top:20px;}
+
+/*******************订单详情******************************/
+
+.orderDetails{ width:1200px; float:left;  color:#0a7cd4; font-size:18px;   font-family:"微软雅黑"; height:32px; line-height:28px; border-bottom:#2a8fdf solid 2px;}
+.orderDetails span{  color:#606060; font-size:18px;  font-family:"微软雅黑"; padding-left:10px; padding-right:10px;}
+.orderDetails samp{  color:#0a7cd4;font-size:18px;  font-family:"微软雅黑";}
+.orderDetails samp a{ color:#0a7cd4; font-size:18px;  font-family:"微软雅黑"; text-decoration:none;}
+.orderDetails samp a:hover{ color:#0a7cd4; font-size:18px;  font-family:"微软雅黑"; text-decoration:underline;}
+.ordys{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑";}
+.ordys a{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑"; text-decoration:none;}
+.ordys a:hover{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑"; text-decoration:underline;}
+#ordysn1{ color:#0a7cd4; font-size:16px;  font-family:"微软雅黑";}
+.orderDetails2{ width:1200px; float:left; background:#fff5f4; margin-top:15px;}
+.orderDetails201{ width:1190px; margin-left:10px; display:inline; height:43px; border-bottom:#e6dcdb solid 1px; float:left; line-height:43px;}
+.orderDetails201 h1{ padding-left:10px; padding-right:45px; color:#706b68; font-size:14px; font-weight:bold; float: left;}
+.orderDetails201 h2{  padding-right:45px; color:#706b68; font-size:14px; font-weight:bold;float: left;}
+.orderDetails201 h2 span{ color:#1e8bce; font-size:14px; font-weight:bold;}
+.orderDetails201 h3{ color:#6a6665; font-size:12px;float: left;}
+.orderDetails201 h4{ float:left; padding-left:18px; padding-top:10px;}
+.orderDetails201btn{ width:55px; height:20px; background:#f7a655; font-size:12px; font-family:"宋体"; color:#fff; cursor:pointer; text-align:center; line-height:20px; border:none;}
+.orderDetails202{ width:1180px; margin-left:20px; display:inline; line-height:22px; padding-top:9px; padding-bottom:9px; color:#666; font-size:12px; float:left; }
+.orderDetails3{ width:1090px; float:left; padding-left:110px; margin-top:27px;}
+.orderDetails301{ width:920px; float:left;  padding-left:30px; height:33px;}
+.orderDetails302{ width:970px; float:left; padding-left:20px; font-size:12px; font-weight:normal;}
+.orderDetails302 h1{ width:222px; float:left; padding-left:3px;}
+.orderDetails302 h2{ width:221px; float:left;}
+.orderDetails302 h3{ width:221px; float:left;}
+.orderDetails302 h4{ width:225px; float:left;}
+.orderDetails302 h5{ float:left;}
+.orderDetails303{ width:900px; float:left;  padding-left:8px; padding-top:10px;}
+.orderDetails303 span{ width:63px; line-height:18px; color:#969696; font-size:12px; display:block; padding-left:15px;}
+.orderDetails4{ width:1200px; float:left; height:32px; border-bottom:#298fd7 solid 2px; margin-top:20px;}
+.orderDetails4 span{ float:left; text-align:center; font-size:18px; color:#0a7cd4; font-family:"微软雅黑"; line-height:24px; height:32px; background:url(../../../Images/images/pu5.jpg) no-repeat center bottom;}
+.orderDetails5{ width:934px; float:left; padding-left:30px; padding-top:15px;}
+.orderDetails6{ width:934px; float:left; padding-left:30px; line-height:16px;}
+.orderDetails7{ width:934px; float:left; padding-left:30px;  padding-top:10px;}
+.orderDetails7 li{ width:934px; line-height:30px;}
+.spanys{ padding-left:50px;}
+#orderys{ font-weight:bold; font-size:12px; color:#313131; padding-top:12px;}
+.orderDetails8{ width:1198px; float:left;  margin-top:15px; border:#e4e0df solid 1px;}
+.orderDetails8border{ background:#fff5f4; border-bottom:#e4e0df solid 1px; color:#6b6160; font-size:12px;}
+.orderDetails8 table td{  border-bottom:#f3f3f3 solid 1px; color:#6b6160; font-size:12px;}
+.orderDetails8 span{ color:#d70e1e; font-weight:bold; font-size:12px;}
+.orderDetails9{ width:250px; float:left; padding-left:950px; background:#f8f8f8; height:178px;}
+.orderDetails901{ width:225px; float:left;}
+.orderDetails901_con{ width:225px; float:left; padding-top:14px; line-height:30px; padding-bottom:3px; border-bottom:#adadad solid 1px;}
+.orderDetails901_text{ width:225px; float:left;}
+.orderDetails901_text h1{ width:139px; float:left; font-size:14px; color:#626262; font-family:"微软雅黑"; text-align:right;}
+.orderDetails901_text h2{ padding-left:5px; float:left; font-size:12px; color:#626262; font-family:"宋体";}
+.orderDetails901_text1{ padding-top:5px; float:left;  color:#323232; font-family:"微软雅黑"; font-size:14px; line-height:30px; padding-left:41px;}
+.orderDetails901_text1 span{color:#e51a27; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; padding-left:2px;}
+.orderDetails901_text2{ padding-left:98px; float:left; width:110px; padding-top:5px;}
+.orderDetails901_text2btn{ width:100px; height:29px; cursor:pointer; background:url(../../../Images/images/pu8.jpg) no-repeat left top; border:none;}
+.tableborder{ border-bottom:#e3dcdc solid 1px;}
+

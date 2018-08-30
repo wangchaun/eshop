@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="FileUpload">
+	<resultMap class="com.sinokj.app.component.file.model.FileUpload" id="FileUploadResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="app_id" property="appId" jdbcType="varchar"/>
+		<result column="app_type" property="appType" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="postfix" property="postfix" jdbcType="varchar"/>
+		<result column="original_name" property="originalName" jdbcType="varchar"/>
+		<result column="relative_path" property="relativePath" jdbcType="varchar"/>
+	</resultMap>
+	
+	<select id="FileUpload_select" resultMap="FileUploadResult">
+		select * from file_upload
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="appId">
+				app_id = #appId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="appType">
+				app_type = #appType#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="FileUpload_invalid_select" resultMap="FileUploadResult">
+		select * from file_upload where app_id is null or app_id=''
+	</select>
+	
+	<insert id="FileUpload_insert">
+		insert into file_upload 
+			(id,app_id,create_time,app_type,postfix,original_name,relative_path)
+		values
+			(#id#,#appId#,#createTime#,#appType#,#postfix#,#originalName#,#relativePath#)
+	</insert>
+	
+	<update id="FileUpload_update">
+		update file_upload
+	    <dynamic prepend="set" >
+	      <isNotNull prepend="," property="appId" >
+	        app_id = #appId#
+	      </isNotNull>
+	    </dynamic>
+	    where id = #id#
+	</update>
+	
+	<update id="FileUpload_clean_appId_update">
+		update file_upload set app_id = null where app_id = #appId#
+	</update>
+	
+	<delete id="FileUpload_deletePic">
+		delete from file_upload where relative_path = #relativePath# and app_id = #appId#
+	</delete>
+	
+	<delete id="FileUpload_delete">
+		delete from file_upload where id = #id#
+	</delete>
+</sqlMap>

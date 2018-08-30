@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Area">
+	<resultMap class="com.sinokj.app.baseInfo.area.model.Area" id="AreaResult">
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="parent_id" property="parentId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="level" property="level" jdbcType="Integer"/>
+		<result column="sort" property="sort" jdbcType="Integer"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Area_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Area.Area_insert"/>
+		<flushOnExecute statement="Area.Area_update"/>
+		<flushOnExecute statement="Area.Area_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel> 
+	
+	<!-- 模糊查询 -->
+	<sql id="Area_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name = #name#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="Area_count_query_select" resultClass="java.lang.Integer" cacheModel="Area_cache">
+		select count(*) from area
+		<include refid="Area_query_select_where_clause"/>
+	</select>	
+	<select id="Area_query_select" resultMap="AreaResult" cacheModel="Area_cache">
+		select * from area 
+		<include refid="Area_query_select_where_clause"/>
+		order by sort
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="Area_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="level">
+				level = #level#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name = #name#
+			</isNotEmpty>
+		</dynamic>
+	</sql>	
+	<select id="Area_select" resultMap="AreaResult" cacheModel="Area_cache">
+		select * from area 
+		<include refid="Area_select_where_clause"/>
+		order by sort
+	</select>
+	
+	<select id="Area_selByName_select" resultMap="AreaResult" cacheModel="Area_cache">
+		select * from area where name=#name#
+	</select>
+	
+	<insert id="Area_insert">
+		<![CDATA[
+			insert into area
+			 (id,parent_id,code,name,level,sort,creator_id,creator_name,create_time,state)
+			   values(#id#,#parentId#,#code#,#name#,#level#,#sort#,#creatorId#,#creatorName#,#createTime#,#state#)
+		]]>
+	</insert>
+	
+	<update id="Area_update">
+		<![CDATA[
+			update area set code=#code#,name=#name#,modifier_id=#modifierId#,
+			 modifier_name=#modifierName#,modify_time=#modifyTime#,state=#state#
+			  where id = #id#
+		]]>
+	</update>
+	
+	<delete id="Area_delete">
+		delete from area
+		<dynamic prepend="where">
+			<isNotEmpty property="id" prepend="and">
+				id=#id#
+			</isNotEmpty>
+			<isNotEmpty property="parentId" prepend="and">
+				parent_id=#parentId#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

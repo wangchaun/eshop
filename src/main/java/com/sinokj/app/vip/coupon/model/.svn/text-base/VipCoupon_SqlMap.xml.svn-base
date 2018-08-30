@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="VipCoupon">
+	<resultMap class="com.sinokj.app.vip.coupon.model.VipCoupon" id="VipCouponResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- VipCoupon  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="money" property="money" jdbcType="decimal"/>
+		<result column="min_buy" property="minBuy" jdbcType="decimal"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="vip_level_id" property="vipLevelId" jdbcType="varchar"/>
+		<result column="vip_level_name" property="vipLevelName" jdbcType="varchar"/>
+		<result column="start_time" property="startTime" jdbcType="datetime"/>
+		<result column="end_time" property="endTime" jdbcType="datetime"/>
+		<result column="count" property="count" jdbcType="Integer"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="customer_name" property="customerName" jdbcType="varchar"/>
+		<result column="saleOrder_id" property="saleOrderId" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="VipCoupon_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="VipCoupon.VipCoupon_insert"/>
+		<flushOnExecute statement="VipCoupon.VipCoupon_update"/>
+		<flushOnExecute statement="VipCoupon.VipCoupon_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="VipCoupon_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id like '%$id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+			  name like '%$name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+			  state = #state#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+			  <![CDATA[end_time >= #endTime#]]>
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="VipCoupon_query_select" resultMap="VipCouponResult" cacheModel="VipCoupon_cache">
+		select * from Vip_Coupon 
+		<include refid="VipCoupon_query_select_where_clause"/>
+		order by name desc
+	</select>
+	<select id="VipCoupon_count_query_select" resultClass="java.lang.Integer" cacheModel="VipCoupon_cache">
+		select count(*) from Vip_Coupon
+		<include refid="VipCoupon_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="VipCoupon_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+			  name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+			  state = #state#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+			  <![CDATA[end_time >= #endTime#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="data">
+			  <![CDATA[create_time >= #data#]]>
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="VipCoupon_select" resultMap="VipCouponResult" cacheModel="VipCoupon_cache">
+		select * from Vip_Coupon 
+		<include refid="VipCoupon_select_where_clause"/>
+		order by name desc
+	</select>
+	<select id="VipCoupon_by_code_select" resultMap="VipCouponResult" cacheModel="VipCoupon_cache">
+		select * from Vip_Coupon  
+			<dynamic prepend="where">
+				<isNotEmpty prepend="and" property="code">
+					code = #code#
+				</isNotEmpty>
+			</dynamic>
+		order by code desc
+	</select>	
+	
+	<select id="VipCoupon_by_customerId_select" resultClass="java.lang.Double" cacheModel="VipCoupon_cache">
+		select SUM(money) from vip_coupon where customer_id=#customerId# and state='s'
+	</select>
+
+	<!--  增加会员购物卷  -->
+	<insert id="VipCoupon_insert">
+		insert into Vip_Coupon 
+			(id,code,remark,name,creator_id,creator_name,
+			create_time,state,money,min_buy,vip_level_id,
+			vip_level_name,start_time,end_time,count,customer_id,
+			customer_name,saleOrder_id
+			 )
+		values
+			(#id#,#code#,#remark#,#name#,#creatorId#,#creatorName#,
+			#createTime#,#state#,#money#,#minBuy#,#vipLevelId#,
+			#vipLevelName#,#startTime#,#endTime#,#count#,#customerId#,
+			#customerName#,#saleOrderId#
+			 )
+	</insert>
+	
+	<!--  修改会员购物卷 根据id -->
+	<update id="VipCoupon_update">
+		update Vip_Coupon set
+			money = #money#,
+			min_buy = #minBuy#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			remark = #remark#,
+			vip_level_id = #vipLevelId#,
+			vip_level_name = #vipLevelName#,
+			start_time = #startTime#,
+			end_time = #endTime#,
+			count = #count#,
+			name = #name#,
+			customer_id = #customerId#,
+			customer_name = #customerName#,
+			saleOrder_id = #saleOrderId#
+		where id = #id#
+	</update>
+	
+	<!-- 删除会员购物卷 根据id-->
+	<delete id="VipCoupon_delete">
+		delete from Vip_Coupon where id = #id#
+	</delete>
+</sqlMap>

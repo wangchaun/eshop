@@ -1,0 +1,259 @@
+$(document).ready(function(){
+   	dateValid();
+   	dateValid1();
+   	loadingActivity();
+   	//loadingGoodType();
+//   	selGoodType('salesVolume');
+});
+
+function changeDateFormat(cellval) {
+  var date = new Date();
+  date.setTime(cellval);
+  var hours=date.getDate()*24+date.getHours();
+  return hours+'时'+date.getMinutes()+'分'+date.getSeconds()+'秒';
+ 
+}
+//团购剩余时间
+function dateValid(){ 
+	for(i=0;i<4;i++){
+		try{	
+		    var beginDate =  new Date();
+		    var beginTime=beginDate.getTime();  
+		    var endTime = Date.parse(document.getElementById("endTime2"+i).value.replace(/-/g,"/")); 
+//		    if(beginTime>=endTime){   
+//		    	var endTime2=document.getElementById("endTime2"+i).value;
+//		    	endTime2 = endTime2.substring(0,11);
+//		        $('#endTime1'+i).html("<samp>往期时间:"+endTime2+"</samp>")
+//		    }else{
+		  	 	$('#endTime1'+i).html("<samp>剩余:"+changeDateFormat(endTime-beginTime)+"</samp>");
+//			}
+		}catch(e){
+			break;
+		}	
+	}
+	setTimeout("dateValid()",1000);
+}
+//抢购剩余时间
+function dateValid1(){ 
+	for(i=0;i<4;i++){
+	 	try{		
+		    var beginDate =  new Date();
+		    var beginTime=beginDate.getTime();
+		    var endTime = Date.parse(document.getElementById("endTime4"+i).value.replace(/-/g,"/"));
+//		    if(beginTime>=endTime){   
+//		    	var endTime4=document.getElementById("endTime4"+i).value;
+//		    	endTime4 = endTime4.substring(0,11);
+//		        $('#endTime3'+i).html("<samp>往期时间:"+endTime4+"</samp>");
+//		    }else{
+		  	 	$('#endTime3'+i).html("<samp>剩余:"+changeDateFormat(endTime-beginTime)+"</samp>");
+//			}
+		}catch(e){
+			break;
+		}	
+	}
+	setTimeout("dateValid1()",1000);
+}
+function loadingGoodType() {
+    $.ajax({
+        type: "GET",
+        dataType:"json",   //返回数据类型是JSON数据格式
+        async: false,
+        cache: false,
+        url: ctxgood+"/goodType/queryTypeTree",
+        success : function(returnData){
+            packageGoodType(returnData.result);
+        },
+        error : function(){
+            alert('系统繁忙!');
+        }
+    },"json");
+}
+//加载广告
+function loadingActivity() {
+    $.ajax({
+        type: "GET",
+        dataType:"json",   //返回数据类型是JSON数据格式
+        async: false,
+        cache: false,
+        url: ctxgood+"/advertise/queryAdvertiseList",
+        success : function(returnData){
+
+        	packageAdvertise(returnData.result);
+        	packageAdvertisePromotion(returnData.result);
+        },
+        error : function(){
+            alert('系统繁忙!');
+        }
+    },"json");
+}
+function packageAdvertisePromotion(result) {
+    var textHtml="";
+    for(var i=0;i<result.length;i++){
+        var data=result[i];
+        if(data.placeId=='首页促销1' || data.placeId=='首页促销2' || data.placeId=='首页促销3'){
+            textHtml+="<h1 class='banner1_text' target='_blank'><a href='"+data.url+"'><img src='"+ctx+data.pic+"'  width='209' height='149' /></a></h1>";
+        }
+    }
+    $('#advertisePromotion').append(textHtml);
+}
+function packageAdvertise(result) {
+    var textHtml="";
+
+    textHtml+="<ul class='slider' >";
+
+    for(var i=0;i<result.length;i++){
+        var data=result[i];
+        if(data.placeId=='首页焦点1' || data.placeId=='首页焦点2' || data.placeId=='首页焦点3' || data.placeId=='首页焦点4' ){
+            textHtml+="<li><a href='"+data.url+"'><img src='"+ctx+data.pic+"' /></a></li>";
+        }
+    }
+
+    textHtml+="</ul>";
+    textHtml+="<ul class='num' >";
+    textHtml+="    <li>1</li>";
+    textHtml+="    <li>2</li>";
+    textHtml+="    <li>3</li>";
+    textHtml+="   <li>4</li>";
+    textHtml+="</ul>";
+
+    $('#advertise').append(textHtml);
+}
+
+//商品分类中的热门品牌
+//function PromotionBrand(typeId,ctx){
+function PromotionBrand(typeId,url){
+
+	var textHtml="";
+	$('#brand'+typeId).empty();
+	$('#promotion'+typeId).empty();
+	if(typeId!=''){
+		$.ajax({
+		  type: "POST",
+		  dataType:"json",   //返回数据类型是JSON数据格式 
+		  async: false,
+		  cache: false,
+		  url: ctx+"/getPromotionBrands.do?goodType.id="+typeId,
+		  success : function(returnData){ 
+		 	var data = eval(returnData);//解析json数据
+		 	 for(i=0;i<data.rows.length;i++){
+		 	 	if(i<16){ //最多显示8行
+		 	 		var data1 = data.rows[i];
+					textHtml+="<li><a href='"+ctx+"/shoptype.do?goodTypeId="+typeId+"'>"+data1.name+"</a></li>";		 	 	
+		 	 	    //textHtml+="<li><a href='"+url+"/shoptype.do?goodTypeId="+typeId+"'>"+data1.name+"</a></li>";		 	 	
+		 	 	}
+		 	 }
+		 	$('#brand'+typeId).append(textHtml);	
+		 	textHtml="";
+			for(i=0;i<data.Arrs.length;i++){
+		 	 	if(i<9){ //最多显示9行
+		 	 		var data2 = data.Arrs[i];
+					textHtml+="<li onclick=geturl('"+data2.uri+"')><a href='javascript:void(0)' >"+data2.subject+"</a></li>";
+						//textHtml+="<li><a href='"+data2.uri+"' >"+data2.subject+"</a></li>";		 	 		 	 	
+		 	 	}
+		 	 }
+			$('#promotion'+typeId).append(textHtml);
+			},
+			error : function(){
+				alert('系统繁忙!');
+		 	}
+	},"json");
+	}
+}
+
+function geturl(url){
+	window.location.href=url;
+}
+
+//排行榜排序
+function selGoodType(sort,vi){
+	$("#con_tw"+vi).empty();
+	var goodtypestyId=$('#goodtypestyId'+vi).val();
+	textHtml="";
+	$.ajax({
+			  type: "POST",
+			  dataType:"json",   //返回数据类型是JSON数据格式 
+			  async: false,
+			  cache: false,
+			  url: ctx+"/getGoodTypelist.do",
+			  data:"good."+sort+"=str&good.goodTypeId="+goodtypestyId,
+			  success : function(returnData){ 
+			 	var data = eval(returnData);//解析json数据
+			 	var datas= data.rows;
+			 	for(i=0;i<datas.length;i++){
+			 	if(i<4){
+			 		textHtml+="<div class='phb01_text'>";
+			 		if(i%4==0) textHtml+="<div class='phb01_te'>";
+			 		if(i%4==1) textHtml+="<div class='phb01_tef'>";
+			 		if(i%4==2) textHtml+="<div class='phb01_tef1'>";
+			 		if(i%4==3) textHtml+="<div class='phb01_tef2'>";
+	                textHtml+="<span><a href='"+ctx+"/cpxq.do?good.id="+datas[i].id+"'><img src="+ctx+datas[i].pic+" width='74' height='74' /></a></span></div>";
+	                textHtml+="<div class='phb01_te1'>";
+	                textHtml+="<div class='phb01_te1con'><a href='"+ctx+"/cpxq.do?good.id="+datas[i].id+"'>"+datas[i].name+"</a></div>";
+	                textHtml+="<div class='phb01_te1con1'>￥"+(datas[i].money).toFixed(1)+"</div>";
+	                textHtml+="<div class='phb01_te1con2'>降价："+(datas[i].priceMarket-datas[i].money).toFixed(1)+"</div>";
+	                textHtml+="<div class='phb01_te1con3'><samp>";
+	                if(datas[i].commentLevel==1)textHtml+="<img src='"+ctx+"/Images/images/pu14.jpg' />";
+	                if(datas[i].commentLevel==2)textHtml+="<img src='"+ctx+"/Images/images/pu13.jpg' />";
+	                if(datas[i].commentLevel==3)textHtml+="<img src='"+ctx+"/Images/images/pu12.jpg' />";
+	                if(datas[i].commentLevel==4)textHtml+="<img src='"+ctx+"/Images/images/pu11.jpg' />";
+	                if(datas[i].commentLevel==5)textHtml+="<img src='"+ctx+"/Images/images/pu10.jpg' />";
+	                textHtml+="</samp><a href='"+ctx+"/cpxq.do?good.id="+datas[i].id+"'>";
+	                if(datas[i].commentCount==null){
+	                	textHtml+="(0人评论)</a></div>";
+	                }else{
+	                	textHtml+="("+datas[i].commentCount+"人评论)</a></div>";
+	                }	
+	                textHtml+="</div></div>";
+	              }  
+			 	}
+			 	$("#con_tw"+vi).html(textHtml);
+			 	
+			 },
+			   error : function(){
+				alert('系统繁忙!');
+			   }
+		},"json");
+	
+}	
+
+//品牌排行榜
+//function selGoodType(sort){
+//	$('#Divol').empty();
+//	textHtml="";
+//	var uri="good."+sort+"=str";
+//	$.ajax({
+//			  type: "POST",
+//			  dataType:"json",   //返回数据类型是JSON数据格式 
+//			  async: false,
+//			  cache: false,
+//			  url: ctx+"/getGoodTypelist.do",
+//			  data:uri,
+//			  success : function(returnData){ 
+//			 	var data = eval(returnData);//解析json数据
+//			 	var datas= data.rows;
+//			 	for(i=0;i<datas.length;i++){
+//			 	   if(i<12){
+//			 		textHtml="<li class='aircond02'><div id='Tab2'><div class='Menubox'><span>"+datas[i].name+"排行榜</span><div class='hll'>";
+//                    textHtml+="<span id='two"+i+"' onclick='this.className='hover',document.getElementById('twol"+i+"').className='',selGoodType('con_two_"+i+"','salesVolume')' class='hover'>数&nbsp;&nbsp;量</span>";
+//                    textHtml+="<span id='twol"+i+"' onclick='this.className='hover',document.getElementById('two"+i+"').className='',selGoodType('con_two_"+i+"','commentValue')' >评论数</span>";
+//                    textHtml+="</div></div><div class='Contentbox'><div id='con_two_"+i+"'>";
+//                    var goodList=datas.goodlist;
+//                    for(j=0;j<goodList.length;j++){
+//                    	textHtml+="<div class='phb01_text'><div class='phb01_te'><span>";
+//                        textHtml+="<a href='#'><img src='"+ctx+goodList[j].pic+"' width='74' height='74' /></a>";//修改链接
+//                        textHtml+="</span></div><div class='phb01_te1'><div class='phb01_te1con'>";
+//                        textHtml+="<a href='#'>"+goodList[j].name+"</a>";
+//                        textHtml+="</div><div class='phb01_te1con1'>¥"+goodList[j].price+"</div>";
+//                        textHtml+="<div class='phb01_te1con2'>降价："+goodList[j].priceMarket-goodList[j].price+"</div>";
+//                        textHtml+="<div class='phb01_te1con3'><samp><img src='images/a26.jpg' /></samp><a href='#'>(16人评论)</a></div>";
+//                        textHtml+="</div></div>";
+//                     } 
+//                    textHtml+="";		
+//			 	   }
+//			 	 }
+//			   },
+//			   error : function(){
+//				alert('系统繁忙!');
+//			   }
+//		},"json");
+//}

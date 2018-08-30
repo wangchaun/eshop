@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+body{behavior:url("js/csshover.htc");}
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================商品分类===================================*/
+
+.content{ width:1200px; margin:0 auto; overflow:hidden;}
+.limitbuy{ width:1200px; float:left;}
+.limitbuy01{ width:1200px; height:32px; padding-top:20px; float:left; border-bottom:#2791e3 solid 2px; margin-bottom:30px;}
+.limitbuy01 span{ float:left; padding-top:0px; height:32px;  background:url(../../../Images/images/a14.jpg) no-repeat center bottom; color:#0a7cd4; font-size:18px; font-family:"微软雅黑"; }
+.hotbuy{ width:1200px;  float:left; overflow:hidden;}
+.hotbuy_left{ width:950px; float:left; overflow:hidden;}
+.hotbuy_left01{ width:935px; height:457px; float:left; background:url(../../../Images/images/hot1.jpg) no-repeat left top;}
+.hotbuy_left02{ width:845px; padding-left:45px; padding-top:23px; float:left;}
+.hotbuy_text{ width:845px; float:left; height:75px; line-height:27px;}
+.hotbuy_text h1{ width:845px; float:left;}
+.hotbuy_text h1 span{ color:#666; font-family:"微软雅黑"; font-size:20px; text-decoration:none; width:845px; height:27px; overflow:hidden; float:left;}
+.hotbuy_text h1 samp{ color:#ff9600; font-family:"微软雅黑"; font-size:16px; text-decoration:none; width:845px; height:27px; overflow:hidden;  float:left;}
+.hotbuy_text h1 span a{color:#666; font-family:"微软雅黑"; font-size:20px; text-decoration:none;}
+.hotbuy_text h1 span a:hover{color:#0a7cd4; font-family:"微软雅黑"; font-size:20px; text-decoration:underline;}
+.hotbuy_text2{ width:845px; float:left;}
+.hotbuy_text201{ width:469px; float:left;}
+.hotbuy_text202{ width:376px; float:left; height:278px; background:url(../../../Images/images/hot2.jpg) no-repeat left top;}
+.hotmoney{ width:325px; float:left; height:70px; padding-left:64px; padding-top:33px;}
+.hotmoney h1{ float:left; padding-top:23px; padding-right:0px; color:#fff; font-size:12px; font-family:Arial, Helvetica, sans-serif; }
+.hotmoney h2{ float:left; padding-top:3px;  color:#fff; font-size:36px; font-family:Arial, Helvetica, sans-serif; padding-right:27px;}
+.hotmoney h3{ float:left;}
+.hotmoney1{ width:359px; float:left; padding-left:39px; line-height:59px;  overflow: hidden;}
+.hotmoney1 h1{ color:#666666; font-size:18px; font-family:"微软雅黑"; float:left; white-space: nowrap;}
+.hotmoney1 h1 span{ text-decoration:line-through;}
+.hotmoney1 h2{ color:#c5c3c1; font-size:14px; font-family:"微软雅黑"; padding-left:12px; padding-right:12px; float:left;}
+.hotmoney2{ width:299px; float:left; padding-left:39px;}
+.hotmoney2 h1{  float:left; line-height:58px; width:128px;}
+.hotmoney2 h1 span{ font-family:Arial, Helvetica, sans-serif; font-size:24px; padding-right:5px; color:#e41215;}
+.hotmoney2 h2{ float:left; line-height:58px; width:160px;}
+.hotmoney2 h2 span{ padding-top:17px; float:left; width:30px;}
+.hotmoney3{ width:299px; float:left; padding-left:39px;}
+.hotmoney3 h2{ float:left; line-height:58px; width:128px;}
+.hotmoney3 h2 span{ padding-top:15px; float:left; padding-right:6px;}
+.hotmoney3 h2 samp{float:left; }
+.hotmoneybtn{ width:113px; height:41px; background:url(../../../Images/images/hot3.jpg) no-repeat left top; border:none; cursor:pointer;}
+.hotbuy_right{ width:250px; float:left;} 
+
+
+
+

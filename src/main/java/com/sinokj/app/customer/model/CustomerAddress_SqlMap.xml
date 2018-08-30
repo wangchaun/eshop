@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CustomerAddress" >
+  <resultMap id="CustomerAddress_result" class="com.sinokj.app.customer.model.CustomerAddress" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <!-- CustomerAddress -->
+   
+	<result column="mobile" property="mobile" jdbcType="varchar"/>
+	<result column="zip_code" property="zipCode" jdbcType="varchar"/>
+	<result column="remark" property="remark" jdbcType="varchar"/>
+	<result column="customer_id" property="customerId" jdbcType="varchar"/>
+	<result column="is_default" property="isDefault" jdbcType="varchar"/>
+	<result column="address" property="address" jdbcType="varchar"/>
+	<result column="street" property="street" jdbcType="varchar"/>
+	<result column="whether_ordrer" property="whetherordrer" jdbcType="varchar"/>
+	<result column="phone" property="phone" jdbcType="varchar"/>
+  </resultMap>
+
+  
+  <!-- 模糊查询 -->
+  <sql id="CustomerAddress_query_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotNull property="customerId" prepend="and">
+  			customer_id = #customerId#
+  		</isNotNull>
+  	</dynamic>
+  </sql>  
+  <select id="CustomerAddress_query_select" resultMap="CustomerAddress_result">
+    select * from customer_address
+     <include refid="CustomerAddress_query_select_where_clause"/>
+    order by id desc
+  </select>  
+  <select id="CustomerAddress_count_query_select" resultClass="java.lang.Integer">
+		select count(*) from customer_address
+		<include refid="CustomerAddress_query_select_where_clause"/>
+	</select>
+   
+  <!-- 精确查询 -->
+  <sql id="CustomerAddress_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotNull property="id" prepend="and">
+  			id = #id#
+  		</isNotNull>
+  		<isNotNull property="customerId" prepend="and">
+  			customer_id = #customerId#
+  		</isNotNull>
+  		<isNotNull property="isDefault" prepend="and">
+  			is_default = #isDefault#
+  		</isNotNull>
+  		<isNotNull property="whetherordrer" prepend="and">
+  			whether_ordrer = #whetherordrer#
+  		</isNotNull>
+  	</dynamic>
+  </sql>
+  <select id="CustomerAddress_select" resultMap="CustomerAddress_result">
+    select * from customer_address
+  <include refid="CustomerAddress_select_where_clause"/>  
+   order by id desc
+  </select>
+  
+
+  <insert id="CustomerAddress_insert">
+    insert into customer_address 
+    (id,name,mobile,zip_code,remark,customer_id,address,is_default,street,whether_ordrer,phone)
+    values 
+    (#id#,#name#,#mobile#,#zipCode#,#remark#,#customerId#,#address#,#isDefault#,#street#,#whetherordrer#,#phone#)
+  </insert>
+  <update id="CustomerAddress_update">
+    update customer_address
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="name" >
+        name = #name:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="mobile" >
+        mobile = #mobile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="zipCode" >
+        zip_code = #zipCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="remark" >
+        remark = #remark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="customerId" >
+        customer_id = #customerId:VARCHAR#
+      </isNotNull>
+       <isNotNull prepend="," property="address" >
+        address = #address:VARCHAR#
+      </isNotNull>
+       <isNotNull prepend="," property="isDefault" >
+        is_default = #isDefault:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="whetherordrer" >
+        whether_ordrer = #whetherordrer#
+      </isNotNull>
+      <isNotNull prepend="," property="street" >
+        street = #street:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="phone" >
+        phone = #phone:VARCHAR#
+      </isNotNull>
+    </dynamic>
+    where id = #id:VARCHAR#
+  </update>
+    <delete id="CustomerAddress_delete">
+    	delete from customer_address
+    	where id = #id:VARCHAR#
+  	</delete>
+</sqlMap>

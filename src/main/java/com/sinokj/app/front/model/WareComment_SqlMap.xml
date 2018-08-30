@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WareComment" >           
+  <resultMap id="WareComment_result" class="com.sinokj.app.front.model.WareComment" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INT" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+	<result column="ware_id" property="wareId" jdbcType="VARCHAR" />
+    <result column="comment_id" property="commentId" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="int" />
+  </resultMap>
+  
+  <!-- 缓存模型 -->
+	<cacheModel id="WareComment_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WareComment.WareComment_insert"/>
+		<flushOnExecute statement="WareComment.WareComment_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 
+  
+  <!-- 模糊查询 -->
+  <sql id="WareComment_query_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotEmpty property="wareId" prepend="and">
+  			ware_id = #wareId#
+  		</isNotEmpty>
+  		<isNotEmpty property="creatorId" prepend="and">
+  			creator_id = #creatorId#
+  		</isNotEmpty>
+  		<!--  
+  		<isNull prepend="and" property="commentId">
+  			<![CDATA[ isnull(comment_id) ]]>
+  		</isNull>-->
+  		<isNotEmpty property="commentId" prepend="and">
+  			comment_id = #commentId#
+  		</isNotEmpty>
+  		<isNotNull prepend="and" property="commentId">
+  			comment_id = #commentId#
+  		</isNotNull>
+  		<isNotEmpty property="state" prepend="and">
+  		    state = #state#
+  		</isNotEmpty>
+  		<isNotEmpty property="id" prepend="and">
+  			id = #id#
+  		</isNotEmpty>
+  		<isEqual property="type"  prepend="and" compareValue="1">
+  			level in ('4','5')
+  		</isEqual>
+  		<isEqual property="type"  prepend="and" compareValue="2">
+  			level = '3'
+  		</isEqual>
+  		<isEqual property="type"  prepend="and" compareValue="3">
+  			level in ('1','2')
+  		</isEqual>
+  	</dynamic>
+  </sql>  
+  <select id="WareComment_query_select" resultMap="WareComment_result" cacheModel="WareComment_cache">
+    select * from ware_comment
+     <include refid="WareComment_query_select_where_clause"/>
+    order by create_time desc
+  </select>  
+  <select id="WareComment_count_query_select" resultClass="java.lang.Integer" cacheModel="WareComment_cache">
+	select count(*) from ware_comment
+	<include refid="WareComment_query_select_where_clause"/>
+  </select>
+   
+  <!-- 精确查询 -->
+  <sql id="WareComment_select_where_clause" >
+  	<dynamic prepend="where">
+  		<isNotEmpty property="wareId" prepend="and">
+  			ware_id = #wareId#
+  		</isNotEmpty>
+  		<isNotEmpty property="creatorId" prepend="and">
+  			creator_id = #creatorId#
+  		</isNotEmpty>
+  		<isNotEmpty property="type" prepend="and">
+  			type = #type#
+  		</isNotEmpty>
+  		<isNotEmpty property="commentId" prepend="and">
+  			comment_id = #commentId#
+  		</isNotEmpty>
+  		<isNotEmpty property="id" prepend="and">
+  			id = #id#
+  		</isNotEmpty>
+  	</dynamic>
+  </sql>
+  <select id="WareComment_select" resultMap="WareComment_result" cacheModel="WareComment_cache">
+    select * from ware_comment
+    <include refid="WareComment_select_where_clause"/>  
+    order by create_time desc
+  </select>
+  
+    <select id="WareComment_remen_select" resultMap="WareComment_result">
+	   <!-- select * from ware_comment where ware_id in(
+		 select id from ware where good_id=#goodId#) ORDER BY create_time desc LIMIT 0,1 -->
+		 select * from ware_comment where ware_id = #goodId# ORDER BY create_time desc LIMIT 0,1
+  </select>
+  <update id="WareComment_update">
+  	  update ware_comment set state=#state# where id = #id#
+  </update>
+  
+  <delete id="WareComment_delete">
+    delete from ware_comment
+    where id = #id:VARCHAR#
+  </delete>
+  
+  <insert id="WareComment_insert">
+    insert into ware_comment 
+    (id,creator_id,creator_name,create_time,sort,ware_id,comment_id,content,type,level,state,code)
+    values 
+    (#id#,#creatorId#,#creatorName#,#createTime#,#sort#,#wareId#,#commentId#,#content#,#type#,#level#,#state#,#code#)
+  </insert>
+</sqlMap>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="Collection">
+	<resultMap class="com.sinokj.app.order.cashBasis.collection.model.Collection" id="CollectionResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		
+		<!-- Collection  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="money_account" property="moneyAccount" jdbcType="decimal"/>
+		<result column="money_collect" property="moneyCollect" jdbcType="decimal"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+		<result column="handler_Id" property="handlerId" jdbcType="varchar"/>
+		<result column="handler_Name" property="handlerName" jdbcType="varchar"/>
+		<result column="dept_Id" property="deptId" jdbcType="varchar"/>
+		<result column="dept_Name" property="deptName" jdbcType="varchar"/>
+		<result column="customer_id" property="customerId" jdbcType="varchar"/>
+		<result column="customer_name" property="customerName" jdbcType="varchar"/>
+		
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Collection_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Collection.Collection_insert"/>
+		<flushOnExecute statement="Collection.Collection_update"/>
+		<flushOnExecute statement="Collection.Collection_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据id和编号 -->
+	<sql id="Collection_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name like '%$customerName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="begin">
+				<![CDATA[create_time >= #begin#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="end">
+				<![CDATA[create_time <= #end#]]>
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Collection_query_select" resultMap="CollectionResult" cacheModel="Collection_cache">
+		select * from Collection 
+		<include refid="Collection_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	<select id="Collection_count_query_select" resultClass="java.lang.Integer" cacheModel="Collection_cache">
+		select count(*) from Collection
+		<include refid="Collection_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="Collection_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerId">
+			  customer_id = #customerId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerName">
+			  customer_name = '#customerName#'
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Collection_select" resultMap="CollectionResult" cacheModel="Collection_cache">
+		select * from Collection 
+		<include refid="Collection_select_where_clause"/>
+		order by create_time desc
+	</select>	
+
+	<!--  增加费用单  -->
+	<insert id="Collection_insert">
+		insert into Collection 
+			(id,code,money_account,remark,handler_id,handler_name,dept_id,
+			 dept_name,creator_id,creator_name,create_time,state,
+			 customer_id,customer_name,money_collect)
+		values
+			(#id#,#code#,#moneyAccount#,#remark#,#handlerId#,#handlerName#,#deptId#,
+			#deptName#,#creatorId#,#creatorName#,#createTime#,#state#,
+			#customerId#,#customerName#,#moneyCollect#)
+	</insert>
+	
+	<!--  修改费用单 根据id -->
+	<update id="Collection_update">
+		update Collection set
+			money_account = #moneyAccount#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			remark = #remark#,
+			handler_id = #handlerId#,
+			handler_name = #handlerName#,
+			dept_id = #deptId#,
+			dept_name = #deptName#,
+			customer_id = #customerId#,
+			customer_name = #customerName#,
+			money_collect = #moneyCollect#
+		where id = #id#
+	</update>
+	
+	<!-- 删除费用单 根据id-->
+	<delete id="Collection_delete">
+		delete from Collection where id = #id#
+	</delete>
+</sqlMap>

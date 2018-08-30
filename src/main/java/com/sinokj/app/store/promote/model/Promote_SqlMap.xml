@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="Promote">
+	<resultMap class="com.sinokj.app.store.promote.model.Promote" id="PromoteResult">
+		<!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="column_No" property="columnNo" jdbcType="varchar"/>
+		<result column="column_Name" property="columnName" jdbcType="varchar"/>
+		<result column="describes" property="describes" jdbcType="varchar"/>
+		<result column="uri" property="uri" jdbcType="varchar"/>
+		<result column="goodType_id" property="goodTypeId" jdbcType="varchar"/>
+		<result column="goodType_name" property="goodTypeName" jdbcType="varchar"/>
+		
+		<!-- promote  column:为数据库里的字段  property:为实体类里的属性 -->
+		<result column="subject" property="subject" jdbcType="varchar"/>
+		<result column="intro" property="intro" jdbcType="varchar"/>
+		<result column="pic_id" property="picId" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>	
+		<result column="type" property="type" jdbcType="varchar"/>	
+		<result column="number" property="number" jdbcType="int"/>
+
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Promote_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Promote.Promote_insert"/>
+		<flushOnExecute statement="Promote.Promote_update"/>
+		<flushOnExecute statement="Promote.Promote_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索:根据主题和编号 -->
+	<sql id="Promote_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="subject">
+			  subject like '%$subject$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnName">
+			  column_Name like '%$columnName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeId">
+			  goodType_id = #goodTypeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeName">
+			  goodType_name like '%$goodTypeName'%$
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	
+	<select id="Promote_query_select" resultMap="PromoteResult" cacheModel="Promote_cache">
+		select * from promote_topic 
+		<include refid="Promote_query_select_where_clause"/>
+		order by modify_time,code desc
+	</select>
+	<select id="Promote_count_query_select" resultClass="java.lang.Integer" cacheModel="Promote_cache">
+		select count(*) from promote_topic
+		<include refid="Promote_query_select_where_clause"/>
+	</select>
+	
+	<!-- 精确搜索 -->
+	<sql id="Promote_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+			  id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+			  code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="subject">
+			  subject = #subject#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="describes">
+			  describes = #describes#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnNo">
+			  column_No = #columnNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnName">
+			  column_Name = #columnName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeId">
+			  goodType_id = #goodTypeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodTypeName">
+			  goodType_name = #goodTypeName#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="Promote_select" resultMap="PromoteResult" cacheModel="Promote_cache">
+		select * from promote_topic 
+		<include refid="Promote_select_where_clause"/>
+		order by create_time,code desc
+	</select>	
+	
+	<select id="Promote_proL_select" resultMap="PromoteResult" cacheModel="Promote_cache">
+		select * from promote_topic
+		<include refid="Promote_select_where_clause"/>
+		order by number
+	</select>
+	
+	<!--  增加  -->
+	<insert id="Promote_insert">
+		insert into promote_topic 
+			(id,code,subject,intro,pic_id,pic,type,modifier_id,modifier_name,modify_time
+			 ,creator_id,creator_name,create_time,state,column_No,column_Name,describes,uri,number,goodType_id,goodType_name)
+		values
+			(#id#,#code#,#subject#,#intro#,#picId#,#pic#,#type#,#modifierId#,#modifierName#,#modifyTime#,
+			#creatorId#,#creatorName#,#createTime#,#state#,#columnNo#,#columnName#,#describes#,#uri#,#number#,#goodTypeId#,#goodTypeName#)
+	</insert>
+	
+	<!--  修改 根据id -->
+	<update id="Promote_update">
+		update promote_topic set
+			code = #code#,
+			subject = #subject#,
+			intro = #intro#,
+			pic_id = #picId#,
+			pic = #pic#,
+			type = #type#,
+			modifier_id = #modifierId#,
+			modifier_name = #modifierName#,
+			modify_time = #modifyTime#,
+			state = #state#,
+			creator_id = #creatorId#,
+			creator_name = #creatorName#,
+			create_time = #createTime#,
+			column_No = #columnNo#,
+			column_Name = #columnName#,
+			describes = #describes#,
+			uri = #uri#,
+			number = #number#,
+			goodType_id = #goodTypeId#,
+			goodType_name = #goodTypeName#
+		where id = #id#
+	</update>
+	
+	<!-- 删除 根据id-->
+	<delete id="Promote_delete">
+		delete from promote_topic where id = #id#
+	</delete>
+</sqlMap>

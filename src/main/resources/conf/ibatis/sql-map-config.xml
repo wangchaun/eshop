@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings useStatementNamespaces="true" />
+  
+	<!-- 系统管理 -->
+	<sqlMap resource="com/sinokj/app/good/phone/Phone_SqlMap.xml" /> 
+    <sqlMap resource="com/sinokj/app/good/phone_package/Phonepackage_SqlMap.xml" /> 
+	<sqlMap resource="com/sinokj/app/system/user/model/SysUser_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/system/role/model/SysRole_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/system/power/model/SysPower_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/system/rolePower/model/SysRolePower_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/system/user/entity/SysUserPower_SqlMap.xml" />
+	<!-- 高级权限 -->
+	<sqlMap resource="com/sinokj/app/system/advPower/model/SysAdvPower_SqlMap.xml" />
+	<!-- 部门 -->
+	<sqlMap resource="com/sinokj/app/system/dept/model/SysDept_SqlMap.xml" />
+	
+	<!-- 公共组件 -->
+	<sqlMap resource="com/sinokj/app/component/file/model/FileUpload_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/component/serialNumber/model/SerialNumber_SqlMap.xml" />
+	
+	<!-- 基本信息 -->
+	<sqlMap resource="com/sinokj/app/baseInfo/dictionary/model/Dictionary_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/dictionary/model/DictionaryItem_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/area/model/Area_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/payment/model/Payment_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/delivery/model/Delivery_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/bankAccount/model/BankAccount_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/supplier/model/Supplier_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/baseInfo/credit/model/Credit_SqlMap.xml" />
+	
+	<!-- 客户信息 -->
+	<sqlMap resource="com/sinokj/app/customer/model/Customer_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/customer/model/CustomerAddress_SqlMap.xml" />
+	<!-- 商品信息 -->
+	<sqlMap resource="com/sinokj/app/good/goodType/model/GoodType_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/good/model/Good_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/goodExtend/model/GoodExtend_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/goodPrice/model/GoodPrice_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/goodRelate/model/GoodRelate_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/favorite/model/Favorite_SqlMap.xml"/>
+	<!--团购商品信息 -->
+	<sqlMap resource="com/sinokj/app/good/groupgood/model/Groupgood_SqlMap.xml" />
+	<!-- 商品种类 -->
+	<sqlMap resource="com/sinokj/app/good/goodKind/model/GoodKind_SqlMap.xml" />
+	<!-- 商品种类属性 -->
+	<sqlMap resource="com/sinokj/app/good/goodKind/model/GoodKingVal_SqlMap.xml" />
+	<!-- 商品品牌 -->
+	<sqlMap resource="com/sinokj/app/good/goodBrand/model/GoodBrand_SqlMap.xml" />
+	<!-- 商品属性 -->
+	<sqlMap resource="com/sinokj/app/good/goodAttr/model/GoodAttr_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/goodAttr/model/GoodAttrValue_SqlMap.xml" />
+	<!-- 商品规格 -->
+	<sqlMap resource="com/sinokj/app/good/goodSpecification/model/GoodSpecification_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/goodSpecification/model/GoodSpecificationVal_SqlMap.xml" />
+	<!-- 仓库 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehouse/model/Warehouse_SqlMap.xml" />
+	<!-- 仓库货物 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehouse/model/WarehouseWare_SqlMap.xml" />
+	<!-- 组合拆分单 -->
+	<sqlMap resource="com/sinokj/app/warehouse/combined/model/Combined_SqlMap.xml" />
+	<!-- 组合拆分单货品 -->
+	<sqlMap resource="com/sinokj/app/warehouse/combined/model/CombinedWare_SqlMap.xml" />
+	<!-- 调度单 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehouseMove/model/WarehouseMove_SqlMap.xml" />
+	<!-- 调度货物 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehouseMove/model/WarehouseMoveWare_SqlMap.xml" />
+	<!-- 仓位 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehousePosition/model/WarehousePosition_SqlMap.xml" />
+	<!-- 仓位货物 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehousePosition/model/WarehousePositionWare_SqlMap.xml" />
+	<!-- 成本调整单 -->
+	<sqlMap resource="com/sinokj/app/warehouse/costAdjust/model/CostAdjust_SqlMap.xml" />
+	<!-- 成本调整单货物 -->
+	<sqlMap resource="com/sinokj/app/warehouse/costAdjust/model/CostAdjustWare_SqlMap.xml" />
+	
+	<!-- 货品 -->
+	<sqlMap resource="com/sinokj/app/good/ware/model/Ware_SqlMap.xml" />
+	<sqlMap resource="com/sinokj/app/good/ware/model/WareSpecificationVal_SqlMap.xml" />
+	<!-- 组合销售商品 -->
+	<sqlMap resource="com/sinokj/app/good/goodCompose/model/GoodCompose_SqlMap.xml" />
+	
+	<!-- 销售模块 -->
+	<!-- 销售订单 -->
+	<sqlMap resource="com/sinokj/app/order/sale/saleOrder/model/SaleOrder_SqlMap.xml" />
+	<!-- 销售收款单 -->
+	<sqlMap resource="com/sinokj/app/order/sale/saleCollection/model/SaleCollection_SqlMap.xml" />
+	<!-- 销售收款单子项 -->
+	<sqlMap resource="com/sinokj/app/order/sale/saleCollection/model/SaleCollectionItem_SqlMap.xml" />
+	<!-- 销售送货单 -->
+	<sqlMap resource="com/sinokj/app/order/sale/saleDelivery/model/SaleDelivery_SqlMap.xml" />
+	<!-- 销售退货单 -->
+	<sqlMap resource="com/sinokj/app/order/sale/saleReturn/model/SaleReturn_SqlMap.xml" />
+	<!-- 销售货物 -->
+	<sqlMap resource="com/sinokj/app/order/sale/saleWare/model/SaleWare_SqlMap.xml" />
+	<!-- 入库单 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehouseInto/model/WarehouseInto_SqlMap.xml" />
+	<!-- 入库单货物 -->
+	<sqlMap resource="com/sinokj/app/warehouse/warehouseInto/model/WarehouseIntoWare_SqlMap.xml" />
+	
+	<!-- 费用单 -->
+	<sqlMap resource="com/sinokj/app/order/cashBasis/fee/model/Fee_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/order/cashBasis/fee/model/FeeItem_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/order/cashBasis/pay/model/Pay_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/order/cashBasis/pay/model/CashItem_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/order/cashBasis/collection/model/Collection_SqlMap.xml"/>
+	<!-- 广告管理 -->
+	<sqlMap resource="com/sinokj/app/store/advertise/model/Advertise_SqlMap.xml"/>
+	<!-- 杂志管理 -->
+	<sqlMap resource="com/sinokj/app/store/magazine/model/Magazine_SqlMap.xml"/>
+	<!-- 返利管理 -->
+	<sqlMap resource="com/sinokj/app/order/buy/rebate/model/Rebate_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/order/buy/rebate/model/RebateItem_SqlMap.xml"/>	
+	
+	<!-- 会员管理 -->
+	<sqlMap resource="com/sinokj/app/vip/prepaid/model/Prepaid_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/vip/coupon/model/VipCoupon_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/vip/coupon/model/VipCouponWare_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/vip/message/model/Message_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/vip/level/model/VipLevel_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/vip/applyCash/model/ApplyToCash_SqlMap.xml"/>
+	
+	<!-- 新闻公告管理 -->
+	<sqlMap resource="com/sinokj/app/store/information/model/Information_SqlMap.xml"/>
+	
+	<!-- 商品包装 -->
+	<sqlMap resource="com/sinokj/app/store/packaging/model/Packaging_SqlMap.xml"/>
+	<!-- 祝福贺卡 -->
+	<sqlMap resource="com/sinokj/app/store/greetingCard/model/GreetingCard_SqlMap.xml"/>
+	<!-- 促销专题 -->
+	<sqlMap resource="com/sinokj/app/store/promote/model/Promote_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/store/promotecolumn/model/Promotecolumn_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/store/promote/model/PromoteGood_SqlMap.xml"/>
+	<!-- 优惠活动 -->
+	<sqlMap resource="com/sinokj/app/store/promotionActivity/model/PromotionActivity_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/store/promotionActivity/model/PromotionActivityGood_SqlMap.xml"/>	
+	<!-- 商城设置 -->
+	<sqlMap resource="com/sinokj/app/store/storeSet/model/StoreSet_SqlMap.xml"/>
+	<!--礼品包赠送 -->
+	<sqlMap resource="com/sinokj/app/store/gift/model/Gift_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/store/gift/model/GiftGood_SqlMap.xml"/>
+	<!-- 商品评论 -->
+	<sqlMap resource="com/sinokj/app/front/model/WareComment_SqlMap.xml"/>
+	
+	<!-- 用户行为(浏览/购买) -->
+	<sqlMap resource="com/sinokj/app/front/browse/model/Browse_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/front/browse/model/BrowseOthers_SqlMap.xml"/>
+	<sqlMap resource="com/sinokj/app/front/browse/model/BrowseBuy_SqlMap.xml"/>
+	
+</sqlMapConfig>

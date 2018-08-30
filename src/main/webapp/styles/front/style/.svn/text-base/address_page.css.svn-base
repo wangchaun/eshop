@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+
+
+
+/*============================待付款订单===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+.coupon_right{ width:1004px; float:left;}
+.courht{width:964px; float:left; padding-left:40px;}
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; font-family:"微软雅黑";  color:#0a7cd4; line-height:24px; height:32px; background:url(../../../Images/images/images/pu2.jpg) no-repeat left bottom; }
+.confirm_text{  width:700px; float:left;  padding-top:25px; height:16px; font-weight:bold; padding-left:45px;}
+.confirm_text1{ width:700px; float:left;  padding-top:15px; padding-left:45px; }
+.confirm_text1 h1{ width:83px; float:left; line-height:30px; height:30px;}
+.confirm_text1 h1 span{ color:#e41215; padding-right:3px;}
+.confirm_text1 h2{  float:left;}
+.confirm_text1 h2 span{ padding-top:0px; padding-left:3px; padding-right:3px; line-height:28px; color:#c2c2c2;}
+.confirm_text1 h3{ width:83px; float:left; line-height:22px;}
+.confirm_text1 h3 span{ color:#e41215; padding-right:3px;}
+.confirm_text1 h4{  float:left; padding-left:83px;}
+.confirminput{ width:142px; padding-left:5px; height:28px; border:#d9d9d9 solid 1px; line-height:28px; color:#666; font-size:12px; background:#fff;}
+.confirminput1{ width:352px;  padding-left:5px; height:28px; border:#d9d9d9 solid 1px; line-height:28px; color:#666; font-size:12px; background:#fff;}
+.confirminput2{ width:196px; padding-left:5px; height:28px; border:#d9d9d9 solid 1px; line-height:28px; color:#666; font-size:12px; background:#fff;}
+.confirmtextare{ width:196px; padding-left:5px; height:78px; border:#d9d9d9 solid 1px; line-height:22px; color:#666; font-size:12px; background:#fff;  overflow:hidden; }
+.confirmselect{ width:109px; height:28px; border:#d9d9d9 solid 1px; line-height:25px; color:#666; font-size:14px; background:#fff; overflow:hidden; }
+.confirmbtn{ width:90px; height:29px;  background:url(../../../Images/images/bao.jpg) no-repeat left top; border:none; cursor:pointer;}
+
+.sb {
+    position:relative;
+    height:24px;
+>    height:24px;
+    border:#d9d9d9 solid 1px;
+    float:left;
+    color:#666;	
+}
+.sb .b {/*模拟下被切除的下拉框(select)*/
+    position:absolute;
+    height:24px;
+    line-height:28px;
+    padding:0 5px;
+    overflow:hidden;
+    white-space :nowrap;text-overflow:ellipsis;
+    font-family:verdana;
+    font-size:12px;
+}
+.sb select {
+    position: absolute;
+    top:1px;
+    right:1px;
+}
+
+.w_50{/*以此来控制该下拉框的长度，可按需要添加多个长度Class，如w_100，w_200*/
+    width:109px !important;
+}
+.w_50 select{/*根据长度切割默认下拉框*/
+    width:107px;
+    clip:rect(2px 107px 24px 90px);/*切除下拉框(select)内容区域，只保留下拉三角箭头*/
+	
+
+}
+
+
+/*兼容谷歌浏览器的*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.sb {
+    position:relative;
+    height:24px;
+>    height:24px;
+    border:#d9d9d9 solid 1px;
+    float:left;
+    color:#666;
+	
+}
+.sb .b {/*模拟下被切除的下拉框(select)*/
+    position:absolute;
+    height:24px;
+    line-height:24px;
+    padding:0 5px;
+    overflow:hidden;
+    white-space :nowrap;text-overflow:ellipsis;
+    font-family:verdana;
+    font-size:12px;
+}
+.sb select {
+    position: absolute;
+    top:1px;
+    right:3px;
+}
+}
+
+
+.confirm_text2{  width:919px; float:left;  padding-top:35px;  padding-left:45px;}
+.confirm_text2 h1{ float:left; font-weight:bold;}
+.confirm_text2 h2{ float:left;}
+.confirm_text3{  width:919px; float:left;  padding-top:20px;  padding-left:45px;}
+.table{ width:917px; height:32px; background:url(../../../Images/images/pu3.jpg) repeat-x left top; border:#e4e4e4 solid 1px; float:left;}
+.table1{ width:917px; border-left:#efefef solid 1px;border-right:#efefef solid 1px; float:left;}
+.table1 table td{border-bottom:#efefef solid 1px;}
+.moren{  width:70px;}
+.moren01{ float:left; padding-top:9px;}
+.moren01 span{ float:left; padding-left:19px;}
+.moren02{ float:left; padding-top:9px; padding-bottom:9px;}
+.moren02 h1{ width:19px; float:left;}
+.moren02 h2{float:left; color:#999999; white-space: nowrap;}
+.ys2{ color:#44a0e7; font-size:12px; font-family:"宋体";  line-height:20px;}
+.ys2 a{ color:#44a0e7; font-size:12px; font-family:"宋体"; text-decoration:none;}
+.ys2 a:hover{ color:#44a0e7; font-size:12px; font-family:"宋体"; text-decoration:underline;}
+.ju{ padding-top:20px; padding-bottom:20px;}
+.ju1{ padding-top:11px; padding-bottom:8px;}
+.ju2{padding-left:20px;}
+.ys3{ color:#44a0e7; font-size:12px; font-family:"宋体"; }
+.ys3 a{ color:#44a0e7; font-size:12px; font-family:"宋体"; text-decoration:none;}
+.ys3 a:hover{ color:#44a0e7; font-size:12px; font-family:"宋体"; text-decoration:underline;}
+/*============================地址弹出层===================================*/
+#add_personlayer2 {width: 100%; height: 768px; position: fixed; z-index: 1000; top:0; background-color:#000; filter: Alpha(Opacity=50);	opacity: .5;}
+.personlayer_dk {width: 100%; height: 768px; position: fixed; z-index: 1000; top:0;}
+.personlayer{ background-color: #FFFFFF; border: 2px solid #FF6600; width: 762px; height: 500px; margin: 50px auto;}
+.personlayer01{ width:762px; height:45px; float:left; border-bottom:#2791e3 solid 2px; position:relative;}
+.personlayer01 h1{ float:left; margin-left:15px; display:inline; color:#2791e3; font-size:18px; font-family:"微软雅黑"; padding-top:12px; height:33px;background:url(../../../Images/images/a14.jpg) no-repeat center bottom;}
+.personlayer01 h2{ position:absolute; right:17px; top:20px;}
+.personlayer01 h2 span{ color:#2791e3; font-size:12px; padding-right:5px; float:left; padding-top:2px;}
+.personlayer01 h2 span a{ color:#2791e3; font-size:12px; text-decoration:none;}
+.personlayer01 h2 span a:hover{ color:#2791e3; font-size:12px; text-decoration:underline;}
+.personlayer01 h2 samp{ float:left;}

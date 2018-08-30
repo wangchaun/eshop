@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Credit">
+	<resultMap class="com.sinokj.app.baseInfo.credit.model.Credit" id="CreditResult">
+	  <!-- base -->
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <!-- credit -->
+	  <result column="creditNum" property="creditNum" jdbcType="Integer"/>
+	  <result column="minmoney" property="minMoney" jdbcType="decimal"/>
+	  <result column="maxmoney" property="maxMoney" jdbcType="decimal"/>
+	  <result column="memo" property="memo" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Credit_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Credit.Credit_insert"/>
+		<flushOnExecute statement="Credit.Credit_update"/>
+		<flushOnExecute statement="Credit.Credit_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel> 
+	
+	<!-- 模糊查询 -->
+	<sql id="Credit_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="memo">
+				memo = #memo#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="Credit_count_query_select" resultClass="java.lang.Integer" cacheModel="Credit_cache">
+		select count(*) from Credit
+		<include refid="Credit_query_select_where_clause"/>
+	</select>	
+	<select id="Credit_query_select" resultMap="CreditResult" cacheModel="Credit_cache">
+		select * from Credit 
+	</select>	
+	
+	 
+	<select id="Credit_select" resultMap="CreditResult" cacheModel="Credit_cache">
+		select * from Credit 
+		<include refid="Credit_query_select_where_clause"/>
+	</select>
+ 
+	
+	<insert id="Credit_insert">
+		<![CDATA[
+			insert into Credit
+			 (id,maxmoney,minmoney,creditNum,memo)
+			   values(#id#,#maxMoney#,#minMoney#,#creditNum#,#memo#)
+		]]>
+	</insert>
+	
+	<update id="Credit_update">
+		<![CDATA[
+			update Credit set maxmoney=#maxMoney#,minmoney=#minMoney#,creditNum=#creditNum#,
+			memo=#memo#
+			where id = #id#
+		]]>
+	</update>
+	<delete id="Credit_delete">
+		delete from Credit
+		<dynamic prepend="where">
+			<isNotEmpty property="id" prepend="and">
+				id=#id#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	 
+</sqlMap>

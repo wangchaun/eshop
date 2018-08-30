@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Warehouse">
+	<resultMap id="WarehouseResult" class="com.sinokj.app.warehouse.warehouse.model.Warehouse" >
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="name" property="name" jdbcType="VARCHAR" />
+	  
+	  <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+	  <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+	  <result column="total_cost_inventory" property="totalCostInventory" jdbcType="decimal"/>
+	  <result column="remark" property="remark" jdbcType="VARCHAR" />
+
+	  <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	  <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	  <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	  <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	  <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	  <result column="state" property="state" jdbcType="VARCHAR" />
+	  <result column="sort" property="sort" jdbcType="INTEGER" />
+	</resultMap>
+	
+ 	 <!-- 缓存模型 -->
+	<cacheModel id="Warehouse_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Warehouse.Warehouse_insert"/>
+		<flushOnExecute statement="Warehouse.Warehouse_update"/>
+		<flushOnExecute statement="Warehouse.Warehouse_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+  	<!-- 模糊查询条件 -->
+	<sql id="Warehouse_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	
+	<select id="Warehouse_count_query_select" resultClass="java.lang.Integer" cacheModel="Warehouse_cache">
+		select count(*) from warehouse
+		<include refid="Warehouse_query_select_where_clause"/>
+	</select>
+	
+	<!-- 模糊查询 -->
+	<select id="Warehouse_query_select" resultMap="WarehouseResult" cacheModel="Warehouse_cache">
+		select * from warehouse 
+		<include refid="Warehouse_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	
+	<!-- 精确查询 -->
+	<select id="Warehouse_select" resultMap="WarehouseResult" cacheModel="Warehouse_cache">
+		select * from warehouse where id = #id# order by sort asc
+	</select>	
+		<select id="front_Warehouse_select" resultMap="WarehouseResult" cacheModel="Warehouse_cache">
+		select * from warehouse order by sort asc
+	</select>	
+
+ 	<!-- 根据id删除仓库 -->
+    <delete id="Warehouse_delete">
+        delete from warehouse where id = #id#
+    </delete>
+    
+    <!-- 添加仓库 -->
+	<insert id="Warehouse_insert">
+	  insert into warehouse (id,code,name,area_id,area_name,sort,remark,creator_id,creator_name,create_time, state)
+	  values
+	  (#id#,#code#,#name#,#areaId#,#areaName#,#sort#,#remark#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+  
+  	<!-- 更新仓库 -->
+	<update id="Warehouse_update">
+	    update warehouse set
+	        code = #code#,
+	        name = #name#,
+	        area_id = #areaId#,
+	        area_name = #areaName#,
+	        total_cost_inventory = #totalCostInventory#,
+	        sort = #sort:INTEGER#,
+	        remark = #remark:VARCHAR#,
+	        modifier_id = #modifierId#,
+	        modifier_name = #modifierName#,
+	        modify_time = #modifyTime#,
+	        state = #state:VARCHAR#
+	    where id = #id#
+	</update>
+</sqlMap>

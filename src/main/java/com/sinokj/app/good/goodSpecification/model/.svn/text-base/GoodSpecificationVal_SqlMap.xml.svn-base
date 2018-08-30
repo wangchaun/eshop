@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="GoodSpecificationVal">
+	<resultMap class="com.sinokj.app.good.goodSpecification.model.GoodSpecificationVal" id="GoodSpecificationValResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="varchar"/>
+		<!-- GoodSpecificationVal -->
+		<result column="good_specification_id" property="goodSpecificationId" jdbcType="varchar"/>
+		<result column="value" property="value" jdbcType="varchar"/>
+
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="GoodSpecificationVal_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="GoodSpecificationVal.GoodSpecificationVal_insert"/>
+		<flushOnExecute statement="GoodSpecificationVal.GoodSpecificationVal_update"/>
+		<flushOnExecute statement="GoodSpecificationVal.GoodSpecificationVal_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	<!-- ly开始 -->
+	<!--普通商品根据goodId查询其所拥有的规格  -->
+		<select id="GoodSpecificationVal_good_query_select" resultMap="GoodSpecificationValResult">
+			select * from good_specification_val where id in (
+				select good_specification_val_id from ware_specification_val where ware_id in (
+					select id from ware where good_id = #goodId#));
+		</select>
+	<!--团购商品根据groupgoodId查询其所拥有的规格  -->
+		<select id="GoodSpecificationVal_groupgood_query_select" resultMap="GoodSpecificationValResult" cacheModel="GoodSpecificationVal_cache">
+			select * from good_specification_val where id in (
+				select good_specification_val_id from ware_specification_val where ware_id in (
+					select id from ware where groupgood_id = #goodId#));
+		</select>
+	<!--根据wareId查询其所拥有的规格  -->
+		<select id="GoodSpecificationVal_ware_query_select" resultMap="GoodSpecificationValResult" cacheModel="GoodSpecificationVal_cache">
+			select * from good_specification_val where id in (
+				select good_specification_val_id from ware_specification_val where ware_id = #wareId#);
+		</select>	
+	<!-- ly结束 -->
+	<!-- 模糊查询 -->
+	<sql id="GoodSpecificationVal_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodSpecificationId">
+				good_specification_id = #goodSpecificationId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="GoodSpecificationVal_count_query_select" resultClass="java.lang.Integer" cacheModel="GoodSpecificationVal_cache">
+		select count(*) from good_specification_val
+		<include refid="GoodSpecificationVal_query_select_where_clause"/>
+	</select>	
+	<select id="GoodSpecificationVal_query_select" resultMap="GoodSpecificationValResult" cacheModel="GoodSpecificationVal_cache">
+		select * from good_specification_val
+		<include refid="GoodSpecificationVal_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="GoodSpecificationVal_select" resultMap="GoodSpecificationValResult" cacheModel="GoodSpecificationVal_cache">
+		select * from good_specification_val
+		<include refid="GoodSpecificationVal_query_select_where_clause"/>
+		order by sort asc
+	</select>	
+	<select id="GoodSpecificationVal_idArr_select" resultMap="GoodSpecificationValResult" cacheModel="GoodSpecificationVal_cache">
+		select * from good_specification_val
+			where id in 
+			<iterate open="(" close=")" conjunction="," property="specificationValIdArr">
+				#specificationValIdArr[]#
+			</iterate>
+		order by good_specification_id,sort asc
+	</select>
+	
+	<insert id="GoodSpecificationVal_insert">
+		insert into good_specification_val 
+			(id,state,sort,good_specification_id,value)
+		values
+			(#id#,#state#,#sort#,#goodSpecificationId#,#value#)
+	</insert>
+	<update id="GoodSpecificationVal_update">
+		update good_specification_val set
+			state = #state#,
+			sort = #sort#,
+			good_specification_id = #goodSpecificationId#,
+			value = #value#
+		where id = #id#
+	</update>
+  <delete id="GoodSpecificationVal_delete">
+    delete from good_specification_val
+    	<dynamic prepend="where">
+    		<isNotEmpty prepend="and" property="id">
+    			id = #id:VARCHAR#
+    		</isNotEmpty>
+    		<isNotEmpty prepend="and" property="goodSpecificationId">
+    			good_specification_id = #goodSpecificationId#
+    		</isNotEmpty>
+    	</dynamic>
+  </delete>	
+	
+</sqlMap>

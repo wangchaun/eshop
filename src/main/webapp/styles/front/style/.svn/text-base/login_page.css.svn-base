@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+
+.box{ width:100%; margin:0 auto;}
+
+
+/*============================用户登录===================================*/
+
+.content{ width:1200px; margin:0 auto; margin-top:25px; background:#f7f7f7; height:565px;}
+.login{ width:1060px; margin:0 auto;}
+/*============================左侧代码===================================*/
+.login01{ width:660px; height:549px; float:left; background:url(../../../Images/images/ulogin_bg.jpg) no-repeat left top; margin-top:15px;}
+.login01_text{ padding-left:97px; padding-top:340px; float:left;}
+.login01_text01{ width:261px; padding-bottom:12px; float:left; line-height:22px; color:#a6dcc8; font-size:12px;}
+.login01_text01 span{ width:261px;  float:left; color:#dfe27c; font-family:"微软雅黑"; font-size:16px;}
+/*============================右侧代码===================================*/
+.login02{ width:350px;  float:left; padding-top:20px; padding-left:20px;}
+.login0201{ width:350px;  float:left; height:19px;}
+.login0202{ width:350px;  float:left; background:url(../../../Images/images/y6.jpg) repeat-y left top; height:450px;}
+.login0202_text{ width:310px;  float:left; margin-left:30px; padding-top:15px; display:inline; color:#2791e3; font-size:18px; font-family:"微软雅黑"; }
+.login0202_text1{ width:298px;  float:left; padding-left:45px;}
+.login0202_text1 h1{ float:left; padding-right:10px; line-height:26px;}
+.login0202_text1 h2{ float:left;}
+.login0202_text1 h3{ width:80%; padding-left:16%; float:left; height:24px; line-height:24px; color:#FF0000;}
+.login0202_text1 h3 span{ width:20px; float:left;  padding-right:5px; padding-top: 4px;}
+.login0202_text1input{ width:205px; padding-left:5px; height:24px; border:#dadada solid 1px; line-height:24px; background:#fff;}
+.login0202_text1input2{ width:205px; padding-left:5px; height:24px; border:#FEA710 solid 1px; line-height:24px; background:#fff;}
+.login0202_text1btn{ width:90px; height:29px; border:none; background:#2791e3; color:#fff; font-size:16px; font-family:"微软雅黑"; line-height:29px; cursor:pointer;}
+.login0202_text2{ width:200px;  float:left; padding-left:91px;  padding-top:15px;}
+.login0202_text2 h1{ float:left; padding-right:10px;}
+.login0202_text2 h2{ float:left; color:#2791e3; font-size:12px; line-height:28px; width:90px;}
+.login0202_text2 h2 a{color:#2791e3; font-size:12px; text-decoration:none;}
+.login0202_text2 h2 a:hover{color:#2791e3; font-size:12px; text-decoration:underline;}
+.login0202_text3{ width:306px;  float:left; margin-left:22px; display:inline; margin-top:25px; background:url(../../../Images/images/y10.jpg) repeat-x top left;}
+.login0202_text301{ width:270px;  float:left;  margin-top:12px; line-height:20px; padding-left:8px;} 
+.login0202_text301 samp{  color:#ff5a00; font-size:16px; font-family:"微软雅黑"; line-height:30px;} 
+.login0202_text302{ width:260px;  float:left;  line-height:20px; padding-left:23px; padding-top:5px;} 
+.login0202_text302 span{ padding-left:12px; color:#2791e3; font-size:12px;} 
+.login0202_text302 span a{color:#2791e3; font-size:12px; text-decoration:none;} 
+.login0202_text4{ width:306px;  float:left; margin-left:22px; display:inline; margin-top:15px; background:url(../../../Images/images/y10.jpg) repeat-x top left;}
+.login0202_text4 h1{ float:left; width:270px; line-height:22px; padding-bottom:10px; padding-top:15px; padding-left:8px;}
+.login0202_text4 h2{ float:left; padding-left:23px;}
+.login0202_text4 h2 span{ float:left; padding-right:20px; padding-bottom:10px;}

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="WarehouseMoveWare">
+	<resultMap id="WarehouseMoveWareResult" class="com.sinokj.app.warehouse.warehouseMove.model.WarehouseMoveWare" >
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <result column="warehouse_move_id" property="warehouseMoveId" jdbcType="VARCHAR" />
+	  <result column="f_warehouse_position_id" property="fwarehousePositionId" jdbcType="VARCHAR" />
+	  <result column="f_warehouse_position_name" property="fwarehousePositionName" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_position_id" property="swarehousePositionId" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_position_name" property="swarehousePositionName" jdbcType="VARCHAR" /> 
+	  <result column="ware_id" property="wareId" jdbcType="VARCHAR" />
+	  <result column="ware_name" property="wareName" jdbcType="VARCHAR" />
+	  <result column="move_num" property="moveNum" jdbcType="INTEGER" />
+	  <result column="price_out" property="priceOut" jdbcType="decimal"/>
+	  <result column="money_out" property="moneyOut" jdbcType="decimal"/>
+	  <result column="price_in" property="priceIn" jdbcType="decimal"/>
+	  <result column="money_in" property="moneyIn" jdbcType="decimal"/>
+	  <result column="price_sale" property="priceSale" jdbcType="decimal"/>
+	  <result column="money_sale" property="moneySale" jdbcType="decimal"/>
+	  <result column="sort" property="sort" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 调库汇总resultMap -->
+	<resultMap id="WarehouseMoveWareResult_HZ" class="com.sinokj.app.warehouse.warehouseMove.model.WarehouseMoveWare" >
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="aname" property="goodName" jdbcType="VARCHAR" />
+	   <result column="unit" property="goodTypeName" jdbcType="VARCHAR" />
+	  <result column="move_num" property="moveNum" jdbcType="INTEGER" />
+	  <result column="money_out" property="moneyOut" jdbcType="decimal"/>
+	  <result column="f_warehouse_position_name" property="fwarehousePositionName" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_position_name" property="swarehousePositionName" jdbcType="VARCHAR" />  	
+	 </resultMap> 
+	 	
+	 <!--调库明细应添加的resultMap-->
+	 <resultMap id="WarehouseMoveWareResult_MX" class="com.sinokj.app.warehouse.warehouseMove.model.WarehouseMoveWare" >
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="aname" property="goodName" jdbcType="VARCHAR" />
+	   <result column="unit" property="goodTypeName" jdbcType="VARCHAR" />
+	  <result column="move_num" property="moveNum" jdbcType="INTEGER" />
+	  <result column="money_out" property="moneyOut" jdbcType="decimal"/>
+	  <result column="f_warehouse_position_name" property="fwarehousePositionName" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_position_name" property="swarehousePositionName" jdbcType="VARCHAR" />
+	  <result column="id" property="wid" jdbcType="varchar" />
+	  <result column="create_time" property="createTime" jdbcType="datetime" />
+	  <result column="movecode" property="moveCode" jdbcType="VARCHAR" />
+	  <result column="f_warehouse_name" property="warehouseNameOut" jdbcType="VARCHAR" />
+	  <result column="s_warehouse_name" property="warehouseNameIn" jdbcType="VARCHAR" /> 
+	  <result column="price_out" property="priceOut" jdbcType="decimal"/>
+	</resultMap>
+	
+ 	 <!-- 缓存模型 -->
+	<cacheModel id="WarehouseMoveWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="WarehouseMoveWare.WarehouseMoveWare_insert"/>
+		<flushOnExecute statement="WarehouseMoveWare.WarehouseMoveWare_update"/>
+		<flushOnExecute statement="WarehouseMoveWare.WarehouseMoveWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	
+		
+	<!-- 调库汇总模糊查询条件-->
+	<sql id="WarehouseMoveWare_Transfer_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="beginTime">
+				ase.create_time>= #beginTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				ase.create_time &lt;= #endTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseNameOut">
+				ase.f_warehouse_name like '%$warehouseNameOut$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseNameIn">
+				ase.s_warehouse_name like '%$warehouseNameIn$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="goodName">
+				ase.aname like '%$goodName$%'
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	
+	<!-- 调库汇总模糊查询-->
+		<select id="WarehouseMoveWare_Transfer_select" resultMap="WarehouseMoveWareResult_HZ" >
+			select * from (
+			select a.`code`,a.`name` as aname,a.unit,sum(b.move_num) as move_num,sum(b.money_out) as money_out,b.f_warehouse_position_name,b.s_warehouse_position_name,c.create_time,c.f_warehouse_name,c.s_warehouse_name
+			from good a,warehouse_move_ware b,warehouse_move c,ware
+			where a.id=ware.good_id AND ware.id=b.ware_id AND b.warehouse_move_id=c.id
+			group by a.`code`) as ase
+			<include refid="WarehouseMoveWare_Transfer_where_clause"/>		
+		</select>
+		
+	<!-- 调库明细模糊查询 -->
+		<select id="WarehouseMoveWare_Summary_select" resultMap="WarehouseMoveWareResult_MX" >
+			select * from(
+			select a.id,a.create_time,a.`code` as movecode,a.f_warehouse_name,b.f_warehouse_position_name,a.s_warehouse_name,b.s_warehouse_position_name,c.`code`,c.`name` as aname,c.unit,b.move_num,b.price_out,b.money_out
+ 			from warehouse_move as a,warehouse_move_ware as b,good as c,ware
+			where c.id=ware.good_id AND ware.id=b.ware_id AND b.warehouse_move_id=a.id
+			) ase
+			<include refid="WarehouseMoveWare_Transfer_where_clause"/>
+			ORDER BY ase.create_time ASC
+					
+		</select>
+  	<!-- 模糊查询条件 -->
+	<sql id="WarehouseMoveWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="warehouseMoveId">
+				warehouse_move_id = #warehouseMoveId#
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	
+	<select id="WarehouseMoveWare_count_query_select" resultClass="java.lang.Integer" cacheModel="WarehouseMoveWare_cache">
+		select count(*) from warehouse_move_ware
+		<include refid="WarehouseMoveWare_query_select_where_clause"/>
+	</select>
+	
+	<!-- 模糊查询 -->
+	<select id="WarehouseMoveWare_query_select" resultMap="WarehouseMoveWareResult" cacheModel="WarehouseMoveWare_cache">
+		select * from warehouse_move_ware
+		<include refid="WarehouseMoveWare_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	
+	<!-- 精确查询 -->
+	<select id="WarehouseMoveWare_select" resultMap="WarehouseMoveWareResult" cacheModel="WarehouseMoveWare_cache">
+		select * from warehouse_move_ware 
+		<include refid="WarehouseMoveWare_query_select_where_clause"/>
+		 order by sort asc
+	</select>	
+
+ 	<!-- 根据warehouseMoveid删除调度货物 -->
+    <delete id="WarehouseMoveWare_delete">
+        delete from warehouse_move_ware where warehouse_move_id = #warehouseMoveId#
+    </delete>
+    
+    <!-- 添加调度货物 -->
+	<insert id="WarehouseMoveWare_insert">
+	  insert into warehouse_move_ware 
+	  (id,warehouse_move_id,f_warehouse_position_id,f_warehouse_position_name,s_warehouse_position_id,s_warehouse_position_name,
+	  	ware_id,ware_name,move_num,price_out,money_out,price_in,money_in,price_sale,money_sale,sort)
+	  values
+	  (#id#,#warehouseMoveId#,#fwarehousePositionId#,#fwarehousePositionName#,#swarehousePositionId#,#swarehousePositionName#,
+	  #wareId#,#wareName#,#moveNum#,#priceOut#,#moneyOut#,#priceIn#,#moneyIn#,#priceSale#,#moneySale#,#sort#)
+	</insert>
+  
+  	<!-- 更新调度货物 -->
+	<update id="WarehouseMoveWare_update">
+	    update warehouse_move_ware set
+	    	 warehouse_move_id = #warehouseMoveId#,
+	        f_warehouse_position_id = #fwarehousePositionId#,
+	        f_warehouse_position_name = #fwarehousePositionName#,
+	        s_warehouse_position_id = #swarehousePositionId#,
+	        s_warehouse_position_name = #swarehousePositionName#,
+	        ware_id = #wareId#,
+	        ware_name = #wareName#,
+	        move_num = #moveNum#,
+	        price_out = #priceOut#,
+	        money_out = #moneyOut#,
+	        price_in = #priceIn#,
+	        money_in = #moneyIn#,
+	        price_sale = #priceSale#,
+	        money_sale = #moneySale#,
+	        sort = #sort#
+	    where id = #id#
+	</update>
+	
+</sqlMap>

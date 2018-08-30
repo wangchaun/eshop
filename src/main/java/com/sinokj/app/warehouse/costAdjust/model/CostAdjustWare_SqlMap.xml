@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="CostAdjustWare">
+	<resultMap class="com.sinokj.app.warehouse.costAdjust.model.CostAdjustWare" id="CostAdjustWareResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="int"/>
+		<!-- SaleOrder -->
+		<result column="order_id" property="orderId" jdbcType="varchar"/>
+		<result column="ware_id" property="wareId" jdbcType="varchar"/>
+		<result column="ware_name" property="wareName" jdbcType="varchar"/>
+		<result column="cost_current" property="costCurrent" jdbcType="decimal"/>
+		<result column="cost_adjust" property="costAdjust" jdbcType="decimal"/>
+		<result column="stock" property="stock"  jdbcType="integer"/>
+		<result column="remark" property="remark"  jdbcType="varchar"/>
+		<result column="ware_code" property="wareCode" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="CostAdjustWare_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="CostAdjustWare.CostAdjustWare_insert"/>
+		<flushOnExecute statement="CostAdjustWare.CostAdjustWare_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="CostAdjustWare_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="orderId">
+				order_id = #orderId#
+			</isNotEmpty>
+		</dynamic>		
+	</sql>
+	<select id="CostAdjustWare_count_query_select" resultClass="java.lang.Integer" cacheModel="CostAdjustWare_cache">
+		select count(*) from cost_adjust_ware
+		<include refid="CostAdjustWare_query_select_where_clause"/>
+	</select>	
+	<select id="CostAdjustWare_query_select" resultMap="CostAdjustWareResult" cacheModel="CostAdjustWare_cache">
+		select * from cost_adjust_ware
+		<include refid="CostAdjustWare_query_select_where_clause"/>
+		order by sort asc
+	</select>
+
+	<insert id="CostAdjustWare_insert">
+		insert into cost_adjust_ware 
+			(id,sort,order_id,ware_id,ware_name,ware_code,cost_current,cost_adjust,stock,remark)
+		values
+			(#id#,#sort#,#orderId#,#wareId#,#wareName#,#wareCode#,#costCurrent#,#costAdjust#,#stock#,#remark#)
+	</insert>
+	
+	<delete id="CostAdjustWare_delete">
+		delete from cost_adjust_ware where order_id = #orderId#
+	</delete>
+</sqlMap>

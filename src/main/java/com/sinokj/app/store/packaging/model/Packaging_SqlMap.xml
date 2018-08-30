@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Packaging">
+	<resultMap class="com.sinokj.app.store.packaging.model.Packaging" id="PackagingResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="code" property="code" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		<result column="modifier_id" property="modifierId" jdbcType="varchar"/>
+		<result column="modifier_name" property="modifierName" jdbcType="varchar"/>
+		<result column="modify_time" property="modifyTime" jdbcType="datetime"/>
+		<result column="state" property="state" jdbcType="varchar"/>
+		<result column="name" property="name" jdbcType="vachar"/>
+		<!-- Packaging -->
+		<result column="packaging_fee" property="packagingFee" jdbcType="varchar"/>
+		<result column="min_for_free" property="minForFree" jdbcType="varchar"/>
+		<result column="package_description" property="packageDescription" jdbcType="varchar"/>
+		<result column="pic_id" property="picId" jdbcType="varchar"/>
+		<result column="pic" property="pic" jdbcType="varchar"/>
+		
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Packaging_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Packaging.Packaging_insert"/>
+		<flushOnExecute statement="Packaging.Packaging_update"/>
+		<flushOnExecute statement="Packaging.Packaging_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="Packaging_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id like '%$id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="packagingFee">
+				packaging_fee like '%$packagingFee$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'
+			</isNotEmpty>
+					
+		</dynamic>		
+	</sql>
+	<select id="Packaging_count_query_select" resultClass="java.lang.Integer" cacheModel="Packaging_cache">
+		select count(*) from packaging
+		<include refid="Packaging_query_select_where_clause"/>
+	</select>	
+	<select id="Packaging_query_select" resultMap="PackagingResult" cacheModel="Packaging_cache">
+		select * from packaging
+		<include refid="Packaging_query_select_where_clause"/>
+		order by code desc
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="Packaging_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="packagingFee">
+				packaging_fee = #packagingFee#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name  = #name#
+			</isNotEmpty>
+					
+		</dynamic>		
+	</sql>	
+	<select id="Packaging_select" resultMap="PackagingResult" cacheModel="Packaging_cache">
+		select * from packaging
+		<include refid="Packaging_select_where_clause"/>
+		order by create_time,code desc
+	</select>
+
+	<insert id="Packaging_insert">
+		insert into packaging 
+			(id,code,name,packaging_fee,min_for_free,package_description,pic_id,pic,creator_id,creator_name,create_time,state)
+		values
+			(#id#,#code#,#name#,#packagingFee#,#minForFree#,#packageDescription#,#picId#,#pic#,#creatorId#,#creatorName#,#createTime#,#state#)
+	</insert>
+	<update id="Packaging_update">
+		update packaging set
+			packaging_fee = #packagingFee#,
+			min_for_free = #minForFree#,
+			package_description = #packageDescription#,
+			name = #name#,
+			pic_id = #picId#,
+			pic = #pic#,
+			creator_name = #creatorName#,
+			create_time = #createTime#,
+			state = #state#
+		where id = #id#
+	</update>
+
+  <delete id="Packaging_delete">
+    delete from packaging
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

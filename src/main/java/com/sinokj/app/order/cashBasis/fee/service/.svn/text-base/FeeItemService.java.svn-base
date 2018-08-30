@@ -1,0 +1,35 @@
+ package com.sinokj.app.order.cashBasis.fee.service;
+ 
+ import com.sinokj.app.order.cashBasis.fee.model.FeeItem;
+import com.sinokj.code.ibatis.impl.PublicDAO;
+import com.sinokj.code.service.BaseService;
+
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
+ 
+ public class FeeItemService extends BaseService<FeeItem>
+ {
+   public void deleteByIntoId(String intoId)
+     throws Exception
+   {
+     if (StringUtils.isBlank(intoId)) {
+       throw new Exception("intoId is null");
+     }
+     Map param = new HashMap();
+     param.put("orderId", intoId);
+     this.publicDAO.delete("FeeItem.FeeItem", param);
+   }
+ 
+   public List<FeeItem> pageListWithuncosc(FeeItem feeItem)
+   {
+     List result = this.publicDAO.select("FeeItem.FeeItem_Withuncosc", feeItem);
+     return result;
+   }
+ }
+
+/* 
+ 
+ 
+ */

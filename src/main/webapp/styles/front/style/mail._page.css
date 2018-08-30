@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+
+
+
+/*============================安全设置===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+.coupon_right{ width:1004px; float:left;}
+.courht{width:964px; float:left; padding-left:40px;}
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; font-family:"微软雅黑";  color:#0a7cd4; line-height:24px; height:32px; background:url(../../../Images/images/pu2.jpg) no-repeat left bottom; }
+.modify{ width:964px; height:42px; float:left; margin-top:21px; background:url(../../../Images/images/sec2.jpg) no-repeat left top; line-height:42px;}
+.modify h1{ width:336px;  float:left; padding-left:99px; color:#fff; font-size:16px; font-family:"微软雅黑";}
+.modify h2{ width:322px;  float:left;   color:#666; font-size:16px; font-family:"微软雅黑";}
+.modify h3{   float:left;  color:#666666; font-size:16px; font-family:"微软雅黑";}
+.modify1{ width:962px; height:223px; float:left; margin-top:21px; border:#ececec solid 1px;}
+.modify1_content{ width:900px; padding-left:27px; float:left; margin-top:15px;}
+.modify101{ width:900px;  float:left; margin-top:15px; }
+.modify101 h1{ width:110px;  float:left; line-height:26px; text-align:right;}
+.modify101 h1 span{ color:#e41215; font-size:12px; padding-right:3px;}
+.modify101 h2{ float:left; line-height:26px; font-weight:bold; padding-right:12px; padding-left:8px;}
+.modify101 h3{ float:left; line-height:26px;}
+.modify101 h4{  float:left; color:#2791e3; line-height:26px;}
+.modify101 h4 a{ color:#2791e3; text-decoration:none;}
+.modify101 h4 a:hover{ color:#2791e3; text-decoration:underline;}
+.modify101 h5{  float:left; padding-right:2px; line-height:26px;}
+.modify103{ width:900px;  float:left; margin-top:10px; }
+.modify103 h1{ width:110px;  float:left; line-height:26px; text-align:right;}
+.modify103 h1 span{ color:#e41215; font-size:12px; padding-right:3px;}
+.modify103 h2{ float:left; line-height:26px; font-weight:bold; padding-right:12px; padding-left:8px;}
+.modify103 h3{ float:left; line-height:26px;}
+.modify102{ width:600px;  float:left; margin-top:22px; padding-left:119px;}
+.pickbtn1{ width:80px; height:22px; cursor:pointer;  border:none; background:#2791e3; text-align:center; font-size:12px; line-height:24px;  color:#fff;}
+.pickinput{ width:69px; padding-left:5px; height:24px; line-height:24px; font-size:12px; color:#666; border:#dadada solid 1px;}
+.pickinput1{ width:151px; padding-left:5px; height:24px; line-height:24px; font-size:12px; color:#666; border:#dadada solid 1px;}
+
+.forgotpasswordbutton{  width:90px; height:29px; cursor:pointer; border:none; background:url(../../../Images/images/pass2.jpg) no-repeat left top;}
+
+
+
+
+

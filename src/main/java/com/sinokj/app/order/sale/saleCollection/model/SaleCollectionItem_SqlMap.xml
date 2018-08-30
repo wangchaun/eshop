@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SaleCollectionItem">
+	<resultMap class="com.sinokj.app.order.sale.saleCollection.model.SaleCollectionItem" id="SaleCollectionItemResult">
+		 <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="sort" property="sort" jdbcType="varchar"/>
+		<!-- SaleCollectionItem -->
+		<result column="collection_id" property="collectionId" jdbcType="varchar"/>
+		<result column="order_id" property="orderId" jdbcType="varchar"/>
+		<result column="money_account" property="moneyAccount" jdbcType="decimal"/>
+		<result column="money_already_received" property="moneyAlreadyReceived" jdbcType="decimal"/>
+		<result column="money_current_received" property="moneyCurrentReceived" jdbcType="decimal"/>
+		<result column="remark" property="remark" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="SaleCollectionItem_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="SaleCollectionItem.SaleCollectionItem_insert"/>
+		<flushOnExecute statement="SaleCollectionItem.SaleCollectionItem_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊搜索 -->
+	<sql id="SaleCollectionItem_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="collectionId">
+			  collection_id = #collectionId#
+			</isNotEmpty>
+		</dynamic>	
+	</sql>
+	<select id="SaleCollectionItem_query_select" resultMap="SaleCollectionItemResult" cacheModel="SaleCollectionItem_cache">
+		select * from sale_collection_item 
+		<include refid="SaleCollectionItem_query_select_where_clause"/>
+		order by sort asc
+	</select>
+	<select id="SaleCollectionItem_count_query_select" resultClass="java.lang.Integer" cacheModel="SaleCollectionItem_cache">
+		select count(*) from sale_collection_item
+		<include refid="SaleCollectionItem_query_select_where_clause"/>
+	</select>
+
+	<insert id="SaleCollectionItem_insert">
+		insert into sale_collection_item 
+			(id,sort,collection_id,order_id,money_account,money_already_received,money_current_received,remark)
+		values
+			(#id#,#sort#,#collectionId#,#orderId#,#moneyAccount#,#moneyAlreadyReceived#,#moneyCurrentReceived#,#remark#)
+	</insert>
+	
+	<delete id="SaleCollectionItem_delete">
+		delete from sale_collection_item where collection_id = #collectionId#
+	</delete>
+</sqlMap>

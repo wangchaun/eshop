@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+
+
+
+/*============================我的评价===================================*/
+
+
+
+.box{ width:100%; margin:0 auto;}
+.content{ width:1200px; margin:0 auto;}
+.coupon{ width:1200px; float:left; padding-top:28px;}
+.content{ width:1200px; margin:0 auto;}
+.applyReturn{ width:1200px; float:left; padding-top:20px;}
+.applyReturn_left{ width:196px; float:left;}
+.applyReturn_right{ width:1004px; float:left;}
+.applyright{width:964px; float:left; padding-left:40px;}
+
+/*******************我的评价******************************/
+
+.courht{width:964px; float:left; padding-left:40px;}
+.courht_title{ width:964px; float:left; height:32px; border-bottom:#298fd7 solid 2px;}
+.courht_title span{ float:left; text-align:center; font-size:18px; color:#1a8bdb; font-family:"微软雅黑"; line-height:28px; height:32px; background:url(../images/a14.jpg) no-repeat center bottom;}
+
+/*******************我的评价******************************/
+
+.courht_text2{ width:964px; float:left; margin-top:15px;}
+.table{ width:962px; height:32px; background:url(../images/pu3.jpg) repeat-x left top; border:#e4e4e4 solid 1px; float:left;}
+.table1{ width:962px; border-left:#efefef solid 1px;border-right:#efefef solid 1px; float:left;}
+.table1 table td{border-bottom:#efefef solid 1px;}
+.phlist{ float:left; padding-bottom:18px; padding-top:18px; width:280px;}
+.phlist h2{ float:left; padding-right:14px;}
+.phlist h2 img{ width:57px; height:57px;border:#e0e0e0 solid 1px;}
+.phlist h3{ float:left; width:200px; padding-top:12px; line-height:18px; color:#666px;}
+.phlist h3 span{color:#666px; font-weight:bold}
+.phlist h1{ float:left; padding-right:10px; padding-top:20px; width:13px;}
+.sales{ width:962px; float:left; margin-top:32px; border:#d9d9d9 solid 1px; line-height:22px; padding-top:11px; padding-bottom:11px; background:#fff5f5; }
+.sales h1{ float:left; padding-left:28px; width:920px;}
+.sales h1 samp{ color:#666; font-size:12px;  float:left; }
+.sales h1 span{  color:#e41215; font-size:12px;  font-weight:normal; float:left;  padding-right:0px;}
+.sales1{ width:962px; float:left; padding-top:40px; color:#666; font-size:12px; font-weight:bold; }
+.sales1 span{color:#e41215; font-size:20px; font-family:Arial, Helvetica, sans-serif; font-weight:normal; line-height:20px; float:left;}
+.sales1 samp{color:#666; font-size:12px; font-weight:bold; float:left; line-height:24px;}
+.sales2{ width:964px; float:left; margin-top:20px; position:relative;}
+.sales201{ float:left;}
+.sales202{ position:absolute; top:3px; right:0px;}
+.sales202 h1{ font-weight:bold; float:left; padding-right:10px; line-height:22px;}
+.sales202 h2{float:left; padding-left:5px; padding-right:5px; line-height:22px;}
+.sales202 h3{ float:left; }
+.applyfirstselect{ width:128px; height:20px; border:#d9d9d9 solid 1px; line-height:18px; font-size:12px; color:#666;}
+.applyfirstselect1{ width:48px; height:20px; border:#d9d9d9 solid 1px; line-height:18px; font-size:12px; color:#666;}
+.salesbtn{ width:48px; height:20px; line-height:21px; background:#2791e3; font-size:12px; color:#fff; text-align:center; font-family:"宋体"; border:none; cursor:pointer;}
+.leftborder{ border-right:#efefef solid 1px;}
+.fys{ font-family:Arial, Helvetica, sans-serif; font-size:12px;}
+.sales4{ width:964px; float:left; padding-top:47px; border-bottom:#bdbdbd solid 1px; height:22px; font-weight:bold;}
+.sales5{ width:749px; float:left; padding-top:47px; padding-left:215px;}
+
+
+
+
+

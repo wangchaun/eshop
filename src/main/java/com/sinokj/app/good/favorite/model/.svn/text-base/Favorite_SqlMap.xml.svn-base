@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Favorite">
+	<resultMap class="com.sinokj.app.good.favorite.model.Favorite" id="FavoriteResult">
+	    <!-- base -->
+		<result column="id" property="id" jdbcType="varchar"/>
+		<result column="creator_id" property="creatorId" jdbcType="varchar"/>
+		<result column="creator_name" property="creatorName" jdbcType="varchar"/>
+		<result column="create_time" property="createTime" jdbcType="datetime"/>
+		
+		<!-- Good -->
+		<result column="good_id" property="goodId" jdbcType="varchar"/>
+		<result column="good_name" property="goodName" jdbcType="varchar"/>
+	</resultMap>
+	
+	<resultMap class="com.sinokj.app.good.good.model.Good" id="FavoritetooResult" extends="FavoriteResult">
+		<result column="intro_brief" property="introBrief" jdbcType="varchar"/>
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="Favorite_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="Favorite.Favorite_insert"/>
+		<flushOnExecute statement="Favorite.Favorite_delete"/>
+		<property name="size" value="2000"/>
+	</cacheModel> 	
+	
+	<!-- 模糊查询 -->
+	<sql id="Favorite_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorId">
+				creator_id = #creatorId#
+			</isNotEmpty>			
+		</dynamic>		
+	</sql>
+	<select id="Favorite_count_query_select" resultClass="java.lang.Integer" cacheModel="Favorite_cache">
+		select count(*) from favorite
+		<include refid="Favorite_query_select_where_clause"/>
+	</select>	
+	<select id="Favorite_query_select" resultMap="FavoriteResult" cacheModel="Favorite_cache">
+		select * from favorite
+		<include refid="Favorite_query_select_where_clause"/>
+		order by create_time desc
+	</select>	
+	
+	<!-- 精确查询 -->
+	<sql id="Favorite_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="creatorId">
+				creator_id = #creatorId#
+			</isNotEmpty>
+				<isNotEmpty prepend="and" property="goodId">
+				good_id = #goodId#
+			</isNotEmpty>			
+		</dynamic>		
+	</sql>	
+	<select id="Favorite_select" resultMap="FavoriteResult" cacheModel="Favorite_cache">
+		select * from favorite
+		<include refid="Favorite_select_where_clause"/>
+		order by create_time desc
+	</select>
+	
+	<select id="Favorite_zx_select" resultMap="FavoriteResult">
+		select * from (select a.*,b.intro_brief from favorite a  LEFT JOIN good_extend b on a.good_id =b.good_id )a where creator_id=#creatorId#
+	</select>
+	
+	
+	
+	<insert id="Favorite_insert">
+		insert into favorite 
+			(id,creator_name,create_time,creator_id,good_id,good_name)
+		values
+			(#id#,#creatorName#,#createTime#,#creatorId#,#goodId#,#goodName#)
+	</insert>
+  <delete id="Favorite_delete">
+    delete from favorite
+    where id = #id:VARCHAR#
+  </delete>	
+	
+</sqlMap>

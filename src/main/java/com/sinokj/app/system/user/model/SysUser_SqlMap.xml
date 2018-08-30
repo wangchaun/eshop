@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SysUser" >
+	<resultMap id="SysUser_result" class="com.sinokj.app.system.user.model.SysUser" >
+	  <result column="id" property="id" jdbcType="VARCHAR" />
+	  <result column="code" property="code" jdbcType="VARCHAR" />
+	  <result column="name" property="name" jdbcType="VARCHAR" />
+	  <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+	  <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+	  <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+	  <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+	  <result column="telphone" property="telphone" jdbcType="VARCHAR" />
+	  <result column="email" property="email" jdbcType="VARCHAR" />
+	  <result column="company" property="company" jdbcType="VARCHAR" />
+ 	  <result column="address" property="address" jdbcType="VARCHAR" />
+	  <result column="mobile" property="mobile" jdbcType="VARCHAR" />	  
+	  <result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+	  <result column="dept_name" property="deptName" jdbcType="VARCHAR" /> 
+	  <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+	  <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+	  <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	  <result column="modifier_id" property="modifierId" jdbcType="VARCHAR" />
+	  <result column="modifier_name" property="modifierName" jdbcType="VARCHAR" />
+	  <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	  <result column="state" property="state" jdbcType="VARCHAR" />
+	  
+	  <result column="warehouse_Id" property="warehouseId" jdbcType="VARCHAR"/>
+	  <result column="warehouse_Name" property="warehouseName" jdbcType="VARCHAR"/>
+	  
+	  <result column="begin" property="begin" javaType="java.sql.Date"/>
+	  <result column="end" property="end" javaType="java.sql.Date" />
+	</resultMap>
+	
+	<!-- 缓存模型 -->
+	<cacheModel id="SysUser_cache" type="LRU" readOnly="false" serialize="true">
+		<flushInterval hours="24"/>
+		<flushOnExecute statement="SysUser.SysUser_insert"/>
+		<flushOnExecute statement="SysUser.SysUser_update"/>
+		<flushOnExecute statement="SysUser.SysUser_pwd_update"/>
+		<flushOnExecute statement="SysUser.SysUser_delete"/>
+		<property name="size" value="1000"/>
+	</cacheModel>  	
+  
+  	<!-- 模糊查询 -->
+	<sql id="SysUser_query_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code like '%$code$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name like '%$name$%'	
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="deptId">
+				dept_id = #deptId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="deptName">
+				dept_name = #deptName#
+			</isNotEmpty>	
+			<isNotEmpty prepend="and" property="pwd">
+				pwd = #pwd#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="state">
+				state = #state# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleCode">
+				role_code = #roleCode#
+			</isNotEmpty>
+		</dynamic> 	
+	</sql>
+	<select id="SysUser_count_query_select" resultClass="java.lang.Integer" cacheModel="SysUser_cache">
+		select count(*) from sys_user
+		<include refid="SysUser_query_select_where_clause"/>
+	</select>	
+	<select id="SysUser_query_select" resultMap="SysUser_result" cacheModel="SysUser_cache">
+		select * from sys_user 
+		<include refid="SysUser_query_select_where_clause"/>
+		order by create_time desc
+	</select>
+	
+  	<!-- 精确查询 -->
+	<sql id="SysUser_select_where_clause">
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="code">
+				code = #code#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="name">
+				name = #name#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleId">
+				role_id = #roleId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleCode">
+				role_code = #roleCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="deptId">
+				dept_id = #deptId#
+			</isNotEmpty>		
+			<isNotEmpty prepend="and" property="state">
+				state = #state# 
+			</isNotEmpty>		
+		</dynamic> 	
+	</sql>
+	<select id="SysUser_select" resultMap="SysUser_result" cacheModel="SysUser_cache">
+		select * from sys_user 
+		<include refid="SysUser_select_where_clause"/>
+		order by create_time desc
+	</select>	
+	
+	
+ 	<!-- 根据id删除用户 -->
+    <delete id="SysUser_delete">
+        delete from sys_user where id = #id#
+    </delete>
+    
+    <!-- 添加用户 -->
+	<insert id="SysUser_insert"  >   
+	  insert into sys_user (id, code, name, role_id, role_code, role_name, pwd, telphone, email, mobile, dept_id, dept_name, creator_id,
+	    creator_name, create_time, modifier_id, modifier_name, modify_time, state,company,address,warehouse_Id,warehouse_Name)
+	  values (#id:VARCHAR#, #code:VARCHAR#, #name:VARCHAR#, #roleId:VARCHAR#, #roleCode:VARCHAR#, #roleName:VARCHAR#,
+	    #pwd:VARCHAR#, #telphone:VARCHAR#,#email#,#mobile#,#deptId:VARCHAR#, #deptName:VARCHAR#,
+	    #creatorId:VARCHAR#, #creatorName:VARCHAR#,#createTime:TIMESTAMP#, #modifierId:VARCHAR#, #modifierName:VARCHAR#, #modifyTime:TIMESTAMP#,#state:VARCHAR#,#company#,#address#,#warehouseId#,#warehouseName#)
+	</insert>
+  
+  	<!-- 更新用户 -->
+	<update id="SysUser_update" >
+	    update sys_user
+	    <dynamic prepend="set" >
+	      <isNotNull prepend="," property="code" >
+	        code = #code:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="name" >
+	        name = #name:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="roleId" >
+	        role_id = #roleId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="roleCode" >
+	        role_code = #roleCode:VARCHAR#
+	      </isNotNull>	      
+	      <isNotNull prepend="," property="roleName" >
+	        role_name = #roleName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="pwd" >
+	        pwd = #pwd:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="telphone" >
+	        telphone = #telphone:VARCHAR#
+	      </isNotNull>
+	       <isNotNull prepend="," property="mobile" >
+	        mobile = #mobile:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="email" >
+	        email = #email:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="deptId" >
+	        dept_id = #deptId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="deptName" >
+	        dept_name = #deptName:VARCHAR#
+	      </isNotNull>	      
+	      <isNotNull prepend="," property="creatorId" >
+	        creator_id = #creatorId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="creatorName" >
+	        creator_name = #creatorName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="createTime" >
+	        create_time = #createTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifierId" >
+	        modifier_id = #modifierId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifierName" >
+	        modifier_name = #modifierName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="modifyTime" >
+	        modify_time = #modifyTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="," property="state" >
+	        state = #state:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="company" >
+	        company = #company:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="address" >
+	        address = #address:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="warehouseId" >
+	        warehouse_Id = #warehouseId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="," property="warehouseName" >
+	        warehouse_Name = #warehouseName:VARCHAR#
+	      </isNotNull>
+	       <isNotNull prepend="," property="begin" >
+	        begin = #begin:VARCHAR#
+	      </isNotNull>
+	       <isNotNull prepend="," property="end" >
+	        end = #end:VARCHAR#
+	      </isNotNull>
+	    </dynamic>
+	    where id = #id#
+	</update>
+  
+  	<!-- 根据用户id，更新用户密码 -->
+  	<update id="SysUser_pwd_update" >
+        UPDATE sys_user SET
+	       pwd = #pwd:VARCHAR#
+        WHERE 
+	         id = #id#
+    </update>
+</sqlMap>
