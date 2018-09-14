@@ -484,14 +484,14 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <optimize>true</optimize>
+                    <!--<optimize>true</optimize>
                     <debug>false</debug>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>false</showWarnings>
                     <compilerArguments>
                         <verbose />
                         <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jce.jar</bootclasspath>
-                    </compilerArguments>
+                    </compilerArguments>-->
                 </configuration>
             </plugin>
 
