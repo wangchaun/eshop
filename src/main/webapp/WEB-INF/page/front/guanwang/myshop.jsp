@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/myshop.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
@@ -37,7 +37,7 @@ con.style.display=i==cursel?"block":"none";
 <body>
 <div class="box">
  <%@ include file="/WEB-INF/page/front/guanwang/header.jsp"%>
-<!--[if !IE]>我的云岗网上商城<![endif]-->
+<!--[if !IE]>我的麦芽网上商城<![endif]-->
 <div class="content">
 <div class="coupon">
  <div class="coupon_left">
@@ -178,7 +178,7 @@ function ShowFLT(i) {
 <!--[if !IE]>右侧结束<![endif]-->
 </div>
 </div>
-<!--[if !IE]>云岗网上商城结束<![endif]-->
+<!--[if !IE]>麦芽网上商城结束<![endif]-->
   <%@ include file="/WEB-INF/page/front/guanwang/bottom.jsp"%> 
 </body>
 </html>

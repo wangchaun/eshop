@@ -28,7 +28,7 @@
         	<div class="login">
 	        	<form action="${ctx }/SysLogin!login.do" name="loginForm" id="loginForm" method="post" onsubmit="return checkForm();">
 		          <s:hidden id="errorInfo" name="errorInfo"></s:hidden><!-- 登陆信息 -->
-		          <div class="loginfont">登陆&nbsp;-云岗网上商城(B2C)</div>
+		          <div class="loginfont">登陆&nbsp;-麦芽网上商城(B2C)</div>
 			      <table align="left" width="100%" border="0" cellspacing="0" cellpadding="0" style="line-height:2.5em;">
 		            <tr>
 		              <td width="25%" align="right"><font size="2.75em">用户名：</font></td>
@@ -65,7 +65,7 @@
     </div>
     
     <div class="foot">
-    	<div class="footfont"><a href="http://www.sinokj.com"><span style="font-size: 12">航天通信专网三院云岗网上商城</span></a><span> Copyright @ 2011-2015</span></div>
+    	<div class="footfont"><a href="http://www.sinokj.com"><span style="font-size: 12">麦芽网上商城</span></a><span> Copyright @ 2011-2015</span></div>
         <div class="footbg"></div>
     </div>
 </div>

@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/help_page.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
 <script src="${ctx}/scripts/front/js/stuHover.js" type="text/javascript"></script>

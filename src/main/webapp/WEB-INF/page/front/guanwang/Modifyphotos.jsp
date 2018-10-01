@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="style/base.css" rel="stylesheet" type="text/css" />
 <style>
 .photoslayer{ width:762px; float:left; height:535px;}

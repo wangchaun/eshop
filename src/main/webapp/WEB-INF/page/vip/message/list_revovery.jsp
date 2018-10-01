@@ -1,6 +1,6 @@
 <%--
 	回复列表页面
-	@author 航天通信专网三院云岗网上商城,lp
+	@author 麦芽网上商城,lp
 	@since NOV 4, 2011 3:12:10 PM
  --%>
 <%@ page contentType="text/html;charset=UTF-8"%>

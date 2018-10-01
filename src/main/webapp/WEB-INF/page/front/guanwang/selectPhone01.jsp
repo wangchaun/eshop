@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/shoppingCart_page1.css" rel="stylesheet" type="text/css" />
@@ -361,7 +361,7 @@ function phoneNumberCampOn(){
 			    	您好 
 				    <c:if test="${loginCustomer!=null }">
 				      	<a href="${ctx }/customersManage.do" target="_blank">${loginCustomer.code }</a>
-				    </c:if>  ，欢迎光临云岗网上商城！      
+				    </c:if>  ，欢迎光临麦芽网上商城！
 			    </div>
 			    <c:if test="${loginCustomer!=null }">
 				    <div id="menu" style="padding-top:4px;">

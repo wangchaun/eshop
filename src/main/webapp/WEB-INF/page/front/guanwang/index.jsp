@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/index_page.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
@@ -137,7 +137,7 @@
 		    </c:forEach>
         </div>
         <div class="brand03_right">
-          <div class="tug02_news01"> <samp style="font-size:14px;">云岗&nbsp;&nbsp;快报</samp> <span><a href="${ctx }/newnews.do"><img src="${ctx}/Images/images/a15.jpg" border="0" /></a></span> </div>
+          <div class="tug02_news01"> <samp style="font-size:14px;">麦芽&nbsp;&nbsp;快报</samp> <span><a href="${ctx }/newnews.do"><img src="${ctx}/Images/images/a15.jpg" border="0" /></a></span> </div>
           <div class="tug02_news02">
             <div class="tug02_ntext">
               <ul>

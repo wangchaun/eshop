@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/bottom_page.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 </head>

@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="style/base.css" rel="stylesheet" type="text/css" />
 <link href="style/qianggou_Detail_page.css" rel="stylesheet" type="text/css" />
 <link href="style/header_page.css" rel="stylesheet" type="text/css" />

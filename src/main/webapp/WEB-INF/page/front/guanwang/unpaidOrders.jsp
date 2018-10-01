@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="style/base.css" rel="stylesheet" type="text/css" />
 <link href="style/unpayOrder_page.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="pro_dropdown_2/pro_dropdown_2.css" />
@@ -28,7 +28,7 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
       <div class="top_ctext1">
         <input name="" type="button" class="subbmit" value="退出" />
       </div>
-     <div class="top_ctext2"><span class="ys1"><a href="myshop.html" target="_parent">云岗网上商城</a> |</span><span class="ys2"><img src="images/a1.jpg" /></span><span class="ys3"><a href="shoppingCart.html" target="_parent">购物车0件</a> | <a href="#">售后服务</a></span></div>
+     <div class="top_ctext2"><span class="ys1"><a href="myshop.html" target="_parent">麦芽网上商城</a> |</span><span class="ys2"><img src="images/a1.jpg" /></span><span class="ys3"><a href="shoppingCart.html" target="_parent">购物车0件</a> | <a href="#">售后服务</a></span></div>
     </div>
     <!--[if !IE]>logo和搜索框<![endif]-->
     <div class="top_logo">

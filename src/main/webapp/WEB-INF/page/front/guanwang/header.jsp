@@ -582,7 +582,7 @@
 <div id="fade" class="black_overlay"></div>
 	<div id="MyDiv" class="Popuplogin" style="display: none;">
 <div class="Popuplogin01">
-<h1>云岗网上商城会员登录</h1>
+<h1>麦芽网上商城会员登录</h1>
 <h2 onclick="CloseDiv('MyDiv','fade')" ><span><a onclick="CloseDiv('MyDiv','fade')" href="javascript:void(0)">关闭</a></span><samp><input name="" type="button"  class="Popuplogin01btn"/></samp></h2>
 </div>
 <div class="Popuplogin02">
@@ -608,8 +608,8 @@
  
 <div class="Popuplogin0202_text2">
 <h1>
-<span>还不是云岗网上商城用户？ </span><br />
-现在免费注册云岗网上商城会员，便能立即享受便宜又放心的<br />
+<span>还不是麦芽网上商城用户？ </span><br />
+现在免费注册麦芽网上商城会员，便能立即享受便宜又放心的<br />
 购物乐趣! <samp><a href="${cx}zhuce.do">会员注册</a></samp></h1>
 </div>
 </div>

@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/password1_page.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
@@ -26,7 +26,7 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
     <div class="coupon">
       <!--[if !IE]>左侧<![endif]-->
       <div class="coupon_left">
-<div class="couponleft_title"><a href="myshop.html">云岗网上商城</a></div>
+<div class="couponleft_title"><a href="myshop.html">麦芽网上商城</a></div>
 <!--[if !IE]>订单中心<![endif]-->
 <div class="couponleft_text">
 <script language=javascript id=clientEventHandlersJS>

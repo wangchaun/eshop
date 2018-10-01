@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/photoComment_pages.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
@@ -29,7 +29,7 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
 <form action="" name="saveComment" id="saveComment" method="post">
 	<div class="content">
 <div class="coupon">
-<div  class="orderDetails"><samp><a href="#">云岗网上商城</a></samp><span>></span><span class="ordys"><a href="#">待评价商品</a></span><span>></span><span class="ordys"><a href="#">发表评论</a></span></div>
+<div  class="orderDetails"><samp><a href="#">麦芽网上商城</a></samp><span>></span><span class="ordys"><a href="#">待评价商品</a></span><span>></span><span class="ordys"><a href="#">发表评论</a></span></div>
 <!--[if !IE]>产品评价<![endif]-->
 <div class="photocomment">
 <h1>欢迎您发表原创，与商品质量有关，对其他用户有参考价值的商品评价!</h1><br/><h2>如果您发表的内容与商品本身质量无关，评价将被删除！</h2>

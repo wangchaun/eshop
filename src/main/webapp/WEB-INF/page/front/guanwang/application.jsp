@@ -6,7 +6,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/application_page.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
@@ -41,11 +41,11 @@ con.style.display=i==cursel?"block":"none";
 <body>
 <div class="box">
  <%@ include file="/WEB-INF/page/front/guanwang/header.jsp"%>
-<!--[if !IE]>云岗网上商城<![endif]-->
+<!--[if !IE]>麦芽网上商城<![endif]-->
 <div class="content">
 <div class="coupon">
  <div class="coupon_left">
-        <div class="couponleft_title"><a href="${ctx }/customersManage.do">云岗网上商城</a></div>
+        <div class="couponleft_title"><a href="${ctx }/customersManage.do">麦芽网上商城</a></div>
         <!--[if !IE]>订单中心<![endif]-->
         <script language=javascript id=clientEventHandlersJS>
 <!--

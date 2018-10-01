@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 <link href="style/base.css" rel="stylesheet" type="text/css" />
 <link href="style/newsdetail.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="pro_dropdown_2/pro_dropdown_2.css" />
@@ -102,11 +102,11 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
   </div>
    <div class="news2_text202">
   <ul>
-  <li><a href="newsdetail.html">云岗网上商城</a></li>
-  <li><a href="#">云岗网上商城</a></li>
-  <li><a href="#">云岗网上商城</a></li>
-  <li><a href="#">云岗网上商城</a></li>
-  <li><a href="#">云岗网上商城</a></li>
+  <li><a href="newsdetail.html">麦芽网上商城</a></li>
+  <li><a href="#">麦芽网上商城</a></li>
+  <li><a href="#">麦芽网上商城</a></li>
+  <li><a href="#">麦芽网上商城</a></li>
+  <li><a href="#">麦芽网上商城</a></li>
   </ul>
   </div>
    </div>

@@ -5,7 +5,7 @@
 <%@ include file="/commons/meta.jsp" %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>云岗网上商城</title>
+<title>麦芽网上商城</title>
 
 
 <script language="javascript" src="${ctx}/scripts/front/js/jquery.js"></script>
@@ -84,13 +84,13 @@
    <input style="cursor:text" id="agreeRegister" disabled="true" name="" type="button"  class="login0202_text1btn" value="同意协议并注册" onclick="submitRegisterForm()"/></div>
   <div class="login0202_text202">
   <h3><span><input name="" type="checkbox" value="" id="read"/></span><samp>我已经阅读并同意</samp></h3>
-  <h2><a href="javascript:void(0)" onclick="chgb()">《云岗网上商城用户协议书》</a></h2>
+  <h2><a href="javascript:void(0)" onclick="chgb()">《麦芽网上商城用户协议书》</a></h2>
   </div>
   </div>
   <div id="szd" class="Agreement" style="display:none;">
   <div class="Agreement01">
-  <span> 云岗网上商城用户注册协议</span>
-  本协议是您与云岗网上商城所有者之间就京东商城网站服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击“同意以下协议，提交”按钮后，本协议即构成对双方有约束力的法律文件。<br />
+  <span> 麦芽网上商城用户注册协议</span>
+  本协议是您与麦芽网上商城所有者之间就京东商城网站服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击“同意以下协议，提交”按钮后，本协议即构成对双方有约束力的法律文件。<br />
   第1条 本站服务条款的确认和接纳<br />
   1.1本站的各项电子服务的所有权和运作权归京东商城所有。用户同意所有注册协议条款并完成注册程序，才能成为本站的正式用户。用户确认：本协议条款是处理双方权利义务的契约，始终有效，法律另有强制性规定或双方另有特别约定的，依其规定。<br />
 1.2用户点击同意本协议的，即视为用户确认自己具有享受本站服务、下单购物等相应的权利能力和行为能力，能够独立承担法律责任。<br />
