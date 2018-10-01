@@ -25,16 +25,16 @@
 </script>
 
 
-<style type="text/css">  
-        /*滚动广告样式*/  
-        .ad {margin:1px;width:630px; height:250px;overflow:hidden;border:0px solid #AAAAAA;position:relative;} 
-        .slider,.num{position:absolute;}  
-        .slider li{ list-style:none;display:inline;}  
-        .slider img{ width:100%; height:250px;display:block;}  
-        .num{ right:15px; bottom:5px;}  
-        .num li{float:left;color: #FF7300;text-align: center;line-height: 16px;width: 16px;height: 16px;font-family: Arial;font-size: 12px;cursor: pointer;overflow: hidden;margin: 4px 1px;border: 1px solid #FF7300;background-color: #fff;}  
-        .num li.on{color: #fff;line-height: 21px;width: 21px;height: 21px;font-size: 16px;margin: 0 1px;border: 0;background-color: #FF7300;font-weight: bold;}  
-          
+<style type="text/css">
+        /*滚动广告样式*/
+        .ad {margin:1px;width:630px; height:250px;overflow:hidden;border:0px solid #AAAAAA;position:relative;}
+        .slider,.num{position:absolute;}
+        .slider li{ list-style:none;display:inline;}
+        .slider img{ width:100%; height:250px;display:block;}
+        .num{ right:15px; bottom:5px;}
+        .num li{float:left;color: #FF7300;text-align: center;line-height: 16px;width: 16px;height: 16px;font-family: Arial;font-size: 12px;cursor: pointer;overflow: hidden;margin: 4px 1px;border: 1px solid #FF7300;background-color: #fff;}
+        .num li.on{color: #fff;line-height: 21px;width: 21px;height: 21px;font-size: 16px;margin: 0 1px;border: 0;background-color: #FF7300;font-weight: bold;}
+
 </style>
 
 
@@ -42,22 +42,22 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/page/front/guanwang/header.jsp"%>
-<script> 
-	d = document.getElementById("nav1"); 
-	var aa = d.getElementsByTagName("a"); 
+<script>
+	d = document.getElementById("nav1");
+	var aa = d.getElementsByTagName("a");
 	aa[0].className = "link_on";   //加载默认
-	d.l = aa[0]; 
-	for(var i in aa){ 
-		var a = aa[i]; 
+	d.l = aa[0];
+	for(var i in aa){
+		var a = aa[i];
 		a.onclick = function(){
 			if(d.l==this){
-				return; 
+				return;
 			}else{
-				this.className = d.l.className; 
-				d.l.className = ""; 
-				d.l = this; 
+				this.className = d.l.className;
+				d.l.className = "";
+				d.l = this;
 			}
-		}; 
+		};
 	};
 </script>
 <div class="box">
@@ -93,10 +93,10 @@
 		                    <div class="tv01_title2">
 			                    <c:forEach items="${goodType2.children}" var="goodType3">
 			                    	<a href="${ctx }/getSecondGoods.do?goodType.id=${goodType3.id }" style="color: #666;text-decoration: none;  -moz-text-decoration-color: -moz-use-text-color -moz-text-decoration-line: none;-moz-text-decoration-style: solid;" >${goodType3.name }</a>
-			                    </c:forEach>		
+			                    </c:forEach>
 		                    </div>
 	                	</div>
-	                </c:forEach>	
+	                </c:forEach>
                    </div>
                   <div class="tv1">
                     <div class="tv101"> <span>热门品牌</span>
@@ -117,7 +117,7 @@
       <!--[if !IE]>右侧<![endif]-->
       <div class="brang02">
         <!--[if !IE]>banner<![endif]-->
-  
+
        <div class="ad" id="advertise" >
 
         </div>
@@ -133,8 +133,8 @@
            <c:forEach items="${advertiseList}" var="promotionActivity">
 		          <c:if test="${promotionActivity.placeId=='商城用户广告4'}">
 		          		<h1 class="brand03left_text"><a href="${promotionActivity.url}" target="_blank"><img src="${ctx}${promotionActivity.pic }" width="308" height="100"/></a></h1>
-		          </c:if>  
-		    </c:forEach>  
+		          </c:if>
+		    </c:forEach>
         </div>
         <div class="brand03_right">
           <div class="tug02_news01"> <samp style="font-size:14px;">云岗&nbsp;&nbsp;快报</samp> <span><a href="${ctx }/newnews.do"><img src="${ctx}/Images/images/a15.jpg" border="0" /></a></span> </div>
@@ -144,10 +144,10 @@
               	<c:forEach items="${inforlist}" var="information" begin="0" end="7" varStatus="i">
               		<c:if test='${i.index==0 }'>
    						<li class="tugys" style="margin: 0;"><a href="${ctx }/oneNewsdetail.do?information.id=${information.id }">${information.title }</a></li>
-   					</c:if>		           			
+   					</c:if>
                		<c:if test='${i.index!=0 }'>
    						<li style="margin: 0;"><a href="${ctx }/oneNewsdetail.do?information.id=${information.id }">${information.title }</a></li>
-   					</c:if>	
+   					</c:if>
                	</c:forEach>
               </ul>
             </div>
@@ -178,7 +178,7 @@
 	            </div>
 	          </div>
          </c:forEach>
-          
+
            <!--[if !IE]>小图循环结束<![endif]-->
         </div>
       </div>
@@ -192,10 +192,10 @@
               	<c:forEach items="${inforlist}" var="information" begin="0" end="8" varStatus="i">
               		<c:if test='${i.index==0 }'>
    						<li class="tugys" style="margin: 0;"><a href="${ctx }/oneNewsdetail.do?information.id=${information.id }">${information.title }</a></li>
-   					</c:if>		           			
+   					</c:if>
                		<c:if test='${i.index!=0 }'>
    						<li style="margin: 0;"><a href="${ctx }/oneNewsdetail.do?information.id=${information.id }">${information.title }</a></li>
-   					</c:if>	
+   					</c:if>
                	</c:forEach>
               </ul>
             </div>
@@ -224,7 +224,7 @@
 	              </div>
 	            </div>
 	          </div>
-	       </c:forEach>   
+	       </c:forEach>
            <!--[if !IE]>小图循环结束<![endif]-->
         </div>
       </div>
@@ -235,7 +235,7 @@
         	 	<c:if test="${promotionActivity.placeId=='首页促销4'}">
         			<a href="${promotionActivity.url }"><img src="${ctx}${promotionActivity.pic }" width="278" height="282"/></a>
         		</c:if>
-        	 </c:forEach>	
+        	 </c:forEach>
         </div>
       </div>
       <!--[if !IE]>end<![endif]-->
@@ -247,7 +247,7 @@
         	<c:forEach items="${goodArrList3}" begin="0" end="0" var="good" varStatus="i">
         		<samp>${good.fztag }</samp>
         	</c:forEach>
-        </div>	
+        </div>
         <div class="app_text1">
           <ul>
             <!--[if !IE]>第一个小图<![endif]-->
@@ -257,12 +257,12 @@
               		<p><a href="${ctx }/cpxq.do?good.id=${good.id }">${good.name }<span>${good.introBrief }</span></a></p>
               		<span>¥${good.price }</span>
               	</li>
-            </c:forEach>  
+            </c:forEach>
             <!--[if !IE]>end<![endif]-->
           </ul>
         </div>
       </div>
-      <!--[if !IE]>右侧大图<![endif]-->  
+      <!--[if !IE]>右侧大图<![endif]-->
     </div>
     <!--[if !IE]>人气热卖<![endif]-->
     <div class="Popularhot">
@@ -277,17 +277,17 @@
 	                <p><a href="${ctx }/cpxq.do?good.id=${good.id }">${good.name }<span>${good.introBrief }</span></a></p>
 	              <span>¥${good.price }</span>
 	            </li>
-             </c:forEach> 
+             </c:forEach>
             <!--[if !IE]>end<![endif]-->
           </ul>
         </div>
       </div>
-      
+
       <!--[if !IE]>end<![endif]-->
       <!-- 新增的广告位 手机广告-->
       <div class="app_right">
         <div class="xsq1">
-            
+
         	<c:forEach items="${advertiseList}" var="promotionActivity">
         	 	<c:if test="${promotionActivity.placeId=='首页促销4'}">
         			<a href="${promotionActivity.url }"><img src="${ctx}${promotionActivity.pic }" width="278px" height="250px"/></a>
@@ -297,7 +297,7 @@
       </div>
       <div class="app_right">
         <div class="xsq1">
-            
+
         	<c:forEach items="${advertiseList}" var="promotionActivity">
         	 	<c:if test="${promotionActivity.placeId=='首页促销5'}">
         			<a href="${promotionActivity.url }"><img src="${ctx}${promotionActivity.pic }" width="278px" height="250px"/></a>
@@ -307,15 +307,15 @@
       </div>
       <!--[if !IE]>公告<![endif]-->
     </div>
-    
+
     <!--[if !IE]>空调热评开始<![endif]-->
 	<div id="recen t-view-track" class="aircond" style="display:none;">
 	<div id="right" class="index_left"><a href="javascript:void(0)"></a></div>
     <div id="left" class="index_right"><a href="javascript:void(0)"></a></div>
     <div id="guess-scroll" style="position: relative; width: 1200px; height: 545px; overflow: hidden;">
     <ol class="lh" style="position: absolute; left: 0px; top: 0px; width: 2700px;">
-	<c:forEach items="${goodTypeArrList}" begin="0" end="11" var="goodType" varStatus="i"> 
-		<input type="hidden" id="goodtypestyId${i.index }" value="${goodType.id }"/>	
+	<c:forEach items="${goodTypeArrList}" begin="0" end="11" var="goodType" varStatus="i">
+		<input type="hidden" id="goodtypestyId${i.index }" value="${goodType.id }"/>
         	   <li class="aircond02">
                 <div id="Tab2">
                   <div class="Menubox"> <span>${goodType.name}</span>
@@ -326,95 +326,87 @@
                   </div>
                   <div class="Contentbox" id="ll${i.index}">
                     <div id="con_two_1" >
-                    <div id="con_tw${i.index }">
-                      <!--[if !IE]>第一个产品<![endif]-->
-                      <c:forEach items="${goodType.goodlist}" begin="0" end="3" var="good" varStatus="j"> 
-	                      <div class="phb01_text">
-	                        <div class="phb01_te<c:if test="${j.index%4==1}">f</c:if><c:if test="${j.index%4==2}">f1</c:if><c:if test="${j.index%4==3}">f2</c:if>"> <span><a href="${ctx }/cpxq.do?good.id=${good.id }"><img src="${ctx }${good.pic }" width="74" height="74" /></a></span></div>
-	                        <div class="phb01_te1">
-	                          <div class="phb01_te1con"><a href="${ctx }/cpxq.do?good.id=${good.id }">${good.name }</a></div>
-	                          <div class="phb01_te1con1">￥${good.price }</div>
-	                          <div class="phb01_te1con2">降价：${good.priceMarket-good.price }</div>
-	                          <div class="phb01_te1con3"><samp>
-	                          	  <c:if test="${good.commentLevel==1 }"><img src="${ctx}/Images/images/pu14.jpg" /></c:if><!-- 1分 -->
-						          <c:if test="${good.commentLevel==2 }"><img src="${ctx}/Images/images/pu13.jpg" /></c:if><!-- 2分 -->
-						          <c:if test="${good.commentLevel==3 }"><img src="${ctx}/Images/images/pu12.jpg" /></c:if><!-- 3分 -->
-						          <c:if test="${good.commentLevel==4 }"><img src="${ctx}/Images/images/pu11.jpg" /></c:if><!-- 4分 -->
-					              <c:if test="${good.commentLevel==5 }"><img src="${ctx}/Images/images/pu10.jpg" /></c:if><!-- 5分 -->
-	                          </samp><a href="${ctx }/cpxq.do?good.id=${good.id }">(<c:if test="${good.commentCount==null }">0</c:if>${good.commentCount }人评论)</a></div>
-	                        </div>
-	                      </div>
-                      </c:forEach>
-                      </div>
-                    </div>
-                  </div>    
+                        <div id="con_tw${i.index }">
+                          <!--[if !IE]>第一个产品<![endif]-->
+                          <c:forEach items="${goodType.goodlist}" begin="0" end="3" var="good" varStatus="j">
+                              <div class="phb01_text">
+                                <div class="phb01_te<c:if test="${j.index%4==1}">f</c:if><c:if test="${j.index%4==2}">f1</c:if><c:if test="${j.index%4==3}">f2</c:if>"> <span><a href="${ctx }/cpxq.do?good.id=${good.id }"><img src="${ctx }${good.pic }" width="74" height="74" /></a></span></div>
+                                <div class="phb01_te1">
+                                  <div class="phb01_te1con"><a href="${ctx }/cpxq.do?good.id=${good.id }">${good.name }</a></div>
+                                  <div class="phb01_te1con1">￥${good.price }</div>
+                                  <div class="phb01_te1con2">降价：${good.priceMarket-good.price }</div>
+                                  <div class="phb01_te1con3"><samp>
+                                      <c:if test="${good.commentLevel==1 }"><img src="${ctx}/Images/images/pu14.jpg" /></c:if><!-- 1分 -->
+                                      <c:if test="${good.commentLevel==2 }"><img src="${ctx}/Images/images/pu13.jpg" /></c:if><!-- 2分 -->
+                                      <c:if test="${good.commentLevel==3 }"><img src="${ctx}/Images/images/pu12.jpg" /></c:if><!-- 3分 -->
+                                      <c:if test="${good.commentLevel==4 }"><img src="${ctx}/Images/images/pu11.jpg" /></c:if><!-- 4分 -->
+                                      <c:if test="${good.commentLevel==5 }"><img src="${ctx}/Images/images/pu10.jpg" /></c:if><!-- 5分 -->
+                                  </samp><a href="${ctx }/cpxq.do?good.id=${good.id }">(<c:if test="${good.commentCount==null }">0</c:if>${good.commentCount }人评论)</a></div>
+                                </div>
+                              </div>
+                          </c:forEach>
+                          </div>
+                        </div>
+                  </div>
+                </div>
               </li>
-             </c:forEach> 
+             </c:forEach>
       </ol>
 	 </div>
+
     </div>
     <!--[if !IE]>空调热评结束<![endif]-->
-    
-    <!--[if !IE]>品牌管<![endif]
+
+    <!--[if !IE]>品牌管<![endif] -->
    <div class="BrandManagement">
       <div class="BrandManagement01"><samp>品牌展示</samp> <span><a href="#"><imgb src="${ctx}/Images/images/a15.jpg" /></a></span></div>
       <div class="BrandManagement02">
-      <div class="BrandManagement0201">
-      <div class="BManange">
-      <div class="new_ppg2">
-	     <c:forEach items="${goodBrandList1}" begin="0" end="15" var="goodBrand" >
-	         <a  href="${ctx }/shoptype.do?good.brandId=${goodBrand.id }"><img src="${ctx}${goodBrand.pic }" /></a>
-	      </c:forEach> 
+          <div class="BrandManagement0201">
+
+              <div class="BManange">
+                 <div class="new_ppg2">
+                     <c:forEach items="${goodBrandList1}" begin="0" end="15" var="goodBrand" >
+                         <a  href="${ctx }/shoptype.do?good.brandId=${goodBrand.id }"><img src="${ctx}${goodBrand.pic }" /></a>
+                      </c:forEach>
+                  </div>
+
+              </div>
+          </div>
+          <div class="BrandManagement0202">
+              <ul>
+                  <c:forEach items="${goodBrandList3}" var="goodBrand" begin="0" end="29">
+                      <li><a href="${ctx }/shoptype.do?good.brandId=${goodBrand.id }">${goodBrand.name }</a></li>
+                  </c:forEach>
+              </ul>
+          </div>
       </div>
-      <div class="new_ppg">
-      <c:forEach items="${goodBrandList1}" begin="0" end="15" var="goodBrand" >
-      		<div class="black_1"><a class="" href="${ctx }/shoptype.do?good.brandId=${goodBrand.id }" onmouseover="this.className='bla'" onmouseout="this.className=''"></a></div>
-	      </c:forEach>
-	      </div>
-      </div>
-      <!-- <div class="BManange">
-	     <c:forEach items="${goodBrandList1}" begin="0" end="15" var="goodBrand" >
-	         <a  href="${ctx }/shoptype.do"><img src="${ctx}${goodBrand.pic }" /></a>
-	      </c:forEach> 
-      </div> --
-      
-      </div>
-      <div class="BrandManagement0202">
-      <ul>
-	      <c:forEach items="${goodBrandList3}" var="goodBrand" begin="0" end="29">
-		      <li><a href="${ctx }/shoptype.do?good.brandId=${goodBrand.id }">${goodBrand.name }</a></li>
-		  </c:forEach>
-      </ul>
-      </div>
-      
-      
-      </div>
+
     </div>
-    -->
-    <!--[if !IE]>你感兴趣的<![endif]
+
+    <!--[if !IE]>你感兴趣的<![endif] -->
     <div class="Interest">
     <div class="Interest01"><samp>猜你喜欢</samp></div>
     <div class="Interest02">
-    -->
+
     <ul>
-    
+
     <!--[if !IE]>第一个产品循环<![endif]-->
-   
+
 	    <c:forEach items="${goodList1}" var="good" begin="0" end="4">
 	    <li><a href="${ctx }/cpxq.do?good.id=${good.id }"><img src="${ctx}${good.pic }" /></a>
 	      <p><a href="${ctx }/cpxq.do?good.id=${good.id }">${good.name }<samp>${good.introBrief }</samp></a></p>
 	    <span>¥${good.price }</span></li>
 	    </c:forEach>
    <!--[if !IE]>第一个产品结束<![endif]-->
-		
+
     </ul>
-    
+
     </div>
- 
- 
- <%@ include file="/WEB-INF/page/front/guanwang/bottom.jsp"%> 
+
+
+ <%@ include file="/WEB-INF/page/front/guanwang/bottom.jsp"%>
 <!--<iframe width="100%" height="500" frameborder=0 scrolling=no src="bottom.htm" ></iframe>-->
- 
+
 </body>
 
 </html>
