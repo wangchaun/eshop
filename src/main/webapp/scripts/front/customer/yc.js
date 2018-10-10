@@ -212,7 +212,11 @@ function yzm(divID,paraA,status){
 			  type: "POST", 
 			  async: false,
 			  cache: false,
-			  url: ctx+"/verifyCode.do?verifyCode="+verifiString+"",
+			  xhrFields: {
+				withCredentials: true
+			  },
+			  crossDomain: true,
+			  url: ctxaccount+"/account/checkValidatePicture?verifyCode="+verifiString+"",
 			  success : function(returnData){
 			  	if(returnData =='true'){		  		
 			  		document.getElementById('checkA').style.border='1px solid #dadada';

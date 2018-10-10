@@ -11,6 +11,7 @@ String base=request.getScheme()+"://"+request.getServerName()+":"+request.getSer
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="ctxgood" value="http://localhost:7979/shopcloud-goods"/>
+<c:set var="ctxaccount" value="http://localhost:8081"/>
 <c:set var="base" value="<%=base %>"/>
 <c:set var="version" value="1.1.10"></c:set>
 <script language="javascript" type="text/javascript">
@@ -18,4 +19,5 @@ String base=request.getScheme()+"://"+request.getServerName()+":"+request.getSer
   var todo = '${todo }';<%--做什么,show,即只能查看，不能编辑--%>
   var base='${base}';
   var ctxgood='${ctxgood}';
+  var ctxaccount='${ctxaccount}';
 </script>

@@ -75,7 +75,7 @@
   <h3>*</h3>
 <!--   <h2><img src="${ctx}/Images/images/y30.jpg" /></h2>-->
 	<h2><div id="verifyImage" onclick="changeImage()">
-	<img src="${ctx }/verifyKey/verifyKey.jpg" id="Image"  style="cursor:pointer;" alt="看不清，换一张"/></div></h2>
+	<img src="${ctxaccount }/account/getValidatePicture" id="Image"  style="cursor:pointer;" alt="看不清，换一张"/></div></h2>
 	<h4 id="zcyc5" style="display:none; margin-left:23px;">请输入验证码，不区分大小写</h4>
 	<h5 id="zcyc51" style="display: none;" ><span><img src="${ctx}/Images/images/pass8.jpg" /></span></h5>
   </div>
