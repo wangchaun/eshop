@@ -7,18 +7,16 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String base=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/UserService"+"/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="ctxgood" value="http://localhost:7979/shopcloud-goods"/>
 <c:set var="ctxaccount" value="http://127.0.0.1:8081"/>
-<c:set var="base" value="<%=base %>"/>
+<c:set var="base" value="<%=basePath%>"/>
 <c:set var="version" value="1.1.18"></c:set>
-<c:set var="path" value="${path}"></c:set>
 <script language="javascript" type="text/javascript">
 
-  var ctx = '${ctx }';
-  var todo = '${todo }';<%--做什么,show,即只能查看，不能编辑--%>
+  var ctx = '${ctx}';
+  var todo = '${todo}';<%--做什么,show,即只能查看，不能编辑--%>
   var base='${base}';
   var ctxgood='${ctxgood}';
   var ctxaccount='${ctxaccount}';
