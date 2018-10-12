@@ -12,7 +12,7 @@
 <script language="JavaScript" type="text/javascript" src="${ctx}/scripts/jquery.form.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx}/scripts/front/common/common.js?version=${version}"></script>
 <script type="text/javascript" src="${ctx}/scripts/front/customer/cusLogin.js?version=${version}"></script>
-<script type="text/javascript" src="${ctx}/scripts/front/customer/yc.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/front/customer/yc.js?version=${version}"></script>
 
 <link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/styles/front/style/register_page.css" rel="stylesheet" type="text/css" />

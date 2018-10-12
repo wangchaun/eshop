@@ -4,6 +4,10 @@ $(document).ready(function () {
     dateValid1();
 
     loadingActivity();
+
+    loadingPopularhot();
+
+
 });
 
 function changeDateFormat(cellval) {
@@ -94,6 +98,23 @@ function loadingActivity() {
     }, "json");
 }
 
+function loadingPopularhot() {
+    $.ajax({
+        type: "GET",
+        dataType: "json",   //返回数据类型是JSON数据格式
+        async: false,
+        cache: false,
+        url: ctxgood + "/good/queryPopulardHotGood",
+        success: function (returnData) {
+
+            console.log(returnData);
+
+        },
+        error: function () {
+            alert('系统繁忙!');
+        }
+    }, "json");
+}
 function packageAdvertisePromotion(result) {
     var textHtml = "";
     for (var i = 0; i < result.length; i++) {

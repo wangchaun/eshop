@@ -208,39 +208,37 @@ function yzm(divID,paraA,status){
 	}else if(status=="hidden"){
 		var verifiString=document.getElementById("checkA").value;
 		if(''!=verifiString){
-			$.ajax({	
-			  type: "POST", 
-			  async: false,
-			  cache: false,
-			  xhrFields: {
-				withCredentials: true
-			  },
-			  crossDomain: true,
-			  url: ctxaccount+"/account/checkValidatePicture?verifyCode="+verifiString+"",
-			  success : function(returnData){
-			  	if(returnData =='true'){		  		
-			  		document.getElementById('checkA').style.border='1px solid #dadada';
-					document.getElementById(divID).style.display="none";
-					$("#zcyc51").empty();
-					$("#zcyc51").append("<span><img src='"+ctx+"/Images/images/pass8.jpg' /></span>");
-					$("#zcyc51").css({display:'block'});
-					verifyFlag=true;				
-					if(checkFlag==true&&verifyFlag==true&&emailFlag==true&&mm1Flag==true&&accountFlag==true){
-						$("#agreeRegister").removeAttr("disabled");
-	    				$("#agreeRegister").css({cursor:"hand"});
-					}
-					
-			  	  }else{
-			  		document.getElementById('checkA').style.border='1px solid #dadada';
-					document.getElementById(divID).style.display="none";
-					$("#zcyc51").empty();
-					$("#zcyc51").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>");
-					$("#zcyc51").css({display:'block'});	
-					verifyFlag=false;	
-					$("#agreeRegister").attr("disabled","true");
-	    			$("#agreeRegister").css({cursor:"text"});		
-			  	  }		  
-			  	},
+			$.ajax({
+			    contentType: 'application/json',
+                type: "POST",
+                url: ctxaccount+"/account/checkValidatePicture?verifyCode="+verifiString+"",
+				beforeSend:function(xhr){
+                    xhr.withCredentials=true;
+				},
+			    success : function(returnData){
+					if(returnData =='true'){
+						document.getElementById('checkA').style.border='1px solid #dadada';
+						document.getElementById(divID).style.display="none";
+						$("#zcyc51").empty();
+						$("#zcyc51").append("<span><img src='"+ctx+"/Images/images/pass8.jpg' /></span>");
+						$("#zcyc51").css({display:'block'});
+						verifyFlag=true;
+						if(checkFlag==true&&verifyFlag==true&&emailFlag==true&&mm1Flag==true&&accountFlag==true){
+							$("#agreeRegister").removeAttr("disabled");
+							$("#agreeRegister").css({cursor:"hand"});
+						}
+
+					  }else{
+						document.getElementById('checkA').style.border='1px solid #dadada';
+						document.getElementById(divID).style.display="none";
+						$("#zcyc51").empty();
+						$("#zcyc51").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>");
+						$("#zcyc51").css({display:'block'});
+						verifyFlag=false;
+						$("#agreeRegister").attr("disabled","true");
+						$("#agreeRegister").css({cursor:"text"});
+					  }
+				},
 		  		error : function(){
 					alert('系统繁忙!');
 		  		}
