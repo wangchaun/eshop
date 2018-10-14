@@ -73,7 +73,7 @@
 								</div>
 								<div class="login_hole0202">
 									<h1><input name="" type="button"  class="loginbtn" onclick="submitHeadForm()"/></h1>
-									<h2><a href="#" >忘记密码</a></h2>
+									<h2><a href="${ctx }/forgetPassword.do" >忘记密码</a></h2>
 								</div>
 							</div>
 						</form>

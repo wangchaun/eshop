@@ -392,6 +392,7 @@ public class CusLoginAction extends BaseAction {
 	}
 
 	public String frontLogin() {
+
 		this.promoteList = this.promoteService.select(new Promote());
 
 		this.advertiseList = this.advertiseService.getAdvertiseList();
@@ -874,6 +875,24 @@ public class CusLoginAction extends BaseAction {
 	}
 	/**用户忘记密码*/
     public String forgetPassword(){
+
+		this.promoteList = this.promoteService.select(new Promote());
+
+		this.advertiseList = this.advertiseService.getAdvertiseList();
+		this.informationList = this.informationService
+				.select(new Information());
+		Area area = new Area();
+		area.setLevel(2);
+		this.areaList = this.areaService.select(area);
+		for (int i = 0; i < this.areaList.size(); i++) {
+			Area arer = new Area();
+			arer.setParentId(((Area) this.areaList.get(i)).getId());
+			arer.setLevel(3);
+			List list = this.areaService.select(arer);
+			if (list.size() > 0)
+				(this.areaList.get(i)).setAreaList(list);
+		}
+
     	return "forget";
     }
 	public Customer getCustomer() {

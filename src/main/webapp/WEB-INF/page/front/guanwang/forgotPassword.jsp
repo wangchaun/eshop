@@ -6,14 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>麦芽网上商城</title>
-<link href="style/base.css" rel="stylesheet" type="text/css" />
-<link href="style/forgotPassword_page.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="pro_dropdown_2/pro_dropdown_2.css" />
-<script src="js/stuHover.js" type="text/javascript"></script>
-<script language="javascript" src="js/jquery.js"></script>
-<script language="javascript" src="js/index20110925_mini.js"></script>
-<script language="javascript" src="js/jquery2.js"></script>
-<SCRIPT type="text/javascript" src="js/jquery1.js"></SCRIPT>
+<link href="${ctx}/styles/front/style/base.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/styles/front/style/forgotPassword_page.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/styles/front/pro_dropdown_2/pro_dropdown_2.css" />
+<script src="${ctx}/scripts/front/js/stuHover.js" type="text/javascript"></script>
+<script language="javascript" src="${ctx}/scripts/front/js/jquery.js"></script>
+<script language="javascript" src="${ctx}/scripts/front/js/index20110925_mini.js"></script>
+<script language="javascript" src="${ctx}/scripts/front/js/jquery2.js"></script>
+<SCRIPT type="text/javascript" src="${ctx}/scripts/front/js/jquery1.js"></SCRIPT>
 <script>
 function changeDiv(tag,method){document.getElementById(tag).style.display = method;}
 </script>
@@ -39,7 +39,7 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
 	<div class="forgotpassword0201_text">
 	<h1>验证码：</h1>
 	<h2><input name="" type="text"  class="forgotpasswordinput1"/></h2>
-	<h3><img src="images/pass3.jpg" /></h3>
+	<h3><img src="${ctx}/Images/images/pass3.jpg" /></h3>
 	<h3>看不清楚，</h3>
 	<h4><a href="#">换一张</a></h4>
 	</div>
@@ -56,8 +56,8 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
   </div>
    <!--[if !IE]>忘记密码1<![endif]-->
   </div>
-  
-  <iframe width="100%" height="500" frameborder=0 scrolling=no src="bottom.htm" style="padding-top:20px;"></iframe>
+
+  <%@ include file="/WEB-INF/page/front/guanwang/bottom.jsp"%>
 </div>
 
 

@@ -1,6 +1,6 @@
 //跳转到注册页面
 function zhuce(){
-	document.location=ctx+"zhuce.do";
+	document.location=ctx+"/zhuce.do";
 }
 
 //登陆提交检查
@@ -32,8 +32,6 @@ function submitForm(){
 			$("#loginMessage").css({display:'block'});
 		}else{
 			var url=ctx+'/loginV.do?customer.code='+codeObj+'&customer.pwd='+pwd;
-
-            MaskUtil.mask();
 
 			$.ajax({
 				url : url,
@@ -77,8 +75,6 @@ function submitHeadForm(){
 		var codeObj = $("#codeUser").val();
 		var pwd = $('#pwdUser').val();
 		var url=ctx+'/login.do?customer.code='+codeObj+'&customer.pwd='+pwd;
-
-        MaskUtil.mask();
 
 		$.ajax({ 
 			url : url,
@@ -156,8 +152,6 @@ function submitDIVForm(){
 		var codeObj = $("#customersCode").val();
 		var pwd = $('#customersPwd').val();
 		var url=ctx+'/login.do?customer.code='+codeObj+'&customer.pwd='+pwd;
-
-        MaskUtil.mask();
 
         $.ajax({
 			url : url,
