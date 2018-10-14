@@ -91,15 +91,18 @@ function submitRegisterForm(){
 		var codeObj = $("#usercode").val();
 		var pwd = $('#userpwd').val();
 		var email=$('#email').val();
-		var url='customer.code='+codeObj+'&customer.pwd='+pwd+'&customer.email='+email;
+		var url='code='+codeObj+'&pwd='+pwd+'&email='+email;
 
         MaskUtil.mask();
 		$.ajax({ 
-		url : ctx+'/registers.do',
+		url : ctxaccount+'/account/register',
 		data:url,
 		async: false,
 		cache: false,
-		type : 'POST', 
+		type : 'POST',
+		beforeSend:function(xhr){
+			xhr.withCredentials=true;
+		},
 		success : function(returnData){
             MaskUtil.unmask();
 			if(returnData == 'true'){

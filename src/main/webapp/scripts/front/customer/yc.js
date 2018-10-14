@@ -211,7 +211,7 @@ function yzm(divID,paraA,status){
 			$.ajax({
 			    contentType: 'application/json',
                 type: "POST",
-                url: ctxaccount+"/account/checkValidatePicture?verifyCode="+verifiString+"",
+                url: ctxaccount+"/account/checkValidatePicture?validateKey="+verifiString+"",
 				beforeSend:function(xhr){
                     xhr.withCredentials=true;
 				},
@@ -253,7 +253,7 @@ function yzm(divID,paraA,status){
 var imageNumber=1;
 //改变验证码
 function changeImage(){
-	var textHtml="<img src='"+ctx+"/verifyKey/verifyKey"+(imageNumber-1)+".jpg' id='Image'  style='cursor:hand'; alt='看不清，换一张'/>";
+	var textHtml="<img src='"+ctx+ "/verifyKey/verifyKey"+(imageNumber-1)+".jpg' id='Image'  style='cursor:hand'; alt='看不清，换一张'/>";
 	$("#verifyImage").empty();
 	$.ajax({
 		  type: "POST", 
@@ -268,6 +268,13 @@ function changeImage(){
 		  }
 	});	
 	imageNumber++;
+}
+//改变验证码-micro service
+function changeImageMS(){
+	$("#verifyImage").empty();
+    var textHtml="<img src='"+ctxaccount+"/account/getValidatePicture?t="+imageNumber+"' id='Image'  style='cursor:pointer;' alt='看不清，换一张'/>";
+    $("#verifyImage").append(textHtml);
+    imageNumber++;
 }
 
 //提交验证flag
