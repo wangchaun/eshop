@@ -1,6 +1,6 @@
 //跳转到注册页面
 function zhuce(){
-    document.location=ctx+"zhuce.do";
+    document.location=ctx+"/zhuce.do";
 }
 
 //登陆提交检查
@@ -60,39 +60,39 @@ function submitForm(){
 }
 function sendGWlogin(url) {
 
-    MaskUtil.mask();
 
-    $.ajax({
-        url : url,
-        async: false,
-        cache: false,
-        type : 'POST',
-        success : function(returnData){
-            if(returnData == 'true'){
-                window.location.href = ctx+'/index.do';
-            }else if(returnData=='account'){
-                $("#loginMessage").empty();
-                $("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>该账号不存在！");
-                $("#loginMessage").css({display:'block'});
-            }else if(returnData=='pw'){
-                $("#loginMessage").empty();
-                $("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>密码错误，请重新填写！");
-                $("#loginMessage").css({display:'block'});
-            }else if(returnData=='pendingAudit'){
-                $("#loginMessage").empty();
-                $("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>该账号已冻结！");
-                $("#loginMessage").css({display:'block'});
-            }else if(returnData=='c'){
-                $("#loginMessage").empty();
-                $("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>该账号已冻结！");
-                $("#loginMessage").css({display:'block'});
-            }
 
-        },
-        error : function(){
-            alert('网络异常，请稍后再试....');
-        }
-    });
+			$.ajax({
+				url : url,
+				async: false,
+				cache: false,
+				type : 'POST',
+				success : function(returnData){
+					if(returnData == 'true'){
+						window.location.href = ctx+'/index.do';
+					}else if(returnData=='account'){
+						$("#loginMessage").empty();
+						$("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>该账号不存在！");
+						$("#loginMessage").css({display:'block'});
+					}else if(returnData=='pw'){
+						$("#loginMessage").empty();
+						$("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>密码错误，请重新填写！");
+						$("#loginMessage").css({display:'block'});
+					}else if(returnData=='pendingAudit'){
+						$("#loginMessage").empty();
+						$("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>该账号已冻结！");
+						$("#loginMessage").css({display:'block'});
+					}else if(returnData=='c'){
+						$("#loginMessage").empty();
+						$("#loginMessage").append("<span><img src='"+ctx+"/Images/images/pass9.jpg' /></span>该账号已冻结！");
+						$("#loginMessage").css({display:'block'});
+					}
+
+				},
+				error : function(){
+					alert('网络异常，请稍后再试....');
+				}
+			});
 
 }
 //客户登录
@@ -105,32 +105,32 @@ function submitHeadForm(){
         var pwd = $('#pwdUser').val();
         var url=ctx+'/login.do?customer.code='+codeObj+'&customer.pwd='+pwd;
 
-        MaskUtil.mask();
 
-        $.ajax({
-            url : url,
-            async: false,
-            cache: false,
-            type : 'POST',
-            success : function(returnData){
-                if(returnData == 'true'){
-                    window.location.href = ctx+'/index.do';
-                }else if(returnData=='account'){
-                    alert('该账号不存在!');
-                }else if(returnData=='pw'){
-                    alert('密码错误，请重新填写!');
-                }else if(returnData=='pendingAudit'){
-                    alert('该账号冻结');
-                }else{
-                    alert('网络异常...');
-                }
-            },
-            error : function(){
-                alert('网络异常...!');
-            }
-        });
 
-    }
+		$.ajax({ 
+			url : url,
+			async: false,
+			cache: false,
+			type : 'POST', 
+			success : function(returnData){ 
+				if(returnData == 'true'){
+				  window.location.href = ctx+'/index.do';
+				}else if(returnData=='account'){
+				  alert('该账号不存在!');
+				}else if(returnData=='pw'){
+				  alert('密码错误，请重新填写!');
+				}else if(returnData=='pendingAudit'){
+				  alert('该账号冻结');
+				}else{
+				  alert('网络异常...');
+				}
+			},
+		error : function(){
+			alert('网络异常...!');
+		}
+	});
+		
+	}
 }
 
 function dlbh(){
@@ -183,8 +183,6 @@ function submitDIVForm(){
         var codeObj = $("#customersCode").val();
         var pwd = $('#customersPwd').val();
         var url=ctx+'/login.do?customer.code='+codeObj+'&customer.pwd='+pwd;
-
-        MaskUtil.mask();
 
         $.ajax({
             url : url,

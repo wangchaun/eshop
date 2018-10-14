@@ -67,7 +67,7 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
 											</div>
 											<div class="login_hole0202">
 												<h1><input name="" type="button"  class="loginbtn" onclick="submitHeadForm()"/></h1>
-												<h2><a href="#">忘记密码</a></h2>
+												<h2><a href="${ctx }/forgetPassword.do">忘记密码</a></h2>
 											</div>
 										</div>
 									</form>
@@ -247,7 +247,7 @@ function changeDiv(tag,method){document.getElementById(tag).style.display = meth
 </div>
 <div class="Popuplogin0202_title2">
 <h1><input name="" type="button"  class="Popuploginbtn" onclick="submitDIVForm()"/></h1>
-<h2><a href="#">忘记密码</a></h2>
+<h2><a href="${ctx}/forgetPassword.do">忘记密码</a></h2>
 </div> 
 
 </div>
