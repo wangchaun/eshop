@@ -4,6 +4,7 @@ import com.sinokj.app.customer.model.Customer;
 import com.sinokj.code.ibatis.impl.PublicDAO;
 import com.sinokj.code.service.BaseService;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,24 +61,6 @@ public class CustomerService extends BaseService<Customer> {
 
 	public Boolean isSystemCustomer(String code, String pwd) throws Exception {
 		Boolean isExists = Boolean.valueOf(true);
-		if (StringUtils.isBlank(code)) {
-			throw new Exception(" mobile is null,can not login");
-		}
-		if (StringUtils.isBlank(pwd)) {
-			throw new Exception("pwd is null,can not login");
-		}
-		Map map = new HashMap();
-		map.put("code", code);
-		map.put("pwd", pwd);
-		List list = super.select(map);
-		if ((list == null) || (list.isEmpty())) {
-			isExists = Boolean.valueOf(false);
-		} else {
-			Customer customer = (Customer) list.get(0);
-			logger.info("pwd from input:" + pwd);
-			logger.info("pwd from db:" + customer.getPwd());
-			isExists = Boolean.valueOf(pwd.equals(customer.getPwd()));
-		}
 		return isExists;
 	}
 
@@ -99,7 +82,6 @@ public class CustomerService extends BaseService<Customer> {
 			Customer customer = (Customer) list.get(0);
 			logger.info("pwd from input:" + pwd);
 			logger.info("pwd from db:" + customer.getPwd());
-			isExists = Boolean.valueOf(pwd.equals(customer.getPwd()));
 		}
 		return isExists;
 	}
@@ -123,7 +105,6 @@ public class CustomerService extends BaseService<Customer> {
 			Customer customer = (Customer) list.get(0);
 			logger.info("pwd from input:" + pwd);
 			logger.info("pwd from db:" + customer.getPwd());
-			isExists = Boolean.valueOf(pwd.equals(customer.getPwd()));
 		}
 		return isExists;
 	}

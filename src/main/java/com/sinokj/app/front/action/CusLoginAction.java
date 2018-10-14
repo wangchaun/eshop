@@ -623,6 +623,7 @@ public class CusLoginAction extends BaseAction {
 				 if (this.customerService.isSystemCustomer(code, pwd).booleanValue()) {
 
 						this.customer.setCode(username);
+						this.customer.setPwd(null);
 						this.customer = ((Customer) this.customerService.selectOne(this.customer));
 						if(this.customer.getState().equals("s")){
 						  loginCustomer = this.customer;
